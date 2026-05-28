@@ -1,0 +1,82 @@
+name: Build & Deploy Full Stack
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  backend-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js for backend
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies (Backend)
+        run: |
+          cd backend
+          npm install
+
+      - name: Build backend
+        run: |
+          cd backend
+          npm run build
+
+      - name: Deploy backend to server
+        uses: appleboy/ssh-action@v0.1.2
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            export GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no"
+            
+            # Create the project directory if it doesn't exist
+            PROJECT_DIR=~/media-map
+            PROJECT_DIR_BACK=~/media-map/backend
+            PROJECT_DIR_FRONT=~/media-map/frontend
+
+            if [ ! -d "$PROJECT_DIR" ]; then
+              mkdir -p $PROJECT_DIR
+            fi
+            
+            # Go into the directory
+            cd $PROJECT_DIR            
+            
+            echo "CLONE OR PULL"
+             # if there is no deployment their, clone the repository, but if there is, pull latest changes
+            if [ ! -d ".git" ]; then
+              git clone --branch master git@github.com:salvorg/media-map-backend.git .
+            else
+              git pull origin master
+            fi            
+            
+            # Go into the directory backend
+            cd $PROJECT_DIR_BACK
+            
+            npm cache clean --force
+            echo "------NPM INSTALL"
+            npm install
+            echo "------RUN BUILD"
+            npm run build
+            echo "------RUN MIGRATIONS"
+            npx sequelize-cli db:migrate 
+            echo "------DELETE MM_BACK"
+            pm2 delete mm-back || true
+            echo "------START BUILD"
+            pm2 start dist/src/main.js --name "mm-back"
+            pm2 save
+            
+            # Go into the directory backend
+            cd $PROJECT_DIR_FRONT
+            
+            echo "------PREPARING TO BUILD FRONT"
+            echo "------NPM INSTALL"
+            npm install
+            echo "------RUN BUILD"
+            npm run build
