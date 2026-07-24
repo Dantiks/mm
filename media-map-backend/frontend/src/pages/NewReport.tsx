@@ -35,14 +35,14 @@ const NewReport: React.FC = () => {
 
   return (
     <div
-      className="flex flex-col-reverse lg:flex-row max-w-7xl w-full mx-auto px-2 md:px-10 my-5 rounded-sm border-stroke border-opacity-30 bg-white shadow-default py-3 mt-5 mx-auto overflow-auto h-full"
+      className="flex flex-col-reverse lg:flex-row gap-8 max-w-[1792px] w-full mx-auto px-6 lg:px-16 py-12 font-inter"
     >
       <ViolationForm />
 
-      <div className="flex-1 mb-10 lg:mb-0 lg:ml-5 p-4 text-gray-600">
-        <h2 className="text-2xl font-bold mb-5">Форманы кантип толтуруу керек?</h2>
+      <div className="flex-1 mb-10 lg:mb-0 text-[15px] leading-[24px] text-slateBody space-y-3">
+        <h2 className="text-[24px] font-extrabold text-navy mb-5">Форманы кантип толтуруу керек?</h2>
         <p className="">
-          Мыйзам <span className="font-bold hover:text-blue-500 cursor-pointer"
+          Мыйзам <span className="font-bold text-goldDeep hover:underline cursor-pointer"
                        onClick={scrollToSection}>бузуулардын түрлөрү</span> жөнүндө кененирээк маалымат
           менен таанышыңыз. Сиз байкаган мыйзам бузуунун түрүн тандаңыз. Формадагы талааларды толтуруңуз. Кызыл жылдыз
           (<span className="text-red-500 font-bold">*</span>) менен белгиленген талаалар сөзсүз толтурулушу керек.
@@ -67,9 +67,9 @@ const NewReport: React.FC = () => {
           Медиа сабаттуу болуңуз!
         </p>
 
-        <h1 className="text-2xl font-bold mt-8" ref={sectionRef}>Бузуулардын түрлөрү:</h1>
+        <h1 className="text-[22px] font-extrabold text-navy mt-8" ref={sectionRef}>Бузуулардын түрлөрү:</h1>
 
-        <h2 className="text-xl font-bold mt-6">Жалган маалымат</h2>
+        <h2 className="text-[19px] font-bold text-ink mt-6">Жалган маалымат</h2>
         <div>
           {expanded.block1 && (<div>
             <p className="my-2"><span className="font-semibold">Жалган маалымат</span> - бул аудиторияны адаштыруу же
@@ -178,14 +178,14 @@ const NewReport: React.FC = () => {
             </p>
           </div>)}
           <button
-            className="text-blue-500 mt-2"
+            className="mt-2 text-[14px] font-semibold text-goldDeep hover:underline"
             onClick={() => toggleContent('block1')}
           >
             {expanded.block1 ? 'Жашыруу' : 'Толугураак окуу...'}
           </button>
         </div>
 
-        <h2 className="text-xl font-bold mt-6">Кастык тили же Жек көрүүчүлүк сөздөр</h2>
+        <h2 className="text-[19px] font-bold text-ink mt-6">Кастык тили же Жек көрүүчүлүк сөздөр</h2>
         <div>
           {expanded.block2 && (<div>
             <p className="my-2"><span className="font-semibold">Кастык тили же Жек көрүүчүлүк сөздөр</span> - зомбулукту
@@ -224,14 +224,14 @@ const NewReport: React.FC = () => {
             </p>
           </div>)}
           <button
-            className="text-blue-500 mt-2"
+            className="mt-2 text-[14px] font-semibold text-goldDeep hover:underline"
             onClick={() => toggleContent('block2')}
           >
             {expanded.block2 ? 'Жашыруу' : 'Толугураак окуу...'}
           </button>
         </div>
 
-        <h2 className="text-xl font-bold mt-6">Санариптик алдамчылык</h2>
+        <h2 className="text-[19px] font-bold text-ink mt-6">Санариптик алдамчылык</h2>
         <div>
           {expanded.block3 && (<div>
 
@@ -266,7 +266,7 @@ const NewReport: React.FC = () => {
             </p>
           </div>)}
           <button
-            className="text-blue-500 mt-2"
+            className="mt-2 text-[14px] font-semibold text-goldDeep hover:underline"
             onClick={() => toggleContent('block3')}
           >
             {expanded.block3 ? 'Жашыруу' : 'Толугураак окуу...'}

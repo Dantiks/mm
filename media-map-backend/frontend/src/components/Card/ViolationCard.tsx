@@ -53,13 +53,13 @@ const ViolationCard: React.FC<Props> = ({ item }) => {
 
   return (
       <div
-          className="p-6 bg-white rounded-3xl"
+          className="p-6 bg-white rounded-[16px] border border-lineLight font-inter"
           onClick={(e) => e.stopPropagation()}
       >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="space-y-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100/50">
+              <div className="p-4 bg-cream rounded-[12px] border border-lineLight">
                 <div className="flex items-center gap-2 text-slate-400 mb-1">
                   <MapPin className="w-4 h-4" />
                   <span className="text-[11px] font-bold uppercase tracking-wider">Локация</span>
@@ -68,7 +68,7 @@ const ViolationCard: React.FC<Props> = ({ item }) => {
                 <p className="text-slate-500 text-sm">{item.authorCity}</p>
               </div>
 
-              <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100/50">
+              <div className="p-4 bg-cream rounded-[12px] border border-lineLight">
                 <div className="flex items-center gap-2 text-slate-400 mb-1">
                   <Link2 className="w-4 h-4" />
                   <span className="text-[11px] font-bold uppercase tracking-wider">Источник</span>
@@ -78,7 +78,7 @@ const ViolationCard: React.FC<Props> = ({ item }) => {
                         href={item.mediaLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-blue-600 hover:text-blue-700 font-medium text-sm flex items-center gap-1 break-all"
+                        className="text-goldDeep hover:underline font-semibold text-sm flex items-center gap-1 break-all"
                     >
                       Перейти по ссылке <ExternalLink className="w-3 h-3" />
                     </a>
@@ -90,8 +90,8 @@ const ViolationCard: React.FC<Props> = ({ item }) => {
 
             <div className="space-y-4">
               <div className="flex gap-3">
-                <div className="mt-1 p-2 bg-blue-50 rounded-lg">
-                  <MessageSquare className="w-4 h-4 text-blue-500" />
+                <div className="mt-1 p-2 bg-creamPill rounded-lg">
+                  <MessageSquare className="w-4 h-4 text-navy" />
                 </div>
                 <div>
                   <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Комментарий заявителя</span>
@@ -102,8 +102,8 @@ const ViolationCard: React.FC<Props> = ({ item }) => {
               </div>
 
               <div className="flex gap-3">
-                <div className="mt-1 p-2 bg-purple-50 rounded-lg">
-                  <ShieldAlert className="w-4 h-4 text-purple-500" />
+                <div className="mt-1 p-2 bg-creamPill rounded-lg">
+                  <ShieldAlert className="w-4 h-4 text-navy" />
                 </div>
                 <div>
                   <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Заметка модератора</span>
@@ -158,7 +158,7 @@ const ViolationCard: React.FC<Props> = ({ item }) => {
               <button
                   type="button"
                   onClick={publishMarkerHandler}
-                  className="flex items-center gap-2 px-6 py-2.5 bg-blue-600 text-white font-bold text-sm rounded-xl hover:bg-blue-700 shadow-lg shadow-blue-200 transition-all active:scale-95"
+                  className="flex items-center gap-2 px-6 py-2.5 bg-gold text-navy font-extrabold text-sm rounded-[12px] hover:opacity-90 shadow-lg transition-all active:scale-95"
               >
                 <Globe className="w-4 h-4" />
                 Опубликовать на карте

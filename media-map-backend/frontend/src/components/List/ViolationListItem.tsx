@@ -17,8 +17,8 @@ const ViolationListItem: React.FC<Props> = ({ item, toggleOpen, isOpenId }) => {
           className={`
         group overflow-hidden transition-all duration-300 border
         ${isOpen
-              ? 'bg-white border-blue-100 ring-4 ring-blue-50 rounded-3xl'
-              : 'bg-white border-slate-100 rounded-2xl hover:border-blue-200 hover:shadow-md hover:shadow-blue-50/50'}
+              ? 'bg-white border-gold ring-4 ring-creamPill rounded-[16px]'
+              : 'bg-white border-lineLight rounded-[12px] hover:border-gold/50 hover:shadow-md'}
       `}
       >
         <div
@@ -27,13 +27,13 @@ const ViolationListItem: React.FC<Props> = ({ item, toggleOpen, isOpenId }) => {
         >
           <div className="flex flex-1 items-center gap-4 min-w-0">
 
-            <div className="flex items-center justify-center bg-slate-100 text-slate-500 font-mono text-[10px] px-2 py-1 rounded-lg border border-slate-200 group-hover:bg-blue-50 group-hover:text-blue-600 group-hover:border-blue-100 transition-colors">
+            <div className="flex items-center justify-center bg-cream text-navy font-mono text-[10px] px-2 py-1 rounded-lg border border-lineLight group-hover:bg-creamPill group-hover:text-navy group-hover:border-lineLight transition-colors">
               #{item.id}
             </div>
 
             <div className="flex items-center gap-3 min-w-[180px]">
-              <div className="p-2 bg-slate-50 rounded-lg group-hover:bg-blue-50 transition-colors">
-                <MapPin className="w-4 h-4 text-slate-400 group-hover:text-blue-500" />
+              <div className="p-2 bg-cream rounded-lg group-hover:bg-creamPill transition-colors">
+                <MapPin className="w-4 h-4 text-slate-400 group-hover:text-navy" />
               </div>
               <div className="flex flex-col overflow-hidden">
               <span className="font-semibold text-slate-700 truncate text-[14px]">
@@ -69,7 +69,7 @@ const ViolationListItem: React.FC<Props> = ({ item, toggleOpen, isOpenId }) => {
 
             <div className={`
             p-1.5 rounded-full transition-all duration-300
-            ${isOpen ? 'bg-blue-600 text-white rotate-180' : 'bg-slate-50 text-slate-400 group-hover:bg-slate-100'}
+            ${isOpen ? 'bg-navy text-white rotate-180' : 'bg-cream text-slate-400 group-hover:bg-creamPill'}
           `}>
               <ChevronDown className="w-4 h-4" />
             </div>
@@ -77,7 +77,7 @@ const ViolationListItem: React.FC<Props> = ({ item, toggleOpen, isOpenId }) => {
         </div>
 
         {isOpen && (
-            <div className="border-t border-slate-50 bg-slate-50/30 p-2 animate-in slide-in-from-top-2 duration-300">
+            <div className="border-t border-lineLight bg-cream/40 p-2 animate-in slide-in-from-top-2 duration-300">
               <ViolationCard item={item} />
             </div>
         )}

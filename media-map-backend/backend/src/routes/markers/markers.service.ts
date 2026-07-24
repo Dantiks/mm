@@ -35,9 +35,10 @@ export class MarkersService {
     return await this.markerRepository.create(newDto);
   }
 
-  async getAll(isApproved: boolean) {
+  async getAll(isApproved?: boolean) {
+    const where = isApproved !== undefined ? { isApproved } : {};
     const result = await this.markerRepository.findAll({
-      where: { isApproved },
+      where,
       include: { all: true },
     });
     if (!result.length) {

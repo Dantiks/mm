@@ -1,5 +1,4 @@
 import React from 'react';
-import Map from "./pages/Map";
 import {Navigate, Route, Routes} from "react-router-dom";
 import Layout from "./layout/Layout";
 import Auth from "./pages/Auth";
@@ -8,6 +7,7 @@ import About from "./pages/About";
 import Contacts from "./pages/Contacts";
 import Terms from "./pages/Terms";
 import Useful from "./pages/Useful";
+import Categories from "./pages/Categories";
 import Test from "./pages/Test";
 import AdminLayout from "./layout/AdminLayout";
 import Main from "./pages/AdminPanel/Main";
@@ -21,8 +21,9 @@ function App() {
         <div className="min-h-screen bg-white relative">
             <Routes>
                 <Route element={<Layout/>}>
-                    <Route index element={<Map/>}/>
+                    <Route index element={<Categories isHome/>}/>
                     <Route path="/sign-up" element={<Auth/>}/>
+                    <Route path="/categories" element={<Categories/>}/>
                     <Route path="/new-report" element={<NewReport/>}/>
                     <Route path="/about" element={<About/>}/>
                     <Route path="/terms" element={<Terms/>}/>

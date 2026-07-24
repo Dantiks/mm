@@ -41,13 +41,19 @@ export class MarkersController {
   @ApiOperation({ summary: 'Получить все маркеры' })
   @ApiResponse({ status: 200, type: [Marker] })
   @Get()
-  getAll(@Query('isApproved') isApproved: boolean) {
-    return this.markerService.getAll(isApproved);
+  getAll(@Query('isApproved') isApproved?: string) {
+    const parsed =
+      isApproved === undefined
+        ? undefined
+        : isApproved === 'true' || isApproved === '1'
+          ? true
+          : false;
+    return this.markerService.getAll(parsed);
   }
 
   @ApiOperation({ summary: 'Получить все маркеры опредленного вида нарушения' })
   @ApiResponse({ status: 200, type: [Marker] })
-  @Get()
+  @Get('by-type')
   getByType(@Query('violationTypeId') violationTypeId: number) {
     return this.markerService.getByType(violationTypeId);
   }

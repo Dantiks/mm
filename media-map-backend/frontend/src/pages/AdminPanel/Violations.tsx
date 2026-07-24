@@ -36,7 +36,7 @@ const Violations = () => {
       <div className="max-w-6xl">
         {/* Заголовок страницы */}
         <div className="flex items-center gap-3 mb-4">
-          <div className="p-3 bg-blue-600 rounded-2xl shadow-lg shadow-blue-100">
+          <div className="p-3 bg-navy rounded-2xl shadow-lg">
             <Settings2 className="w-6 h-6 text-white" />
           </div>
           <div>
@@ -50,7 +50,7 @@ const Violations = () => {
           <div className="xl:col-span-2">
             <div className="bg-white  border border-slate-100 p-8 sticky top-6 shadow-sm">
               <div className="flex items-center gap-3 mb-6">
-                <PlusCircle className="w-5 h-5 text-blue-500" />
+                <PlusCircle className="w-5 h-5 text-navy" />
                 <h2 className="text-lg font-bold text-slate-800">Новый вид</h2>
               </div>
               <ViolationTypeForm onSuccess={refreshViolationTypes} />
@@ -80,7 +80,7 @@ const Violations = () => {
                                 className={`
                           flex items-center justify-between p-4 rounded-2xl border transition-all duration-300
                           ${isEditing
-                                    ? 'border-blue-200 bg-blue-50 shadow-sm ring-4 ring-blue-50/50'
+                                    ? 'border-gold bg-cream shadow-sm ring-4 ring-creamPill'
                                     : 'border-slate-50 bg-slate-50/50 hover:border-slate-200 hover:bg-white hover:shadow-md'}
                         `}
                             >
@@ -101,8 +101,8 @@ const Violations = () => {
                                     onClick={() => handleEditClick(item.id)}
                                     className={`p-2.5 rounded-xl transition-all ${
                                         isEditing
-                                            ? 'bg-blue-600 text-white shadow-md'
-                                            : 'text-slate-400 hover:bg-white hover:text-blue-600 hover:shadow-sm'
+                                            ? 'bg-navy text-white shadow-md'
+                                            : 'text-slate-400 hover:bg-white hover:text-navy hover:shadow-sm'
                                     }`}
                                 >
                                   {isEditing ? <XCircle className="w-5 h-5" /> : <PencilLine className="w-5 h-5" />}
@@ -118,8 +118,8 @@ const Violations = () => {
 
                             {/* Анимированная форма редактирования внутри списка */}
                             {isEditing && (
-                                <div className="p-6 bg-white border-2 border-blue-100 rounded-[2rem] shadow-xl animate-in fade-in slide-in-from-top-4 duration-300">
-                                  <div className="flex items-center gap-2 mb-4 text-blue-600">
+                                <div className="p-6 bg-white border-2 border-lineLight rounded-[16px] shadow-xl animate-in fade-in slide-in-from-top-4 duration-300">
+                                  <div className="flex items-center gap-2 mb-4 text-goldDeep">
                                     <PencilLine className="w-4 h-4" />
                                     <span className="text-sm font-bold uppercase tracking-wider">Редактирование категории</span>
                                   </div>

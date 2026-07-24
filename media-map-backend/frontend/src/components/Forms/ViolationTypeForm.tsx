@@ -83,14 +83,14 @@ const ViolationTypeForm: React.FC<Props> = ({ item, onSuccess }) => {
       <form autoComplete="off" onSubmit={onSubmit} className="space-y-6">
         <div className="space-y-2">
           <label className="text-sm font-bold text-slate-700 ml-1 flex items-center gap-2">
-            <Type className="w-4 h-4 text-blue-500" />
+            <Type className="w-4 h-4 text-navy" />
             Название нарушения
           </label>
           <div className="relative">
             <input
                 type="text"
                 placeholder="Напр: Превышение скорости"
-                className="w-full rounded-2xl border border-slate-200 bg-slate-50/50 py-3.5 px-5 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-50 transition-all text-slate-700 placeholder:text-slate-400"
+                className="w-full rounded-[10px] border border-lineLight bg-white py-3 px-4 outline-none focus:border-gold transition-colors text-navy placeholder:text-[#757575]"
                 name="violationType"
                 value={formData.violationType}
                 onChange={inputChangeHandler}
@@ -102,7 +102,7 @@ const ViolationTypeForm: React.FC<Props> = ({ item, onSuccess }) => {
         <div className="space-y-2">
           <div className="flex items-center justify-between ml-1">
             <label className="text-sm font-bold text-slate-700 flex items-center gap-2">
-              <UploadCloud className="w-4 h-4 text-blue-500" />
+              <UploadCloud className="w-4 h-4 text-navy" />
               Иконка категории
             </label>
             {(item && currentIconUrl) && (
@@ -117,7 +117,7 @@ const ViolationTypeForm: React.FC<Props> = ({ item, onSuccess }) => {
               onClick={() => fileInputRef.current?.click()}
               className={`
             relative cursor-pointer group border-2 border-dashed rounded-2xl p-6 transition-all duration-200 min-h-[160px] flex items-center justify-center
-            ${preview ? 'border-emerald-200 bg-emerald-50/30' : 'border-slate-200 bg-slate-50/50 hover:border-blue-300 hover:bg-blue-50/30'}
+            ${preview ? 'border-emerald-300 bg-emerald-50/40' : 'border-lineLight bg-cream hover:border-gold'}
           `}
           >
             <input
@@ -149,7 +149,7 @@ const ViolationTypeForm: React.FC<Props> = ({ item, onSuccess }) => {
                   </div>
               ) : (
                   <div className="p-3 bg-white rounded-xl shadow-sm border border-slate-100 group-hover:scale-110 transition-transform">
-                    <UploadCloud className="w-6 h-6 text-slate-400 group-hover:text-blue-500" />
+                    <UploadCloud className="w-6 h-6 text-slate-400 group-hover:text-navy" />
                   </div>
               )}
 
@@ -167,10 +167,10 @@ const ViolationTypeForm: React.FC<Props> = ({ item, onSuccess }) => {
             type="submit"
             disabled={loading}
             className={`
-          w-full flex items-center justify-center gap-2 py-4 rounded-2xl font-bold text-sm tracking-wide transition-all shadow-lg
+          w-full flex items-center justify-center gap-2 py-4 rounded-[12px] font-bold text-sm tracking-wide transition-all shadow-lg
           ${loading
                 ? 'bg-slate-100 text-slate-400 cursor-not-allowed shadow-none'
-                : 'bg-slate-900 text-white hover:bg-slate-800 shadow-slate-200 active:scale-[0.98]'}
+                : 'bg-navy text-white hover:bg-navyCard active:scale-[0.98]'}
         `}
         >
           {loading ? (

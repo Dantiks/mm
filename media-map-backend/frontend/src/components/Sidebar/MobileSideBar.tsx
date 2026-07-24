@@ -10,6 +10,7 @@ import {
   BookOpen,
   Phone,
   LayoutDashboard,
+  ShieldAlert,
   LogOut,
   X,
   ChevronRight
@@ -34,6 +35,7 @@ const MobileSideBar: React.FC<Props> = ({ isOpen, setIsOpen }) => {
 
   const menuItems = [
     { to: "/about", label: "Долбоор жөнүндө", icon: <Info className="w-5 h-5" /> },
+    { to: "/categories", label: "Категории нарушений", icon: <ShieldAlert className="w-5 h-5" /> },
     { to: "/terms", label: "Картаны колдонуу", icon: <MapIcon className="w-5 h-5" /> },
     { to: "/useful", label: "Пайдалуу булактар", icon: <BookOpen className="w-5 h-5" /> },
     { to: "/contacts", label: "Байланыштар", icon: <Phone className="w-5 h-5" /> },

@@ -53,16 +53,16 @@ const ViolationEditForm: React.FC<Props> = ({item, onClose}) => {
   };
 
   return (
-    <form className="p-4" onSubmit={onSubmit}>
+    <form className="p-4 font-inter" onSubmit={onSubmit}>
       <div className="mb-4">
-        <label className="mb-2.5 block text-black text-lg">
+        <label className="mb-2 block text-[15px] font-semibold text-navy">
           Область проживания
         </label>
         <select
           name="authorRegion"
           value={state.authorRegion}
           onChange={selectChangeHandler}
-          className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none"
+          className="w-full rounded-[10px] border border-lineLight bg-white py-3 px-4 text-[15px] text-navy outline-none focus:border-gold transition-colors"
         >
           <option className="py-2 my-2" value="">Жашаган аймагыңызды тандаңыз:</option>
           <option value="Чүй облусу">Чүй облусу</option>
@@ -76,27 +76,27 @@ const ViolationEditForm: React.FC<Props> = ({item, onClose}) => {
       </div>
 
       <div className="mb-4">
-        <label className="mb-2.5 block text-black text-lg">
+        <label className="mb-2 block text-[15px] font-semibold text-navy">
           Город/ГПТ/село проживания
         </label>
         <input
           type="text"
           placeholder="Введите ваш город/пгт/село (например: Бишкек)"
-          className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none"
+          className="w-full rounded-[10px] border border-lineLight bg-white py-3 px-4 text-[15px] text-navy outline-none focus:border-gold transition-colors"
           name="authorCity"
           value={state.authorCity}
           onChange={inputChangeHandler}
         />
       </div>
       <div className="mb-4">
-        <label className="mb-2.5 block text-black text-lg">
+        <label className="mb-2 block text-[15px] font-semibold text-navy">
           Вид нарушения
         </label>
         <select
           name="violationTypeId"
           value={state.violationTypeId}
           onChange={selectChangeHandler}
-          className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none"
+          className="w-full rounded-[10px] border border-lineLight bg-white py-3 px-4 text-[15px] text-navy outline-none focus:border-gold transition-colors"
         >
           <option value="">Выберите вид нарушения</option>
           {violationTypes.map((type) =>
@@ -106,13 +106,13 @@ const ViolationEditForm: React.FC<Props> = ({item, onClose}) => {
       </div>
 
       <div className="mb-4">
-        <label className="mb-2.5 block text-black text-lg">
+        <label className="mb-2 block text-[15px] font-semibold text-navy">
           Ссылка на медиа ресурс
         </label>
         <input
           type="url"
           placeholder="Введите ссылку (например: https://lalafo.kg/)"
-          className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none"
+          className="w-full rounded-[10px] border border-lineLight bg-white py-3 px-4 text-[15px] text-navy outline-none focus:border-gold transition-colors"
           name="mediaLink"
           value={state.mediaLink}
           onChange={inputChangeHandler}
@@ -120,7 +120,7 @@ const ViolationEditForm: React.FC<Props> = ({item, onClose}) => {
       </div>
 
       <div className="mb-4">
-        <label className="mb-2.5 block text-black text-lg">
+        <label className="mb-2 block text-[15px] font-semibold text-navy">
           Скриншот
         </label>
         {newImage ? (
@@ -142,13 +142,13 @@ const ViolationEditForm: React.FC<Props> = ({item, onClose}) => {
           type="file"
           accept="image/*"
           ref={fileInputRef}
-          className="w-full rounded-lg border border-stroke bg-transparent p-2 text-black outline-none focus:border-primary focus-visible:shadow-none"
+          className="mt-3 w-full rounded-[10px] border border-lineLight bg-white p-2 text-[14px] text-navy outline-none focus:border-gold transition-colors"
           name="image"
           onChange={fileChangeHandler}
         />
       </div>
       <div className="mb-6">
-        <label className="mb-2.5 block text-black text-lg">
+        <label className="mb-2 block text-[15px] font-semibold text-navy">
           Комментарий пользователя
         </label>
         <textarea
@@ -161,7 +161,7 @@ const ViolationEditForm: React.FC<Props> = ({item, onClose}) => {
       </div>
 
       <div className="mb-6">
-        <label className="mb-2.5 block text-black text-lg">
+        <label className="mb-2 block text-[15px] font-semibold text-navy">
           Комментарий модератора
         </label>
         <textarea
@@ -175,7 +175,7 @@ const ViolationEditForm: React.FC<Props> = ({item, onClose}) => {
       <div className="mb-5 flex justify-center items-center">
         <button
           type="submit"
-          className="bg-blue-500 text-white py-2 px-6 rounded-lg text-lg hover:bg-blue-600"
+          className="bg-gold text-navy font-extrabold py-2.5 px-8 rounded-[12px] text-[15px] hover:opacity-90 transition-opacity"
         >
           Редактировать
         </button>

@@ -7,7 +7,7 @@ const Layout: React.FC = () => {
 
   return (
     <div
-      className="min-h-dvh max-h-dvh flex flex-col relative"
+      className="min-h-dvh flex flex-col relative"
       style={{
         transition: "height 0.2s linear",
       }}

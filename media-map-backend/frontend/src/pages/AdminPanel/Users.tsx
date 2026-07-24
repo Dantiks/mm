@@ -40,7 +40,7 @@ const Users = () => {
     const getRoleBadge = (role: string) => {
         const styles = {
             SUPERADMIN: "bg-rose-100 text-rose-700 border-rose-200",
-            ADMIN: "bg-blue-100 text-blue-700 border-blue-200",
+            ADMIN: "bg-creamPill text-goldDeep border-lineLight",
             MODERATOR: "bg-amber-100 text-amber-700 border-amber-200",
             USER: "bg-slate-100 text-slate-700 border-slate-200",
         };
@@ -72,7 +72,7 @@ const Users = () => {
             {/* Шапка страницы */}
             <div className="flex items-center justify-between mb-8 p-2">
                 <div className="flex items-center gap-4">
-                    <div className="p-3 bg-slate-900 rounded-2xl shadow-xl">
+                    <div className="p-3 bg-navy rounded-2xl shadow-xl">
                         <UsersIcon className="w-6 h-6 text-white" />
                     </div>
                     <div>
@@ -88,7 +88,7 @@ const Users = () => {
             </div>
 
             {/* Таблица */}
-            <div className="bg-white border border-slate-100 shadow-sm overflow-hidden">
+            <div className="bg-white border border-lineLight rounded-[16px] shadow-sm overflow-hidden">
                 <table className="min-w-full border-collapse text-left">
                     <thead>
                     <tr className="bg-slate-50/50 border-b border-slate-100">
@@ -105,12 +105,12 @@ const Users = () => {
                         >
                             <td className="py-5 px-6">
                                 <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-white group-hover:text-blue-500 transition-all border border-transparent group-hover:border-slate-100">
+                                    <div className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-white group-hover:text-navy transition-all border border-transparent group-hover:border-lineLight">
                                         <Mail className="w-5 h-5" />
                                     </div>
                                     <span className="font-semibold text-slate-700">{userItem.email}</span>
                                     {currentUser?.id === userItem.id && (
-                                        <span className="text-[10px] bg-blue-50 text-blue-600 px-1.5 py-0.5 rounded-md font-bold uppercase">Вы</span>
+                                        <span className="text-[10px] bg-cream text-goldDeep px-1.5 py-0.5 rounded-md font-bold uppercase">Вы</span>
                                     )}
                                 </div>
                             </td>

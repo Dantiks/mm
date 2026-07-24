@@ -13,17 +13,33 @@ module.exports = {
                 inter: ['Inter', 'sans-serif'],
                 nunito: ['Nunito Sans', 'sans-serif'],
                 roboto: ['Roboto', 'sans-serif'],
+                mono: ['JetBrains Mono', 'monospace'],
             },
             screens: {
                 'sm': '240px', // кастомный брейкпоинт
             },
             colors: {
-                button: "#133E87",
-                mainTheme: "#133E87",
+                // Legacy tokens remapped to the Figma palette so existing
+                // components adopt the redesign automatically.
+                button: "#0b2545",
+                mainTheme: "#0b2545",
                 lightBlue: "#E8F3FF",
                 burgundy: "#9A0000",
-                yellow: "#FFB319",
-                darkBlue: "#133E87",
+                yellow: "#e8b84b",
+                darkBlue: "#0b2545",
+                // Figma design system (mediamap.kg redesign)
+                navy: "#0b2545",
+                navyCard: "#0f2e58",
+                gold: "#e8b84b",
+                goldDeep: "#b8871f",
+                cream: "#f7f4ec",
+                creamPill: "#fbf1da",
+                lineLight: "#ece7da",
+                mutedNavy: "#9fb0c7",
+                ink: "#14181a",
+                slateBody: "#6e7979",
+                statUp: "#ba1a1a",
+                statDown: "#2f9e5b",
             },
             keyframes: {
                 rotateY: {

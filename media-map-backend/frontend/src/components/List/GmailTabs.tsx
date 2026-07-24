@@ -31,7 +31,7 @@ const GmailTabs: React.FC<Props> = ({ markers }) => {
 
   return (
       <div className="w-full">
-        <div className="flex items-center gap-2 p-1 bg-slate-100/50 w-fit mb-8 overflow-x-auto no-scrollbar">
+        <div className="flex items-center gap-2 p-1 bg-cream rounded-[12px] w-fit mb-8 overflow-x-auto no-scrollbar">
           {tabs.map((tab) => {
             const isActive = activeTab === tab.id.toString();
             return (
@@ -41,7 +41,7 @@ const GmailTabs: React.FC<Props> = ({ markers }) => {
                     className={`
                 flex items-center gap-2 px-6 py-2.5 transition-all duration-200 whitespace-nowrap
                 ${isActive
-                        ? 'bg-white text-blue-600 shadow-sm shadow-blue-100/50 font-semibold'
+                        ? 'bg-white text-navy rounded-[8px] shadow-sm border border-lineLight font-semibold'
                         : 'text-slate-500 hover:text-slate-700 hover:bg-white/50'}
               `}
                 >
@@ -67,7 +67,7 @@ const GmailTabs: React.FC<Props> = ({ markers }) => {
                       />
                   ))
               ) : (
-              <div className="flex flex-col items-center justify-center py-20 text-slate-400 bg-slate-50/50 rounded-3xl border-2 border-dashed border-slate-100">
+              <div className="flex flex-col items-center justify-center py-20 text-slate-400 bg-cream rounded-[16px] border-2 border-dashed border-lineLight">
                 <Inbox className="w-12 h-12 mb-3 opacity-20" />
                 <p className="font-medium">Заявки в этой категории отсутствуют</p>
               </div>

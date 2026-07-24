@@ -83,7 +83,7 @@ const ViolationForm = () => {
     };
 
     return (
-        <div className="p-4 sm:p-12.5 xl:p-17.5 flex-1">
+        <div className="flex-1 rounded-[16px] border border-lineLight bg-white p-6 md:p-8">
             <CustomAlert
                 message={'Сиздин арызыңыз кабыл алынды жана кароого жөнөтүлөт.'}
                 isShow={isAlertOpen}
@@ -91,7 +91,7 @@ const ViolationForm = () => {
             />
             <form
                 autoComplete="off" onSubmit={onSubmit}>
-                <h2 className="mb-8 text-2xl font-bold text-center text-mainTheme sm:text-title-xl2">
+                <h2 className="mb-8 text-center text-[24px] font-extrabold text-navy">
                     Бузуу жөнүндө билдирүү
                 </h2>
                 <div className="mb-6">
@@ -101,14 +101,14 @@ const ViolationForm = () => {
                 </div>
 
                 <div className="mb-8">
-                    <label className="mb-2.5 block text-black text-lg">
+                    <label className="mb-2 block text-[15px] font-semibold text-navy">
                         <span className="text-red-500">*</span> Жашаган аймагыңызды тандаңыз:
                     </label>
                     <select
                         name="authorRegion"
                         value={formData.authorRegion}
                         onChange={selectChangeHandler}
-                        className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none"
+                        className="w-full rounded-[10px] border border-lineLight bg-white py-3 px-4 text-[15px] text-navy outline-none focus:border-gold transition-colors"
                         required
                     >
                         <option className="py-2 my-2" value="">Жашаган аймагыңызды тандаңыз:</option>
@@ -123,14 +123,14 @@ const ViolationForm = () => {
                 </div>
 
                 <div className="mb-8">
-                    <label className="mb-2.5 block text-black text-lg">
+                    <label className="mb-2 block text-[15px] font-semibold text-navy">
                         <span className="text-red-500">*</span> Жашаган шаарыңызды / шаарча / айылыңызды тандаңыз:
                     </label>
                     <input
                         autoComplete="off"
                         type="text"
                         placeholder="Бишкек"
-                        className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none"
+                        className="w-full rounded-[10px] border border-lineLight bg-white py-3 px-4 text-[15px] text-navy outline-none focus:border-gold transition-colors"
                         name="authorCity"
                         value={formData.authorCity}
                         onChange={inputChangeHandler}
@@ -139,14 +139,14 @@ const ViolationForm = () => {
                 </div>
 
                 <div className="mb-8">
-                    <label className="mb-2.5 block text-black text-lg">
+                    <label className="mb-2 block text-[15px] font-semibold text-navy">
                         <span className="text-red-500">*</span> Бузуунун түрүн тандаңыз:
                     </label>
                     <select
                         name="violationTypeId"
                         value={formData.violationTypeId}
                         onChange={selectChangeHandler}
-                        className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none"
+                        className="w-full rounded-[10px] border border-lineLight bg-white py-3 px-4 text-[15px] text-navy outline-none focus:border-gold transition-colors"
                         required
                     >
                         <option value="" className="text-gray-400">Бузуунун түрүн тандаңыз:</option>
@@ -157,14 +157,14 @@ const ViolationForm = () => {
                 </div>
 
                 <div className="mb-8">
-                    <label className="mb-2.5 block text-black text-lg">
+                    <label className="mb-2 block text-[15px] font-semibold text-navy">
                         Медиаресурска шилтеме киргизиңиз:
                     </label>
                     <input
                         autoComplete="off"
                         type="url"
                         placeholder="Мисалы: https://lalafo.kg/"
-                        className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none"
+                        className="w-full rounded-[10px] border border-lineLight bg-white py-3 px-4 text-[15px] text-navy outline-none focus:border-gold transition-colors"
                         name="mediaLink"
                         value={formData.mediaLink}
                         onChange={inputChangeHandler}
@@ -172,7 +172,7 @@ const ViolationForm = () => {
                 </div>
 
                 <div className="mb-8">
-                    <label className="mb-2.5 block text-black text-lg">
+                    <label className="mb-2 block text-[15px] font-semibold text-navy">
                         Скриншотту тиркөө:
                     </label>
 
@@ -191,9 +191,9 @@ const ViolationForm = () => {
                         {/* Кастомная кнопка */}
                         <button
                             type="button"
-                            className="w-full rounded-lg border border-stroke bg-transparent p-3 outline-none cursor-pointer hover:bg-opacity-70 flex items-center"
+                            className="flex w-full items-center rounded-[10px] border border-lineLight bg-white p-3 outline-none cursor-pointer hover:bg-cream transition-colors"
                         >
-                            <div className="bg-mainTheme inline-block text-sm text-white py-2 px-4 rounded ">Файлды
+                            <div className="bg-navy inline-block text-sm text-white py-2 px-4 rounded ">Файлды
                                 тандоо
                             </div>
                             <span
@@ -203,12 +203,12 @@ const ViolationForm = () => {
                 </div>
 
                 <div className="mb-8">
-                    <label className="mb-2.5 block text-black text-lg">
+                    <label className="mb-2 block text-[15px] font-semibold text-navy">
                         Бузуу боюнча комментарий калтыруу: <span className="text-gray-400">(милдеттүү эмес)</span>
                     </label>
                     <textarea
                         placeholder="Өзүңүз туш болгон же байкаган жагдайды сүрөттөп бериңиз."
-                        className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none"
+                        className="w-full rounded-[10px] border border-lineLight bg-white py-3 px-4 text-[15px] text-navy outline-none focus:border-gold transition-colors"
                         name="authorComment"
                         value={formData.authorComment}
                         onChange={inputChangeHandler}
@@ -222,7 +222,7 @@ const ViolationForm = () => {
                         type="submit"
                         value={createLoading ? "Жөнөтүү..." : "Жөнөтүү"}
                         // disabled={createLoading}
-                        className="w-full cursor-pointer rounded-lg border bg-button p-4 mb-5 text-white transition hover:bg-opacity-70 disabled:bg-gray-400"
+                        className="w-full cursor-pointer rounded-[12px] bg-gold p-4 mb-5 text-[15px] font-extrabold text-navy transition-opacity hover:opacity-90 disabled:opacity-60"
                     />
                 </div>
             </form>

@@ -29,11 +29,11 @@ const AdminPanelSidebar: React.FC<Props> = ({ sidebarOpen, setSidebarOpen }) => 
         transition-all duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 shadow-sm`}
       >
         <div className="flex items-center gap-3 px-2 mb-10">
-          <div className="bg-blue-600 p-2 rounded-xl shadow-lg shadow-blue-100">
+          <div className="bg-navy p-2 rounded-xl shadow-lg">
             <LayoutDashboard className="text-white w-6 h-6" />
           </div>
           <h1 className="text-slate-800 text-xl font-bold tracking-tight">
-            MEDIA <span className="text-blue-600">MAP</span>
+            MEDIA <span className="text-goldDeep">MAP</span>
           </h1>
         </div>
 
@@ -50,7 +50,7 @@ const AdminPanelSidebar: React.FC<Props> = ({ sidebarOpen, setSidebarOpen }) => 
                   className={({ isActive }) => `
               group flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200
               ${isActive
-                      ? 'bg-blue-50 text-blue-700 shadow-sm shadow-blue-50'
+                      ? 'bg-cream text-navy shadow-sm'
                       : 'text-slate-500 hover:bg-slate-50 hover:text-slate-700'}
             `}
               >
@@ -74,12 +74,12 @@ const AdminPanelSidebar: React.FC<Props> = ({ sidebarOpen, setSidebarOpen }) => 
         </nav>
 
         <div className="absolute bottom-8 left-6 right-6">
-          <div className="bg-slate-900 rounded-xl p-4 text-white overflow-hidden relative">
+          <div className="bg-navy rounded-xl p-4 text-white overflow-hidden relative">
             <div className="relative z-10">
               <p className="text-xs text-slate-400">Система готова</p>
               <p className="text-[13px] font-medium">Обновлений нет</p>
             </div>
-            <div className="absolute -right-2 -bottom-2 bg-slate-800 w-12 h-12 rounded-full blur-xl opacity-50" />
+            <div className="absolute -right-2 -bottom-2 bg-navyCard w-12 h-12 rounded-full blur-xl opacity-50" />
           </div>
         </div>
       </aside>

@@ -35,7 +35,7 @@ const AdminPanelHeader: React.FC<Props> = ({ setSidebarOpen }) => {
                     <div className="flex items-center gap-2 text-xs font-medium text-slate-400 uppercase tracking-wider">
                         <span>Admin</span>
                         <ChevronRight className="w-3 h-3" />
-                        <span className="text-blue-600">Dashboard</span>
+                        <span className="text-goldDeep">Dashboard</span>
                     </div>
                     <h1 className="text-xl font-bold text-slate-800 leading-tight">
                         {getTitle()}
@@ -58,7 +58,7 @@ const AdminPanelHeader: React.FC<Props> = ({ setSidebarOpen }) => {
                         <p className="text-sm font-semibold text-slate-700">Admin User</p>
                         <p className="text-[11px] text-slate-400 font-medium">Главный модератор</p>
                     </div>
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white font-bold shadow-md shadow-blue-100">
+                    <div className="w-10 h-10 rounded-xl bg-navy flex items-center justify-center text-white font-bold shadow-md">
                         A
                     </div>
                 </div>

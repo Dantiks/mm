@@ -12,9 +12,9 @@ const ModalWindow: React.FC<Props> = ({ isOpen, onClose, title, children }) => {
 
   return (
     <div className="fixed inset-0 bg-gray-900 bg-opacity-50 z-50 flex items-center justify-center">
-      <div className="md:max-h-[90%] bg-white rounded-lg shadow-lg md:max-w-[80%] h-full w-full flex flex-col">
+      <div className="md:max-h-[90%] bg-white rounded-[16px] shadow-lg md:max-w-[80%] font-inter h-full w-full flex flex-col">
         <div className="border-b p-4 flex items-center justify-between">
-          <h2 className="text-lg font-semibold">{title || ""}</h2>
+          <h2 className="text-[18px] font-extrabold text-navy">{title || ""}</h2>
           <button
             onClick={onClose}
             className="text-gray-600 hover:text-red-600 focus:outline-none"
@@ -28,7 +28,7 @@ const ModalWindow: React.FC<Props> = ({ isOpen, onClose, title, children }) => {
         <div className="border-t p-4 flex items-center justify-center">
           <button
             onClick={onClose}
-            className="px-4 py-2 bg-burgundy text-white rounded-lg hover:bg-opacity-90 focus:outline-none"
+            className="px-6 py-2.5 bg-navy text-white font-bold rounded-[12px] hover:bg-navyCard transition-colors focus:outline-none"
           >
             Закрыть
           </button>
