@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../i18n/LanguageContext';
+import categoriesContent from '../i18n/pages/categories';
 
 interface Stat {
   label: string;
@@ -17,60 +19,19 @@ interface Category {
   stats: Stat[];
 }
 
-const categories: Category[] = [
-  {
-    icon: '⬡',
-    title: 'Язык вражды',
-    count: '1,248 постов за неделю',
-    description:
-      'Язык вражды — это высказывания, унижающие или дискриминирующие людей по признаку пола, этничности, религии или ориентации. Мы показываем, как его распознавать и почему важно ему не потворствовать.',
-    example:
-      'Пример кейса: публикации с признаками этнической вражды в отношении мигрантских сообществ, содержащие дезинформацию и призывы к дискриминации.',
-    stats: [
-      { label: 'Гендер · неделя', value: '432', delta: '4.2%', up: true },
-      { label: 'ЛГБТ · неделя', value: '315', delta: '1.8%', up: false },
-      { label: 'Этничность · неделя', value: '501', delta: '8.1%', up: true },
-    ],
-  },
-  {
-    icon: '▤',
-    title: 'Дезинформация',
-    count: '850 постов за неделю',
-    description:
-      'Дезинформация — это заведомо ложная или искажённая информация, которую распространяют, чтобы ввести в заблуждение или повлиять на общественное мнение.',
-    stats: [
-      { label: 'Фейковые новости · неделя', value: '320', delta: '6.4%', up: true },
-      { label: 'Синтетические видео · неделя', value: '140', delta: '11.3%', up: true },
-      { label: 'Боты-аккаунты · неделя', value: '390', delta: '2.6%', up: false },
-    ],
-  },
-  {
-    icon: '🛡',
-    title: 'Цифровое мошенничество',
-    count: '420 постов за неделю',
-    description:
-      'Цифровое мошенничество — это обман с использованием технологий: фишинг, поддельные сайты и схемы для кражи денег или личных данных. Мы отслеживаем схемы фишинга, поддельные банковские уведомления и мошеннические предложения работы, распространяемые в мессенджерах и соцсетях.',
-    stats: [
-      { label: 'Фишинговые ссылки · неделя', value: '210', delta: '9.7%', up: true },
-      { label: 'Поддельные банк. уведомления · неделя', value: '95', delta: '3.1%', up: true },
-      { label: 'Мошеннические вакансии · неделя', value: '115', delta: '4.5%', up: false },
-    ],
-  },
-];
-
-const CheckMessageControl = () => (
+const CheckMessageControl: React.FC<{ placeholder: string }> = ({ placeholder }) => (
   <form
     onSubmit={(e) => e.preventDefault()}
     className="flex h-[44px] w-full max-w-[292px] shrink-0 overflow-hidden rounded-[8px] border border-lineLight"
   >
     <input
       type="text"
-      placeholder="Проверить сообщение"
+      placeholder={placeholder}
       className="min-w-0 flex-1 bg-white px-[14px] text-[14px] text-navy placeholder:text-[#757575] outline-none"
     />
     <button
       type="submit"
-      aria-label="Проверить сообщение"
+      aria-label={placeholder}
       className="flex w-[44px] shrink-0 items-center justify-center bg-navy text-[16px] text-white"
     >
       ▶
@@ -94,7 +55,10 @@ const StatCard: React.FC<{ stat: Stat }> = ({ stat }) => (
   </div>
 );
 
-const CategorySection: React.FC<{ category: Category }> = ({ category }) => (
+const CategorySection: React.FC<{ category: Category; checkMessagePlaceholder: string }> = ({
+  category,
+  checkMessagePlaceholder,
+}) => (
   <section className="border-t border-lineLight pt-12 first:border-t-0 first:pt-0">
     <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
       <div className="flex items-start gap-4">
@@ -106,7 +70,7 @@ const CategorySection: React.FC<{ category: Category }> = ({ category }) => (
           <p className="mt-1 text-[13px] text-[#9aa3a4]">{category.count}</p>
         </div>
       </div>
-      <CheckMessageControl />
+      <CheckMessageControl placeholder={checkMessagePlaceholder} />
     </div>
 
     <p className="mt-6 max-w-[820px] text-[14px] leading-[22.4px] text-slateBody">
@@ -133,13 +97,16 @@ const CategorySection: React.FC<{ category: Category }> = ({ category }) => (
 );
 
 const Categories = () => {
+  const { t, language } = useLanguage();
+  const c = categoriesContent[language];
+
   return (
     <div className="bg-white font-inter">
       {/* Breadcrumb bar */}
       <div className="border-b border-lineLight bg-cream">
         <div className="mx-auto max-w-[1792px] px-6 py-[11px] lg:px-16">
           <Link to="/" className="text-[13px] font-semibold text-navy hover:underline">
-            ← Главная
+            {c.breadcrumb}
           </Link>
         </div>
       </div>
@@ -150,11 +117,10 @@ const Categories = () => {
           <div className="flex flex-col gap-10 xl:flex-row xl:items-start xl:justify-between">
             <div className="max-w-[620px]">
               <h1 className="text-[34px] font-extrabold leading-tight text-navy md:text-[44px]">
-                Категории нарушений
+                {c.heroTitle}
               </h1>
               <p className="mt-4 text-[17px] leading-[27.2px] text-[#4b5556]">
-                Три направления, которые мы отслеживаем и объясняем: язык вражды, дезинформация и
-                цифровое мошенничество.
+                {c.heroSubtitle}
               </p>
             </div>
 
@@ -168,11 +134,10 @@ const Categories = () => {
                 />
                 <div>
                   <p className="font-mono text-[10px] uppercase tracking-[0.32px] text-goldDeep">
-                    Цитата дня
+                    {t.home.quoteLabel}
                   </p>
                   <p className="mt-1 text-[12px] italic leading-snug text-[#2e3839]">
-                    «Анализ современных медиа-трендов требует мультидисциплинарного подхода для
-                    подлинного понимания их влияния.»
+                    {t.home.quoteText}
                   </p>
                 </div>
               </div>
@@ -187,10 +152,8 @@ const Categories = () => {
                   className="h-[36px] w-[36px] shrink-0 object-contain"
                 />
                 <span>
-                  <span className="block text-[13px] font-bold text-ink">Старый сайт</span>
-                  <span className="block text-[11px] text-slateBody">
-                    Доступ к предыдущей версии платформы
-                  </span>
+                  <span className="block text-[13px] font-bold text-ink">{t.home.oldSite}</span>
+                  <span className="block text-[11px] text-slateBody">{t.home.oldSiteDesc}</span>
                 </span>
               </Link>
             </aside>
@@ -201,8 +164,12 @@ const Categories = () => {
       {/* Category sections */}
       <div className="mx-auto max-w-[1792px] px-6 py-16 lg:px-16">
         <div className="space-y-12">
-          {categories.map((category) => (
-            <CategorySection key={category.title} category={category} />
+          {c.categories.map((category) => (
+            <CategorySection
+              key={category.title}
+              category={category}
+              checkMessagePlaceholder={t.home.checkMessagePlaceholder}
+            />
           ))}
         </div>
 
@@ -215,11 +182,10 @@ const Categories = () => {
           />
           <div>
             <p className="font-mono text-[11px] uppercase tracking-[0.55px] text-goldDeep">
-              Цитата дня
+              {t.home.quoteLabel}
             </p>
             <p className="mt-1 text-[14px] italic leading-[22.4px] text-[#2e3839]">
-              «Анализ современных медиа-трендов требует мультидисциплинарного подхода для подлинного
-              понимания их влияния.»
+              {t.home.quoteText}
             </p>
           </div>
         </div>

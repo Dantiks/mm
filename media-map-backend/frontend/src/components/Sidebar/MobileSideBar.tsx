@@ -15,6 +15,8 @@ import {
   X,
   ChevronRight
 } from "lucide-react";
+import { useLanguage } from "../../i18n/LanguageContext";
+import LanguageSwitcher from "../../i18n/LanguageSwitcher";
 
 interface Props {
   isOpen: boolean;
@@ -25,6 +27,7 @@ const MobileSideBar: React.FC<Props> = ({ isOpen, setIsOpen }) => {
   const user = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
   const location = useLocation();
+  const { t } = useLanguage();
 
   const handleLogout = async () => {
     await dispatch(logout());
@@ -34,11 +37,11 @@ const MobileSideBar: React.FC<Props> = ({ isOpen, setIsOpen }) => {
   const isActive = (path: string) => location.pathname === path;
 
   const menuItems = [
-    { to: "/about", label: "О проекте", icon: <Info className="w-5 h-5" /> },
-    { to: "/categories", label: "Категории нарушений", icon: <ShieldAlert className="w-5 h-5" /> },
-    { to: "/terms", label: "Как это работает", icon: <ListChecks className="w-5 h-5" /> },
-    { to: "/useful", label: "Полезные ресурсы", icon: <BookOpen className="w-5 h-5" /> },
-    { to: "/contacts", label: "Контакты", icon: <Phone className="w-5 h-5" /> },
+    { to: "/about", label: t.nav.about, icon: <Info className="w-5 h-5" /> },
+    { to: "/categories", label: t.nav.categories, icon: <ShieldAlert className="w-5 h-5" /> },
+    { to: "/terms", label: t.nav.terms, icon: <ListChecks className="w-5 h-5" /> },
+    { to: "/useful", label: t.nav.resources, icon: <BookOpen className="w-5 h-5" /> },
+    { to: "/contacts", label: t.nav.contacts, icon: <Phone className="w-5 h-5" /> },
   ];
 
   return (
@@ -60,12 +63,15 @@ const MobileSideBar: React.FC<Props> = ({ isOpen, setIsOpen }) => {
           {/* Шапка: лого и кнопка закрытия */}
           <div className="flex items-center justify-between p-5 border-b border-slate-50">
             <img src="/media-map-logo.png" alt="Logo" className="h-7 w-auto" />
-            <button
-                onClick={setIsOpen}
-                className="p-2 -mr-2 text-slate-400 hover:text-slate-900 transition-colors"
-            >
-              <X className="w-6 h-6" />
-            </button>
+            <div className="flex items-center gap-2">
+              <LanguageSwitcher />
+              <button
+                  onClick={setIsOpen}
+                  className="p-2 -mr-2 text-slate-400 hover:text-slate-900 transition-colors"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
           </div>
 
           {/* Навигация */}
@@ -98,7 +104,7 @@ const MobileSideBar: React.FC<Props> = ({ isOpen, setIsOpen }) => {
             {user && (
                 <div className="mt-6 pt-6 border-t border-slate-100">
               <span className="px-4 text-[10px] font-black uppercase tracking-[0.15em] text-slate-400 block mb-3">
-                Администратор
+                {t.nav.admin}
               </span>
                   <div className="space-y-1">
                     <Link
@@ -111,7 +117,7 @@ const MobileSideBar: React.FC<Props> = ({ isOpen, setIsOpen }) => {
                         }`}
                     >
                       <LayoutDashboard className={`w-5 h-5 ${isActive('/admin/main') ? 'text-blue-400' : 'text-slate-400'}`} />
-                      Панель
+                      {t.nav.panel}
                     </Link>
 
                     <button
@@ -119,7 +125,7 @@ const MobileSideBar: React.FC<Props> = ({ isOpen, setIsOpen }) => {
                         className="w-full flex items-center gap-4 px-4 py-3 rounded-2xl text-red-500 font-bold text-sm hover:bg-red-50 transition-colors mt-1"
                     >
                       <LogOut className="w-5 h-5 text-red-400" />
-                      Выйти
+                      {t.nav.logout}
                     </button>
                   </div>
                 </div>

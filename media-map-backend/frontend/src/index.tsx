@@ -9,6 +9,7 @@ import {PersistGate} from "redux-persist/integration/react";
 import {addInterceptors} from "./axiosApi";
 import {GoogleOAuthProvider} from "@react-oauth/google";
 import {GOOGLE_CLIENT_ID} from "./utils/constants";
+import {LanguageProvider} from "./i18n/LanguageContext";
 
 addInterceptors(store);
 
@@ -20,9 +21,11 @@ root.render(
     <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID} >
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <BrowserRouter future={{ v7_startTransition: true }}>
-          <App/>
-        </BrowserRouter>
+        <LanguageProvider>
+          <BrowserRouter future={{ v7_startTransition: true }}>
+            <App/>
+          </BrowserRouter>
+        </LanguageProvider>
       </PersistGate>
     </Provider>
     </GoogleOAuthProvider>

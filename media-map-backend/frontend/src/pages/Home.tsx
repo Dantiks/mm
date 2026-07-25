@@ -10,7 +10,9 @@ import {
   FileText,
   Wrench,
   Sparkles,
+  Fuel,
 } from 'lucide-react';
+import { useLanguage } from '../i18n/LanguageContext';
 
 const socials = [
   { label: 'TG', href: 'https://t.me/' },
@@ -19,80 +21,23 @@ const socials = [
   { label: 'YT', href: 'https://youtube.com/' },
 ];
 
-const homeCategories = [
-  {
-    icon: <Hexagon className="h-5 w-5" />,
-    title: 'Язык вражды',
-    description:
-      'Понимаем, как распознавать язык вражды и почему важно не распространять ненависть.',
-  },
-  {
-    icon: <AlignJustify className="h-5 w-5" />,
-    title: 'Дезинформация',
-    description: 'Учимся выявлять фейки, манипуляции и пропаганду в новостях и соцсетях.',
-  },
-  {
-    icon: <ShieldAlert className="h-5 w-5" />,
-    title: 'Цифровое мошенничество',
-    description: 'Защищаем личные данные, распознаём схемы обмана и фишинга.',
-  },
+const categoryIcons = [
+  <Hexagon className="h-5 w-5" key="hexagon" />,
+  <AlignJustify className="h-5 w-5" key="align" />,
+  <ShieldAlert className="h-5 w-5" key="shield" />,
 ];
 
-const resources = [
-  {
-    icon: <Compass className="h-4 w-4" />,
-    title: 'Медиаграмотность',
-    description: 'Развиваем критическое мышление и навыки ответственного потребления.',
-  },
-  {
-    icon: <CheckSquare className="h-4 w-4" />,
-    title: 'Чек-листы',
-    description: 'Простые списки для проверки информации.',
-  },
-  {
-    icon: <PlayCircle className="h-4 w-4" />,
-    title: 'Видео и подкасты',
-    description: 'Объясняем сложные темы простыми словами.',
-  },
-  {
-    icon: <FileText className="h-4 w-4" />,
-    title: 'Статьи и гайды',
-    description: 'Подробные материалы и инструкции.',
-  },
-  {
-    icon: <Wrench className="h-4 w-4" />,
-    title: 'Инструменты',
-    description: 'Полезные сервисы для проверки фактов.',
-  },
-  {
-    icon: <Sparkles className="h-4 w-4" />,
-    title: 'Тесты и квизы',
-    description: 'Проверьте свои знания в интерактивном формате.',
-  },
+const resourceIcons = [
+  <Compass className="h-4 w-4" key="compass" />,
+  <CheckSquare className="h-4 w-4" key="check" />,
+  <PlayCircle className="h-4 w-4" key="play" />,
+  <FileText className="h-4 w-4" key="file" />,
+  <Wrench className="h-4 w-4" key="wrench" />,
+  <Sparkles className="h-4 w-4" key="sparkles" />,
 ];
 
-const news = [
-  {
-    tag: 'дезинформация',
-    title: 'Минюст обновил разъяснения к закону о защите от ложной информации',
-    description:
-      'Новые критерии помогут отличать журналистскую ошибку от преднамеренной дезинформации.',
-    date: '2 июля 2026',
-  },
-  {
-    tag: 'инструменты',
-    title: 'MediaMap запускает Telegram-бот для быстрой проверки новостей',
-    description:
-      'Бот проверяет ссылки и скриншоты за секунды и объясняет вердикт простыми словами.',
-    date: '28 июня 2026',
-  },
-  {
-    tag: 'языквражды',
-    title: 'Исследование: язык вражды в комментариях вырос на 12% за полугодие',
-    description: 'Больше всего рост заметен в комментариях к темам миграции и религии.',
-    date: '21 июня 2026',
-  },
-];
+const NEWS_OF_DAY_SOURCE =
+  'https://gazeta.kg/economika/209237-pervaja-partija-gsm-iz-kitaja-otpravlena-v-kyrgyzstan.html';
 
 const tagStyles: Record<string, string> = {
   дезинформация: 'bg-[#fbe4e1] text-[#b3392f]',
@@ -100,19 +45,19 @@ const tagStyles: Record<string, string> = {
   инструменты: 'bg-creamPill text-goldDeep',
 };
 
-const CheckMessageControl = () => (
+const CheckMessageControl: React.FC<{ placeholder: string }> = ({ placeholder }) => (
   <form
     onSubmit={(e) => e.preventDefault()}
     className="flex h-[44px] w-full overflow-hidden rounded-[8px] border border-lineLight"
   >
     <input
       type="text"
-      placeholder="Проверить сообщение"
+      placeholder={placeholder}
       className="min-w-0 flex-1 bg-white px-[14px] text-[14px] text-navy placeholder:text-[#757575] outline-none"
     />
     <button
       type="submit"
-      aria-label="Проверить сообщение"
+      aria-label={placeholder}
       className="flex w-[44px] shrink-0 items-center justify-center bg-navy text-[16px] text-white"
     >
       ▶
@@ -121,6 +66,10 @@ const CheckMessageControl = () => (
 );
 
 const Home = () => {
+  const { t } = useLanguage();
+  const homeCategories = t.home.categories.map((c, i) => ({ ...c, icon: categoryIcons[i] }));
+  const resources = t.home.resources.map((r, i) => ({ ...r, icon: resourceIcons[i] }));
+
   return (
     <div className="bg-white font-inter">
       {/* Hero */}
@@ -129,14 +78,13 @@ const Home = () => {
           <div className="flex flex-col gap-10 xl:flex-row xl:items-start xl:justify-between">
             <div className="max-w-[620px]">
               <h1 className="text-[34px] font-extrabold leading-tight text-navy md:text-[46px]">
-                Медиаграмотность — ваш навигатор в мире информации
+                {t.home.heroTitle}
               </h1>
               <p className="mt-4 text-[17px] leading-[27.2px] text-[#4b5556]">
-                Учимся анализировать информацию, распознавать манипуляции, противостоять языку
-                вражды, дезинформации и цифровому мошенничеству.
+                {t.home.heroSubtitle}
               </p>
               <div className="mt-8 flex items-center gap-3">
-                <span className="text-[13px] font-semibold text-navy">Следите за нами</span>
+                <span className="text-[13px] font-semibold text-navy">{t.home.followUs}</span>
                 <div className="flex gap-2">
                   {socials.map((s) => (
                     <a
@@ -156,16 +104,22 @@ const Home = () => {
 
             {/* Right column */}
             <div className="flex w-full flex-col gap-3 xl:max-w-[820px]">
-              <div className="overflow-hidden rounded-[10px] border border-lineLight bg-white">
+              <a
+                href={NEWS_OF_DAY_SOURCE}
+                target="_blank"
+                rel="noreferrer"
+                className="block overflow-hidden rounded-[10px] border border-lineLight bg-white transition-colors hover:bg-cream"
+              >
                 <div className="flex h-[220px] items-center justify-center bg-creamPill">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.29px] text-[#9aa3a4]">
-                    фото: новость дня
-                  </span>
+                  <Fuel className="h-10 w-10 text-goldDeep" strokeWidth={1.5} />
                 </div>
-                <p className="px-4 py-3 font-mono text-[10px] uppercase tracking-[0.29px] text-[#9aa3a4]">
-                  Новость дня · обновляется автоматически
+                <p className="px-4 pt-3 font-mono text-[10px] uppercase tracking-[0.29px] text-[#9aa3a4]">
+                  {t.home.newsOfDayCaption}
                 </p>
-              </div>
+                <p className="px-4 pb-4 pt-1 text-[15px] font-bold leading-snug text-navy underline decoration-navy/40 underline-offset-2">
+                  {t.home.newsOfDayTitle}
+                </p>
+              </a>
 
               <div className="flex items-center gap-3 rounded-[10px] border border-lineLight bg-white p-4">
                 <img
@@ -175,11 +129,10 @@ const Home = () => {
                 />
                 <div>
                   <p className="font-mono text-[10px] uppercase tracking-[0.32px] text-goldDeep">
-                    Цитата дня
+                    {t.home.quoteLabel}
                   </p>
                   <p className="mt-1 text-[13px] italic leading-snug text-[#2e3839]">
-                    «Анализ современных медиа-трендов требует мультидисциплинарного подхода для
-                    подлинного понимания их влияния.»
+                    {t.home.quoteText}
                   </p>
                 </div>
               </div>
@@ -194,10 +147,8 @@ const Home = () => {
                   className="h-[36px] w-[36px] shrink-0 object-contain"
                 />
                 <span>
-                  <span className="block text-[13px] font-bold text-ink">Старый сайт</span>
-                  <span className="block text-[12px] text-slateBody">
-                    Доступ к предыдущей версии платформы
-                  </span>
+                  <span className="block text-[13px] font-bold text-ink">{t.home.oldSite}</span>
+                  <span className="block text-[12px] text-slateBody">{t.home.oldSiteDesc}</span>
                 </span>
               </Link>
             </div>
@@ -221,13 +172,13 @@ const Home = () => {
                 {c.description}
               </p>
               <div className="mt-5">
-                <CheckMessageControl />
+                <CheckMessageControl placeholder={t.home.checkMessagePlaceholder} />
               </div>
               <Link
                 to="/categories"
                 className="mt-3 text-[13px] font-semibold text-navy hover:underline"
               >
-                Проверить информацию →
+                {t.home.checkInfo}
               </Link>
             </div>
           ))}
@@ -239,15 +190,15 @@ const Home = () => {
         <div className="mx-auto max-w-[1792px] px-6 py-16 lg:px-16">
           <div className="flex flex-col gap-10 lg:flex-row lg:justify-between">
             <div className="max-w-[320px] shrink-0">
-              <h2 className="text-[28px] font-extrabold text-navy">Ресурсы для вас</h2>
+              <h2 className="text-[28px] font-extrabold text-navy">{t.home.resourcesTitle}</h2>
               <p className="mt-3 text-[14px] leading-[22.4px] text-slateBody">
-                Практические материалы, инструменты и сервисы для работы с информацией.
+                {t.home.resourcesSubtitle}
               </p>
               <Link
                 to="/useful"
                 className="mt-4 inline-block text-[13px] font-semibold text-navy hover:underline"
               >
-                Смотреть все ресурсы →
+                {t.home.resourcesViewAll}
               </Link>
             </div>
             <div className="grid flex-1 grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -272,12 +223,12 @@ const Home = () => {
       {/* News */}
       <div className="mx-auto max-w-[1792px] px-6 py-16 lg:px-16">
         <div className="flex items-center justify-between">
-          <h2 className="text-[28px] font-extrabold text-navy">Новости</h2>
-          <span className="text-[13px] font-semibold text-slateBody">Все новости →</span>
+          <h2 className="text-[28px] font-extrabold text-navy">{t.home.newsTitle}</h2>
+          <span className="text-[13px] font-semibold text-slateBody">{t.home.newsAll}</span>
         </div>
 
         <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
-          {news.map((n) => (
+          {t.home.news.map((n) => (
             <div
               key={n.title}
               className="overflow-hidden rounded-[16px] border border-lineLight bg-white"
@@ -306,7 +257,7 @@ const Home = () => {
         </div>
 
         <span className="mt-6 inline-block text-[13px] font-semibold text-slateBody">
-          Читать все новости →
+          {t.home.newsReadAll}
         </span>
       </div>
     </div>

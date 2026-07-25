@@ -5,6 +5,8 @@ import {selectViolationTypes} from "../../features/violationTypes/violationTypes
 import {apiURL} from "../../utils/constants";
 import {useAppDispatch} from "../../app/hooks/useAppDispatch";
 import {updateMarker} from "../../features/markers/markersThunks";
+import {useLanguage} from "../../i18n/LanguageContext";
+import violationEditFormContent from "../../i18n/pages/violationEditForm";
 
 interface Props {
   item: MarkerBeforeModeratorMutation | MarkerOnMap;
@@ -12,6 +14,8 @@ interface Props {
 }
 
 const ViolationEditForm: React.FC<Props> = ({item, onClose}) => {
+  const {language} = useLanguage();
+  const c = violationEditFormContent[language];
   const dispatch = useAppDispatch();
   const [state, setState] = useState<MarkerBeforeModeratorMutation | MarkerOnMap>(item);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -56,7 +60,7 @@ const ViolationEditForm: React.FC<Props> = ({item, onClose}) => {
     <form className="p-4 font-inter" onSubmit={onSubmit}>
       <div className="mb-4">
         <label className="mb-2 block text-[15px] font-semibold text-navy">
-          Область проживания
+          {c.regionLabel}
         </label>
         <select
           name="authorRegion"
@@ -64,24 +68,20 @@ const ViolationEditForm: React.FC<Props> = ({item, onClose}) => {
           onChange={selectChangeHandler}
           className="w-full rounded-[10px] border border-lineLight bg-white py-3 px-4 text-[15px] text-navy outline-none focus:border-gold transition-colors"
         >
-          <option className="py-2 my-2" value="">Выберите регион проживания:</option>
-          <option value="Чуйская область">Чуйская область</option>
-          <option value="Таласская область">Таласская область</option>
-          <option value="Иссык-Кульская область">Иссык-Кульская область</option>
-          <option value="Нарынская область">Нарынская область</option>
-          <option value="Джалал-Абадская область">Джалал-Абадская область</option>
-          <option value="Ошская область">Ошская область</option>
-          <option value="Баткенская область">Баткенская область</option>
+          <option className="py-2 my-2" value="">{c.regionDefaultOption}</option>
+          {c.regions.map((region, index) => (
+            <option key={region} value={violationEditFormContent.ru.regions[index]}>{region}</option>
+          ))}
         </select>
       </div>
 
       <div className="mb-4">
         <label className="mb-2 block text-[15px] font-semibold text-navy">
-          Город/ГПТ/село проживания
+          {c.cityLabel}
         </label>
         <input
           type="text"
-          placeholder="Введите ваш город/пгт/село (например: Бишкек)"
+          placeholder={c.cityPlaceholder}
           className="w-full rounded-[10px] border border-lineLight bg-white py-3 px-4 text-[15px] text-navy outline-none focus:border-gold transition-colors"
           name="authorCity"
           value={state.authorCity}
@@ -90,7 +90,7 @@ const ViolationEditForm: React.FC<Props> = ({item, onClose}) => {
       </div>
       <div className="mb-4">
         <label className="mb-2 block text-[15px] font-semibold text-navy">
-          Вид нарушения
+          {c.violationTypeLabel}
         </label>
         <select
           name="violationTypeId"
@@ -98,7 +98,7 @@ const ViolationEditForm: React.FC<Props> = ({item, onClose}) => {
           onChange={selectChangeHandler}
           className="w-full rounded-[10px] border border-lineLight bg-white py-3 px-4 text-[15px] text-navy outline-none focus:border-gold transition-colors"
         >
-          <option value="">Выберите вид нарушения</option>
+          <option value="">{c.violationTypeDefaultOption}</option>
           {violationTypes.map((type) =>
             <option key={type.id} value={type.id}>{type.violationType}</option>
           )}
@@ -107,11 +107,11 @@ const ViolationEditForm: React.FC<Props> = ({item, onClose}) => {
 
       <div className="mb-4">
         <label className="mb-2 block text-[15px] font-semibold text-navy">
-          Ссылка на медиа ресурс
+          {c.mediaLinkLabel}
         </label>
         <input
           type="url"
-          placeholder="Введите ссылку (например: https://lalafo.kg/)"
+          placeholder={c.mediaLinkPlaceholder}
           className="w-full rounded-[10px] border border-lineLight bg-white py-3 px-4 text-[15px] text-navy outline-none focus:border-gold transition-colors"
           name="mediaLink"
           value={state.mediaLink}
@@ -121,22 +121,22 @@ const ViolationEditForm: React.FC<Props> = ({item, onClose}) => {
 
       <div className="mb-4">
         <label className="mb-2 block text-[15px] font-semibold text-navy">
-          Скриншот
+          {c.screenshotLabel}
         </label>
         {newImage ? (
           <img
             src={URL.createObjectURL(newImage)}
-            alt="Новое изображение"
+            alt={c.newImageAlt}
             className="mt-2 max-w-[400px] h-auto rounded"
           />
         ) : item.image ? (
           <img
             src={`${apiURL}static/uploads/screenshots/${item.image}`}
-            alt="Скриншот пользователя"
+            alt={c.userImageAlt}
             className="mt-2 max-w-[400px] h-auto rounded"
           />
         ) : (
-          "Заявитель не прикрепил изображение"
+          c.noImageFallback
         )}
         <input
           type="file"
@@ -149,10 +149,10 @@ const ViolationEditForm: React.FC<Props> = ({item, onClose}) => {
       </div>
       <div className="mb-6">
         <label className="mb-2 block text-[15px] font-semibold text-navy">
-          Комментарий пользователя
+          {c.userCommentLabel}
         </label>
         <textarea
-          placeholder="Опишите с чем вы столкнулись"
+          placeholder={c.userCommentPlaceholder}
           className="w-full h-[200px] rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none"
           name="authorComment"
           value={state.authorComment!}
@@ -162,10 +162,10 @@ const ViolationEditForm: React.FC<Props> = ({item, onClose}) => {
 
       <div className="mb-6">
         <label className="mb-2 block text-[15px] font-semibold text-navy">
-          Комментарий модератора
+          {c.moderatorCommentLabel}
         </label>
         <textarea
-          placeholder="Введите ваш комментарий"
+          placeholder={c.moderatorCommentPlaceholder}
           className="w-full h-[200px] rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none"
           name="moderatorComment"
           value={state.moderatorComment!}
@@ -177,7 +177,7 @@ const ViolationEditForm: React.FC<Props> = ({item, onClose}) => {
           type="submit"
           className="bg-gold text-navy font-extrabold py-2.5 px-8 rounded-[12px] text-[15px] hover:opacity-90 transition-opacity"
         >
-          Редактировать
+          {c.submit}
         </button>
       </div>
     </form>

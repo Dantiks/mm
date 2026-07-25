@@ -1,12 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
-const navLinks = [
-  { label: 'О проекте', to: '/about' },
-  { label: 'Ресурсы', to: '/useful' },
-  { label: 'Категории нарушений', to: '/categories' },
-  { label: 'Контакты', to: '/contacts' },
-];
+import { useLanguage } from '../../i18n/LanguageContext';
+import footerContent from '../../i18n/pages/footer';
 
 const socials = [
   { label: 'TG', href: 'https://t.me/' },
@@ -16,6 +11,16 @@ const socials = [
 ];
 
 const Footer = () => {
+  const { language } = useLanguage();
+  const c = footerContent[language];
+
+  const navLinks = [
+    { label: c.navLinks.about, to: '/about' },
+    { label: c.navLinks.resources, to: '/useful' },
+    { label: c.navLinks.categories, to: '/categories' },
+    { label: c.navLinks.contacts, to: '/contacts' },
+  ];
+
   return (
     <footer className="bg-navy font-inter text-white">
       <div className="mx-auto max-w-[1792px] px-6 lg:px-16">
@@ -50,7 +55,7 @@ const Footer = () => {
 
         <div className="flex flex-col gap-4 py-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-[12px] text-[#8590a0]">
-            © 2026 MediaMap.kg. Материалы публикуются в рамках инициативы медиаграмотности КР.
+            {c.copyright}
           </p>
           <div className="flex flex-wrap items-center gap-3">
             <a

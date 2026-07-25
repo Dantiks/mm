@@ -1,66 +1,41 @@
 import React from 'react';
 import { Send, ShieldCheck, BarChart3, ListFilter, ClipboardCheck, Eye } from 'lucide-react';
 import { PageHero, PageSection } from '../components/UI/DesignKit';
+import { useLanguage } from '../i18n/LanguageContext';
+import termsContent from '../i18n/pages/terms';
 
-interface Step {
-  n: number;
-  icon: React.ReactNode;
-  title: string;
-  body?: string;
-  bullets?: string[];
-  chips?: { icon: React.ReactNode; label: string }[];
-}
-
-const steps: Step[] = [
-  {
-    n: 1,
-    icon: <Send className="h-7 w-7 text-navy" />,
-    title: 'Отправка обращения',
-    bullets: [
-      'Заполните форму и сообщите о мошенничестве или языке вражды.',
-      'Приложите местоположение, ссылку и скриншот.',
-    ],
-  },
-  {
-    n: 2,
-    icon: <ShieldCheck className="h-7 w-7 text-navy" />,
-    title: 'Экспертная проверка',
-    body: 'Фактчекеры и эксперты тщательно проверяют информацию и передают её администратору.',
-    chips: [
-      { icon: <ClipboardCheck className="h-4 w-4 text-goldDeep" />, label: 'Администратор ставит отметку' },
-    ],
-  },
-  {
-    n: 3,
-    icon: <BarChart3 className="h-7 w-7 text-navy" />,
-    title: 'Мониторинг',
-    body: 'Следите за статистикой по категориям нарушений в реальном времени и получайте полную информацию о случаях.',
-    chips: [
-      { icon: <ListFilter className="h-4 w-4 text-goldDeep" />, label: 'Фильтр по категориям' },
-      { icon: <Eye className="h-4 w-4 text-goldDeep" />, label: 'Актуальная статистика' },
-    ],
-  },
+const stepIcons = [
+  <Send className="h-7 w-7 text-navy" key="send" />,
+  <ShieldCheck className="h-7 w-7 text-navy" key="shield" />,
+  <BarChart3 className="h-7 w-7 text-navy" key="chart" />,
 ];
 
+const chipIconsByStepIndex: Record<number, React.ReactNode[]> = {
+  1: [<ClipboardCheck className="h-4 w-4 text-goldDeep" key="clipboard" />],
+  2: [
+    <ListFilter className="h-4 w-4 text-goldDeep" key="filter" />,
+    <Eye className="h-4 w-4 text-goldDeep" key="eye" />,
+  ],
+};
+
 const Terms = () => {
+  const { language } = useLanguage();
+  const c = termsContent[language];
+
   return (
     <div className="bg-white">
-      <PageHero
-        eyebrow="инструкция"
-        title="Как это работает?"
-        subtitle="Сделайте вклад в цифровую безопасность всего за три простых шага."
-      />
+      <PageHero eyebrow={c.eyebrow} title={c.title} subtitle={c.subtitle} />
 
       <PageSection>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {steps.map((step) => (
+          {c.steps.map((step, i) => (
             <div
               key={step.n}
               className="flex h-full flex-col rounded-[16px] border border-lineLight bg-white p-6"
             >
               <div className="mb-5 flex items-center justify-between">
                 <span className="flex h-16 w-16 items-center justify-center rounded-full bg-creamPill">
-                  {step.icon}
+                  {stepIcons[i]}
                 </span>
                 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-navy text-[14px] font-bold text-white">
                   {step.n}
@@ -86,14 +61,14 @@ const Terms = () => {
 
               {step.chips && (
                 <div className="mt-auto space-y-2 pt-4">
-                  {step.chips.map((chip) => (
+                  {step.chips.map((label, chipIndex) => (
                     <div
-                      key={chip.label}
+                      key={label}
                       className="flex items-center gap-2 rounded-[10px] border border-lineLight bg-cream px-3 py-2"
                     >
-                      {chip.icon}
+                      {chipIconsByStepIndex[i]?.[chipIndex]}
                       <span className="text-[11px] font-bold uppercase tracking-tight text-navy">
-                        {chip.label}
+                        {label}
                       </span>
                     </div>
                   ))}

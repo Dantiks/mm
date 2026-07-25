@@ -10,6 +10,8 @@ import {
   selectSignUpError,
   selectSignUpLoading,
 } from '../features/users/usersSlice';
+import { useLanguage } from '../i18n/LanguageContext';
+import authContent from '../i18n/pages/auth';
 
 type Tab = 'signup' | 'login';
 
@@ -22,6 +24,8 @@ const labelClass =
 const Auth = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { language } = useLanguage();
+  const c = authContent[language];
 
   const [tab, setTab] = useState<Tab>('signup');
   const [firstName, setFirstName] = useState('');
@@ -69,7 +73,7 @@ const Auth = () => {
               isSignup ? 'bg-gold text-navy' : 'text-mutedNavy hover:text-white'
             }`}
           >
-            Создать аккаунт
+            {c.createAccount}
           </button>
           <button
             type="button"
@@ -78,37 +82,35 @@ const Auth = () => {
               !isSignup ? 'bg-gold text-navy' : 'text-mutedNavy hover:text-white'
             }`}
           >
-            Войти
+            {c.login}
           </button>
         </div>
 
         <p className="mt-8 text-[14px] leading-normal text-mutedNavy">
-          {isSignup
-            ? 'Сохраняйте проверки, подписывайтесь на темы и получайте персональные дайджесты.'
-            : 'Войдите, чтобы продолжить работу с сохранёнными проверками и подписками.'}
+          {isSignup ? c.signupSubtitle : c.loginSubtitle}
         </p>
 
         <form onSubmit={submitHandler} autoComplete="off" className="mt-6 space-y-5">
           {isSignup && (
             <div className="flex flex-row gap-4">
               <div className="flex-1">
-                <label className={labelClass}>Имя</label>
+                <label className={labelClass}>{c.firstName}</label>
                 <input
                   className={inputClass}
                   type="text"
                   name="firstName"
-                  placeholder="Имя"
+                  placeholder={c.firstName}
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
                 />
               </div>
               <div className="flex-1">
-                <label className={labelClass}>Фамилия</label>
+                <label className={labelClass}>{c.lastName}</label>
                 <input
                   className={inputClass}
                   type="text"
                   name="lastName"
-                  placeholder="Фамилия"
+                  placeholder={c.lastName}
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
                 />
@@ -117,7 +119,7 @@ const Auth = () => {
           )}
 
           <div>
-            <label className={labelClass}>Электронная почта</label>
+            <label className={labelClass}>{c.email}</label>
             <input
               className={inputClass}
               type="email"
@@ -130,12 +132,12 @@ const Auth = () => {
           </div>
 
           <div>
-            <label className={labelClass}>Пароль</label>
+            <label className={labelClass}>{c.password}</label>
             <input
               className={inputClass}
               type="password"
               name="password"
-              placeholder="Минимум 8 символов"
+              placeholder={c.passwordPlaceholder}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -145,8 +147,8 @@ const Auth = () => {
           {(signUpError || signInError) && (
             <p className="text-[13px] text-red-400">
               {isSignup
-                ? Object.values(signUpError ?? {}).flat().join(' ') || 'Не удалось создать аккаунт.'
-                : signInError?.message || 'Не удалось войти. Проверьте данные.'}
+                ? Object.values(signUpError ?? {}).flat().join(' ') || c.signUpErrorFallback
+                : signInError?.message || c.signInErrorFallback}
             </p>
           )}
 
@@ -155,18 +157,18 @@ const Auth = () => {
             disabled={loading}
             className="w-full h-[57px] rounded-[12px] bg-gold text-navy text-[17px] font-extrabold transition-opacity hover:opacity-90 disabled:opacity-60"
           >
-            {isSignup ? 'Зарегистрироваться →' : 'Войти →'}
+            {isSignup ? c.signUpSubmit : c.signInSubmit}
           </button>
         </form>
 
         <p className="mt-6 text-center text-[13px] text-[#7c8ea8]">
-          {isSignup ? 'Уже есть аккаунт? ' : 'Нет аккаунта? '}
+          {isSignup ? c.hasAccount : c.noAccount}
           <button
             type="button"
             onClick={() => setTab(isSignup ? 'login' : 'signup')}
             className="font-semibold text-gold hover:underline"
           >
-            {isSignup ? 'Войти' : 'Создать аккаунт'}
+            {isSignup ? c.login : c.createAccount}
           </button>
         </p>
       </div>

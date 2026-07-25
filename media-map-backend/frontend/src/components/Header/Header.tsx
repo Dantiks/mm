@@ -6,19 +6,22 @@ import { logout } from "../../features/users/usersThunks";
 import { useAppDispatch } from "../../app/hooks/useAppDispatch";
 import { LogOut, LayoutDashboard, Menu, X } from "lucide-react";
 import MobileSideBar from "../Sidebar/MobileSideBar";
-
-const navItems = [
-  { label: 'Главная', to: '/' },
-  { label: 'О нас', to: '/about' },
-  { label: 'Категории нарушений', to: '/categories' },
-  { label: 'Ресурсы', to: '/useful' },
-  { label: 'Контакты', to: '/contacts' },
-];
+import { useLanguage } from "../../i18n/LanguageContext";
+import LanguageSwitcher from "../../i18n/LanguageSwitcher";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
+  const { t } = useLanguage();
+
+  const navItems = [
+    { label: t.nav.home, to: '/' },
+    { label: t.nav.about, to: '/about' },
+    { label: t.nav.categories, to: '/categories' },
+    { label: t.nav.resources, to: '/useful' },
+    { label: t.nav.contacts, to: '/contacts' },
+  ];
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -62,6 +65,8 @@ const Header = () => {
 
             {/* Правая часть: Пользователь и мобильное меню */}
             <div className="flex items-center gap-3">
+              <LanguageSwitcher className="hidden md:flex" />
+
               {user && (
                   <div className="hidden items-center gap-2 md:flex">
                     <Link
@@ -69,14 +74,14 @@ const Header = () => {
                         className="flex items-center gap-2 rounded-xl bg-navy px-4 py-2 text-sm font-bold text-white transition-all hover:bg-navyCard"
                     >
                       <LayoutDashboard className="h-4 w-4" />
-                      Панель
+                      {t.nav.panel}
                     </Link>
                     <button
                         onClick={handleLogout}
                         className="flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-bold text-red-500 transition-all hover:bg-red-50"
                     >
                       <LogOut className="h-4 w-4" />
-                      Выйти
+                      {t.nav.logout}
                     </button>
                   </div>
               )}
@@ -85,7 +90,7 @@ const Header = () => {
               <button
                   onClick={toggleMenu}
                   className="rounded-xl bg-slate-50 p-2 text-slate-600 transition-colors hover:bg-slate-100 md:hidden"
-                  aria-label="Меню"
+                  aria-label={t.nav.menu}
               >
                 {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </button>
