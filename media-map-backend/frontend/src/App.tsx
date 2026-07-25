@@ -8,6 +8,7 @@ import Contacts from "./pages/Contacts";
 import Terms from "./pages/Terms";
 import Useful from "./pages/Useful";
 import Categories from "./pages/Categories";
+import Home from "./pages/Home";
 import AdminLayout from "./layout/AdminLayout";
 import Main from "./pages/AdminPanel/Main";
 import ApprovedViolations from "./pages/AdminPanel/ApprovedViolations";
@@ -20,7 +21,7 @@ function App() {
         <div className="min-h-screen bg-white relative">
             <Routes>
                 <Route element={<Layout/>}>
-                    <Route index element={<Categories isHome/>}/>
+                    <Route index element={<Home/>}/>
                     <Route path="/sign-up" element={<Auth/>}/>
                     <Route path="/categories" element={<Categories/>}/>
                     <Route path="/new-report" element={<NewReport/>}/>

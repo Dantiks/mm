@@ -132,24 +132,17 @@ const CategorySection: React.FC<{ category: Category }> = ({ category }) => (
   </section>
 );
 
-interface CategoriesProps {
-  /** When rendered as the home route, hide the self-referential breadcrumb. */
-  isHome?: boolean;
-}
-
-const Categories: React.FC<CategoriesProps> = ({ isHome = false }) => {
+const Categories = () => {
   return (
     <div className="bg-white font-inter">
       {/* Breadcrumb bar */}
-      {!isHome && (
-        <div className="border-b border-lineLight bg-cream">
-          <div className="mx-auto max-w-[1792px] px-6 py-[11px] lg:px-16">
-            <Link to="/" className="text-[13px] font-semibold text-navy hover:underline">
-              ← Главная
-            </Link>
-          </div>
+      <div className="border-b border-lineLight bg-cream">
+        <div className="mx-auto max-w-[1792px] px-6 py-[11px] lg:px-16">
+          <Link to="/" className="text-[13px] font-semibold text-navy hover:underline">
+            ← Главная
+          </Link>
         </div>
-      )}
+      </div>
 
       {/* Hero */}
       <div className="bg-cream">
