@@ -37,7 +37,7 @@ const Header = () => {
             {/* Логотип */}
             <Link to="/" className="group flex items-center">
               <img
-                  src="/media-map-logo.png"
+                  src="/media-map-logo.jpg"
                   alt="mediamap.kg"
                   className="h-8 w-auto transition-transform group-hover:scale-105 md:h-10"
               />

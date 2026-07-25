@@ -62,7 +62,7 @@ const MobileSideBar: React.FC<Props> = ({ isOpen, setIsOpen }) => {
         >
           {/* Шапка: лого и кнопка закрытия */}
           <div className="flex items-center justify-between p-5 border-b border-slate-50">
-            <img src="/media-map-logo.png" alt="Logo" className="h-7 w-auto" />
+            <img src="/media-map-logo.jpg" alt="Logo" className="h-7 w-auto" />
             <div className="flex items-center gap-2">
               <LanguageSwitcher />
               <button
