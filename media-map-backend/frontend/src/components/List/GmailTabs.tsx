@@ -4,7 +4,7 @@ import { selectViolationTypes } from "../../features/violationTypes/violationTyp
 import ViolationListItem from "./ViolationListItem";
 import { MarkerBeforeModeratorMutation, MarkerOnMap } from "../../types";
 import { apiURL } from "../../utils/constants";
-import { LayoutList, Inbox } from "lucide-react";
+import { Inbox } from "lucide-react";
 
 interface Props {
   markers: MarkerOnMap[] | MarkerBeforeModeratorMutation[];

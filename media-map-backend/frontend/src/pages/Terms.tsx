@@ -1,5 +1,5 @@
 import React from 'react';
-import { Send, ShieldCheck, Map, MousePointer2, ClipboardCheck, Eye } from 'lucide-react';
+import { Send, ShieldCheck, BarChart3, ListFilter, ClipboardCheck, Eye } from 'lucide-react';
 import { PageHero, PageSection } from '../components/UI/DesignKit';
 
 interface Step {
@@ -15,29 +15,29 @@ const steps: Step[] = [
   {
     n: 1,
     icon: <Send className="h-7 w-7 text-navy" />,
-    title: 'Билдирүү жиберүү',
+    title: 'Отправка обращения',
     bullets: [
-      'Форманы толтуруп, шылуундар же кастык тили тууралуу кабарлаңыз.',
-      'Жайгашкан жерди, шилтемени жана скриншотту тиркеңиз.',
+      'Заполните форму и сообщите о мошенничестве или языке вражды.',
+      'Приложите местоположение, ссылку и скриншот.',
     ],
   },
   {
     n: 2,
     icon: <ShieldCheck className="h-7 w-7 text-navy" />,
-    title: 'Эксперттик текшерүү',
-    body: 'Фактчекерлер жана эксперттер маалыматты кылдат текшерип, администраторго өткөрүп беришет.',
+    title: 'Экспертная проверка',
+    body: 'Фактчекеры и эксперты тщательно проверяют информацию и передают её администратору.',
     chips: [
-      { icon: <ClipboardCheck className="h-4 w-4 text-goldDeep" />, label: 'Администратор белги коёт' },
+      { icon: <ClipboardCheck className="h-4 w-4 text-goldDeep" />, label: 'Администратор ставит отметку' },
     ],
   },
   {
     n: 3,
-    icon: <Map className="h-7 w-7 text-navy" />,
+    icon: <BarChart3 className="h-7 w-7 text-navy" />,
     title: 'Мониторинг',
-    body: 'Картаны реалдуу убакытта байкап, бузуулар боюнча толук маалымат алыңыз.',
+    body: 'Следите за статистикой по категориям нарушений в реальном времени и получайте полную информацию о случаях.',
     chips: [
-      { icon: <MousePointer2 className="h-4 w-4 text-goldDeep" />, label: 'Интерактивдүү чыкылдатуу' },
-      { icon: <Eye className="h-4 w-4 text-goldDeep" />, label: 'Фильтрациялоо мүмкүнчүлүгү' },
+      { icon: <ListFilter className="h-4 w-4 text-goldDeep" />, label: 'Фильтр по категориям' },
+      { icon: <Eye className="h-4 w-4 text-goldDeep" />, label: 'Актуальная статистика' },
     ],
   },
 ];
@@ -46,9 +46,9 @@ const Terms = () => {
   return (
     <div className="bg-white">
       <PageHero
-        eyebrow="колдонмо"
-        title="Картаны кантип колдонуу керек?"
-        subtitle="Үч жөнөкөй кадам менен санариптик коопсуздукка салым кошуңуз."
+        eyebrow="инструкция"
+        title="Как это работает?"
+        subtitle="Сделайте вклад в цифровую безопасность всего за три простых шага."
       />
 
       <PageSection>

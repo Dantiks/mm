@@ -11,6 +11,7 @@ import {ViolationType} from './models/violation-type.models';
 import {EmailModule} from "./email/email.module";
 import * as process from "node:process";
 import {MailerModule} from "@nestjs-modules/mailer";
+import {TelegramModule} from "./telegram/telegram.module";
 
 @Module({
     controllers: [],
@@ -49,6 +50,7 @@ import {MailerModule} from "@nestjs-modules/mailer";
         MarkersModule,
         ViolationTypeModule,
         EmailModule,
+        TelegramModule,
     ],
 })
 export class AppModule {

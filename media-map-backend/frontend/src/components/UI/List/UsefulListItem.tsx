@@ -36,7 +36,7 @@ const UsefulListItem: React.FC<Props> = ({ link, title, description, icon, tag }
                 <p className="line-clamp-2 text-[14px] leading-snug text-slateBody">{description}</p>
 
                 <div className="mt-3 flex items-center text-[11px] font-bold text-goldDeep opacity-0 transition-opacity group-hover:opacity-100">
-                    Кененирээк билүү <ExternalLink className="ml-1 h-3 w-3" />
+                    Узнать подробнее <ExternalLink className="ml-1 h-3 w-3" />
                 </div>
             </div>
         </a>

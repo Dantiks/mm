@@ -34,7 +34,7 @@ const Header = () => {
             {/* Логотип */}
             <Link to="/" className="group flex items-center">
               <img
-                  src="/main-logo.png"
+                  src="/media-map-logo.png"
                   alt="mediamap.kg"
                   className="h-8 w-auto transition-transform group-hover:scale-105 md:h-10"
               />
@@ -76,7 +76,7 @@ const Header = () => {
                         className="flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-bold text-red-500 transition-all hover:bg-red-50"
                     >
                       <LogOut className="h-4 w-4" />
-                      Чыгуу
+                      Выйти
                     </button>
                   </div>
               )}

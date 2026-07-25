@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, Image as ImageIcon, Link2, ChevronDown, Hash } from "lucide-react";
+import { MapPin, Image as ImageIcon, Link2, ChevronDown } from "lucide-react";
 import ViolationCard from "../Card/ViolationCard";
 import { MarkerBeforeModeratorMutation, MarkerOnMap } from "../../types";
 

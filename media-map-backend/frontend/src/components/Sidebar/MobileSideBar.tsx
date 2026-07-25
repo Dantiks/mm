@@ -6,7 +6,7 @@ import { logout } from "../../features/users/usersThunks";
 import { useAppDispatch } from "../../app/hooks/useAppDispatch";
 import {
   Info,
-  Map as MapIcon,
+  ListChecks,
   BookOpen,
   Phone,
   LayoutDashboard,
@@ -34,11 +34,11 @@ const MobileSideBar: React.FC<Props> = ({ isOpen, setIsOpen }) => {
   const isActive = (path: string) => location.pathname === path;
 
   const menuItems = [
-    { to: "/about", label: "Долбоор жөнүндө", icon: <Info className="w-5 h-5" /> },
+    { to: "/about", label: "О проекте", icon: <Info className="w-5 h-5" /> },
     { to: "/categories", label: "Категории нарушений", icon: <ShieldAlert className="w-5 h-5" /> },
-    { to: "/terms", label: "Картаны колдонуу", icon: <MapIcon className="w-5 h-5" /> },
-    { to: "/useful", label: "Пайдалуу булактар", icon: <BookOpen className="w-5 h-5" /> },
-    { to: "/contacts", label: "Байланыштар", icon: <Phone className="w-5 h-5" /> },
+    { to: "/terms", label: "Как это работает", icon: <ListChecks className="w-5 h-5" /> },
+    { to: "/useful", label: "Полезные ресурсы", icon: <BookOpen className="w-5 h-5" /> },
+    { to: "/contacts", label: "Контакты", icon: <Phone className="w-5 h-5" /> },
   ];
 
   return (
@@ -59,7 +59,7 @@ const MobileSideBar: React.FC<Props> = ({ isOpen, setIsOpen }) => {
         >
           {/* Шапка: лого и кнопка закрытия */}
           <div className="flex items-center justify-between p-5 border-b border-slate-50">
-            <img src="/main-logo.png" alt="Logo" className="h-7 w-auto" />
+            <img src="/media-map-logo.png" alt="Logo" className="h-7 w-auto" />
             <button
                 onClick={setIsOpen}
                 className="p-2 -mr-2 text-slate-400 hover:text-slate-900 transition-colors"
@@ -119,7 +119,7 @@ const MobileSideBar: React.FC<Props> = ({ isOpen, setIsOpen }) => {
                         className="w-full flex items-center gap-4 px-4 py-3 rounded-2xl text-red-500 font-bold text-sm hover:bg-red-50 transition-colors mt-1"
                     >
                       <LogOut className="w-5 h-5 text-red-400" />
-                      Чыгуу
+                      Выйти
                     </button>
                   </div>
                 </div>

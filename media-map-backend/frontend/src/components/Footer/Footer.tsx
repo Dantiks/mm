@@ -48,37 +48,26 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-2 py-6 text-[12px] text-[#8590a0] sm:flex-row sm:items-center sm:justify-between">
-          <p>© 2026 MediaMap.kg. Материалы публикуются в рамках инициативы медиаграмотности КР.</p>
-          <p>
-            При поддержке:{' '}
-            <a
-              href="https://www.eeas.europa.eu/delegations/kyrgyz-republic_ru"
-              target="_blank"
-              rel="noreferrer"
-              className="hover:text-white"
-            >
-              Европейский Союз
-            </a>{' '}
-            ·{' '}
+        <div className="flex flex-col gap-4 py-6 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-[12px] text-[#8590a0]">
+            © 2026 MediaMap.kg. Материалы публикуются в рамках инициативы медиаграмотности КР.
+          </p>
+          <div className="flex flex-wrap items-center gap-3">
             <a
               href="https://mediaconsult.kg/"
               target="_blank"
               rel="noreferrer"
-              className="hover:text-white"
+              className="flex h-9 items-center rounded-md bg-white px-3 transition-opacity hover:opacity-90"
             >
-              МедиаКонсалт
-            </a>{' '}
-            ·{' '}
-            <a
-              href="https://internews.kg/"
-              target="_blank"
-              rel="noreferrer"
-              className="hover:text-white"
-            >
-              Internews
+              <img src="/media-consult-logo.png" alt="МедиаКонсалт" className="h-5 w-auto object-contain" />
             </a>
-          </p>
+            <span className="flex h-9 items-center rounded-md bg-white px-3">
+              <img src="/assoc-logo.png" alt="Ассоциация Общинных СМИ" className="h-6 w-auto object-contain" />
+            </span>
+            <span className="flex h-9 items-center rounded-md bg-white px-3">
+              <img src="/bashky-bet-logo.png" alt="Жамааттык ЖМКлардын Бирлиги" className="h-6 w-auto object-contain" />
+            </span>
+          </div>
         </div>
       </div>
     </footer>

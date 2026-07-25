@@ -8,7 +8,6 @@ import Contacts from "./pages/Contacts";
 import Terms from "./pages/Terms";
 import Useful from "./pages/Useful";
 import Categories from "./pages/Categories";
-import Test from "./pages/Test";
 import AdminLayout from "./layout/AdminLayout";
 import Main from "./pages/AdminPanel/Main";
 import ApprovedViolations from "./pages/AdminPanel/ApprovedViolations";
@@ -27,7 +26,6 @@ function App() {
                     <Route path="/new-report" element={<NewReport/>}/>
                     <Route path="/about" element={<About/>}/>
                     <Route path="/terms" element={<Terms/>}/>
-                    <Route path="/test" element={<Test/>}/>
                     <Route path="/useful" element={<Useful/>}/>
                     <Route path="/contacts" element={<Contacts/>}/>
                     <Route path="*" element={<Navigate to="/" replace/>}/>

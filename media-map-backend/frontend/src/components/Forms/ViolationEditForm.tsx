@@ -64,14 +64,14 @@ const ViolationEditForm: React.FC<Props> = ({item, onClose}) => {
           onChange={selectChangeHandler}
           className="w-full rounded-[10px] border border-lineLight bg-white py-3 px-4 text-[15px] text-navy outline-none focus:border-gold transition-colors"
         >
-          <option className="py-2 my-2" value="">Жашаган аймагыңызды тандаңыз:</option>
-          <option value="Чүй облусу">Чүй облусу</option>
-          <option value="Талас облусу">Талас облусу</option>
-          <option value="Ысык-Көл облусу">Ысык-Көл облусу</option>
-          <option value="Нарын облусу">Нарын облусу</option>
-          <option value="Жалал-Абад облусу">Жалал-Абад облусу</option>
-          <option value="Ош облусу">Ош облусу</option>
-          <option value="Баткен облусу">Баткен облусу</option>
+          <option className="py-2 my-2" value="">Выберите регион проживания:</option>
+          <option value="Чуйская область">Чуйская область</option>
+          <option value="Таласская область">Таласская область</option>
+          <option value="Иссык-Кульская область">Иссык-Кульская область</option>
+          <option value="Нарынская область">Нарынская область</option>
+          <option value="Джалал-Абадская область">Джалал-Абадская область</option>
+          <option value="Ошская область">Ошская область</option>
+          <option value="Баткенская область">Баткенская область</option>
         </select>
       </div>
 

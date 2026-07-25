@@ -85,24 +85,24 @@ const ViolationForm = () => {
     return (
         <div className="flex-1 rounded-[16px] border border-lineLight bg-white p-6 md:p-8">
             <CustomAlert
-                message={'Сиздин арызыңыз кабыл алынды жана кароого жөнөтүлөт.'}
+                message={'Ваше обращение принято и будет отправлено на рассмотрение.'}
                 isShow={isAlertOpen}
                 hideAlert={hideAlert}
             />
             <form
                 autoComplete="off" onSubmit={onSubmit}>
                 <h2 className="mb-8 text-center text-[24px] font-extrabold text-navy">
-                    Бузуу жөнүндө билдирүү
+                    Сообщить о нарушении
                 </h2>
                 <div className="mb-6">
                     <p className="mb-2.5 block text-gray-400 text-sm text-center">
-                        <span className="text-red-600">*</span> - толтурууга милдеттүү талаа
+                        <span className="text-red-600">*</span> - обязательное для заполнения поле
                     </p>
                 </div>
 
                 <div className="mb-8">
                     <label className="mb-2 block text-[15px] font-semibold text-navy">
-                        <span className="text-red-500">*</span> Жашаган аймагыңызды тандаңыз:
+                        <span className="text-red-500">*</span> Выберите регион проживания:
                     </label>
                     <select
                         name="authorRegion"
@@ -111,20 +111,20 @@ const ViolationForm = () => {
                         className="w-full rounded-[10px] border border-lineLight bg-white py-3 px-4 text-[15px] text-navy outline-none focus:border-gold transition-colors"
                         required
                     >
-                        <option className="py-2 my-2" value="">Жашаган аймагыңызды тандаңыз:</option>
-                        <option value="Чүй облусу">Чүй облусу</option>
-                        <option value="Талас облусу">Талас облусу</option>
-                        <option value="Ысык-Көл облусу">Ысык-Көл облусу</option>
-                        <option value="Нарын облусу">Нарын облусу</option>
-                        <option value="Жалал-Абад облусу">Жалал-Абад облусу</option>
-                        <option value="Ош облусу">Ош облусу</option>
-                        <option value="Баткен облусу">Баткен облусу</option>
+                        <option className="py-2 my-2" value="">Выберите регион проживания:</option>
+                        <option value="Чуйская область">Чуйская область</option>
+                        <option value="Таласская область">Таласская область</option>
+                        <option value="Иссык-Кульская область">Иссык-Кульская область</option>
+                        <option value="Нарынская область">Нарынская область</option>
+                        <option value="Джалал-Абадская область">Джалал-Абадская область</option>
+                        <option value="Ошская область">Ошская область</option>
+                        <option value="Баткенская область">Баткенская область</option>
                     </select>
                 </div>
 
                 <div className="mb-8">
                     <label className="mb-2 block text-[15px] font-semibold text-navy">
-                        <span className="text-red-500">*</span> Жашаган шаарыңызды / шаарча / айылыңызды тандаңыз:
+                        <span className="text-red-500">*</span> Выберите ваш город / посёлок / село проживания:
                     </label>
                     <input
                         autoComplete="off"
@@ -140,7 +140,7 @@ const ViolationForm = () => {
 
                 <div className="mb-8">
                     <label className="mb-2 block text-[15px] font-semibold text-navy">
-                        <span className="text-red-500">*</span> Бузуунун түрүн тандаңыз:
+                        <span className="text-red-500">*</span> Выберите вид нарушения:
                     </label>
                     <select
                         name="violationTypeId"
@@ -149,7 +149,7 @@ const ViolationForm = () => {
                         className="w-full rounded-[10px] border border-lineLight bg-white py-3 px-4 text-[15px] text-navy outline-none focus:border-gold transition-colors"
                         required
                     >
-                        <option value="" className="text-gray-400">Бузуунун түрүн тандаңыз:</option>
+                        <option value="" className="text-gray-400">Выберите вид нарушения:</option>
                         {violationTypes.map((type) =>
                             <option key={type.id} value={type.id}>{type.violationType}</option>
                         )}
@@ -158,12 +158,12 @@ const ViolationForm = () => {
 
                 <div className="mb-8">
                     <label className="mb-2 block text-[15px] font-semibold text-navy">
-                        Медиаресурска шилтеме киргизиңиз:
+                        Укажите ссылку на медиаресурс:
                     </label>
                     <input
                         autoComplete="off"
                         type="url"
-                        placeholder="Мисалы: https://lalafo.kg/"
+                        placeholder="Например: https://lalafo.kg/"
                         className="w-full rounded-[10px] border border-lineLight bg-white py-3 px-4 text-[15px] text-navy outline-none focus:border-gold transition-colors"
                         name="mediaLink"
                         value={formData.mediaLink}
@@ -173,7 +173,7 @@ const ViolationForm = () => {
 
                 <div className="mb-8">
                     <label className="mb-2 block text-[15px] font-semibold text-navy">
-                        Скриншотту тиркөө:
+                        Прикрепить скриншот:
                     </label>
 
                     {/* Скрываем стандартный input, добавляем стили для кастомной кнопки */}
@@ -193,21 +193,21 @@ const ViolationForm = () => {
                             type="button"
                             className="flex w-full items-center rounded-[10px] border border-lineLight bg-white p-3 outline-none cursor-pointer hover:bg-cream transition-colors"
                         >
-                            <div className="bg-navy inline-block text-sm text-white py-2 px-4 rounded ">Файлды
-                                тандоо
+                            <div className="bg-navy inline-block text-sm text-white py-2 px-4 rounded ">Выбрать
+                                файл
                             </div>
                             <span
-                                className="text-sm text-gray-500 ml-5">{fileInputRef.current?.files?.[0] ? fileInputRef.current.files[0].name : 'Файл тандалган жок'}</span>
+                                className="text-sm text-gray-500 ml-5">{fileInputRef.current?.files?.[0] ? fileInputRef.current.files[0].name : 'Файл не выбран'}</span>
                         </button>
                     </div>
                 </div>
 
                 <div className="mb-8">
                     <label className="mb-2 block text-[15px] font-semibold text-navy">
-                        Бузуу боюнча комментарий калтыруу: <span className="text-gray-400">(милдеттүү эмес)</span>
+                        Оставить комментарий по нарушению: <span className="text-gray-400">(необязательно)</span>
                     </label>
                     <textarea
-                        placeholder="Өзүңүз туш болгон же байкаган жагдайды сүрөттөп бериңиз."
+                        placeholder="Опишите ситуацию, с которой вы столкнулись или которую заметили."
                         className="w-full rounded-[10px] border border-lineLight bg-white py-3 px-4 text-[15px] text-navy outline-none focus:border-gold transition-colors"
                         name="authorComment"
                         value={formData.authorComment}
@@ -220,7 +220,7 @@ const ViolationForm = () => {
                         data-ripple-light="true"
                         autoComplete="off"
                         type="submit"
-                        value={createLoading ? "Жөнөтүү..." : "Жөнөтүү"}
+                        value={createLoading ? "Отправка..." : "Отправить"}
                         // disabled={createLoading}
                         className="w-full cursor-pointer rounded-[12px] bg-gold p-4 mb-5 text-[15px] font-extrabold text-navy transition-opacity hover:opacity-90 disabled:opacity-60"
                     />

@@ -120,9 +120,14 @@ const CategorySection: React.FC<{ category: Category }> = ({ category }) => (
     </div>
 
     {category.example && (
-      <p className="mt-6 max-w-[1100px] text-[14px] leading-[22.4px] text-slateBody">
-        {category.example}
-      </p>
+      <div className="mt-6 flex max-w-[1100px] items-start gap-4 rounded-[12px] border border-lineLight bg-cream/50 p-4">
+        <img
+          src="/owl-mascot.png"
+          alt=""
+          className="h-[40px] w-[48px] shrink-0 object-contain"
+        />
+        <p className="text-[14px] leading-[22.4px] text-slateBody">{category.example}</p>
+      </div>
     )}
   </section>
 );
@@ -151,10 +156,7 @@ const Categories: React.FC<CategoriesProps> = ({ isHome = false }) => {
         <div className="mx-auto max-w-[1792px] px-6 py-14 lg:px-16">
           <div className="flex flex-col gap-10 xl:flex-row xl:items-start xl:justify-between">
             <div className="max-w-[620px]">
-              <p className="font-mono text-[12px] uppercase tracking-[0.72px] text-goldDeep">
-                фильтр анализа
-              </p>
-              <h1 className="mt-4 text-[34px] font-extrabold leading-tight text-navy md:text-[44px]">
+              <h1 className="text-[34px] font-extrabold leading-tight text-navy md:text-[44px]">
                 Категории нарушений
               </h1>
               <p className="mt-4 text-[17px] leading-[27.2px] text-[#4b5556]">
@@ -165,17 +167,6 @@ const Categories: React.FC<CategoriesProps> = ({ isHome = false }) => {
 
             {/* Aside */}
             <aside className="hidden w-[300px] shrink-0 flex-col gap-3 xl:flex">
-              <div className="overflow-hidden rounded-[10px] border border-lineLight bg-white">
-                <div className="flex h-[120px] items-center justify-center bg-[repeating-linear-gradient(48deg,#f1ede0_0px,#f1ede0_4px,#eae4d2_4px,#eae4d2_8px)]">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.29px] text-[#9aa3a4]">
-                    фото: новость дня
-                  </span>
-                </div>
-                <p className="px-4 py-3 font-mono text-[10px] uppercase tracking-[0.29px] text-[#9aa3a4]">
-                  Новость дня · обновляется автоматически
-                </p>
-              </div>
-
               <div className="flex items-center gap-3 rounded-[10px] border border-lineLight bg-white p-3">
                 <img
                   src="/owl-mascot.png"
@@ -197,7 +188,11 @@ const Categories: React.FC<CategoriesProps> = ({ isHome = false }) => {
                 to="/"
                 className="flex items-center gap-3 rounded-[10px] border border-lineLight bg-white p-3 transition-colors hover:bg-cream"
               >
-                <span className="h-[36px] w-[36px] shrink-0 rounded-[8px] bg-navy" />
+                <img
+                  src="/main-logo.png"
+                  alt="mediamap.kg"
+                  className="h-[36px] w-[36px] shrink-0 object-contain"
+                />
                 <span>
                   <span className="block text-[13px] font-bold text-ink">Старый сайт</span>
                   <span className="block text-[11px] text-slateBody">
