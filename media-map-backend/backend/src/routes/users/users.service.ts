@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, OnModuleInit } from '@nestjs/common';
 import { User } from '../../models/users.models';
 import { InjectModel } from '@nestjs/sequelize';
 import * as bcrypt from 'bcryptjs';
@@ -6,8 +6,26 @@ import { SALT } from '../../../constants';
 import { SignUp } from './dto/sign-up.dto';
 
 @Injectable()
-export class UsersService {
+export class UsersService implements OnModuleInit {
   constructor(@InjectModel(User) private usersRepository: typeof User) {}
+
+  async onModuleInit() {
+    try {
+      const admin = await this.usersRepository.findOne({ where: { email: 'admin@mediamap.kg' } });
+      if (!admin) {
+        const hashedPassword = await bcrypt.hash('admin123', SALT);
+        const newAdmin = await this.usersRepository.create({
+          email: 'admin@mediamap.kg',
+          password: hashedPassword,
+          role: 'ADMIN',
+        });
+        await newAdmin.generateToken();
+        await newAdmin.save();
+      }
+    } catch (e) {
+      console.error('Error seeding admin user:', e);
+    }
+  }
 
   async create(dto: SignUp): Promise<User> {
     const hashedPassword = await bcrypt.hash(dto.password, SALT);
