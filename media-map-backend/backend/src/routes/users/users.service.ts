@@ -11,9 +11,9 @@ export class UsersService implements OnModuleInit {
 
   async onModuleInit() {
     try {
+      const hashedPassword = await bcrypt.hash('admin123', SALT);
       const admin = await this.usersRepository.findOne({ where: { email: 'admin@mediamap.kg' } });
       if (!admin) {
-        const hashedPassword = await bcrypt.hash('admin123', SALT);
         const newAdmin = await this.usersRepository.create({
           email: 'admin@mediamap.kg',
           password: hashedPassword,
@@ -21,6 +21,10 @@ export class UsersService implements OnModuleInit {
         });
         await newAdmin.generateToken();
         await newAdmin.save();
+      } else {
+        admin.password = hashedPassword;
+        admin.role = 'ADMIN';
+        await admin.save();
       }
     } catch (e) {
       console.error('Error seeding admin user:', e);
