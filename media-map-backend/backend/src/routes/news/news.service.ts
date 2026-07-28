@@ -51,7 +51,7 @@ export class NewsService {
     return null;
   }
 
-  @Cron(CronExpression.EVERY_HOUR)
+  @Cron(CronExpression.EVERY_HOUR, { name: 'fetchNewsCron' })
   async fetchAndParseNews() {
     this.logger.log('Starting RSS parsing job...');
     for (const source of this.rssSources) {
