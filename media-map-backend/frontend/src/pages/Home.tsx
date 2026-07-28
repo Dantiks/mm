@@ -148,6 +148,8 @@ const Home = () => {
                   <p className="text-[13px] italic leading-snug text-navy">
                     «{t.home.quoteOfDay ?? 'Анализ современных медиа-трендов требует мультидисциплинарного подхода для подлинного понимания их влияния.'}»
                   </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
