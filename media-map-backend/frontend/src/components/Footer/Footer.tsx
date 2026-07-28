@@ -72,7 +72,10 @@ const Footer = () => {
               <img src="/assoc-logo.png" alt="Ассоциация Общинных СМИ" className="h-6 w-auto object-contain" />
             </span>
             <span className="flex h-9 items-center rounded-md bg-white px-3">
-              <img src="/bashky-bet-logo.png" alt="Жамааттык ЖМКлардын Бирлиги" className="h-6 w-auto object-contain" />
+              <img src="/eu-horiz-logo.png" alt="Европейский Союз" className="h-6 w-auto object-contain" />
+            </span>
+            <span className="flex h-9 items-center rounded-md bg-white px-3">
+              <img src="/internews-2-logo.jpg" alt="Internews" className="h-6 w-auto object-contain" />
             </span>
           </div>
         </div>
