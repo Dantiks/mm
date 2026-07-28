@@ -17,7 +17,7 @@ const NewsAggregator: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/news')
+    fetch('/api/news')
       .then((res) => res.json())
       .then((data) => {
         setNews(data.rows || []);

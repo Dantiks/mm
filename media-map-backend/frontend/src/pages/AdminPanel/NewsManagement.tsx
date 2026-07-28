@@ -17,7 +17,7 @@ const NewsManagement: React.FC = () => {
   const fetchNews = async () => {
     setLoading(true);
     try {
-      const { data } = await axios.get('http://localhost:5000/api/news');
+      const { data } = await axios.get('/api/news');
       setNews(data.rows || []);
     } catch (err) {
       console.error(err);
@@ -34,7 +34,7 @@ const NewsManagement: React.FC = () => {
   const handleDelete = async (id: number) => {
     if (!window.confirm('Вы уверены, что хотите удалить эту новость?')) return;
     try {
-      await axios.delete(`http://localhost:5000/api/news/${id}`);
+      await axios.delete(`/api/news/${id}`);
       alert('Новость удалена');
       fetchNews();
     } catch (err) {
@@ -46,7 +46,7 @@ const NewsManagement: React.FC = () => {
   const handleTriggerFetch = async () => {
     setFetching(true);
     try {
-      await axios.get('http://localhost:5000/api/news/trigger-fetch');
+      await axios.get('/api/news/trigger-fetch');
       alert('Парсинг новостей запущен');
       await fetchNews();
     } catch (err) {

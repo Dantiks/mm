@@ -38,7 +38,7 @@ interface MapMarker {
 const getMarkerIcon = (iconName?: string) => {
   if (!iconName) return new L.Icon.Default();
   return new L.Icon({
-    iconUrl: `http://localhost:5000/api/static/uploads/icons/${iconName}`,
+    iconUrl: `/api/static/uploads/icons/${iconName}`,
     iconSize: [36, 36],
     iconAnchor: [18, 18],
     popupAnchor: [0, -18],
@@ -58,8 +58,8 @@ const MapPage: React.FC = () => {
     const fetchData = async () => {
       try {
         const [markersRes, categoriesRes] = await Promise.all([
-          axios.get('http://localhost:5000/api/markers?isApproved=true'),
-          axios.get('http://localhost:5000/api/violation-types')
+          axios.get('/api/markers?isApproved=true'),
+          axios.get('/api/violation-types')
         ]);
         setMarkers(markersRes.data);
         setCategories(categoriesRes.data);
@@ -110,7 +110,7 @@ const MapPage: React.FC = () => {
               >
                 {cat.icon && (
                   <img 
-                    src={`http://localhost:5000/api/static/uploads/icons/${cat.icon}`} 
+                    src={`/api/static/uploads/icons/${cat.icon}`} 
                     alt={cat.violationType} 
                     className={`w-7 h-7 object-contain transition-all ${isSelected ? 'opacity-100 scale-110' : 'opacity-60 grayscale'}`} 
                   />
@@ -168,7 +168,7 @@ const MapPage: React.FC = () => {
                           
                           {marker.image && (
                             <img 
-                              src={`http://localhost:5000/api/static/uploads/screenshots/${marker.image}`} 
+                              src={`/api/static/uploads/screenshots/${marker.image}`} 
                               alt="Скриншот нарушения" 
                               className="w-full h-32 object-cover rounded-lg mb-3 shadow-sm"
                               onError={(e) => {
