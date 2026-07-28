@@ -22,7 +22,6 @@ const categoryOwls = [
 const categorySlugs = ['hate-speech', 'disinformation', 'digital-fraud'];
 
 const resourceIcons = [
-  <Compass className="h-4 w-4" key="compass" />,
   <CheckSquare className="h-4 w-4" key="check" />,
   <PlayCircle className="h-4 w-4" key="play" />,
   <FileText className="h-4 w-4" key="file" />,
@@ -149,25 +148,46 @@ const Home = () => {
                   <p className="text-[13px] italic leading-snug text-navy">
                     «{t.home.quoteOfDay ?? 'Анализ современных медиа-трендов требует мультидисциплинарного подхода для подлинного понимания их влияния.'}»
                   </p>
-                </div>
-              </div>
-
-              {/* Интерактивная карта */}
-              <Link
-                to="/map"
-                className="flex items-center gap-3 rounded-xl bg-white px-4 py-3 border border-slate-100 transition-colors hover:border-red-300 hover:bg-red-50/40 group"
-              >
-                <img
-                  src="/main-logo.png"
-                  alt="Старый сайт"
-                  className="h-7 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity"
-                />
-                <div>
-                  <p className="text-[13px] font-bold text-navy">Доступ к предыдущей версии платформы</p>
-                </div>
-                <ExternalLink className="ml-auto h-4 w-4 text-slate-400 group-hover:text-red-500 transition-colors" />
-              </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── БЛОК ПРОВЕРКИ ИНФОРМАЦИИ ── */}
+      <section className="bg-white pt-10 pb-2">
+        <div className="mx-auto max-w-[1792px] px-6 lg:px-16">
+          <div className="flex flex-col gap-5 rounded-2xl bg-[#f5f0e8]/60 p-6 border border-amber-100/50 shadow-sm md:flex-row md:items-center md:justify-between relative overflow-hidden">
+            {/* Декоративный фон */}
+            <div className="absolute right-0 top-0 -translate-y-1/4 translate-x-1/4 opacity-10 pointer-events-none">
+              <Sparkles className="h-48 w-48 text-amber-500" />
+            </div>
+            
+            <div className="flex items-center gap-4 relative z-10">
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white shadow-sm border border-amber-100">
+                <img src="/owl-mascot.png" alt="Совёнок" className="h-8 w-8 object-contain" />
+              </div>
+              <div>
+                <h2 className="text-[18px] font-black text-navy">{t.home.checkInfoBtn}</h2>
+                <p className="text-[13px] text-slate-600 mt-1 max-w-md">{t.owl.checkTip}</p>
+              </div>
+            </div>
+            
+            <form 
+              onSubmit={(e) => {
+                e.preventDefault();
+                alert('Функция проверки информации в разработке');
+              }}
+              className="flex w-full max-w-xl gap-2 relative z-10"
+            >
+              <input 
+                type="text" 
+                placeholder={t.home.checkInputPlaceholder} 
+                className="flex-1 rounded-xl border border-slate-200 bg-white px-4 py-3 text-[14px] outline-none transition-colors focus:border-amber-400 focus:ring-1 focus:ring-amber-400 shadow-inner"
+              />
+              <button type="submit" className="flex items-center justify-center rounded-xl bg-red-600 px-6 py-3 font-bold text-white transition-all hover:bg-red-700 hover:scale-105 shadow-sm">
+                <ArrowRight className="h-5 w-5" />
+              </button>
+            </form>
           </div>
         </div>
       </section>
@@ -230,6 +250,23 @@ const Home = () => {
             </div>
 
             <div className="grid flex-1 grid-cols-1 gap-x-8 gap-y-5 sm:grid-cols-2 lg:grid-cols-3">
+              <Link
+                to="/map"
+                className="flex items-start gap-3.5 rounded-xl bg-white p-4 border border-slate-100 shadow-2xs hover:border-red-300 hover:bg-red-50/40 transition-colors group"
+              >
+                <img
+                  src="/main-logo.png"
+                  alt="Старый сайт"
+                  className="h-9 w-9 object-contain opacity-80 group-hover:opacity-100 transition-opacity shrink-0"
+                />
+                <div>
+                  <h3 className="text-[14px] font-bold text-navy group-hover:text-red-600 transition-colors flex items-center gap-1">
+                    {t.home.oldSiteTitle} <ExternalLink className="h-3 w-3" />
+                  </h3>
+                  <p className="mt-1 text-[12px] leading-snug text-slateBody">{t.home.oldSiteDesc}</p>
+                </div>
+              </Link>
+              
               {resources.map((r) => (
                 <div key={r.title} className="flex items-start gap-3.5 rounded-xl bg-white p-4 border border-slate-100 shadow-2xs">
                   <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-red-50 text-red-600 border border-red-100">
