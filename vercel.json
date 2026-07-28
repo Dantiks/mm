@@ -1,9 +1,6 @@
 {
-  "framework": null,
-  "installCommand": "npm install --prefix media-map-backend/frontend",
-  "buildCommand": "cd media-map-backend/frontend && npm run build",
+  "buildCommand": "cd media-map-backend/frontend && CI=false npm run build",
   "outputDirectory": "media-map-backend/frontend/build",
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
-  ]
+  "installCommand": "cd media-map-backend/frontend && npm install",
+  "framework": null
 }
