@@ -12,7 +12,7 @@ import { UsersModule } from '../users/users.module';
   imports: [
     SequelizeModule.forFeature([ViolationType]),
     forwardRef(() => AuthModule),
-    UsersModule,
+    forwardRef(() => UsersModule),
   ],
 })
 export class ViolationTypeModule {}
