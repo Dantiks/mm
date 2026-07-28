@@ -32,6 +32,25 @@ export class NewsService {
     return this.newsRepository.destroy({ where: { id } });
   }
 
+  async create(dto: any) {
+    return this.newsRepository.create({
+      title: dto.title || 'Без заголовка',
+      link: dto.link || '',
+      contentSnippet: dto.contentSnippet || '',
+      pubDate: dto.pubDate ? new Date(dto.pubDate) : new Date(),
+      source: dto.source || 'Manual',
+      guid: dto.guid || `manual-${Date.now()}-${Math.random()}`,
+    });
+  }
+
+  async update(id: number, dto: any) {
+    const newsItem = await this.newsRepository.findByPk(id);
+    if (newsItem) {
+      return newsItem.update(dto);
+    }
+    return null;
+  }
+
   @Cron(CronExpression.EVERY_HOUR)
   async fetchAndParseNews() {
     this.logger.log('Starting RSS parsing job...');
