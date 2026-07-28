@@ -9,6 +9,7 @@ import {
   Sparkles,
   ArrowRight,
   ExternalLink,
+  X,
 } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 
@@ -49,6 +50,9 @@ const Home = () => {
   const { t } = useLanguage();
 
   const [currentNewsIndex, setCurrentNewsIndex] = useState(0);
+  const [activeCheckCategory, setActiveCheckCategory] = useState<{ title: string; slug: string; owl: string } | null>(null);
+  const [checkInputText, setCheckInputText] = useState('');
+  const [checkSubmitted, setCheckSubmitted] = useState(false);
 
   const carouselNews = [
     { title: t.home.newsOfDayTitle, link: 'https://factcheck.kg/' },
@@ -155,46 +159,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ── БЛОК ПРОВЕРКИ ИНФОРМАЦИИ ── */}
-      <section className="bg-white pt-10 pb-2">
-        <div className="mx-auto max-w-[1792px] px-6 lg:px-16">
-          <div className="flex flex-col gap-5 rounded-2xl bg-[#f5f0e8]/60 p-6 border border-amber-100/50 shadow-sm md:flex-row md:items-center md:justify-between relative overflow-hidden">
-            {/* Декоративный фон */}
-            <div className="absolute right-0 top-0 -translate-y-1/4 translate-x-1/4 opacity-10 pointer-events-none">
-              <Sparkles className="h-48 w-48 text-amber-500" />
-            </div>
-            
-            <div className="flex items-center gap-4 relative z-10">
-              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white shadow-sm border border-amber-100">
-                <img src="/owl-mascot.png" alt="Совёнок" className="h-8 w-8 object-contain" />
-              </div>
-              <div>
-                <h2 className="text-[18px] font-black text-navy">{t.home.checkInfoBtn}</h2>
-                <p className="text-[13px] text-slate-600 mt-1 max-w-md">{t.owl.checkTip}</p>
-              </div>
-            </div>
-            
-            <form 
-              onSubmit={(e) => {
-                e.preventDefault();
-                alert('Функция проверки информации в разработке');
-              }}
-              className="flex w-full max-w-xl gap-2 relative z-10"
-            >
-              <input 
-                id="check-info-input"
-                type="text" 
-                placeholder={t.home.checkInputPlaceholder} 
-                className="flex-1 rounded-xl border border-slate-200 bg-white px-4 py-3 text-[14px] outline-none transition-colors focus:border-amber-400 focus:ring-1 focus:ring-amber-400 shadow-inner"
-              />
-              <button type="submit" className="flex items-center justify-center rounded-xl bg-red-600 px-6 py-3 font-bold text-white transition-all hover:bg-red-700 hover:scale-105 shadow-sm">
-                <ArrowRight className="h-5 w-5" />
-              </button>
-            </form>
-          </div>
-        </div>
-      </section>
-
       {/* ── 3 КАТЕГОРИИ ── */}
       <section className="bg-white py-12">
         <div className="mx-auto max-w-[1792px] px-6 lg:px-16">
@@ -235,12 +199,13 @@ const Home = () => {
                   <button
                     onClick={(e) => {
                       e.preventDefault();
-                      const el = document.getElementById('check-info-input');
-                      if (el) { el.focus(); el.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+                      setActiveCheckCategory({ title: c.title, slug: c.slug, owl: c.owl.src });
+                      setCheckInputText('');
+                      setCheckSubmitted(false);
                     }}
-                    className="flex items-center justify-center gap-1.5 rounded-xl border border-amber-300 bg-amber-50 px-3 py-2 text-[12px] font-bold text-amber-800 transition-all hover:bg-amber-100 hover:border-amber-400"
+                    className="flex items-center justify-center gap-1.5 rounded-xl border border-amber-300 bg-amber-50 px-3 py-2.5 text-[12px] font-bold text-amber-900 transition-all hover:bg-amber-100 hover:border-amber-400 hover:scale-[1.02] shadow-2xs"
                   >
-                    <Sparkles className="h-3.5 w-3.5 text-amber-500" />
+                    <Sparkles className="h-3.5 w-3.5 text-amber-600" />
                     Проверить информацию
                   </button>
                 </div>
@@ -349,6 +314,98 @@ const Home = () => {
           ))}
         </div>
       </section>
+
+      {/* ── МОДАЛЬНОЕ ОКНО ПРОВЕРКИ ИНФОРМАЦИИ ── */}
+      {activeCheckCategory && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-navy/60 backdrop-blur-xs p-4 animate-in fade-in duration-200">
+          <div className="relative w-full max-w-xl rounded-3xl bg-white p-6 sm:p-8 shadow-2xl border border-slate-100 overflow-hidden">
+            {/* Кнопка закрытия */}
+            <button 
+              onClick={() => setActiveCheckCategory(null)}
+              className="absolute right-5 top-5 flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-navy transition-colors"
+            >
+              <X className="h-5 w-5" />
+            </button>
+
+            {/* Заголовок с совёнком */}
+            <div className="flex items-center gap-4 mb-6">
+              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-amber-50 border border-amber-100 shadow-xs">
+                <img src={activeCheckCategory.owl} alt={activeCheckCategory.title} className="h-12 w-12 object-contain" />
+              </div>
+              <div>
+                <span className="inline-block rounded-full bg-amber-100 px-3 py-0.5 text-[11px] font-bold text-amber-800 mb-1">
+                  Категория: {activeCheckCategory.title}
+                </span>
+                <h3 className="text-[20px] font-black text-navy leading-tight">Проверить информацию</h3>
+              </div>
+            </div>
+
+            {!checkSubmitted ? (
+              <form 
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  if (!checkInputText.trim()) return;
+                  setCheckSubmitted(true);
+                }}
+                className="flex flex-col gap-4"
+              >
+                <p className="text-[13px] text-slate-600 leading-relaxed">
+                  Вставьте текст, ссылку или цитату. Совёнок и эксперты MediaMap проверят достоверность по категории <strong className="text-navy font-bold">«{activeCheckCategory.title}»</strong>.
+                </p>
+
+                <textarea
+                  value={checkInputText}
+                  onChange={(e) => setCheckInputText(e.target.value)}
+                  placeholder="Вставьте ссылку или текст для проверки..."
+                  rows={4}
+                  required
+                  className="w-full rounded-2xl border border-slate-200 bg-slate-50/50 p-4 text-[14px] text-navy outline-none transition-colors focus:border-amber-400 focus:bg-white focus:ring-2 focus:ring-amber-200 shadow-inner resize-none"
+                />
+
+                <div className="flex items-center gap-3 pt-2">
+                  <button 
+                    type="submit" 
+                    className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-red-600 px-6 py-3.5 text-[14px] font-bold text-white shadow-md transition-all hover:bg-red-700 hover:scale-[1.02]"
+                  >
+                    <Sparkles className="h-4 w-4" /> Отправить на проверку
+                  </button>
+                  <button 
+                    type="button" 
+                    onClick={() => setActiveCheckCategory(null)}
+                    className="rounded-xl border border-slate-200 px-5 py-3.5 text-[14px] font-bold text-slate-600 hover:bg-slate-50 transition-colors"
+                  >
+                    Отмена
+                  </button>
+                </div>
+              </form>
+            ) : (
+              <div className="flex flex-col items-center text-center py-4 gap-3">
+                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 mb-1">
+                  <Sparkles className="h-7 w-7" />
+                </div>
+                <h4 className="text-[18px] font-extrabold text-navy">Запрос успешно отправлен!</h4>
+                <p className="text-[13px] text-slate-600 max-w-md">
+                  Спасибо! Материал передан на проверку фактчекерам по категории «{activeCheckCategory.title}».
+                </p>
+                <div className="flex gap-3 mt-4 w-full">
+                  <Link 
+                    to="/new-report"
+                    className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-navy px-4 py-3 text-[13px] font-bold text-white hover:bg-navyCard transition-colors"
+                  >
+                    Сообщить о нарушении на карте
+                  </Link>
+                  <button 
+                    onClick={() => setActiveCheckCategory(null)}
+                    className="rounded-xl border border-slate-200 px-5 py-3 text-[13px] font-bold text-slate-600 hover:bg-slate-50 transition-colors"
+                  >
+                    Закрыть
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
     </div>
   );
