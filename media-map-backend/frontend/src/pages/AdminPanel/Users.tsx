@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAppDispatch } from "../../app/hooks/useAppDispatch";
-import { deleteUser, getAllUsers } from "../../features/users/usersThunks";
+import { deleteUser, getAllUsers, signUp } from "../../features/users/usersThunks";
 import { useAppSelector } from "../../app/hooks/useAppSelector";
 import { selectAllUsers, selectUser } from "../../features/users/usersSlice";
 import { User } from "../../types";
@@ -10,7 +10,10 @@ import {
     ShieldCheck,
     User as UserIcon,
     ShieldAlert,
-    Mail
+    Mail,
+    UserPlus,
+    X,
+    Check
 } from "lucide-react";
 
 const Users = () => {
@@ -18,36 +21,65 @@ const Users = () => {
     const currentUser = useAppSelector(selectUser);
     const allUsers = useAppSelector(selectAllUsers);
 
+    const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+    const [newEmail, setNewEmail] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [newRole, setNewRole] = useState<'ADMIN' | 'MODERATOR'>('ADMIN');
+    const [isCreating, setIsCreating] = useState(false);
+    const [createSuccess, setCreateSuccess] = useState('');
+
     useEffect(() => {
         dispatch(getAllUsers());
     }, [dispatch]);
 
     const handleDelete = async (userToDelete: User) => {
-        if (currentUser && currentUser.role === "SUPERADMIN") {
+        if (currentUser && (currentUser.role === "SUPERADMIN" || currentUser.role === "ADMIN")) {
             if (window.confirm(`Вы уверены, что хотите удалить пользователя ${userToDelete.email}?`)) {
                 try {
                     const response = await dispatch(deleteUser(userToDelete.id)).unwrap();
                     window.alert(response.message);
+                    dispatch(getAllUsers());
                 } catch (e) {
                     window.alert("Ошибка при удалении");
                 }
             }
         } else {
-            window.alert('У вас недостаточно прав! Требуется роль SUPERADMIN.');
+            window.alert('У вас недостаточно прав! Требуется роль администратора.');
+        }
+    };
+
+    const handleCreateAdmin = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!newEmail || !newPassword) return;
+        setIsCreating(true);
+        try {
+            await dispatch(signUp({ email: newEmail, password: newPassword, role: newRole, name: 'Администратор №2' })).unwrap();
+            setCreateSuccess(`Второй администратор (${newEmail}) успешно зарегистрирован!`);
+            setNewEmail('');
+            setNewPassword('');
+            dispatch(getAllUsers());
+            setTimeout(() => {
+                setCreateSuccess('');
+                setIsAddModalOpen(false);
+            }, 2500);
+        } catch (e) {
+            window.alert('Ошибка при создании администратора');
+        } finally {
+            setIsCreating(false);
         }
     };
 
     const getRoleBadge = (role: string) => {
         const styles = {
             SUPERADMIN: "bg-rose-100 text-rose-700 border-rose-200",
-            ADMIN: "bg-creamPill text-goldDeep border-lineLight",
-            MODERATOR: "bg-amber-100 text-amber-700 border-amber-200",
+            ADMIN: "bg-amber-100 text-amber-800 border-amber-300 font-bold",
+            MODERATOR: "bg-emerald-100 text-emerald-800 border-emerald-300",
             USER: "bg-slate-100 text-slate-700 border-slate-200",
         };
 
         const labels = {
             SUPERADMIN: "Super Admin",
-            ADMIN: "Администратор",
+            ADMIN: "Администратор №2",
             MODERATOR: "Модератор",
             USER: "Пользователь",
         };
@@ -68,22 +100,27 @@ const Users = () => {
     };
 
     return (
-        <div className="max-w-6xl">
+        <div className="max-w-6xl font-inter">
             {/* Шапка страницы */}
-            <div className="flex items-center justify-between mb-8 p-2">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 p-2">
                 <div className="flex items-center gap-4">
                     <div className="p-3 bg-navy rounded-2xl shadow-xl">
                         <UsersIcon className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                        <h2 className="text-2xl font-bold text-slate-800 tracking-tight">Пользователи</h2>
-                        <p className="text-sm text-slate-500 font-medium">Управление доступом и ролями системы</p>
+                        <h2 className="text-2xl font-bold text-slate-800 tracking-tight">Пользователи и Администраторы</h2>
+                        <p className="text-sm text-slate-500 font-medium">Управление доступом второго администратора (мамы) и модераторов</p>
                     </div>
                 </div>
-                <div className="hidden md:block">
-                    <span className="bg-white border border-slate-100 px-4 py-2 rounded-xl text-sm font-semibold text-slate-600 shadow-sm">
-                        Всего: {allUsers.length}
-                    </span>
+                
+                <div className="flex flex-wrap items-center gap-2">
+                    <button
+                        onClick={() => setIsAddModalOpen(true)}
+                        className="inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-5 py-2.5 text-xs font-extrabold text-white shadow-md hover:bg-red-700 transition-all"
+                    >
+                        <UserPlus className="w-4 h-4" />
+                        + 2-й администратор
+                    </button>
                 </div>
             </div>
 
@@ -137,16 +174,86 @@ const Users = () => {
                     ))}
                     </tbody>
                 </table>
-
-                {allUsers.length === 0 && (
-                    <div className="py-20 text-center">
-                        <div className="inline-flex p-4 bg-slate-50 rounded-full mb-4">
-                            <UsersIcon className="w-8 h-8 text-slate-200" />
-                        </div>
-                        <p className="text-slate-400 font-medium">Список пользователей пуст</p>
-                    </div>
-                )}
             </div>
+
+            {/* Модальное окно добавления второго администратора */}
+            {isAddModalOpen && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-xs">
+                    <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl animate-fadeIn">
+                        <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+                            <h3 className="text-lg font-bold text-navy flex items-center gap-2">
+                                <ShieldCheck className="w-5 h-5 text-red-600" />
+                                Назначить 2-го администратора
+                            </h3>
+                            <button onClick={() => setIsAddModalOpen(false)} className="text-slate-400 hover:text-slate-600">
+                                <X className="w-5 h-5" />
+                            </button>
+                        </div>
+
+                        <form onSubmit={handleCreateAdmin} className="mt-4 space-y-4">
+                            <div>
+                                <label className="block text-xs font-bold text-slate-600 mb-1">Email администратора</label>
+                                <input
+                                    type="email"
+                                    required
+                                    value={newEmail}
+                                    onChange={(e) => setNewEmail(e.target.value)}
+                                    placeholder="admin2@mediamap.kg"
+                                    className="w-full rounded-xl border border-slate-300 px-4 py-2.5 text-sm text-navy outline-none focus:border-red-500"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-xs font-bold text-slate-600 mb-1">Пароль</label>
+                                <input
+                                    type="password"
+                                    required
+                                    value={newPassword}
+                                    onChange={(e) => setNewPassword(e.target.value)}
+                                    placeholder="••••••••"
+                                    className="w-full rounded-xl border border-slate-300 px-4 py-2.5 text-sm text-navy outline-none focus:border-red-500"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-xs font-bold text-slate-600 mb-1">Роль доступа</label>
+                                <select
+                                    value={newRole}
+                                    onChange={(e) => setNewRole(e.target.value as 'ADMIN' | 'MODERATOR')}
+                                    className="w-full rounded-xl border border-slate-300 px-4 py-2.5 text-sm text-navy outline-none focus:border-red-500"
+                                >
+                                    <option value="ADMIN">Администратор (Полный доступ)</option>
+                                    <option value="MODERATOR">Модератор (Проверка заявок)</option>
+                                </select>
+                            </div>
+
+                            {createSuccess && (
+                                <div className="flex items-center gap-2 rounded-xl bg-emerald-50 p-3 text-xs font-bold text-emerald-800 border border-emerald-200">
+                                    <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+                                    <span>{createSuccess}</span>
+                                </div>
+                            )}
+
+                            <div className="flex items-center justify-end gap-3 pt-2">
+                                <button
+                                    type="button"
+                                    onClick={() => setIsAddModalOpen(false)}
+                                    className="rounded-xl px-4 py-2 text-xs font-bold text-slate-500 hover:bg-slate-100"
+                                >
+                                    Отмена
+                                </button>
+                                <button
+                                    type="submit"
+                                    disabled={isCreating}
+                                    className="rounded-xl bg-red-600 px-5 py-2 text-xs font-bold text-white hover:bg-red-700 shadow-md"
+                                >
+                                    {isCreating ? 'Создание...' : 'Создать учетную запись'}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

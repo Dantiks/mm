@@ -6,7 +6,8 @@ export interface SignIn {
 }
 
 export interface SignUp extends SignIn {
-  name: string;
+  name?: string;
+  role?: string;
 }
 
 interface User {

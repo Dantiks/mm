@@ -1,197 +1,120 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext';
-import categoriesContent from '../i18n/pages/categories';
+import { 
+  MessageSquareWarning, 
+  FileSearch, 
+  ShieldAlert, 
+  ArrowRight, 
+  ShieldCheck
+} from 'lucide-react';
 
-interface Stat {
-  label: string;
-  value: string;
-  delta: string;
-  up: boolean;
-}
-
-interface Category {
-  icon: string;
-  title: string;
-  count: string;
-  description: string;
-  example?: string;
-  stats: Stat[];
-}
-
-const CheckMessageControl: React.FC<{ placeholder: string }> = ({ placeholder }) => (
-  <form
-    onSubmit={(e) => e.preventDefault()}
-    className="flex h-[44px] w-full max-w-[292px] shrink-0 overflow-hidden rounded-[8px] border border-lineLight"
-  >
-    <input
-      type="text"
-      placeholder={placeholder}
-      className="min-w-0 flex-1 bg-white px-[14px] text-[14px] text-navy placeholder:text-[#757575] outline-none"
-    />
-    <button
-      type="submit"
-      aria-label={placeholder}
-      className="flex w-[44px] shrink-0 items-center justify-center bg-navy text-[16px] text-white"
-    >
-      ▶
-    </button>
-  </form>
-);
-
-const StatCard: React.FC<{ stat: Stat }> = ({ stat }) => (
-  <div className="rounded-[12px] border border-lineLight px-[18px] py-[14px]">
-    <p className="text-[12px] font-normal uppercase tracking-[0.48px] text-[#9aa3a4]">
-      {stat.label}
-    </p>
-    <div className="mt-3 flex items-baseline gap-2">
-      <span className="text-[26px] font-extrabold leading-none text-ink">{stat.value}</span>
-      <span
-        className={`text-[13px] font-semibold ${stat.up ? 'text-statUp' : 'text-statDown'}`}
-      >
-        {stat.up ? '↑' : '↓'} {stat.delta}
-      </span>
-    </div>
-  </div>
-);
-
-const CategorySection: React.FC<{ category: Category; checkMessagePlaceholder: string }> = ({
-  category,
-  checkMessagePlaceholder,
-}) => (
-  <section className="border-t border-lineLight pt-12 first:border-t-0 first:pt-0">
-    <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-      <div className="flex items-start gap-4">
-        <span className="flex h-[44px] w-[44px] shrink-0 items-center justify-center rounded-full bg-creamPill text-[20px] text-navy">
-          {category.icon}
-        </span>
-        <div>
-          <h2 className="text-[22px] font-extrabold leading-tight text-ink">{category.title}</h2>
-          <p className="mt-1 text-[13px] text-[#9aa3a4]">{category.count}</p>
-        </div>
-      </div>
-      <CheckMessageControl placeholder={checkMessagePlaceholder} />
-    </div>
-
-    <p className="mt-6 max-w-[820px] text-[14px] leading-[22.4px] text-slateBody">
-      {category.description}
-    </p>
-
-    <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {category.stats.map((stat) => (
-        <StatCard key={stat.label} stat={stat} />
-      ))}
-    </div>
-
-    {category.example && (
-      <div className="mt-6 flex max-w-[1100px] items-start gap-4 rounded-[12px] border border-lineLight bg-cream/50 p-4">
-        <img
-          src="/owl-mascot.png"
-          alt=""
-          className="h-[40px] w-[48px] shrink-0 object-contain"
-        />
-        <p className="text-[14px] leading-[22.4px] text-slateBody">{category.example}</p>
-      </div>
-    )}
-  </section>
-);
+const categoryData = [
+  {
+    id: 'hate-speech',
+    icon: <MessageSquareWarning className="h-8 w-8 text-red-600" />,
+    badge: 'Категория №1',
+  },
+  {
+    id: 'disinformation',
+    icon: <FileSearch className="h-8 w-8 text-red-600" />,
+    badge: 'Категория №2',
+  },
+  {
+    id: 'digital-fraud',
+    icon: <ShieldAlert className="h-8 w-8 text-red-600" />,
+    badge: 'Категория №3',
+  },
+];
 
 const Categories = () => {
-  const { t, language } = useLanguage();
-  const c = categoriesContent[language];
+  const { t } = useLanguage();
 
   return (
-    <div className="bg-white font-inter">
-      {/* Breadcrumb bar */}
-      <div className="border-b border-lineLight bg-cream">
-        <div className="mx-auto max-w-[1792px] px-6 py-[11px] lg:px-16">
-          <Link to="/" className="text-[13px] font-semibold text-navy hover:underline">
-            {c.breadcrumb}
-          </Link>
+    <div className="bg-white font-inter min-h-screen py-10">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-6">
+        
+        {/* Крупный заголовок: Визуально очевидно, что категорий три */}
+        <div className="text-center max-w-3xl mx-auto mb-8">
+          <div className="flex justify-center mb-4">
+            <img 
+              src="/owl-mascot.png" 
+              alt="Mascot" 
+              className="h-16 w-16 object-contain hover:scale-110 transition-transform duration-300"
+            />
+          </div>
+          <div className="inline-flex items-center gap-2 rounded-full bg-red-100 px-4 py-1.5 text-xs font-black text-red-700 uppercase tracking-widest mb-3 border border-red-200 shadow-xs">
+            <ShieldCheck className="h-4 w-4 text-red-600" />
+            3 Основные категории нарушений
+          </div>
+          <h1 className="text-3xl font-black text-navy sm:text-4xl md:text-5xl tracking-tight">
+            Категории нарушений
+          </h1>
         </div>
-      </div>
 
-      {/* Hero */}
-      <div className="bg-cream">
-        <div className="mx-auto max-w-[1792px] px-6 py-14 lg:px-16">
-          <div className="flex flex-col gap-10 xl:flex-row xl:items-start xl:justify-between">
-            <div className="max-w-[620px]">
-              <h1 className="text-[34px] font-extrabold leading-tight text-navy md:text-[44px]">
-                {c.heroTitle}
-              </h1>
-              <p className="mt-4 text-[17px] leading-[27.2px] text-[#4b5556]">
-                {c.heroSubtitle}
-              </p>
-            </div>
-
-            {/* Aside */}
-            <aside className="hidden w-[300px] shrink-0 flex-col gap-3 xl:flex">
-              <div className="flex items-center gap-3 rounded-[10px] border border-lineLight bg-white p-3">
-                <img
-                  src="/owl-mascot.png"
-                  alt=""
-                  className="h-[44px] w-[52px] shrink-0 object-contain"
-                />
+        {/* СРАЗУ ПОСЛЕ КРУПНОГО ЗАГОЛОВКА ИДУТ САМИ 3 КАТЕГОРИИ (БЕЗ ПРОМЕЖУТОЧНОГО ТЕКСТА И БЕЗ ЦИТАТ) */}
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+          {categoryData.map((cat) => {
+            const detail = t.categoryDetails[cat.id];
+            return (
+              <Link
+                key={cat.id}
+                to={`/categories/${cat.id}`}
+                className="group relative flex flex-col justify-between rounded-3xl border-2 border-slate-200 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-red-600 hover:shadow-xl"
+              >
                 <div>
-                  <p className="font-mono text-[10px] uppercase tracking-[0.32px] text-goldDeep">
-                    {t.home.quoteLabel}
-                  </p>
-                  <p className="mt-1 text-[12px] italic leading-snug text-[#2e3839]">
-                    {t.home.quoteText}
+                  {/* Верхняя часть карточки с фирменной красной иконкой */}
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-red-50 border-2 border-red-100 group-hover:bg-red-600 group-hover:text-white transition-colors duration-300 shadow-xs">
+                      {cat.icon}
+                    </span>
+                    <span className="rounded-full bg-red-50 px-3.5 py-1 text-xs font-extrabold text-red-700 border border-red-100 uppercase tracking-wider">
+                      {cat.badge}
+                    </span>
+                  </div>
+
+                  {/* Название и описание категории */}
+                  <h2 className="text-2xl font-black text-navy group-hover:text-red-600 transition-colors">
+                    {detail.title}
+                  </h2>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-600 font-medium">
+                    {detail.summary}
                   </p>
                 </div>
-              </div>
 
-              <Link
-                to="/"
-                className="flex items-center gap-3 rounded-[10px] border border-lineLight bg-white p-3 transition-colors hover:bg-cream"
-              >
-                <img
-                  src="/main-logo.png"
-                  alt="mediamap.kg"
-                  className="h-[36px] w-[36px] shrink-0 object-contain"
-                />
-                <span>
-                  <span className="block text-[13px] font-bold text-ink">{t.home.oldSite}</span>
-                  <span className="block text-[11px] text-slateBody">{t.home.oldSiteDesc}</span>
-                </span>
+                {/* Нижняя кнопка-ссылка на детальную страницу с законами и примерами */}
+                <div className="mt-8 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-black text-navy group-hover:text-red-600 transition-colors">
+                  <span>Что это, законы КР и примеры</span>
+                  <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1.5 transition-transform text-red-600" />
+                </div>
               </Link>
-            </aside>
-          </div>
+            );
+          })}
         </div>
-      </div>
 
-      {/* Category sections */}
-      <div className="mx-auto max-w-[1792px] px-6 py-16 lg:px-16">
-        <div className="space-y-12">
-          {c.categories.map((category) => (
-            <CategorySection
-              key={category.title}
-              category={category}
-              checkMessagePlaceholder={t.home.checkMessagePlaceholder}
+        {/* Информационный блок с Маскотом-совёнком */}
+        <div className="mt-12 rounded-3xl border-2 border-amber-200/80 bg-gradient-to-r from-amber-50/80 via-orange-50/40 to-amber-50/80 p-6 md:p-8 flex flex-col md:flex-row items-center gap-6 shadow-sm">
+          <div className="relative shrink-0">
+            <img
+              src="/owl-mascot.png"
+              alt={t.owl.teacherName}
+              className="h-20 w-20 object-contain"
             />
-          ))}
-        </div>
-
-        {/* Quote of the day callout */}
-        <div className="mt-12 flex items-center gap-5 rounded-[16px] border border-lineLight bg-cream p-5">
-          <img
-            src="/owl-mascot.png"
-            alt=""
-            className="h-[54px] w-[72px] shrink-0 object-contain"
-          />
+          </div>
           <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.55px] text-goldDeep">
-              {t.home.quoteLabel}
-            </p>
-            <p className="mt-1 text-[14px] italic leading-[22.4px] text-[#2e3839]">
-              {t.home.quoteText}
+            <h3 className="text-base font-extrabold text-navy mb-1 flex items-center gap-2">
+              <span>{t.owl.explainHeader}</span>
+            </h3>
+            <p className="text-xs md:text-sm text-slate-700 leading-relaxed font-medium">
+              Все три категории строго мониторятся экспертами MediaMap. Кликните по любой карточке выше, чтобы изучить подробную юридическую базу Кыргызской Республики, статьи Уголовного Кодекса и реальные примеры из практики.
             </p>
           </div>
         </div>
+
       </div>
     </div>
   );
 };
 
 export default Categories;
+

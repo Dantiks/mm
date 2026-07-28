@@ -2,12 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../../i18n/LanguageContext';
 import footerContent from '../../i18n/pages/footer';
+import { Send, Instagram, Facebook, Youtube } from 'lucide-react';
 
 const socials = [
-  { label: 'TG', href: 'https://t.me/' },
-  { label: 'IG', href: 'https://instagram.com/' },
-  { label: 'FB', href: 'https://facebook.com/' },
-  { label: 'YT', href: 'https://youtube.com/' },
+  { label: 'Telegram', href: 'https://t.me/mediamap_kg', icon: <Send className="h-4 w-4" /> },
+  { label: 'Instagram', href: 'https://instagram.com/mediamap_kg', icon: <Instagram className="h-4 w-4" /> },
+  { label: 'Facebook', href: 'https://facebook.com/mediamapkg', icon: <Facebook className="h-4 w-4" /> },
+  { label: 'YouTube', href: 'https://youtube.com/@mediamapkg', icon: <Youtube className="h-4 w-4" /> },
 ];
 
 const Footer = () => {
@@ -37,7 +38,7 @@ const Footer = () => {
             ))}
           </nav>
 
-          <div className="flex gap-2">
+          <div className="flex gap-3">
             {socials.map((social) => (
               <a
                 key={social.label}
@@ -45,9 +46,10 @@ const Footer = () => {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={social.label}
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-white/30 font-mono text-[9px] font-bold text-white transition-colors hover:border-white/70"
+                title={social.label}
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-gold hover:text-navy hover:scale-110"
               >
-                {social.label}
+                {social.icon}
               </a>
             ))}
           </div>

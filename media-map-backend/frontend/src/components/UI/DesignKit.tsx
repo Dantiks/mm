@@ -34,7 +34,7 @@ export const PageHero: React.FC<PageHeroProps> = ({
   eyebrow,
   title,
   subtitle,
-  breadcrumb = true,
+  breadcrumb = false,
   aside,
 }) => (
   <div className="bg-cream font-inter">

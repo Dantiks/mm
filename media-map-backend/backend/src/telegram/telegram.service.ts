@@ -1,4 +1,9 @@
-import { Injectable, Logger, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
+import {
+  Injectable,
+  Logger,
+  OnModuleInit,
+  OnModuleDestroy,
+} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TelegramBot } from 'node-telegram-bot-api';
 import { classifyText } from './classifier';
@@ -13,7 +18,9 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
   onModuleInit() {
     const token = this.configService.get<string>('TELEGRAM_BOT_TOKEN');
     if (!token) {
-      this.logger.warn('TELEGRAM_BOT_TOKEN не задан — Telegram-бот не запущен.');
+      this.logger.warn(
+        'TELEGRAM_BOT_TOKEN не задан — Telegram-бот не запущен.',
+      );
       return;
     }
 

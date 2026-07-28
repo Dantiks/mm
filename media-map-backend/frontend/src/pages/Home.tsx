@@ -1,31 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  Hexagon,
-  AlignJustify,
-  ShieldAlert,
   Compass,
   CheckSquare,
   PlayCircle,
   FileText,
   Wrench,
   Sparkles,
-  Fuel,
+  ArrowRight,
+  ExternalLink,
 } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 
-const socials = [
-  { label: 'TG', href: 'https://t.me/' },
-  { label: 'IG', href: 'https://instagram.com/' },
-  { label: 'FB', href: 'https://facebook.com/' },
-  { label: 'YT', href: 'https://youtube.com/' },
+// Совята для каждой категории: поза подобрана по смыслу
+const categoryOwls = [
+  { src: '/owl-stop.png', alt: 'Язык вражды — сова предупреждает' },   // рука стоп + !
+  { src: '/owl-think.png', alt: 'Дезинформация — сова анализирует' },  // думает
+  { src: '/owl-cross.png', alt: 'Мошенничество — строгая сова' },      // скрещены руки
 ];
 
-const categoryIcons = [
-  <Hexagon className="h-5 w-5" key="hexagon" />,
-  <AlignJustify className="h-5 w-5" key="align" />,
-  <ShieldAlert className="h-5 w-5" key="shield" />,
-];
+const categorySlugs = ['hate-speech', 'disinformation', 'digital-fraud'];
 
 const resourceIcons = [
   <Compass className="h-4 w-4" key="compass" />,
@@ -36,230 +30,271 @@ const resourceIcons = [
   <Sparkles className="h-4 w-4" key="sparkles" />,
 ];
 
-const NEWS_OF_DAY_SOURCE =
-  'https://gazeta.kg/economika/209237-pervaja-partija-gsm-iz-kitaja-otpravlena-v-kyrgyzstan.html';
+const socials = [
+  { label: 'TG', href: 'https://t.me/mediamap_kg', color: 'bg-[#229ED9]' },
+  { label: 'IG', href: 'https://instagram.com/mediamap_kg', color: 'bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400' },
+  { label: 'FB', href: 'https://facebook.com/mediamapkg', color: 'bg-[#1877F2]' },
+  { label: 'YT', href: 'https://youtube.com/@mediamapkg', color: 'bg-[#FF0000]' },
+];
 
 const tagStyles: Record<string, string> = {
-  дезинформация: 'bg-[#fbe4e1] text-[#b3392f]',
-  языквражды: 'bg-[#fbe4e1] text-[#b3392f]',
-  инструменты: 'bg-creamPill text-goldDeep',
+  фактчекинг: 'bg-red-100 text-red-700',
+  дезинформация: 'bg-red-100 text-red-700',
+  коопсуздук: 'bg-amber-100 text-amber-800',
+  безопасность: 'bg-amber-100 text-amber-800',
+  обучение: 'bg-emerald-100 text-emerald-800',
+  окутуу: 'bg-emerald-100 text-emerald-800',
 };
-
-const CheckMessageControl: React.FC<{ placeholder: string }> = ({ placeholder }) => (
-  <form
-    onSubmit={(e) => e.preventDefault()}
-    className="flex h-[44px] w-full overflow-hidden rounded-[8px] border border-lineLight"
-  >
-    <input
-      type="text"
-      placeholder={placeholder}
-      className="min-w-0 flex-1 bg-white px-[14px] text-[14px] text-navy placeholder:text-[#757575] outline-none"
-    />
-    <button
-      type="submit"
-      aria-label={placeholder}
-      className="flex w-[44px] shrink-0 items-center justify-center bg-navy text-[16px] text-white"
-    >
-      ▶
-    </button>
-  </form>
-);
 
 const Home = () => {
   const { t } = useLanguage();
-  const homeCategories = t.home.categories.map((c, i) => ({ ...c, icon: categoryIcons[i] }));
+
+  const [currentNewsIndex, setCurrentNewsIndex] = useState(0);
+
+  const carouselNews = [
+    { title: t.home.newsOfDayTitle, link: 'https://factcheck.kg/' },
+    { title: t.home.news[0]?.title || 'Важная новость', link: 'https://factcheck.kg/' },
+    { title: t.home.news[1]?.title || 'Обновление платформы', link: 'https://factcheck.kg/' }
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentNewsIndex((prev) => (prev + 1) % carouselNews.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [carouselNews.length]);
+
+  const homeCategories = t.home.categories.map((c, i) => ({
+    ...c,
+    owl: categoryOwls[i],
+    slug: categorySlugs[i],
+  }));
+
   const resources = t.home.resources.map((r, i) => ({ ...r, icon: resourceIcons[i] }));
 
   return (
     <div className="bg-white font-inter">
-      {/* Hero */}
-      <div className="bg-cream">
-        <div className="mx-auto max-w-[1792px] px-6 py-14 lg:px-16">
-          <div className="flex flex-col gap-10 xl:flex-row xl:items-start xl:justify-between">
-            <div className="max-w-[620px]">
-              <h1 className="text-[34px] font-extrabold leading-tight text-navy md:text-[46px]">
+
+      {/* ── HERO ── */}
+      <section className="bg-[#f5f0e8] py-12 lg:py-16">
+        <div className="mx-auto max-w-[1792px] px-6 lg:px-16">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-start">
+
+            {/* LEFT: Заголовок + Следите за нами */}
+            <div className="flex flex-col justify-center">
+              <h1 className="text-[32px] font-black leading-tight text-navy sm:text-[40px] lg:text-[46px]">
                 {t.home.heroTitle}
               </h1>
-              <p className="mt-4 text-[17px] leading-[27.2px] text-[#4b5556]">
+              <p className="mt-4 text-[15px] leading-relaxed text-slate-600 max-w-lg">
                 {t.home.heroSubtitle}
               </p>
+
+              {/* Соцсети */}
               <div className="mt-8 flex items-center gap-3">
-                <span className="text-[13px] font-semibold text-navy">{t.home.followUs}</span>
-                <div className="flex gap-2">
-                  {socials.map((s) => (
-                    <a
-                      key={s.label}
-                      href={s.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label={s.label}
-                      className="flex h-9 w-9 items-center justify-center rounded-full bg-navy font-mono text-[9px] font-bold text-white transition-opacity hover:opacity-90"
-                    >
-                      {s.label}
-                    </a>
-                  ))}
-                </div>
+                <span className="text-[13px] font-bold text-navy">Следите за нами</span>
+                {socials.map((s) => (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={`flex h-8 w-8 items-center justify-center rounded-full text-[10px] font-black text-white shadow-sm transition-transform hover:scale-110 ${s.color}`}
+                  >
+                    {s.label}
+                  </a>
+                ))}
               </div>
             </div>
 
-            {/* Right column */}
-            <div className="flex w-full flex-col gap-3 xl:max-w-[820px]">
+            {/* RIGHT: Агрегатор-виджет */}
+            <div className="flex flex-col gap-3 rounded-2xl bg-white p-1 shadow-sm border border-slate-100">
+
+              {/* Новость дня (Карусель) */}
               <a
-                href={NEWS_OF_DAY_SOURCE}
+                href={carouselNews[currentNewsIndex].link}
                 target="_blank"
                 rel="noreferrer"
-                className="block overflow-hidden rounded-[10px] border border-lineLight bg-white transition-colors hover:bg-cream"
+                className="relative flex flex-col gap-1 rounded-xl bg-[#f5f0e8] p-4 transition-colors hover:bg-amber-100/60 min-h-[96px] overflow-hidden"
               >
-                <div className="flex h-[220px] items-center justify-center bg-creamPill">
-                  <Fuel className="h-10 w-10 text-goldDeep" strokeWidth={1.5} />
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-amber-800">
+                    {t.home.newsOfDayCaption}
+                  </span>
                 </div>
-                <p className="px-4 pt-3 font-mono text-[10px] uppercase tracking-[0.29px] text-[#9aa3a4]">
-                  {t.home.newsOfDayCaption}
-                </p>
-                <p className="px-4 pb-4 pt-1 text-[15px] font-bold leading-snug text-navy underline decoration-navy/40 underline-offset-2">
-                  {t.home.newsOfDayTitle}
-                </p>
+                <div className="relative flex-1">
+                  {carouselNews.map((news, idx) => (
+                    <div 
+                      key={idx}
+                      className={`absolute top-0 left-0 w-full transition-opacity duration-500 ${idx === currentNewsIndex ? 'opacity-100 relative' : 'opacity-0 absolute pointer-events-none'}`}
+                    >
+                      <p className="text-[14px] font-bold text-red-700 underline underline-offset-2 decoration-red-400 leading-snug line-clamp-2">
+                        {news.title}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </a>
 
-              <div className="flex items-center gap-3 rounded-[10px] border border-lineLight bg-white p-4">
+              {/* Цитата дня */}
+              <div className="flex items-start gap-3 rounded-xl bg-white px-4 py-3 border border-slate-100">
                 <img
                   src="/owl-mascot.png"
-                  alt=""
-                  className="h-[44px] w-[52px] shrink-0 object-contain"
+                  alt="Совёнок"
+                  className="h-10 w-10 shrink-0 object-contain"
                 />
                 <div>
-                  <p className="font-mono text-[10px] uppercase tracking-[0.32px] text-goldDeep">
-                    {t.home.quoteLabel}
+                  <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1">
+                    Цитата дня
                   </p>
-                  <p className="mt-1 text-[13px] italic leading-snug text-[#2e3839]">
-                    {t.home.quoteText}
+                  <p className="text-[13px] italic leading-snug text-navy">
+                    «{t.home.quoteOfDay ?? 'Анализ современных медиа-трендов требует мультидисциплинарного подхода для подлинного понимания их влияния.'}»
                   </p>
                 </div>
               </div>
 
+              {/* Интерактивная карта */}
               <Link
-                to="/"
-                className="flex items-center gap-3 rounded-[10px] border border-lineLight bg-white p-4 transition-colors hover:bg-cream"
+                to="/map"
+                className="flex items-center gap-3 rounded-xl bg-white px-4 py-3 border border-slate-100 transition-colors hover:border-red-300 hover:bg-red-50/40 group"
               >
                 <img
                   src="/main-logo.png"
-                  alt="mediamap.kg"
-                  className="h-[36px] w-[36px] shrink-0 object-contain"
+                  alt="Старый сайт"
+                  className="h-7 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity"
                 />
-                <span>
-                  <span className="block text-[13px] font-bold text-ink">{t.home.oldSite}</span>
-                  <span className="block text-[12px] text-slateBody">{t.home.oldSiteDesc}</span>
-                </span>
+                <div>
+                  <p className="text-[13px] font-bold text-navy">Доступ к предыдущей версии платформы</p>
+                </div>
+                <ExternalLink className="ml-auto h-4 w-4 text-slate-400 group-hover:text-red-500 transition-colors" />
               </Link>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Category teasers */}
-      <div className="mx-auto max-w-[1792px] px-6 py-16 lg:px-16">
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {homeCategories.map((c) => (
-            <div
-              key={c.title}
-              className="flex flex-col rounded-[16px] border border-lineLight bg-white p-6"
-            >
-              <span className="flex h-[44px] w-[44px] items-center justify-center rounded-full bg-creamPill text-navy">
-                {c.icon}
-              </span>
-              <h2 className="mt-4 text-[19px] font-extrabold text-ink">{c.title}</h2>
-              <p className="mt-2 flex-1 text-[14px] leading-[22.4px] text-slateBody">
-                {c.description}
-              </p>
-              <div className="mt-5">
-                <CheckMessageControl placeholder={t.home.checkMessagePlaceholder} />
-              </div>
+      {/* ── 3 КАТЕГОРИИ ── */}
+      <section className="bg-white py-12">
+        <div className="mx-auto max-w-[1792px] px-6 lg:px-16">
+          <div className="mb-6 flex items-center justify-between">
+            <h2 className="text-[22px] font-extrabold text-navy">{t.home.categoriesTitle}</h2>
+            <Link to="/categories" className="flex items-center gap-1 text-[13px] font-bold text-red-600 hover:underline">
+              {t.home.categoriesViewAll} <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+            {homeCategories.map((c) => (
               <Link
-                to="/categories"
-                className="mt-3 text-[13px] font-semibold text-navy hover:underline"
+                key={c.title}
+                to={`/categories/${c.slug}`}
+                className="group flex flex-col rounded-2xl border-2 border-slate-200/80 bg-white p-6 shadow-xs transition-all hover:-translate-y-1 hover:border-red-600/50 hover:shadow-md"
               >
-                {t.home.checkInfo}
+                {/* Совёнок вместо иконки */}
+                <div className="flex justify-center">
+                  <img
+                    src={c.owl.src}
+                    alt={c.owl.alt}
+                    className="h-32 w-32 object-contain drop-shadow-md transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
+                <h3 className="mt-4 text-[16px] font-black text-navy group-hover:text-red-600 transition-colors text-center">
+                  {c.title}
+                </h3>
+                <p className="mt-2 text-[13px] leading-relaxed text-slate-600 flex-1 text-center">
+                  {c.description}
+                </p>
+                <span className="mt-4 flex items-center justify-center gap-1 text-[12px] font-bold text-red-600">
+                  Подробнее <ArrowRight className="h-3 w-3" />
+                </span>
               </Link>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      </section>
 
-      {/* Resources */}
-      <div className="bg-cream">
-        <div className="mx-auto max-w-[1792px] px-6 py-16 lg:px-16">
-          <div className="flex flex-col gap-10 lg:flex-row lg:justify-between">
+      {/* ── РЕСУРСЫ ── */}
+      <section className="bg-[#f5f0e8]/40 py-12">
+        <div className="mx-auto max-w-[1792px] px-6 lg:px-16">
+          <div className="flex flex-col gap-8 lg:flex-row lg:justify-between">
             <div className="max-w-[320px] shrink-0">
-              <h2 className="text-[28px] font-extrabold text-navy">{t.home.resourcesTitle}</h2>
-              <p className="mt-3 text-[14px] leading-[22.4px] text-slateBody">
+              <h2 className="text-[26px] font-extrabold text-navy">{t.home.resourcesTitle}</h2>
+              <p className="mt-2 text-[14px] leading-relaxed text-slateBody">
                 {t.home.resourcesSubtitle}
               </p>
               <Link
                 to="/useful"
-                className="mt-4 inline-block text-[13px] font-semibold text-navy hover:underline"
+                className="mt-4 inline-flex items-center gap-1.5 rounded-xl bg-navy px-4 py-2.5 text-xs font-bold text-white transition-all hover:bg-navyCard shadow-xs"
               >
                 {t.home.resourcesViewAll}
               </Link>
             </div>
-            <div className="grid flex-1 grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+
+            <div className="grid flex-1 grid-cols-1 gap-x-8 gap-y-5 sm:grid-cols-2 lg:grid-cols-3">
               {resources.map((r) => (
-                <div key={r.title} className="flex items-start gap-4">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-navy text-white">
+                <div key={r.title} className="flex items-start gap-3.5 rounded-xl bg-white p-4 border border-slate-100 shadow-2xs">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-red-50 text-red-600 border border-red-100">
                     {r.icon}
                   </span>
                   <div>
-                    <h3 className="text-[15px] font-bold text-navy">{r.title}</h3>
-                    <p className="mt-1 text-[13px] leading-snug text-slateBody">
-                      {r.description}
-                    </p>
+                    <h3 className="text-[14px] font-bold text-navy">{r.title}</h3>
+                    <p className="mt-1 text-[12px] leading-snug text-slateBody">{r.description}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* News */}
-      <div className="mx-auto max-w-[1792px] px-6 py-16 lg:px-16">
-        <div className="flex items-center justify-between">
-          <h2 className="text-[28px] font-extrabold text-navy">{t.home.newsTitle}</h2>
-          <span className="text-[13px] font-semibold text-slateBody">{t.home.newsAll}</span>
+      {/* ── НОВОСТИ ── */}
+      <section className="mx-auto max-w-[1792px] px-6 py-12 lg:px-16">
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h2 className="text-[26px] font-extrabold text-navy">{t.home.newsTitle}</h2>
+            <p className="text-xs text-slate-500 mt-1">Реальные публикации и исследования в Кыргызстане</p>
+          </div>
+          <Link to="/useful" className="text-[13px] font-bold text-red-600 hover:underline flex items-center gap-1">
+            {t.home.newsAll}
+          </Link>
         </div>
 
-        <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {t.home.news.map((n) => (
-            <div
+            <article
               key={n.title}
-              className="overflow-hidden rounded-[16px] border border-lineLight bg-white"
+              className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xs transition-all hover:shadow-md hover:border-red-400 flex flex-col justify-between"
             >
-              <div className="flex h-[180px] items-center justify-center bg-creamPill">
-                <span className="font-mono text-[10px] uppercase tracking-[0.29px] text-[#9aa3a4]">
-                  фото: новость
+              <div>
+                <div className="relative h-[180px] overflow-hidden bg-slate-100">
+                  <img
+                    src={n.image || '/news1.png'}
+                    alt={n.title}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <span
+                    className={`absolute top-3 left-3 rounded-full px-2.5 py-0.5 text-[10px] font-bold shadow-xs ${tagStyles[n.tag] ?? 'bg-white text-navy'}`}
+                  >
+                    #{n.tag}
+                  </span>
+                </div>
+                <div className="p-4">
+                  <h3 className="text-[15px] font-extrabold leading-snug text-navy group-hover:text-red-600 transition-colors">
+                    {n.title}
+                  </h3>
+                  <p className="mt-2 text-[12px] leading-relaxed text-slateBody">{n.description}</p>
+                </div>
+              </div>
+              <div className="px-4 pb-4 pt-2 flex items-center justify-between border-t border-slate-100 text-[11px] text-slate-400">
+                <span>{n.date}</span>
+                <span className="font-bold text-navy group-hover:text-red-600 flex items-center gap-1">
+                  Подробнее <ArrowRight className="h-3 w-3" />
                 </span>
               </div>
-              <div className="p-5">
-                <span
-                  className={`inline-block rounded-full px-3 py-1 text-[11px] font-bold ${tagStyles[n.tag] ?? 'bg-creamPill text-goldDeep'}`}
-                >
-                  #{n.tag}
-                </span>
-                <h3 className="mt-3 text-[16px] font-extrabold leading-snug text-ink">
-                  {n.title}
-                </h3>
-                <p className="mt-2 text-[13px] leading-relaxed text-slateBody">
-                  {n.description}
-                </p>
-                <p className="mt-3 text-[12px] text-[#9aa3a4]">{n.date}</p>
-              </div>
-            </div>
+            </article>
           ))}
         </div>
+      </section>
 
-        <span className="mt-6 inline-block text-[13px] font-semibold text-slateBody">
-          {t.home.newsReadAll}
-        </span>
-      </div>
     </div>
   );
 };

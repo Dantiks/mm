@@ -123,6 +123,11 @@ const ViolationCard: React.FC<Props> = ({ item }) => {
                       src={`${apiURL}static/uploads/screenshots/${item.image}`}
                       alt="Скриншот нарушения"
                       className="w-full h-auto object-cover max-h-[300px] transition-transform duration-500 group-hover:scale-105"
+                      onError={(e) => {
+                        if (!e.currentTarget.src.includes('/news1.png')) {
+                          e.currentTarget.src = '/news1.png';
+                        }
+                      }}
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors pointer-events-none" />
                 </div>

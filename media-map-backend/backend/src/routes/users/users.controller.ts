@@ -1,8 +1,9 @@
-import {Body, Controller, Delete, Get, Param, Post} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { User } from '../../models/users.models';
 import { SignUp } from './dto/sign-up.dto';
+import { TokenAuthGuard } from '../../auth/token-auth.guard';
 
 @ApiTags('Пользователи')
 @Controller('users')
@@ -11,6 +12,7 @@ export class UsersController {
 
   @ApiOperation({ summary: 'Создание пользователя' })
   @ApiResponse({ status: 200, type: User })
+  @UseGuards(TokenAuthGuard)
   @Post()
   create(@Body() dto: SignUp) {
     return this.usersService.create(dto);
@@ -18,6 +20,7 @@ export class UsersController {
 
   @ApiOperation({ summary: 'Получить всех пользователей' })
   @ApiResponse({ status: 200, type: [User] })
+  @UseGuards(TokenAuthGuard)
   // @Roles('ADMIN')
   // @UseGuards(RolesGuard)
   @Get()
@@ -27,8 +30,7 @@ export class UsersController {
 
   @ApiOperation({ summary: 'Удалить пользователя' })
   @ApiResponse({ status: 200, description: 'Пользователь успешно удалён' })
-  // @Roles('ADMIN')
-  // @UseGuards(RolesGuard)
+  @UseGuards(TokenAuthGuard)
   @Delete(':id')
   delete(@Param('id') id: string) {
     return this.usersService.delete(Number(id));

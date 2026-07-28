@@ -1,10 +1,7 @@
 {
   "development": {
-    "username": "mediamap",
-    "password": "password",
-    "database": "mediamapdb",
-    "host": "localhost",
-    "dialect": "postgres"
+    "dialect": "sqlite",
+    "storage": "./database.sqlite"
   },
   "test": {
     "username": "root",

@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from "react-router-dom";
 import {EnvelopeIcon, LockClosedIcon} from "@heroicons/react/24/outline";
 import GoogleSignInButton from "../Buttons/GoogleSignInButton";
 import {SignIn} from "../../types";

@@ -10,6 +10,7 @@ import {
   Query,
   UploadedFile,
   UseInterceptors,
+  UseGuards
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ViolationType } from '../../models/violation-type.models';
@@ -19,6 +20,7 @@ import { Marker } from '../../models/markers.models';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { createMulterOptions } from '../../../multer.config';
 import { UpdateMarkerDto } from './dto/update-marker.dto';
+import { TokenAuthGuard } from '../../auth/token-auth.guard';
 
 @ApiTags('Маркеры')
 @Controller('markers')
@@ -60,8 +62,6 @@ export class MarkersController {
 
   @ApiOperation({ summary: 'Получить маркер по ID' })
   @ApiResponse({ status: 200, type: [Marker] })
-  // @Roles("ADMIN")
-  // @UseGuards(RolesGuard)
   @Get('/:id')
   getOne(@Param('id') id: number) {
     return this.markerService.getOne(id);
@@ -69,8 +69,7 @@ export class MarkersController {
 
   @ApiOperation({ summary: 'Обновить маркер' })
   @ApiResponse({ status: 200, type: [Marker] })
-  // @Roles("ADMIN")
-  // @UseGuards(RolesGuard)
+  @UseGuards(TokenAuthGuard)
   @Put('/:id')
   @UseInterceptors(FileInterceptor('image', createMulterOptions('screenshots')))
   update(
@@ -81,8 +80,9 @@ export class MarkersController {
     return this.markerService.update(id, markerDto, image);
   }
 
-  @ApiOperation({ summary: 'Обновить маркер' })
+  @ApiOperation({ summary: 'Обновить маркер (PATCH)' })
   @ApiResponse({ status: 200, description: 'Маркер обновлён успешно' })
+  @UseGuards(TokenAuthGuard)
   @Patch('/:id')
   @UseInterceptors(FileInterceptor('image', createMulterOptions('screenshots')))
   async updateMarker(
@@ -95,8 +95,7 @@ export class MarkersController {
 
   @ApiOperation({ summary: 'Удалить маркер' })
   @ApiResponse({ status: 200, type: [Marker] })
-  // @Roles("ADMIN")
-  // @UseGuards(RolesGuard)
+  @UseGuards(TokenAuthGuard)
   @Delete('/:id')
   remove(@Param('id') id: number) {
     return this.markerService.remove(id);

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -15,4 +15,34 @@ html, body, #root {
   padding: 0;
   overflow-x: hidden;
   box-sizing: border-box;
+}
+
+/* 3 Варианта Дизайна */
+[data-theme="glass"] {
+  --bg-main: #f8fafc;
+  --card-bg: rgba(255, 255, 255, 0.85);
+  --card-border: rgba(226, 232, 240, 0.8);
+  font-family: 'DM Sans', sans-serif;
+}
+
+[data-theme="glass"] .bg-white {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(12px);
+}
+
+[data-theme="editorial"] {
+  --bg-main: #faf9f6;
+  font-family: 'Inter', Georgia, serif;
+}
+
+[data-theme="editorial"] h1, 
+[data-theme="editorial"] h2, 
+[data-theme="editorial"] h3 {
+  font-family: 'Merriweather', Georgia, serif;
+  letter-spacing: -0.02em;
+}
+
+[data-theme="editorial"] .rounded-3xl,
+[data-theme="editorial"] .rounded-2xl {
+  border-radius: 12px !important;
 }

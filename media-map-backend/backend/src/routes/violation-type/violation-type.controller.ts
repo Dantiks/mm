@@ -8,7 +8,9 @@ import {
   Post,
   UploadedFile,
   UseInterceptors,
+  UseGuards,
 } from '@nestjs/common';
+import { TokenAuthGuard } from '../../auth/token-auth.guard';
 import { ViolationTypeService } from './violation-type.service';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ViolationType } from '../../models/violation-type.models';
@@ -23,8 +25,7 @@ export class ViolationTypeController {
 
   @ApiOperation({ summary: 'Создать вида нарушения' })
   @ApiResponse({ status: 200, type: ViolationType })
-  // @Roles("ADMIN")
-  // @UseGuards(RolesGuard)
+  @UseGuards(TokenAuthGuard)
   @Post()
   @UseInterceptors(FileInterceptor('icon', createMulterOptions('icons')))
   create(
@@ -36,8 +37,7 @@ export class ViolationTypeController {
 
   @ApiOperation({ summary: 'Обновить вид нарушения' })
   @ApiResponse({ status: 200, type: ViolationType })
-  // @Roles("ADMIN")
-  // @UseGuards(RolesGuard)
+  @UseGuards(TokenAuthGuard)
   @Patch('/:id')
   @UseInterceptors(FileInterceptor('icon', createMulterOptions('icons')))
   update(
@@ -68,8 +68,7 @@ export class ViolationTypeController {
 
   @ApiOperation({ summary: 'Удалить вид нарушения по ID' })
   @ApiResponse({ status: 200, type: [ViolationType] })
-  // @Roles("ADMIN")
-  // @UseGuards(RolesGuard)
+  @UseGuards(TokenAuthGuard)
   @Delete('/:id')
   remove(@Param('id') id: number) {
     return this.violationTypeService.remove(id);

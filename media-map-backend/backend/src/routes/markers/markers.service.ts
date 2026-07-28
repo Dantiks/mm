@@ -7,7 +7,7 @@ import { promises as fs } from 'fs';
 import { UsersService } from '../users/users.service';
 import { ViolationTypeService } from '../violation-type/violation-type.service';
 import { UpdateMarkerDto } from './dto/update-marker.dto';
-import {EmailService} from "../../email/email.service";
+import { EmailService } from '../../email/email.service';
 
 @Injectable()
 export class MarkersService {
@@ -28,9 +28,9 @@ export class MarkersService {
       newDto.image = image.filename;
     }
     await this.emailService.sendEmail(
-        'elmirat.daniela@gmail.com, aselsooronbaeva@gmail.com',
-        'Новая запись в приложении Media Map',
-        `Создана новая запись! Город: ${newDto.authorCity}, Регион: ${newDto.authorRegion}`,
+      'elmirat.daniela@gmail.com, aselsooronbaeva@gmail.com',
+      'Новая запись в приложении Media Map',
+      `Создана новая запись! Город: ${newDto.authorCity}, Регион: ${newDto.authorRegion}`,
     );
     return await this.markerRepository.create(newDto);
   }
@@ -161,11 +161,11 @@ export class MarkersService {
 
     if (result.image) {
       const filePath = path.resolve(
-          process.cwd(),
-          'static',
-          'uploads',
-          'screenshots',
-          result.image,
+        process.cwd(),
+        'static',
+        'uploads',
+        'screenshots',
+        result.image,
       );
 
       if (await fs.access(filePath).catch(() => false)) {
