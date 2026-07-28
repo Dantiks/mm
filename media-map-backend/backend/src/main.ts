@@ -14,8 +14,8 @@ async function start() {
   app.use('/api/static', express.static(join(process.cwd(), 'static')));
 
   app.enableCors({
-    origin: 'http://localhost:3000',
-    credentials: true, // Если нужно разрешить куки
+    origin: true,
+    credentials: true,
   });
 
   const config = new DocumentBuilder()

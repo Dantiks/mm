@@ -2,5 +2,15 @@
   "buildCommand": "cd media-map-backend/frontend && CI=false npm run build",
   "outputDirectory": "media-map-backend/frontend/build",
   "installCommand": "cd media-map-backend/frontend && npm install",
-  "framework": null
+  "framework": null,
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://mediamap-backend-production.up.railway.app/api/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }
