@@ -33,7 +33,7 @@ async function start() {
   // Глобальная валидация для всех эндпоинтов
   app.useGlobalPipes(new ValidationPipe());
 
-  await app.listen(PORT, () => console.log(`We live on port = ${PORT}`));
+  await app.listen(PORT, '0.0.0.0', () => console.log(`We live on port = ${PORT}`));
 }
 
 start();
