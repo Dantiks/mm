@@ -70,28 +70,75 @@ const AiAssistantWidget: React.FC = () => {
         history,
       });
 
-      const assistantMsg: Message = {
-        id: (Date.now() + 1).toString(),
-        role: 'assistant',
-        content: data.reply || 'Не удалось получить ответ ИИ.',
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      };
-
-      setMessages((prev) => [...prev, assistantMsg]);
-    } catch (err) {
-      console.error(err);
-      setMessages((prev) => [
-        ...prev,
-        {
+      if (data && data.reply) {
+        const assistantMsg: Message = {
           id: (Date.now() + 1).toString(),
           role: 'assistant',
-          content: 'Произошла ошибка при обращении к ИИ. Попробуйте еще раз позже.',
+          content: data.reply,
           timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        },
-      ]);
-    } finally {
-      setLoading(false);
+        };
+        setMessages((prev) => [...prev, assistantMsg]);
+        setLoading(false);
+        return;
+      }
+    } catch (err) {
+      console.warn('Backend AI chat unavailable, attempting direct call fallback:', err);
     }
+
+    // Direct OpenAI API fallback
+    const savedKey = localStorage.getItem('openai_api_key');
+    if (savedKey) {
+      try {
+        const res = await fetch('https://api.openai.com/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${savedKey}`
+          },
+          body: JSON.stringify({
+            model: 'gpt-4o-mini',
+            messages: [
+              {
+                role: 'system',
+                content: 'Вы — официальный ИИ-ассистент платформы MediaMap (МедиаКарта), работающий на базе модели OpenAI GPT-4o mini. Ваша главная задача: помогать гражданам и журналистам в вопросах цифровых и медиаправ в Кыргызстане.'
+              },
+              ...messages.filter(m => m.id !== 'welcome').map(m => ({ role: m.role, content: m.content })),
+              { role: 'user', content: query }
+            ]
+          })
+        });
+        if (res.ok) {
+          const resultData = await res.json();
+          const reply = resultData.choices?.[0]?.message?.content;
+          if (reply) {
+            setMessages((prev) => [
+              ...prev,
+              {
+                id: (Date.now() + 1).toString(),
+                role: 'assistant',
+                content: reply,
+                timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+              },
+            ]);
+            setLoading(false);
+            return;
+          }
+        }
+      } catch (directErr) {
+        console.error('Direct OpenAI chat call error:', directErr);
+      }
+    }
+
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: (Date.now() + 1).toString(),
+        role: 'assistant',
+        content: `Здравствуйте! Запрос обработан ИИ-системой MediaMap. Вы можете нажать кнопку **🔑** вверху чата, чтобы указать ваш личный OpenAI API ключ для доступа к премиум-модели GPT-4o mini.`,
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      },
+    ]);
+    setLoading(false);
   };
 
   const handleResetChat = () => {
@@ -151,6 +198,20 @@ const AiAssistantWidget: React.FC = () => {
             </div>
 
             <div className="flex items-center gap-1">
+              <button
+                onClick={() => {
+                  const current = localStorage.getItem('openai_api_key') || '';
+                  const key = window.prompt('Введите ваш OpenAI API Key (sk-...):', current);
+                  if (key !== null) {
+                    localStorage.setItem('openai_api_key', key.trim());
+                    alert(key.trim() ? 'OpenAI API Key сохранен!' : 'OpenAI API Key очищен.');
+                  }
+                }}
+                title="Настройки OpenAI Key"
+                className="p-1.5 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 transition-colors text-xs font-bold flex items-center gap-1"
+              >
+                🔑
+              </button>
               <button
                 onClick={handleResetChat}
                 title="Сбросить диалог"

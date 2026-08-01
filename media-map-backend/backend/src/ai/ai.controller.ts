@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import { Body, Controller, Headers, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AiService } from './ai.service';
 import { AnalyzeRequestDto, ChatRequestDto } from './dto/ai-request.dto';
@@ -12,15 +12,21 @@ export class AiController {
   @ApiResponse({ status: 200, description: 'Анализ успешно выполнен' })
   @Post('analyze')
   @HttpCode(HttpStatus.OK)
-  async analyze(@Body() dto: AnalyzeRequestDto) {
-    return this.aiService.analyzeContent(dto);
+  async analyze(
+    @Body() dto: AnalyzeRequestDto,
+    @Headers('x-openai-key') customKey?: string,
+  ) {
+    return this.aiService.analyzeContent(dto, customKey);
   }
 
   @ApiOperation({ summary: 'Диалог с ИИ-помощником (GPT-4o mini)' })
   @ApiResponse({ status: 200, description: 'Ответ ИИ получен' })
   @Post('chat')
   @HttpCode(HttpStatus.OK)
-  async chat(@Body() dto: ChatRequestDto) {
-    return this.aiService.chat(dto);
+  async chat(
+    @Body() dto: ChatRequestDto,
+    @Headers('x-openai-key') customKey?: string,
+  ) {
+    return this.aiService.chat(dto, customKey);
   }
 }

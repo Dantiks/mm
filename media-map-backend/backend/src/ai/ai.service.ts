@@ -35,7 +35,8 @@ export class AiService {
 - Практические рекомендации и действия для пользователя.`;
   }
 
-  async analyzeContent(dto: AnalyzeRequestDto) {
+  async analyzeContent(dto: AnalyzeRequestDto, customKey?: string) {
+    const keyToUse = customKey || this.apiKey;
     const userPrompt = `Проведи детальный анализ следующего сообщения/ссылки/контента:
 "${dto.content}"
 ${dto.category ? `Категория для ориентира: ${dto.category}` : ''}
@@ -47,11 +48,11 @@ ${dto.category ? `Категория для ориентира: ${dto.category}`
 4. **Рекомендованные шаги**: ...`;
 
     try {
-      if (this.apiKey) {
+      if (keyToUse) {
         const res = await fetch('https://api.openai.com/v1/chat/completions', {
           method: 'POST',
           headers: {
-            Authorization: `Bearer ${this.apiKey}`,
+            Authorization: `Bearer ${keyToUse}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
@@ -76,6 +77,9 @@ ${dto.category ? `Категория для ориентира: ${dto.category}`
               timestamp: new Date().toISOString(),
             };
           }
+        } else {
+          const errData: any = await res.json().catch(() => ({}));
+          this.logger.warn(`OpenAI API HTTP ${res.status}: ${JSON.stringify(errData)}`);
         }
       }
     } catch (error: any) {
@@ -87,7 +91,8 @@ ${dto.category ? `Категория для ориентира: ${dto.category}`
     return this.generateSmartFallbackAnalysis(dto.content, dto.category);
   }
 
-  async chat(dto: ChatRequestDto) {
+  async chat(dto: ChatRequestDto, customKey?: string) {
+    const keyToUse = customKey || this.apiKey;
     const messages = [
       { role: 'system', content: this.systemPrompt },
       ...(dto.history || []).map((h) => ({
@@ -98,11 +103,11 @@ ${dto.category ? `Категория для ориентира: ${dto.category}`
     ];
 
     try {
-      if (this.apiKey) {
+      if (keyToUse) {
         const res = await fetch('https://api.openai.com/v1/chat/completions', {
           method: 'POST',
           headers: {
-            Authorization: `Bearer ${this.apiKey}`,
+            Authorization: `Bearer ${keyToUse}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({

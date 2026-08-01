@@ -118,6 +118,21 @@ const AiAnalysisModal: React.FC<Props> = ({
 
           <div className="flex items-center gap-2">
             <button
+              onClick={() => {
+                const current = localStorage.getItem('openai_api_key') || '';
+                const key = window.prompt('Введите ваш OpenAI API Key (sk-...):', current);
+                if (key !== null) {
+                  localStorage.setItem('openai_api_key', key.trim());
+                  alert(key.trim() ? 'OpenAI API Key сохранен!' : 'OpenAI API Key очищен.');
+                }
+              }}
+              className="px-3 py-2.5 rounded-xl bg-slate-100 text-slate-700 text-xs font-bold hover:bg-slate-200 transition-colors flex items-center gap-1.5"
+              title="Настройка ключа OpenAI"
+            >
+              🔑 Ключ ИИ
+            </button>
+
+            <button
               onClick={onClose}
               className="px-5 py-2.5 rounded-xl bg-slate-100 text-slate-600 text-xs font-bold hover:bg-slate-200 transition-colors"
             >
