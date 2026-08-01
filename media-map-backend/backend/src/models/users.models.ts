@@ -6,6 +6,8 @@ import { randomUUID } from 'crypto';
 interface UserCreationAttrs {
   email: string;
   password: string;
+  role?: string;
+  name?: string;
 }
 
 @Table({ tableName: 'users' })

@@ -15,6 +15,7 @@ import { TelegramModule } from './telegram/telegram.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { NewsModule } from './routes/news/news.module';
 import { News } from './models/news.models';
+import { AiModule } from './ai/ai.module';
 
 @Module({
   controllers: [],
@@ -59,6 +60,7 @@ import { News } from './models/news.models';
     TelegramModule,
     ScheduleModule.forRoot(),
     NewsModule,
+    AiModule,
   ],
 })
 export class AppModule {}

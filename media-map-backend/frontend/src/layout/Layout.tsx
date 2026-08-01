@@ -2,6 +2,7 @@ import React from 'react';
 import {Outlet} from 'react-router-dom';
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
+import AiAssistantWidget from "../components/AI/AiAssistantWidget";
 
 const Layout: React.FC = () => {
 
@@ -17,6 +18,7 @@ const Layout: React.FC = () => {
         <Outlet/>
       </main>
       <Footer/>
+      <AiAssistantWidget />
     </div>
   );
 };
