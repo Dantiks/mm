@@ -53,24 +53,38 @@ const ViolationCard: React.FC<Props> = ({ item }) => {
   };
 
   const [aiLoading, setAiLoading] = useState(false);
-  const [aiNote, setAiNote] = useState<string | null>(item.moderatorComment || null);
+  const [aiNote, setAiNote] = useState<string | null>(
+    item.moderatorComment && !item.moderatorComment.includes('обрабатывается') ? item.moderatorComment : null
+  );
 
   const handleReAnalyzeAi = async () => {
     setAiLoading(true);
     try {
-      const content = `${item.authorComment || ''} ${item.mediaLink || ''}`.trim() || `Заявка по городу ${item.authorCity}`;
-      const { data } = await axiosApi.post('/ai/analyze', { content });
+      const contentParts = [
+        item.authorComment ? `Текст заявки/Комментарий: "${item.authorComment}"` : '',
+        item.mediaLink ? `Ссылка/Источник: ${item.mediaLink}` : '',
+        `Локация заявки: ${item.authorCity}, ${item.authorRegion}`,
+        item.image ? `Прикреплен скриншот: ${item.image}` : ''
+      ].filter(Boolean).join('\n') || `Заявка по городу ${item.authorCity}`;
+
+      const { data } = await axiosApi.post('/ai/analyze', { content: contentParts });
       if (data && data.analysis) {
         const newComment = `🤖 [Автоматический ИИ-разбор GPT-4o mini]:\n${data.analysis}`;
         setAiNote(newComment);
       }
     } catch (e) {
-      console.error(e);
-      alert('Ошибка при вызове ИИ.');
+      console.error('Ошибка при вызове ИИ:', e);
     } finally {
       setAiLoading(false);
     }
   };
+
+  React.useEffect(() => {
+    if (!aiNote) {
+      handleReAnalyzeAi();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
       <div

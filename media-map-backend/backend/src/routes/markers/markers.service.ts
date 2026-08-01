@@ -32,14 +32,20 @@ export class MarkersService {
 
     // Автоматическая проверка через ИИ (GPT-4o mini)
     try {
-      const contentToAnalyze = `${newDto.authorComment || ''} ${newDto.mediaLink || ''}`.trim() || `Заявка по городу ${newDto.authorCity}`;
+      const contentToAnalyze = [
+        newDto.authorComment ? `Текст заявки: "${newDto.authorComment}"` : '',
+        newDto.mediaLink ? `Ссылка/Источник: ${newDto.mediaLink}` : '',
+        `Регион и город: ${newDto.authorRegion}, ${newDto.authorCity}`,
+        newDto.image ? `Прикреплен файловый скриншот: ${newDto.image}` : ''
+      ].filter(Boolean).join('\n') || `Заявка по городу ${newDto.authorCity}`;
+
       const aiResult = await this.aiService.analyzeContent({
         content: contentToAnalyze,
         category: violationType?.violationType,
       });
 
       if (aiResult && aiResult.analysis) {
-        newDto.moderatorComment = `🤖 [Автоматический ИИ-разбор GPT-4o mini]:\n${aiResult.analysis}\n\n--- (Пометка модератора: Проверьте категорию и подтвердите координаты)`;
+        newDto.moderatorComment = `🤖 [Автоматический ИИ-разбор GPT-4o mini]:\n${aiResult.analysis}`;
       }
     } catch (e) {
       console.error('Ошибка при автоматическом ИИ-анализе:', e);
