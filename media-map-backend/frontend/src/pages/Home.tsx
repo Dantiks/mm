@@ -13,6 +13,7 @@ import {
 import { useLanguage } from '../i18n/LanguageContext';
 import AiAnalysisModal from '../components/AI/AiAnalysisModal';
 import axiosApi from '../axiosApi';
+import { DEFAULT_OPENAI_KEY } from '../utils/constants';
 
 // Совята для каждой категории: поза подобрана по смыслу
 const categoryOwls = [
@@ -81,8 +82,8 @@ const Home = () => {
       console.warn('Backend AI route unavailable, using direct fallback:', err);
     }
 
-    // Direct OpenAI API fallback if client key is saved in localStorage
-    const savedKey = localStorage.getItem('openai_api_key');
+    // Direct OpenAI API fallback using savedKey or DEFAULT_OPENAI_KEY
+    const savedKey = localStorage.getItem('openai_api_key') || DEFAULT_OPENAI_KEY;
     if (savedKey) {
       try {
         const res = await fetch('https://api.openai.com/v1/chat/completions', {

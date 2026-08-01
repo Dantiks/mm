@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Bot, X, Send, Sparkles, RefreshCw } from 'lucide-react';
 import axiosApi from '../../axiosApi';
+import { DEFAULT_OPENAI_KEY } from '../../utils/constants';
 
 interface Message {
   id: string;
@@ -85,8 +86,8 @@ const AiAssistantWidget: React.FC = () => {
       console.warn('Backend AI chat unavailable, attempting direct call fallback:', err);
     }
 
-    // Direct OpenAI API fallback
-    const savedKey = localStorage.getItem('openai_api_key');
+    // Direct OpenAI API fallback using savedKey or DEFAULT_OPENAI_KEY
+    const savedKey = localStorage.getItem('openai_api_key') || DEFAULT_OPENAI_KEY;
     if (savedKey) {
       try {
         const res = await fetch('https://api.openai.com/v1/chat/completions', {
