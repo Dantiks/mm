@@ -36,7 +36,7 @@ export class CreateMarkerDto {
 
   @IsOptional()
   @IsString({ message: 'Должно быть строкой' })
-  readonly moderatorComment: string;
+  moderatorComment: string;
 
   @IsOptional()
   @IsNumber()

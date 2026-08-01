@@ -373,6 +373,7 @@ const Home = () => {
                 onSubmit={(e) => {
                   e.preventDefault();
                   if (!checkInputText.trim()) return;
+                  handleAiAnalyze(checkInputText, activeCheckCategory?.title);
                   setCheckSubmitted(true);
                 }}
                 className="flex flex-col gap-4"
@@ -390,25 +391,19 @@ const Home = () => {
                   className="w-full rounded-2xl border border-slate-200 bg-slate-50/50 p-4 text-[14px] text-navy outline-none transition-colors focus:border-amber-400 focus:bg-white focus:ring-2 focus:ring-amber-200 shadow-inner resize-none"
                 />
 
-                <div className="flex flex-col sm:flex-row items-center gap-3 pt-2">
-                  <button 
-                    type="button"
-                    onClick={() => {
-                      if (!checkInputText.trim()) return;
-                      handleAiAnalyze(checkInputText, activeCheckCategory.title);
-                      setActiveCheckCategory(null);
-                    }}
-                    className="w-full sm:flex-1 flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-700 to-navy px-5 py-3.5 text-[13px] font-extrabold text-white shadow-md transition-all hover:from-indigo-800 hover:to-slate-900"
-                  >
-                    <Sparkles className="h-4 w-4 text-gold animate-pulse" />
-                    Проверить через ИИ (GPT-4o mini)
-                  </button>
-
+                <div className="flex items-center gap-3 pt-2">
                   <button 
                     type="submit" 
-                    className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-xl bg-red-600 px-5 py-3.5 text-[13px] font-bold text-white shadow-md transition-all hover:bg-red-700"
+                    className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-red-600 px-6 py-3.5 text-[14px] font-bold text-white shadow-md transition-all hover:bg-red-700 hover:scale-[1.02]"
                   >
-                    Отправить модератору
+                    <Sparkles className="h-4 w-4" /> Отправить на проверку
+                  </button>
+                  <button 
+                    type="button" 
+                    onClick={() => setActiveCheckCategory(null)}
+                    className="rounded-xl border border-slate-200 px-5 py-3.5 text-[14px] font-bold text-slate-600 hover:bg-slate-50 transition-colors"
+                  >
+                    Отмена
                   </button>
                 </div>
               </form>

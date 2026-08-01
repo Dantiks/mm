@@ -8,6 +8,7 @@ import { UsersService } from '../users/users.service';
 import { ViolationTypeService } from '../violation-type/violation-type.service';
 import { UpdateMarkerDto } from './dto/update-marker.dto';
 import { EmailService } from '../../email/email.service';
+import { AiService } from '../../ai/ai.service';
 
 @Injectable()
 export class MarkersService {
@@ -16,6 +17,7 @@ export class MarkersService {
     private userService: UsersService,
     private violationTypeService: ViolationTypeService,
     private readonly emailService: EmailService,
+    private readonly aiService: AiService,
   ) {}
 
   async create(dto: CreateMarkerDto, image: Express.Multer.File) {
@@ -23,10 +25,26 @@ export class MarkersService {
     if (dto.userId) {
       await this.userService.getById(newDto.userId);
     }
-    await this.violationTypeService.getById(newDto.violationTypeId);
+    const violationType = await this.violationTypeService.getById(newDto.violationTypeId);
     if (image) {
       newDto.image = image.filename;
     }
+
+    // Автоматическая проверка через ИИ (GPT-4o mini)
+    try {
+      const contentToAnalyze = `${newDto.authorComment || ''} ${newDto.mediaLink || ''}`.trim() || `Заявка по городу ${newDto.authorCity}`;
+      const aiResult = await this.aiService.analyzeContent({
+        content: contentToAnalyze,
+        category: violationType?.violationType,
+      });
+
+      if (aiResult && aiResult.analysis) {
+        newDto.moderatorComment = `🤖 [Автоматический ИИ-разбор GPT-4o mini]:\n${aiResult.analysis}\n\n--- (Пометка модератора: Проверьте категорию и подтвердите координаты)`;
+      }
+    } catch (e) {
+      console.error('Ошибка при автоматическом ИИ-анализе:', e);
+    }
+
     await this.emailService.sendEmail(
       'elmirat.daniela@gmail.com, aselsooronbaeva@gmail.com',
       'Новая запись в приложении Media Map',

@@ -11,6 +11,7 @@ import { ViolationTypeModule } from '../violation-type/violation-type.module';
 import { ViolationTypeService } from '../violation-type/violation-type.service';
 import { EmailModule } from '../../email/email.module';
 import { EmailService } from '../../email/email.service';
+import { AiModule } from '../../ai/ai.module';
 
 @Module({
   controllers: [MarkersController],
@@ -20,6 +21,7 @@ import { EmailService } from '../../email/email.service';
     UsersModule,
     ViolationTypeModule,
     EmailModule,
+    AiModule,
   ],
 })
 export class MarkersModule {}

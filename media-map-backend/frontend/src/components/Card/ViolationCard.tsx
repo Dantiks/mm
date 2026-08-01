@@ -11,15 +11,16 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 import ModalWindow from "../Modals/ModalWindow";
 import ViolationEditForm from "../Forms/ViolationEditForm";
+import axiosApi from "../../axiosApi";
 import {
   MapPin,
   Link2,
   MessageSquare,
-  ShieldAlert,
   Trash2,
   Edit3,
   Globe,
-  ExternalLink
+  ExternalLink,
+  Sparkles
 } from "lucide-react";
 
 interface Props {
@@ -49,6 +50,26 @@ const ViolationCard: React.FC<Props> = ({ item }) => {
   const publishMarkerHandler = () => {
     dispatch(fetchOneMarker(item.id));
     navigate('/');
+  };
+
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiNote, setAiNote] = useState<string | null>(item.moderatorComment || null);
+
+  const handleReAnalyzeAi = async () => {
+    setAiLoading(true);
+    try {
+      const content = `${item.authorComment || ''} ${item.mediaLink || ''}`.trim() || `Заявка по городу ${item.authorCity}`;
+      const { data } = await axiosApi.post('/ai/analyze', { content });
+      if (data && data.analysis) {
+        const newComment = `🤖 [Автоматический ИИ-разбор GPT-4o mini]:\n${data.analysis}`;
+        setAiNote(newComment);
+      }
+    } catch (e) {
+      console.error(e);
+      alert('Ошибка при вызове ИИ.');
+    } finally {
+      setAiLoading(false);
+    }
   };
 
   return (
@@ -101,16 +122,25 @@ const ViolationCard: React.FC<Props> = ({ item }) => {
                 </div>
               </div>
 
-              <div className="flex gap-3">
-                <div className="mt-1 p-2 bg-creamPill rounded-lg">
-                  <ShieldAlert className="w-4 h-4 text-navy" />
+              {/* Блок анализа ИИ / Заметки модератора */}
+              <div className="p-4 bg-indigo-50/70 border border-indigo-100 rounded-2xl space-y-2">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-indigo-900 font-extrabold text-xs">
+                    <Sparkles className="w-4 h-4 text-indigo-600" />
+                    <span>ИИ-Заключение (GPT-4o mini) & Заметка</span>
+                  </div>
+                  <button
+                    onClick={handleReAnalyzeAi}
+                    disabled={aiLoading}
+                    className="flex items-center gap-1 text-[11px] font-bold text-indigo-700 hover:text-indigo-900 bg-white px-2.5 py-1 rounded-lg border border-indigo-200 shadow-2xs hover:bg-indigo-50 transition-all disabled:opacity-50"
+                  >
+                    <Sparkles className="w-3 h-3 text-indigo-600" />
+                    {aiLoading ? 'Анализ...' : 'Обновить ИИ-разбор'}
+                  </button>
                 </div>
-                <div>
-                  <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Заметка модератора</span>
-                  <p className="text-slate-600 text-sm mt-1 leading-relaxed italic">
-                    {item.moderatorComment || 'Нет внутренних пометок'}
-                  </p>
-                </div>
+                <p className="text-slate-700 text-xs leading-relaxed whitespace-pre-wrap font-medium">
+                  {aiNote || 'ИИ-заключение обрабатывается...'}
+                </p>
               </div>
             </div>
           </div>
