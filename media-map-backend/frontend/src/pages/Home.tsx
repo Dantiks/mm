@@ -15,6 +15,10 @@ import AiAnalysisModal from '../components/AI/AiAnalysisModal';
 import axiosApi from '../axiosApi';
 import { DEFAULT_OPENAI_KEY } from '../utils/constants';
 
+import { TelegramIcon, InstagramIcon, FacebookIcon, YoutubeIcon } from '../components/Common/SocialIcons';
+import SiteSearchModal from '../components/Search/SiteSearchModal';
+import { Search } from 'lucide-react';
+
 // Совята для каждой категории: поза подобрана по смыслу
 const categoryOwls = [
   { src: '/owl-stop.png', alt: 'Язык вражды — сова предупреждает' },   // рука стоп + !
@@ -33,10 +37,10 @@ const resourceIcons = [
 ];
 
 const socials = [
-  { label: 'TG', href: 'https://t.me/mediamap_kg', color: 'bg-[#229ED9]' },
-  { label: 'IG', href: 'https://instagram.com/mediamap_kg', color: 'bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400' },
-  { label: 'FB', href: 'https://facebook.com/mediamapkg', color: 'bg-[#1877F2]' },
-  { label: 'YT', href: 'https://youtube.com/@mediamapkg', color: 'bg-[#FF0000]' },
+  { label: 'Telegram', href: 'https://t.me/mediamap_kg', color: 'bg-[#229ED9]', icon: <TelegramIcon className="h-4 w-4" /> },
+  { label: 'Instagram', href: 'https://instagram.com/mediamap_kg', color: 'bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400', icon: <InstagramIcon className="h-4 w-4" /> },
+  { label: 'Facebook', href: 'https://facebook.com/mediamapkg', color: 'bg-[#1877F2]', icon: <FacebookIcon className="h-4 w-4" /> },
+  { label: 'YouTube', href: 'https://youtube.com/@mediamapkg', color: 'bg-[#FF0000]', icon: <YoutubeIcon className="h-4 w-4" /> },
 ];
 
 const tagStyles: Record<string, string> = {
@@ -55,6 +59,7 @@ const Home = () => {
   const [activeCheckCategory, setActiveCheckCategory] = useState<{ title: string; slug: string; owl: string } | null>(null);
   const [checkInputText, setCheckInputText] = useState('');
   const [checkSubmitted, setCheckSubmitted] = useState(false);
+  const [isSiteSearchOpen, setIsSiteSearchOpen] = useState(false);
 
   // AI Modal States
   const [isAiModalOpen, setIsAiModalOpen] = useState(false);
@@ -143,15 +148,33 @@ const Home = () => {
   };
 
   const carouselNews = [
-    { title: t.home.newsOfDayTitle, link: 'https://factcheck.kg/' },
-    { title: t.home.news[0]?.title || 'Важная новость', link: 'https://factcheck.kg/' },
-    { title: t.home.news[1]?.title || 'Обновление платформы', link: 'https://factcheck.kg/' }
+    {
+      title: 'В Бишкеке стартовала кампания против языка вражды в соцсетях',
+      link: 'https://factcheck.kg/',
+      image: '/news1.png',
+      tag: 'фактчекинг',
+      date: '02 августа 2026'
+    },
+    {
+      title: t.home.news[0]?.title || 'Цифровая безопасность журналистов: руководство по защите данных',
+      link: 'https://factcheck.kg/',
+      image: t.home.news[0]?.image || '/news2.png',
+      tag: t.home.news[0]?.tag || 'безопасность',
+      date: t.home.news[0]?.date || '01 августа 2026'
+    },
+    {
+      title: t.home.news[1]?.title || 'Инструкция по распознаванию фейков и манипуляций в мессенджерах',
+      link: 'https://factcheck.kg/',
+      image: t.home.news[1]?.image || '/news3.png',
+      tag: t.home.news[1]?.tag || 'обучение',
+      date: t.home.news[1]?.date || '30 июля 2026'
+    }
   ];
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentNewsIndex((prev) => (prev + 1) % carouselNews.length);
-    }, 4000);
+    }, 5000);
     return () => clearInterval(timer);
   }, [carouselNews.length]);
 
@@ -163,15 +186,17 @@ const Home = () => {
 
   const resources = t.home.resources.map((r, i) => ({ ...r, icon: resourceIcons[i] }));
 
+  const currentNews = carouselNews[currentNewsIndex];
+
   return (
     <div className="bg-white font-inter">
 
       {/* ── HERO ── */}
       <section className="bg-[#f5f0e8] py-12 lg:py-16">
         <div className="mx-auto max-w-[1792px] px-6 lg:px-16">
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-start">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-center">
 
-            {/* LEFT: Заголовок + Следите за нами */}
+            {/* LEFT: Заголовок + Поиск + Следите за нами */}
             <div className="flex flex-col justify-center">
               <h1 className="text-[32px] font-black leading-tight text-navy sm:text-[40px] lg:text-[46px]">
                 {t.home.heroTitle}
@@ -180,68 +205,91 @@ const Home = () => {
                 {t.home.heroSubtitle}
               </p>
 
-              {/* Соцсети */}
+              {/* Поисковая строка на главной */}
+              <div className="mt-6">
+                <button
+                  onClick={() => setIsSiteSearchOpen(true)}
+                  className="flex w-full max-w-lg items-center gap-3 rounded-2xl border-2 border-slate-200/80 bg-white p-3.5 shadow-sm transition-all hover:border-red-500/50 hover:shadow-md text-left"
+                >
+                  <Search className="h-5 w-5 text-red-600 shrink-0" />
+                  <span className="text-sm font-semibold text-slate-400 flex-1">
+                    Поиск по сайту (новости, нарушения, регионы)...
+                  </span>
+                  <span className="rounded-lg bg-red-50 px-3 py-1 text-xs font-bold text-red-600 border border-red-100">
+                    Искать
+                  </span>
+                </button>
+              </div>
+
+              {/* Соцсети с фирменными иконками */}
               <div className="mt-8 flex items-center gap-3">
                 <span className="text-[13px] font-bold text-navy">Следите за нами</span>
-                {socials.map((s) => (
-                  <a
-                    key={s.label}
-                    href={s.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className={`flex h-8 w-8 items-center justify-center rounded-full text-[10px] font-black text-white shadow-sm transition-transform hover:scale-110 ${s.color}`}
-                  >
-                    {s.label}
-                  </a>
-                ))}
+                <div className="flex items-center gap-2">
+                  {socials.map((s) => (
+                    <a
+                      key={s.label}
+                      href={s.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={s.label}
+                      title={s.label}
+                      className={`flex h-9 w-9 items-center justify-center rounded-full text-white shadow-md transition-all hover:scale-110 active:scale-95 ${s.color}`}
+                    >
+                      {s.icon}
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
 
-            {/* RIGHT: Агрегатор-виджет */}
-            <div className="flex flex-col gap-3 rounded-2xl bg-white p-1 shadow-sm border border-slate-100">
+            {/* RIGHT: Новость с картинкой (Без Цитаты!) */}
+            <div className="flex flex-col rounded-3xl bg-white p-4 shadow-xl border border-slate-100 relative group overflow-hidden">
+              <div className="flex items-center justify-between mb-3 px-1">
+                <span className="font-mono text-[11px] font-extrabold uppercase tracking-widest text-amber-800 flex items-center gap-1.5">
+                  <span className="h-2 w-2 rounded-full bg-red-600 animate-ping" />
+                  {t.home.newsOfDayCaption}
+                </span>
+                <span className="text-xs text-slate-400 font-bold">{currentNews.date}</span>
+              </div>
 
-              {/* Новость дня (Карусель) */}
               <a
-                href={carouselNews[currentNewsIndex].link}
+                href={currentNews.link}
                 target="_blank"
                 rel="noreferrer"
-                className="relative flex flex-col gap-1 rounded-xl bg-[#f5f0e8] p-4 transition-colors hover:bg-amber-100/60 min-h-[96px] overflow-hidden"
+                className="flex flex-col gap-3 group/card"
               >
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-amber-800">
-                    {t.home.newsOfDayCaption}
+                <div className="relative h-[220px] w-full overflow-hidden rounded-2xl bg-slate-100">
+                  <img
+                    src={currentNews.image}
+                    alt={currentNews.title}
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover/card:scale-105"
+                  />
+                  <span className="absolute top-3 left-3 rounded-full bg-red-600 px-3 py-1 text-[10px] font-extrabold text-white shadow-md uppercase tracking-wider">
+                    #{currentNews.tag}
                   </span>
                 </div>
-                <div className="relative flex-1">
-                  {carouselNews.map((news, idx) => (
-                    <div 
-                      key={idx}
-                      className={`absolute top-0 left-0 w-full transition-opacity duration-500 ${idx === currentNewsIndex ? 'opacity-100 relative' : 'opacity-0 absolute pointer-events-none'}`}
-                    >
-                      <p className="text-[14px] font-bold text-red-700 underline underline-offset-2 decoration-red-400 leading-snug line-clamp-2">
-                        {news.title}
-                      </p>
+
+                <div className="px-1 py-1">
+                  <h3 className="text-[17px] font-extrabold text-navy leading-snug group-hover/card:text-red-600 transition-colors line-clamp-2">
+                    {currentNews.title}
+                  </h3>
+                  <div className="mt-3 flex items-center justify-between text-xs font-bold text-red-600">
+                    <span className="flex items-center gap-1">
+                      Читать дальше <ArrowRight className="h-3.5 w-3.5" />
+                    </span>
+                    <div className="flex items-center gap-1">
+                      {carouselNews.map((_, i) => (
+                        <span
+                          key={i}
+                          className={`h-1.5 rounded-full transition-all ${
+                            i === currentNewsIndex ? 'w-5 bg-red-600' : 'w-1.5 bg-slate-200'
+                          }`}
+                        />
+                      ))}
                     </div>
-                  ))}
+                  </div>
                 </div>
               </a>
-
-              {/* Цитата дня */}
-              <div className="flex items-start gap-3 rounded-xl bg-white px-4 py-3 border border-slate-100">
-                <img
-                  src="/owl-mascot.png"
-                  alt="Совёнок"
-                  className="h-10 w-10 shrink-0 object-contain"
-                />
-                <div>
-                  <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1">
-                    Цитата дня
-                  </p>
-                  <p className="text-[13px] italic leading-snug text-navy">
-                    «{t.home.quoteOfDay ?? 'Анализ современных медиа-трендов требует мультидисциплинарного подхода для подлинного понимания их влияния.'}»
-                  </p>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -277,13 +325,7 @@ const Home = () => {
                 <p className="mt-2 text-[13px] leading-relaxed text-slate-600 flex-1 text-center">
                   {c.description}
                 </p>
-                <div className="mt-4 flex flex-col gap-2">
-                  <Link
-                    to={`/categories/${c.slug}`}
-                    className="flex items-center justify-center gap-1 text-[12px] font-bold text-red-600 hover:underline"
-                  >
-                    Подробнее <ArrowRight className="h-3 w-3" />
-                  </Link>
+                <div className="mt-6 flex flex-col gap-2.5">
                   <button
                     onClick={(e) => {
                       e.preventDefault();
@@ -291,11 +333,18 @@ const Home = () => {
                       setCheckInputText('');
                       setCheckSubmitted(false);
                     }}
-                    className="flex items-center justify-center gap-1.5 rounded-xl border border-amber-300 bg-amber-50 px-3 py-2.5 text-[12px] font-bold text-amber-900 transition-all hover:bg-amber-100 hover:border-amber-400 hover:scale-[1.02] shadow-2xs"
+                    className="group relative flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 via-orange-500 to-red-600 px-4 py-3 text-[13px] font-extrabold text-white shadow-lg shadow-orange-500/25 transition-all hover:scale-[1.03] hover:shadow-xl hover:shadow-orange-500/40 active:scale-[0.98] overflow-hidden"
                   >
-                    <Sparkles className="h-3.5 w-3.5 text-amber-600" />
-                    Проверить информацию
+                    <Sparkles className="h-4 w-4 text-white animate-pulse" />
+                    <span>Проверить информацию (GPT-4o mini)</span>
                   </button>
+
+                  <Link
+                    to={`/categories/${c.slug}`}
+                    className="flex items-center justify-center gap-1 text-[12px] font-bold text-slate-500 hover:text-red-600 transition-colors"
+                  >
+                    Подробнее о категории <ArrowRight className="h-3 w-3" />
+                  </Link>
                 </div>
               </div>
             ))}
@@ -503,6 +552,12 @@ const Home = () => {
         analysisText={aiAnalysisResult}
         loading={aiLoading}
         queryText={aiQueryText}
+      />
+
+      {/* ── SITE SEARCH MODAL ── */}
+      <SiteSearchModal
+        isOpen={isSiteSearchOpen}
+        onClose={() => setIsSiteSearchOpen(false)}
       />
 
     </div>

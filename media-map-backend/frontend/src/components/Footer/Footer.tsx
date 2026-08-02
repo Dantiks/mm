@@ -2,13 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../../i18n/LanguageContext';
 import footerContent from '../../i18n/pages/footer';
-import { Send, Instagram, Facebook, Youtube } from 'lucide-react';
+import { TelegramIcon, InstagramIcon, FacebookIcon, YoutubeIcon } from '../Common/SocialIcons';
 
 const socials = [
-  { label: 'Telegram', href: 'https://t.me/mediamap_kg', icon: <Send className="h-4 w-4" /> },
-  { label: 'Instagram', href: 'https://instagram.com/mediamap_kg', icon: <Instagram className="h-4 w-4" /> },
-  { label: 'Facebook', href: 'https://facebook.com/mediamapkg', icon: <Facebook className="h-4 w-4" /> },
-  { label: 'YouTube', href: 'https://youtube.com/@mediamapkg', icon: <Youtube className="h-4 w-4" /> },
+  { label: 'Telegram', href: 'https://t.me/mediamap_kg', icon: <TelegramIcon className="h-4 w-4" /> },
+  { label: 'Instagram', href: 'https://instagram.com/mediamap_kg', icon: <InstagramIcon className="h-4 w-4" /> },
+  { label: 'Facebook', href: 'https://facebook.com/mediamapkg', icon: <FacebookIcon className="h-4 w-4" /> },
+  { label: 'YouTube', href: 'https://youtube.com/@mediamapkg', icon: <YoutubeIcon className="h-4 w-4" /> },
 ];
 
 const Footer = () => {

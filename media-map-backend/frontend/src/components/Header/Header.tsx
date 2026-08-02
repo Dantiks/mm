@@ -4,13 +4,15 @@ import { useAppSelector } from "../../app/hooks/useAppSelector";
 import { useAppDispatch } from "../../app/hooks/useAppDispatch";
 import { selectUser } from "../../features/users/usersSlice";
 import { logout } from "../../features/users/usersThunks";
-import { LogOut, LayoutDashboard, Menu, X } from "lucide-react";
+import { LogOut, LayoutDashboard, Menu, X, Search } from "lucide-react";
 import MobileSideBar from "../Sidebar/MobileSideBar";
 import { useLanguage } from "../../i18n/LanguageContext";
 import LanguageSwitcher from "../../i18n/LanguageSwitcher";
+import SiteSearchModal from "../Search/SiteSearchModal";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
   const { t } = useLanguage();
@@ -66,6 +68,16 @@ const Header = () => {
 
           {/* Правая часть */}
           <div className="flex items-center gap-3">
+            {/* Кнопка Поиска */}
+            <button
+              onClick={() => setIsSearchOpen(true)}
+              className="flex items-center gap-2 rounded-xl bg-slate-100 px-3 py-2 text-xs font-bold text-slate-700 hover:bg-slate-200 transition-all border border-slate-200"
+              title="Поиск по сайту"
+            >
+              <Search className="h-4 w-4 text-slate-500" />
+              <span className="hidden sm:inline">Поиск</span>
+            </button>
+
             <LanguageSwitcher className="hidden md:flex" />
 
             {user && (
@@ -99,6 +111,7 @@ const Header = () => {
         </div>
       </div>
 
+      <SiteSearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
       <MobileSideBar isOpen={isOpen} setIsOpen={toggleMenu} />
     </header>
   );
