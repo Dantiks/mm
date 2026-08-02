@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   CheckSquare,
@@ -17,7 +17,8 @@ import { DEFAULT_OPENAI_KEY } from '../utils/constants';
 
 import { TelegramIcon, InstagramIcon, FacebookIcon, YoutubeIcon } from '../components/Common/SocialIcons';
 import SiteSearchModal from '../components/Search/SiteSearchModal';
-import { Search } from 'lucide-react';
+
+import NewsAggregatorCarousel, { NewsItem } from '../components/News/NewsAggregatorCarousel';
 
 // Совята для каждой категории: поза подобрана по смыслу
 const categoryOwls = [
@@ -55,7 +56,6 @@ const tagStyles: Record<string, string> = {
 const Home = () => {
   const { t } = useLanguage();
 
-  const [currentNewsIndex, setCurrentNewsIndex] = useState(0);
   const [activeCheckCategory, setActiveCheckCategory] = useState<{ title: string; slug: string; owl: string } | null>(null);
   const [checkInputText, setCheckInputText] = useState('');
   const [checkSubmitted, setCheckSubmitted] = useState(false);
@@ -147,36 +147,58 @@ const Home = () => {
     setAiLoading(false);
   };
 
-  const carouselNews = [
+  const aggregatorNewsItems: NewsItem[] = [
     {
+      id: 1,
       title: 'В Бишкеке стартовала кампания против языка вражды в соцсетях',
       link: 'https://factcheck.kg/',
       image: '/news1.png',
       tag: 'фактчекинг',
-      date: '02 августа 2026'
+      date: '02 авг',
+      commentsCount: 128,
+      description: 'Правовая оценка дезинформации и разжигания розни.'
     },
     {
+      id: 2,
       title: t.home.news[0]?.title || 'Цифровая безопасность журналистов: руководство по защите данных',
       link: 'https://factcheck.kg/',
       image: t.home.news[0]?.image || '/news2.png',
       tag: t.home.news[0]?.tag || 'безопасность',
-      date: t.home.news[0]?.date || '01 августа 2026'
+      date: '01 авг',
+      commentsCount: 45,
+      description: 'Защита личных данных и аккаунтов от взлома.'
     },
     {
+      id: 3,
       title: t.home.news[1]?.title || 'Инструкция по распознаванию фейков и манипуляций в мессенджерах',
       link: 'https://factcheck.kg/',
       image: t.home.news[1]?.image || '/news3.png',
       tag: t.home.news[1]?.tag || 'обучение',
-      date: t.home.news[1]?.date || '30 июля 2026'
+      date: '30 июл',
+      commentsCount: 89,
+      description: 'Проверка недостоверных рассылок в мессенджерах.'
+    },
+    {
+      id: 4,
+      title: 'Мониторинг соблюдения стандартов свободы слова в КР',
+      link: 'https://factcheck.kg/',
+      image: '/news1.png',
+      tag: 'исследование',
+      date: '28 июл',
+      commentsCount: 64,
+      description: 'Экспертная аналитика от юристов медиа-сферы.'
+    },
+    {
+      id: 5,
+      title: 'Защита прав СМИ и кибергигиена в социальных сетях',
+      link: 'https://factcheck.kg/',
+      image: '/news2.png',
+      tag: 'практика',
+      date: '25 июл',
+      commentsCount: 37,
+      description: 'Пошаговый алгоритм действий при кибербуллинге.'
     }
   ];
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentNewsIndex((prev) => (prev + 1) % carouselNews.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [carouselNews.length]);
 
   const homeCategories = t.home.categories.map((c, i) => ({
     ...c,
@@ -186,8 +208,6 @@ const Home = () => {
 
   const resources = t.home.resources.map((r, i) => ({ ...r, icon: resourceIcons[i] }));
 
-  const currentNews = carouselNews[currentNewsIndex];
-
   return (
     <div className="bg-white font-inter">
 
@@ -196,7 +216,7 @@ const Home = () => {
         <div className="mx-auto max-w-[1792px] px-6 lg:px-16">
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-center">
 
-            {/* LEFT: Заголовок + Поиск + Следите за нами */}
+            {/* LEFT: Заголовок + Следите за нами */}
             <div className="flex flex-col justify-center">
               <h1 className="text-[32px] font-black leading-tight text-navy sm:text-[40px] lg:text-[46px]">
                 {t.home.heroTitle}
@@ -205,21 +225,6 @@ const Home = () => {
                 {t.home.heroSubtitle}
               </p>
 
-              {/* Поисковая строка на главной */}
-              <div className="mt-6">
-                <button
-                  onClick={() => setIsSiteSearchOpen(true)}
-                  className="flex w-full max-w-lg items-center gap-3 rounded-2xl border-2 border-slate-200/80 bg-white p-3.5 shadow-sm transition-all hover:border-red-500/50 hover:shadow-md text-left"
-                >
-                  <Search className="h-5 w-5 text-red-600 shrink-0" />
-                  <span className="text-sm font-semibold text-slate-400 flex-1">
-                    Поиск по сайту (новости, нарушения, регионы)...
-                  </span>
-                  <span className="rounded-lg bg-red-50 px-3 py-1 text-xs font-bold text-red-600 border border-red-100">
-                    Искать
-                  </span>
-                </button>
-              </div>
 
               {/* Соцсети с фирменными иконками */}
               <div className="mt-8 flex items-center gap-3">
@@ -242,54 +247,9 @@ const Home = () => {
               </div>
             </div>
 
-            {/* RIGHT: Новость с картинкой (Без Цитаты!) */}
-            <div className="flex flex-col rounded-3xl bg-white p-4 shadow-xl border border-slate-100 relative group overflow-hidden">
-              <div className="flex items-center justify-between mb-3 px-1">
-                <span className="font-mono text-[11px] font-extrabold uppercase tracking-widest text-amber-800 flex items-center gap-1.5">
-                  <span className="h-2 w-2 rounded-full bg-red-600 animate-ping" />
-                  {t.home.newsOfDayCaption}
-                </span>
-                <span className="text-xs text-slate-400 font-bold">{currentNews.date}</span>
-              </div>
-
-              <a
-                href={currentNews.link}
-                target="_blank"
-                rel="noreferrer"
-                className="flex flex-col gap-3 group/card"
-              >
-                <div className="relative h-[220px] w-full overflow-hidden rounded-2xl bg-slate-100">
-                  <img
-                    src={currentNews.image}
-                    alt={currentNews.title}
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover/card:scale-105"
-                  />
-                  <span className="absolute top-3 left-3 rounded-full bg-red-600 px-3 py-1 text-[10px] font-extrabold text-white shadow-md uppercase tracking-wider">
-                    #{currentNews.tag}
-                  </span>
-                </div>
-
-                <div className="px-1 py-1">
-                  <h3 className="text-[17px] font-extrabold text-navy leading-snug group-hover/card:text-red-600 transition-colors line-clamp-2">
-                    {currentNews.title}
-                  </h3>
-                  <div className="mt-3 flex items-center justify-between text-xs font-bold text-red-600">
-                    <span className="flex items-center gap-1">
-                      Читать дальше <ArrowRight className="h-3.5 w-3.5" />
-                    </span>
-                    <div className="flex items-center gap-1">
-                      {carouselNews.map((_, i) => (
-                        <span
-                          key={i}
-                          className={`h-1.5 rounded-full transition-all ${
-                            i === currentNewsIndex ? 'w-5 bg-red-600' : 'w-1.5 bg-slate-200'
-                          }`}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </a>
+            {/* RIGHT: Горизонтальный Агрегатор Новостей (NYT Style) */}
+            <div className="w-full min-w-0">
+              <NewsAggregatorCarousel items={aggregatorNewsItems} title="Агрегатор новостей" />
             </div>
           </div>
         </div>
