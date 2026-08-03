@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import axios from 'axios';
 import L from 'leaflet';
 import { PageHero } from '../components/UI/DesignKit';
 import { ExternalLink, MapPin, Calendar, Search, X, Maximize2 } from 'lucide-react';
@@ -82,23 +81,9 @@ const MapPage: React.FC = () => {
   // Kyrgyzstan Center coordinates
   const KG_CENTER: [number, number] = [41.2044, 74.7661];
 
+  // Lock MapPage to real database dump markers to prevent seeder override
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const markersRes = await axios.get('/api/markers?isApproved=true');
-        if (Array.isArray(markersRes.data) && markersRes.data.length > 0) {
-          const validApiMarkers = markersRes.data.filter(
-            (m: any) => m.authorComment && !m.authorComment.includes('Описание маркера')
-          );
-          if (validApiMarkers.length > 0) {
-            setMarkers(validApiMarkers);
-          }
-        }
-      } catch (error) {
-        console.log('Using embedded database dump markers');
-      }
-    };
-    fetchData();
+    setMarkers(realMarkersData as any);
   }, []);
 
   const filteredMarkers = markers.filter(m => {
