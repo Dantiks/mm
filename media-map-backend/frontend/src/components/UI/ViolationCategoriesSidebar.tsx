@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useLanguage } from '../../i18n/LanguageContext';
-import { ShieldAlert, X, ArrowRight, BookOpen } from 'lucide-react';
+import { X, ArrowRight, BookOpen } from 'lucide-react';
 import EditableText from '../CMS/EditableText';
 
 export const ViolationCategoriesSidebar: React.FC = () => {
-  const { t } = useLanguage();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const location = useLocation();
 
@@ -13,26 +11,34 @@ export const ViolationCategoriesSidebar: React.FC = () => {
     {
       id: 1,
       slug: 'hate-speech',
-      title: t.home.categories[0]?.title || 'Язык вражды (Hate Speech)',
+      title: 'Язык вражды',
       desc: 'Дискриминационные высказывания, враждебные призывы и ксенофобия в медиа.',
-      icon: '/uploads/icons/hate.png',
-      color: 'from-amber-500 to-orange-600',
+      owl: '/owl-stop.png',
+      bg: 'bg-red-50 border-red-100',
     },
     {
       id: 2,
-      slug: 'digital-scams',
-      title: t.home.categories[1]?.title || 'Санариптик шылуундар (Цифровое мошенничество)',
-      desc: 'Фишинг, взлом аккаунтов, дипфейки и финансовые схемы в сети.',
-      icon: '/uploads/icons/propaganda.png',
-      color: 'from-orange-500 to-red-600',
+      slug: 'disinformation',
+      title: 'Дезинформация',
+      desc: 'Манипуляция фактами, фальсифицированные видео и ложные новости.',
+      owl: '/owl-think.png',
+      bg: 'bg-amber-50 border-amber-100',
     },
     {
       id: 3,
-      slug: 'disinformation',
-      title: t.home.categories[2]?.title || 'Фейки и дезинформация',
-      desc: 'Манипуляция фактами, фальсифицированные видео и ложные новости.',
-      icon: '/uploads/icons/fake.png',
-      color: 'from-red-600 to-rose-700',
+      slug: 'propaganda',
+      title: 'Пропаганда',
+      desc: 'Однобокое навязывание мнений, деструктивный контент и манипуляции.',
+      owl: '/owl-cross.png',
+      bg: 'bg-purple-50 border-purple-100',
+    },
+    {
+      id: 4,
+      slug: 'digital-scams',
+      title: 'Цифровое мошенничество',
+      desc: 'Фишинг, взлом аккаунтов, дипфейки и финансовые схемы в сети.',
+      owl: '/owl-teacher.png',
+      bg: 'bg-blue-50 border-blue-100',
     },
   ];
 
@@ -41,10 +47,10 @@ export const ViolationCategoriesSidebar: React.FC = () => {
       {/* Sticky Quick Toggle Tab on Left Screen Edge */}
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed left-0 top-1/2 -translate-y-1/2 z-40 flex items-center gap-2 bg-navy text-white px-3 py-3 rounded-r-2xl shadow-2xl hover:bg-red-600 transition-all hover:pl-4 cursor-pointer group border border-l-0 border-white/20"
+        className="fixed left-0 top-1/2 -translate-y-1/2 z-40 flex items-center gap-2 bg-navy text-white px-2.5 py-3 rounded-r-2xl shadow-2xl hover:bg-red-600 transition-all hover:pl-3.5 cursor-pointer group border border-l-0 border-white/20"
         title="Категории нарушений"
       >
-        <ShieldAlert className="h-5 w-5 text-amber-400 group-hover:scale-110 transition-transform" />
+        <img src="/owl-think.png" alt="Совёнок" className="h-7 w-7 object-contain drop-shadow-md group-hover:scale-110 transition-transform" />
         <span className="[writing-mode:vertical-lr] rotate-180 text-xs font-black uppercase tracking-wider hidden sm:block">
           Категории нарушений
         </span>
@@ -67,12 +73,10 @@ export const ViolationCategoriesSidebar: React.FC = () => {
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-slate-100 bg-slate-50/80">
           <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded-xl bg-red-50 text-red-600">
-              <ShieldAlert className="h-5 w-5" />
-            </div>
+            <img src="/owl-mascot.png" alt="Совёнок" className="h-9 w-9 object-contain drop-shadow-xs" />
             <div>
               <h3 className="font-extrabold text-navy text-base">Категории нарушений</h3>
-              <p className="text-xs text-slate-500">Навигатор по правовым разделам</p>
+              <p className="text-xs text-slate-500">Правовой навигатор MediaMap</p>
             </div>
           </div>
           <button
@@ -99,8 +103,8 @@ export const ViolationCategoriesSidebar: React.FC = () => {
                 }`}
               >
                 <div className="flex items-start gap-3.5">
-                  <div className="h-12 w-12 shrink-0 rounded-xl bg-amber-50 p-1.5 border border-amber-100 flex items-center justify-center">
-                    <img src={c.icon} alt={c.title} className="h-full w-full object-contain" />
+                  <div className={`h-14 w-14 shrink-0 rounded-2xl p-1 border flex items-center justify-center ${c.bg}`}>
+                    <img src={c.owl} alt={c.title} className="h-full w-full object-contain drop-shadow-md transition-transform group-hover:scale-110" />
                   </div>
                   <div className="flex-1">
                     <h4 className="text-sm font-bold text-navy hover:text-red-600 transition-colors">
