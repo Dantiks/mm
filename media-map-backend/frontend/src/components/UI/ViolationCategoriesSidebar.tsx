@@ -14,7 +14,7 @@ export const ViolationCategoriesSidebar: React.FC = () => {
       slug: 'hate-speech',
       title: t.home.categories[0]?.title || 'Язык вражды (Hate Speech)',
       desc: 'Дискриминационные высказывания, враждебные призывы и ксенофобия в медиа.',
-      icon: '/owl-stop.png',
+      icon: '/uploads/icons/hate.png',
       color: 'from-amber-500 to-orange-600',
     },
     {
@@ -22,7 +22,7 @@ export const ViolationCategoriesSidebar: React.FC = () => {
       slug: 'digital-scams',
       title: t.home.categories[1]?.title || 'Санариптик шылуундар (Цифровое мошенничество)',
       desc: 'Фишинг, взлом аккаунтов, дипфейки и финансовые схемы в сети.',
-      icon: '/owl-search.png',
+      icon: '/uploads/icons/propaganda.png',
       color: 'from-orange-500 to-red-600',
     },
     {
@@ -30,7 +30,7 @@ export const ViolationCategoriesSidebar: React.FC = () => {
       slug: 'disinformation',
       title: t.home.categories[2]?.title || 'Фейки и дезинформация',
       desc: 'Манипуляция фактами, фальсифицированные видео и ложные новости.',
-      icon: '/owl-law.png',
+      icon: '/uploads/icons/fake.png',
       color: 'from-red-600 to-rose-700',
     },
   ];

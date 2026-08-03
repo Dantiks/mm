@@ -3,7 +3,6 @@ import { useAppSelector } from "../../app/hooks/useAppSelector";
 import { selectViolationTypes } from "../../features/violationTypes/violationTypesSlice";
 import ViolationListItem from "./ViolationListItem";
 import { MarkerBeforeModeratorMutation, MarkerOnMap } from "../../types";
-import { apiURL } from "../../utils/constants";
 import { Inbox } from "lucide-react";
 
 interface Props {
@@ -29,11 +28,23 @@ const GmailTabs: React.FC<Props> = ({ markers }) => {
         .filter((item) => item.violationTypeId === Number(activeTab))
         .sort((a, b) => a.authorCity.localeCompare(b.authorCity));
 
+  const getTabIconPath = (tab: { id: number; violationType: string; icon?: string }) => {
+    const name = (tab.violationType || '').toLowerCase();
+    if (name.includes('вражд') || name.includes('жек көрүү') || name.includes('hate')) return '/uploads/icons/hate.png';
+    if (name.includes('дезинформ') || name.includes('фейк') || name.includes('жалган')) return '/uploads/icons/fake.png';
+    if (name.includes('пропаганд') || name.includes('шылуун')) return '/uploads/icons/propaganda.png';
+    if (tab.id === 2) return '/uploads/icons/fake.png';
+    if (tab.id === 3) return '/uploads/icons/propaganda.png';
+    if (tab.id === 4) return '/uploads/icons/other.png';
+    return '/uploads/icons/other.png';
+  };
+
   return (
       <div className="w-full">
         <div className="flex items-center gap-2 p-1 bg-cream rounded-[12px] w-fit mb-8 overflow-x-auto no-scrollbar">
           {tabs.map((tab) => {
             const isActive = activeTab === tab.id.toString();
+            const iconSrc = getTabIconPath(tab);
             return (
                 <button
                     key={tab.id}
@@ -46,8 +57,8 @@ const GmailTabs: React.FC<Props> = ({ markers }) => {
               `}
                 >
                   <img
-                      className={`w-5 h-5 object-contain transition-opacity ${isActive ? 'opacity-100' : 'opacity-50'}`}
-                      src={`${apiURL}static/uploads/icons/${tab.icon}`}
+                      className={`w-5 h-5 object-contain transition-opacity ${isActive ? 'opacity-100' : 'opacity-70'}`}
+                      src={iconSrc}
                       alt={tab.violationType}
                   />
                   <span className="text-sm">{tab.violationType}</span>
