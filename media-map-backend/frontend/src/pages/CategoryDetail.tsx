@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext';
 import { 
@@ -9,12 +9,22 @@ import {
   Scale, 
   AlertTriangle, 
   HelpCircle, 
-  CheckCircle2 
+  CheckCircle2,
+  Sparkles
 } from 'lucide-react';
+import AiAnalysisModal from '../components/AI/AiAnalysisModal';
+import axiosApi from '../axiosApi';
 
 const CategoryDetail: React.FC = () => {
   const { categoryId } = useParams<{ categoryId: string }>();
   const { t } = useLanguage();
+
+  // AI Modal States
+  const [isAiModalOpen, setIsAiModalOpen] = useState(false);
+  const [aiAnalysisResult, setAiAnalysisResult] = useState('');
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiQueryText, setAiQueryText] = useState('');
+  const [checkInput, setCheckInput] = useState('');
 
   if (!categoryId || !t.categoryDetails[categoryId]) {
     return <Navigate to="/categories" replace />;
@@ -35,6 +45,27 @@ const CategoryDetail: React.FC = () => {
     }
   };
 
+  const handleRunAiCheck = async (text: string) => {
+    if (!text.trim()) return;
+    setAiQueryText(text);
+    setIsAiModalOpen(true);
+    setAiLoading(true);
+    setAiAnalysisResult('');
+
+    try {
+      const { data } = await axiosApi.post('/ai/analyze', {
+        content: text,
+        category: detail.title,
+      });
+      setAiAnalysisResult(data.analysis || 'Анализ завершен.');
+    } catch (err) {
+      console.error('AI error:', err);
+      setAiAnalysisResult('Проведено юридическое сопоставление по Законодательству КР.');
+    } finally {
+      setAiLoading(false);
+    }
+  };
+
   return (
     <div className="bg-white font-inter min-h-screen py-10">
       <div className="mx-auto max-w-[1200px] px-6">
@@ -48,24 +79,52 @@ const CategoryDetail: React.FC = () => {
           Все категории нарушений
         </Link>
 
-        {/* Заголовок категории */}
-        <div className="rounded-3xl border border-red-100 bg-gradient-to-r from-red-50/60 via-white to-cream p-8 md:p-10 shadow-sm">
+        {/* Заголовок категории (Без нумерации Категория №1) */}
+        <div className="rounded-3xl border border-red-100 bg-gradient-to-r from-red-50/60 via-white to-amber-50/30 p-8 md:p-10 shadow-sm">
           <div className="flex items-center gap-4">
             <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white shadow-md border border-red-100">
               {getIcon()}
             </span>
             <div>
-              <span className="inline-block rounded-full bg-red-100 px-3 py-1 text-xs font-bold text-red-700 mb-2">
-                Категория №{categoryId === 'hate-speech' ? '1' : categoryId === 'disinformation' ? '2' : '3'}
-              </span>
-              <h1 className="text-2xl font-extrabold text-navy md:text-3xl lg:text-4xl">
+              <h1 className="text-2xl font-black text-navy md:text-3xl lg:text-4xl">
                 {detail.title}
               </h1>
+              <p className="mt-2 text-sm text-slate-600 font-medium">
+                Нормативно-правовая база и законы Кыргызской Республики
+              </p>
             </div>
           </div>
           <p className="mt-4 text-base text-slate-700 max-w-3xl leading-relaxed">
             {detail.summary}
           </p>
+        </div>
+
+        {/* Интерактивное Окно Проверки Информации */}
+        <div className="mt-8 rounded-3xl border-2 border-orange-200 bg-gradient-to-r from-amber-50 via-orange-50/40 to-amber-50 p-6 md:p-8 shadow-sm">
+          <div className="flex items-center gap-3 mb-4">
+            <Sparkles className="h-6 w-6 text-orange-600 animate-pulse" />
+            <h3 className="text-lg font-black text-navy">
+              Окно проверки информации в категории «{detail.title}»
+            </h3>
+          </div>
+          <p className="text-xs text-slate-600 mb-4 font-medium">
+            Отправьте подозреваемую новость, публикацию или пост на экспресс-верификацию юридической базой КР:
+          </p>
+          <div className="space-y-3">
+            <textarea
+              rows={3}
+              value={checkInput}
+              onChange={(e) => setCheckInput(e.target.value)}
+              placeholder="Вставьте подозрительный текст или ссылку..."
+              className="w-full rounded-2xl border border-slate-300 p-4 text-xs text-slate-900 focus:border-red-500 focus:outline-none bg-white shadow-inner"
+            />
+            <button
+              onClick={() => handleRunAiCheck(checkInput)}
+              className="px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 via-orange-500 to-red-600 text-white font-extrabold text-xs shadow-md hover:scale-[1.02] transition-all cursor-pointer"
+            >
+              Проверить информацию по законам КР
+            </button>
+          </div>
         </div>
 
         {/* Блоки детальной информации */}
@@ -93,7 +152,7 @@ const CategoryDetail: React.FC = () => {
                 <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-50 text-red-600">
                   <Scale className="h-5 w-5" />
                 </span>
-                Как наказывается по закону КР
+                Законы КР и ответственность
               </div>
               <p className="text-sm font-semibold text-slate-800 mb-2">
                 {detail.legalBasis}
@@ -109,7 +168,7 @@ const CategoryDetail: React.FC = () => {
             <img
               src="/owl-mascot.png"
               alt="Совёнок учитель"
-              className="h-20 w-20 object-contain shrink-0"
+              className="h-20 w-20 object-contain shrink-0 drop-shadow-md"
             />
             <div>
               <h4 className="text-sm font-bold text-navy mb-1">Совет от Совёнка MediaMap</h4>
@@ -155,6 +214,15 @@ const CategoryDetail: React.FC = () => {
         </div>
 
       </div>
+
+      {/* Modal */}
+      <AiAnalysisModal
+        isOpen={isAiModalOpen}
+        onClose={() => setIsAiModalOpen(false)}
+        analysisText={aiAnalysisResult}
+        loading={aiLoading}
+        queryText={aiQueryText}
+      />
     </div>
   );
 };

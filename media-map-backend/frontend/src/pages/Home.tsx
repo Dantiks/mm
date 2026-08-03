@@ -366,9 +366,10 @@ const Home = () => {
 
                   <Link
                     to={`/categories/${c.slug}`}
-                    className="flex items-center justify-center gap-1 text-[12px] font-bold text-slate-500 hover:text-red-600 transition-colors"
+                    className="flex items-center justify-center gap-1 text-[12px] font-bold text-slate-500 hover:text-red-600 transition-colors pt-1 border-t border-slate-100"
                   >
-                    Подробнее о категории <ArrowRight className="h-3 w-3" />
+                    <span>Законы КР и нормативно-правовая база</span>
+                    <ArrowRight className="h-3.5 w-3.5 text-red-600" />
                   </Link>
                 </div>
               </div>
