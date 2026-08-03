@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   CheckSquare,
@@ -19,6 +19,7 @@ import { TelegramIcon, InstagramIcon, FacebookIcon, YoutubeIcon } from '../compo
 import SiteSearchModal from '../components/Search/SiteSearchModal';
 
 import NewsAggregatorCarousel, { NewsItem } from '../components/News/NewsAggregatorCarousel';
+import NewsDetailModal, { DetailedNewsItem } from '../components/News/NewsDetailModal';
 
 // Совята для каждой категории: поза подобрана по смыслу
 const categoryOwls = [
@@ -147,7 +148,35 @@ const Home = () => {
     setAiLoading(false);
   };
 
-  const aggregatorNewsItems: NewsItem[] = [
+  const [liveNews, setLiveNews] = useState<NewsItem[]>([]);
+  const [selectedDetailNews, setSelectedDetailNews] = useState<DetailedNewsItem | null>(null);
+
+  useEffect(() => {
+    axiosApi
+      .get('/news')
+      .then((res) => {
+        const rows = res.data.rows || [];
+        if (rows.length > 0) {
+          const formatted: NewsItem[] = rows.map((item: any) => {
+            const imgUrl = (item.source || '').split('|')[1];
+            return {
+              id: item.id,
+              title: item.title,
+              link: item.link,
+              image: imgUrl || '/news1.png',
+              tag: 'фактчекинг',
+              date: new Date(item.pubDate).toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' }),
+              commentsCount: Math.floor(Math.random() * 80) + 12,
+              description: item.contentSnippet,
+            };
+          });
+          setLiveNews(formatted);
+        }
+      })
+      .catch((err) => console.error('Failed to load home news feed:', err));
+  }, []);
+
+  const fallbackNewsItems: NewsItem[] = [
     {
       id: 1,
       title: 'В Бишкеке стартовала кампания против языка вражды в соцсетях',
@@ -188,17 +217,9 @@ const Home = () => {
       commentsCount: 64,
       description: 'Экспертная аналитика от юристов медиа-сферы.'
     },
-    {
-      id: 5,
-      title: 'Защита прав СМИ и кибергигиена в социальных сетях',
-      link: 'https://factcheck.kg/',
-      image: '/news2.png',
-      tag: 'практика',
-      date: '25 июл',
-      commentsCount: 37,
-      description: 'Пошаговый алгоритм действий при кибербуллинге.'
-    }
   ];
+
+  const displayNewsList = liveNews.length > 0 ? liveNews : fallbackNewsItems;
 
   const homeCategories = t.home.categories.map((c, i) => ({
     ...c,
@@ -247,13 +268,34 @@ const Home = () => {
               </div>
             </div>
 
-            {/* RIGHT: Горизонтальный Агрегатор Новостей (NYT Style) */}
+            {/* RIGHT: Горизонтальный Автоматический Агрегатор Новостей (NYT Style) */}
             <div className="w-full min-w-0">
-              <NewsAggregatorCarousel items={aggregatorNewsItems} title="Агрегатор новостей" />
+              <NewsAggregatorCarousel
+                items={displayNewsList}
+                title="Агрегатор новостей"
+                onSelectNews={(item) =>
+                  setSelectedDetailNews({
+                    id: item.id,
+                    title: item.title,
+                    link: item.link,
+                    image: item.image,
+                    tag: item.tag,
+                    date: item.date,
+                    description: item.description,
+                  })
+                }
+              />
             </div>
           </div>
         </div>
       </section>
+
+      {/* NYT Style News Detail Modal */}
+      <NewsDetailModal
+        news={selectedDetailNews}
+        onClose={() => setSelectedDetailNews(null)}
+        onRunAiCheck={(text) => handleAiAnalyze(text)}
+      />
 
       {/* ── 3 КАТЕГОРИИ ── */}
       <section className="bg-white py-12">
