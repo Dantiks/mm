@@ -233,23 +233,23 @@ const Home = () => {
     <div className="bg-white font-inter">
 
       {/* ── HERO ── */}
-      <section className="bg-[#f5f0e8] py-12 lg:py-16">
+      <section className="bg-[#f5f0e8] py-6 lg:py-8">
         <div className="mx-auto max-w-[1792px] px-6 lg:px-16">
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-center">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-center">
 
             {/* LEFT: Заголовок + Следите за нами */}
             <div className="flex flex-col justify-center">
-              <h1 className="text-[32px] font-black leading-tight text-navy sm:text-[40px] lg:text-[46px]">
+              <h1 className="text-[28px] font-black leading-tight text-navy sm:text-[34px] lg:text-[38px]">
                 {t.home.heroTitle}
               </h1>
-              <p className="mt-4 text-[15px] leading-relaxed text-slate-600 max-w-lg">
+              <p className="mt-2.5 text-[14px] leading-relaxed text-slate-600 max-w-lg">
                 {t.home.heroSubtitle}
               </p>
 
 
               {/* Соцсети с фирменными иконками */}
-              <div className="mt-8 flex items-center gap-3">
-                <span className="text-[13px] font-bold text-navy">Следите за нами</span>
+              <div className="mt-5 flex items-center gap-3">
+                <span className="text-[12px] font-bold text-navy">Следите за нами</span>
                 <div className="flex items-center gap-2">
                   {socials.map((s) => (
                     <a
@@ -259,7 +259,7 @@ const Home = () => {
                       rel="noreferrer"
                       aria-label={s.label}
                       title={s.label}
-                      className={`flex h-9 w-9 items-center justify-center rounded-full text-white shadow-md transition-all hover:scale-110 active:scale-95 ${s.color}`}
+                      className={`flex h-8 w-8 items-center justify-center rounded-full text-white shadow-md transition-all hover:scale-110 active:scale-95 ${s.color}`}
                     >
                       {s.icon}
                     </a>
@@ -268,7 +268,7 @@ const Home = () => {
               </div>
             </div>
 
-            {/* RIGHT: Горизонтальный Автоматический Агрегатор Новостей (NYT Style) */}
+            {/* RIGHT: Горизонтальный Компактный Агрегатор Новостей */}
             <div className="w-full min-w-0">
               <NewsAggregatorCarousel
                 items={displayNewsList}
@@ -298,7 +298,7 @@ const Home = () => {
       />
 
       {/* ── 3 КАТЕГОРИИ ── */}
-      <section className="bg-white py-12">
+      <section className="bg-white py-6 lg:py-8">
         <div className="mx-auto max-w-[1792px] px-6 lg:px-16">
           <div className="mb-6 flex items-center justify-between">
             <h2 className="text-[22px] font-extrabold text-navy">{t.home.categoriesTitle}</h2>
