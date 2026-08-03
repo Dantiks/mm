@@ -87,7 +87,12 @@ const MapPage: React.FC = () => {
       try {
         const markersRes = await axios.get('/api/markers?isApproved=true');
         if (Array.isArray(markersRes.data) && markersRes.data.length > 0) {
-          setMarkers(markersRes.data);
+          const validApiMarkers = markersRes.data.filter(
+            (m: any) => m.authorComment && !m.authorComment.includes('Описание маркера')
+          );
+          if (validApiMarkers.length > 0) {
+            setMarkers(validApiMarkers);
+          }
         }
       } catch (error) {
         console.log('Using embedded database dump markers');
