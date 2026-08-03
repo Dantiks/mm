@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
 import NewsDetailModal, { DetailedNewsItem } from '../components/News/NewsDetailModal';
 import AiAnalysisModal from '../components/AI/AiAnalysisModal';
-import { Sparkles, RefreshCw } from 'lucide-react';
+import { RefreshCw } from 'lucide-react';
 import axiosApi from '../axiosApi';
 
 interface RawNewsItem {
@@ -170,8 +170,7 @@ const NewsAggregator: React.FC = () => {
                             }}
                             className="flex items-center gap-1 font-bold text-red-600 hover:text-red-700 transition-colors"
                           >
-                            <Sparkles className="h-3.5 w-3.5" />
-                            Проверить через ИИ
+                            Проверить информацию
                           </button>
                         </div>
                       </div>

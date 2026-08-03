@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, ExternalLink, Calendar, Globe, Sparkles } from 'lucide-react';
+import { X, ExternalLink, Calendar, Globe } from 'lucide-react';
 
 export interface DetailedNewsItem {
   id: string | number;
@@ -101,8 +101,7 @@ const NewsDetailModal: React.FC<Props> = ({ news, onClose, onRunAiCheck }) => {
                   }}
                   className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-red-600 to-amber-600 text-white font-bold text-xs shadow-md shadow-red-500/20 hover:scale-103 transition-all"
                 >
-                  <Sparkles className="h-4 w-4" />
-                  Проверить через GPT-4o mini
+                  Проверить информацию
                 </button>
               )}
             </div>

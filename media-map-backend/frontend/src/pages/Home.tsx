@@ -349,8 +349,7 @@ const Home = () => {
                     }}
                     className="group relative flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 via-orange-500 to-red-600 px-4 py-3 text-[13px] font-extrabold text-white shadow-lg shadow-orange-500/25 transition-all hover:scale-[1.03] hover:shadow-xl hover:shadow-orange-500/40 active:scale-[0.98] overflow-hidden"
                   >
-                    <Sparkles className="h-4 w-4 text-white animate-pulse" />
-                    <span>Проверить информацию (GPT-4o mini)</span>
+                    <span>Проверить информацию</span>
                   </button>
 
                   <Link

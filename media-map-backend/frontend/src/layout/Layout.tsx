@@ -6,6 +6,8 @@ import AiAssistantWidget from "../components/AI/AiAssistantWidget";
 import { EditorModeProvider } from '../context/EditorModeContext';
 import FloatingEditorBar from '../components/CMS/FloatingEditorBar';
 
+import OwlQuoteWidget from '../components/UI/OwlQuoteWidget';
+
 const Layout: React.FC = () => {
   return (
     <EditorModeProvider>
@@ -19,6 +21,7 @@ const Layout: React.FC = () => {
         <main className="flex-1">
           <Outlet />
         </main>
+        <OwlQuoteWidget />
         <Footer />
         <AiAssistantWidget />
         <FloatingEditorBar />
