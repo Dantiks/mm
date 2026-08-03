@@ -40,11 +40,11 @@ export const ViolationCategoriesSidebar: React.FC = () => {
       {/* Sticky Quick Toggle Tab on Left Screen Edge */}
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed left-0 top-1/2 -translate-y-1/2 z-40 flex items-center gap-2 bg-navy text-white px-3 py-3 rounded-r-2xl shadow-2xl hover:bg-red-600 transition-all hover:pl-4 cursor-pointer group border border-l-0 border-white/20"
+        className="fixed left-0 top-1/2 -translate-y-1/2 z-40 flex items-center gap-1.5 bg-navy text-white px-2 py-2.5 rounded-r-xl shadow-xl hover:bg-red-600 transition-all hover:pl-3 cursor-pointer group border border-l-0 border-white/20"
         title="Категории нарушений"
       >
-        <ShieldAlert className="h-5 w-5 text-amber-400 group-hover:scale-110 transition-transform" />
-        <span className="[writing-mode:vertical-lr] rotate-180 text-xs font-black uppercase tracking-wider hidden sm:block">
+        <ShieldAlert className="h-4 w-4 text-amber-400 group-hover:scale-110 transition-transform shrink-0" />
+        <span className="[writing-mode:vertical-lr] rotate-180 text-[10px] font-extrabold uppercase tracking-tight hidden sm:block">
           Категории нарушений
         </span>
       </button>

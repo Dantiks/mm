@@ -228,7 +228,7 @@ const Home = () => {
 
       {/* ── HERO ── */}
       <section className="bg-[#f5f0e8] py-6 lg:py-8">
-        <div className="mx-auto max-w-[1792px] px-6 lg:px-16">
+        <div className="mx-auto max-w-[1792px] pl-14 pr-6 sm:pl-16 sm:pr-8 lg:pl-24 lg:pr-16">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-center">
 
             {/* LEFT: Заголовок + Совёнок + Следите за нами */}
