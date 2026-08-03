@@ -238,8 +238,20 @@ const Home = () => {
         <div className="mx-auto max-w-[1792px] px-6 lg:px-16">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-center">
 
-            {/* LEFT: Заголовок + Следите за нами */}
+            {/* LEFT: Заголовок + Совёнок + Следите за нами */}
             <div className="flex flex-col justify-center">
+              {/* Совёнок MediaMap перед началом слогана */}
+              <div className="flex items-center gap-3 mb-2">
+                <img
+                  src="/owl-mascot.png"
+                  alt="Совёнок MediaMap"
+                  className="h-16 w-16 sm:h-20 sm:w-20 object-contain drop-shadow-md transition-transform duration-300 hover:scale-110"
+                  onError={(e) => {
+                    (e.target as HTMLElement).setAttribute('src', '/owl-happy.png');
+                  }}
+                />
+              </div>
+
               <EditableText
                 textKey="home.heroTitle"
                 value={t.home.heroTitle}
