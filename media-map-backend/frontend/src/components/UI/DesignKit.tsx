@@ -7,7 +7,8 @@ import { Link } from 'react-router-dom';
  * lineLight #ece7da, ink #14181a, slateBody #6e7979. Font: Inter + JetBrains Mono.
  */
 
-// Small uppercase monospace label used above section titles.
+import EditableText from '../CMS/EditableText';
+
 export const Eyebrow: React.FC<{ children: React.ReactNode; className?: string }> = ({
   children,
   className = '',
@@ -15,7 +16,11 @@ export const Eyebrow: React.FC<{ children: React.ReactNode; className?: string }
   <p
     className={`font-mono text-[12px] uppercase tracking-[0.72px] text-goldDeep ${className}`}
   >
-    {children}
+    {typeof children === 'string' ? (
+      <EditableText textKey="eyebrow" value={children} />
+    ) : (
+      children
+    )}
   </p>
 );
 
@@ -42,7 +47,7 @@ export const PageHero: React.FC<PageHeroProps> = ({
       <div className="border-b border-lineLight">
         <div className="mx-auto max-w-[1792px] px-6 py-[11px] lg:px-16">
           <Link to="/" className="text-[13px] font-semibold text-navy hover:underline">
-            ← Главная
+            <EditableText textKey="hero.breadcrumb" value="← Главная" />
           </Link>
         </div>
       </div>
@@ -52,10 +57,20 @@ export const PageHero: React.FC<PageHeroProps> = ({
         <div className="max-w-[720px]">
           {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
           <h1 className="mt-4 text-[34px] font-extrabold leading-tight text-navy md:text-[44px]">
-            {title}
+            {typeof title === 'string' ? (
+              <EditableText textKey="hero.title" value={title} />
+            ) : (
+              title
+            )}
           </h1>
           {subtitle && (
-            <p className="mt-4 text-[17px] leading-[27.2px] text-[#4b5556]">{subtitle}</p>
+            <p className="mt-4 text-[17px] leading-[27.2px] text-[#4b5556]">
+              {typeof subtitle === 'string' ? (
+                <EditableText textKey="hero.subtitle" value={subtitle} />
+              ) : (
+                subtitle
+              )}
+            </p>
           )}
         </div>
         {aside && <div className="shrink-0">{aside}</div>}

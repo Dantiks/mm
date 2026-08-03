@@ -10,6 +10,8 @@ import CustomAlert from "../UI/Alert/CustomAlert";
 import {useLanguage} from "../../i18n/LanguageContext";
 import violationFormContent from "../../i18n/pages/violationForm";
 
+import EditableText from '../CMS/EditableText';
+
 const ViolationForm = () => {
     const {language} = useLanguage();
     const c = violationFormContent[language];
@@ -96,17 +98,17 @@ const ViolationForm = () => {
             <form
                 autoComplete="off" onSubmit={onSubmit}>
                 <h2 className="mb-8 text-center text-[24px] font-extrabold text-navy">
-                    {c.heading}
+                    <EditableText textKey="form.heading" value={c.heading} />
                 </h2>
                 <div className="mb-6">
                     <p className="mb-2.5 block text-gray-400 text-sm text-center">
-                        <span className="text-red-600">*</span> {c.requiredNote}
+                        <span className="text-red-600">*</span> <EditableText textKey="form.requiredNote" value={c.requiredNote} />
                     </p>
                 </div>
 
                 <div className="mb-8">
                     <label className="mb-2 block text-[15px] font-semibold text-navy">
-                        <span className="text-red-500">*</span> {c.regionLabel}
+                        <span className="text-red-500">*</span> <EditableText textKey="form.regionLabel" value={c.regionLabel} />
                     </label>
                     <select
                         name="authorRegion"
@@ -124,7 +126,7 @@ const ViolationForm = () => {
 
                 <div className="mb-8">
                     <label className="mb-2 block text-[15px] font-semibold text-navy">
-                        <span className="text-red-500">*</span> {c.cityLabel}
+                        <span className="text-red-500">*</span> <EditableText textKey="form.cityLabel" value={c.cityLabel} />
                     </label>
                     <input
                         autoComplete="off"
@@ -140,7 +142,7 @@ const ViolationForm = () => {
 
                 <div className="mb-8">
                     <label className="mb-2 block text-[15px] font-semibold text-navy">
-                        <span className="text-red-500">*</span> {c.violationTypeLabel}
+                        <span className="text-red-500">*</span> <EditableText textKey="form.violationTypeLabel" value={c.violationTypeLabel} />
                     </label>
                     <select
                         name="violationTypeId"
@@ -158,7 +160,7 @@ const ViolationForm = () => {
 
                 <div className="mb-8">
                     <label className="mb-2 block text-[15px] font-semibold text-navy">
-                        {c.mediaLinkLabel}
+                        <EditableText textKey="form.mediaLinkLabel" value={c.mediaLinkLabel} />
                     </label>
                     <input
                         autoComplete="off"
@@ -173,7 +175,7 @@ const ViolationForm = () => {
 
                 <div className="mb-8">
                     <label className="mb-2 block text-[15px] font-semibold text-navy">
-                        {c.screenshotLabel}
+                        <EditableText textKey="form.screenshotLabel" value={c.screenshotLabel} />
                     </label>
 
                     {/* Скрываем стандартный input, добавляем стили для кастомной кнопки */}
@@ -193,7 +195,8 @@ const ViolationForm = () => {
                             type="button"
                             className="flex w-full items-center rounded-[10px] border border-lineLight bg-white p-3 outline-none cursor-pointer hover:bg-cream transition-colors"
                         >
-                            <div className="bg-navy inline-block text-sm text-white py-2 px-4 rounded ">{c.chooseFileButton}
+                            <div className="bg-navy inline-block text-sm text-white py-2 px-4 rounded ">
+                                <EditableText textKey="form.chooseFileBtn" value={c.chooseFileButton} />
                             </div>
                             <span
                                 className="text-sm text-gray-500 ml-5">{fileInputRef.current?.files?.[0] ? fileInputRef.current.files[0].name : c.noFileChosen}</span>
@@ -203,7 +206,7 @@ const ViolationForm = () => {
 
                 <div className="mb-8">
                     <label className="mb-2 block text-[15px] font-semibold text-navy">
-                        {c.commentLabel} <span className="text-gray-400">{c.commentOptional}</span>
+                        <EditableText textKey="form.commentLabel" value={c.commentLabel} /> <span className="text-gray-400"><EditableText textKey="form.commentOptional" value={c.commentOptional} /></span>
                     </label>
                     <textarea
                         placeholder={c.commentPlaceholder}
@@ -215,14 +218,12 @@ const ViolationForm = () => {
                 </div>
 
                 <div className="mb-10">
-                    <input
-                        data-ripple-light="true"
-                        autoComplete="off"
+                    <button
                         type="submit"
-                        value={createLoading ? c.submitting : c.submit}
-                        // disabled={createLoading}
                         className="w-full cursor-pointer rounded-[12px] bg-gold p-4 mb-5 text-[15px] font-extrabold text-navy transition-opacity hover:opacity-90 disabled:opacity-60"
-                    />
+                    >
+                        <EditableText textKey="form.submitBtn" value={createLoading ? c.submitting : c.submit} />
+                    </button>
                 </div>
             </form>
         </div>

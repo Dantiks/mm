@@ -10,6 +10,7 @@ import {
   PieChart
 } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
+import EditableText from '../components/CMS/EditableText';
 
 interface MarkerData {
   id: number;
@@ -67,16 +68,19 @@ const Analytics: React.FC = () => {
               <div className="flex items-center gap-2 mb-3">
                 <span className="flex h-3 w-3 rounded-full bg-red-600 animate-ping" />
                 <span className="font-mono text-xs font-black uppercase tracking-widest text-red-600">
-                  Data Insights & Reports • MediaMap
+                  <EditableText textKey="analytics.eyebrow" value="Data Insights & Reports • MediaMap" />
                 </span>
               </div>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight">
-                {language === 'ky' ? 'Сайт боюнча аналитика' : 'Аналитика и статистика платформы'}
+                <EditableText textKey="analytics.title" value={language === 'ky' ? 'Сайт боюнча аналитика' : 'Аналитика и статистика платформы'} />
               </h1>
               <p className="mt-3 text-sm text-slate-600 font-medium max-w-2xl">
-                {language === 'ky' 
-                  ? 'Кыргызстан боюнча катталган медиа укук бузуулардын, фейктердин жана санариптик шылуундардын аналитикасы.' 
-                  : 'Мониторинг соблюдения медиа-прав, дезинформации и цифровых мошенничеств по всей территории Кыргызской Республики.'}
+                <EditableText 
+                  textKey="analytics.subtitle" 
+                  value={language === 'ky' 
+                    ? 'Кыргызстан боюнча катталган медиа укук бузуулардын, фейктердин жана санариптик шылуундардын аналитикасы.' 
+                    : 'Мониторинг соблюдения медиа-прав, дезинформации и цифровых мошенничеств по всей территории Кыргызской Республики.'} 
+                />
               </p>
             </div>
 
@@ -84,7 +88,7 @@ const Analytics: React.FC = () => {
               <BarChart3 className="h-10 w-10 text-red-600" />
               <div>
                 <span className="text-2xl font-black text-navy">{totalMarkers}</span>
-                <span className="block text-xs font-bold text-slate-500 uppercase">Всего фиксаций</span>
+                <span className="block text-xs font-bold text-slate-500 uppercase"><EditableText textKey="analytics.totalFixations" value="Всего фиксаций" /></span>
               </div>
             </div>
           </div>
@@ -97,10 +101,10 @@ const Analytics: React.FC = () => {
               <span className="p-3 rounded-xl bg-red-50 text-red-600 font-bold">
                 <FileText className="h-6 w-6" />
               </span>
-              <span className="text-xs font-extrabold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full">+100% База</span>
+              <span className="text-xs font-extrabold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full"><EditableText textKey="analytics.card1.tag" value="+100% База" /></span>
             </div>
             <span className="text-3xl font-black text-navy">{totalMarkers}</span>
-            <h4 className="text-xs font-bold text-slate-500 uppercase mt-1">Подтверждённые кейсы</h4>
+            <h4 className="text-xs font-bold text-slate-500 uppercase mt-1"><EditableText textKey="analytics.card1.title" value="Подтверждённые кейсы" /></h4>
           </div>
 
           <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs">
@@ -108,10 +112,10 @@ const Analytics: React.FC = () => {
               <span className="p-3 rounded-xl bg-amber-50 text-amber-600 font-bold">
                 <MapPin className="h-6 w-6" />
               </span>
-              <span className="text-xs font-extrabold text-amber-700 bg-amber-50 px-2.5 py-1 rounded-full">7 Областей</span>
+              <span className="text-xs font-extrabold text-amber-700 bg-amber-50 px-2.5 py-1 rounded-full"><EditableText textKey="analytics.card2.tag" value="7 Областей" /></span>
             </div>
             <span className="text-3xl font-black text-navy">9</span>
-            <h4 className="text-xs font-bold text-slate-500 uppercase mt-1">Регионов КР под защитой</h4>
+            <h4 className="text-xs font-bold text-slate-500 uppercase mt-1"><EditableText textKey="analytics.card2.title" value="Регионов КР под защитой" /></h4>
           </div>
 
           <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs">
@@ -119,10 +123,10 @@ const Analytics: React.FC = () => {
               <span className="p-3 rounded-xl bg-blue-50 text-blue-600 font-bold">
                 <ShieldCheck className="h-6 w-6" />
               </span>
-              <span className="text-xs font-extrabold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-full">Экспертиза</span>
+              <span className="text-xs font-extrabold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-full"><EditableText textKey="analytics.card3.tag" value="Экспертиза" /></span>
             </div>
             <span className="text-3xl font-black text-navy">94%</span>
-            <h4 className="text-xs font-bold text-slate-500 uppercase mt-1">Уровень верификации</h4>
+            <h4 className="text-xs font-bold text-slate-500 uppercase mt-1"><EditableText textKey="analytics.card3.title" value="Уровень верификации" /></h4>
           </div>
 
           <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs">
@@ -130,10 +134,10 @@ const Analytics: React.FC = () => {
               <span className="p-3 rounded-xl bg-emerald-50 text-emerald-600 font-bold">
                 <TrendingUp className="h-6 w-6" />
               </span>
-              <span className="text-xs font-extrabold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">Активно</span>
+              <span className="text-xs font-extrabold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full"><EditableText textKey="analytics.card4.tag" value="Активно" /></span>
             </div>
             <span className="text-3xl font-black text-navy">24/7</span>
-            <h4 className="text-xs font-bold text-slate-500 uppercase mt-1">ИИ-Мониторинг фейков</h4>
+            <h4 className="text-xs font-bold text-slate-500 uppercase mt-1"><EditableText textKey="analytics.card4.title" value="ИИ-Мониторинг фейков" /></h4>
           </div>
         </div>
 
@@ -148,8 +152,8 @@ const Analytics: React.FC = () => {
                   <PieChart className="h-6 w-6" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-extrabold text-navy">Распределение по категориям</h3>
-                  <p className="text-xs text-slate-500">Доля видов нарушений в платформе</p>
+                  <h3 className="text-xl font-extrabold text-navy"><EditableText textKey="analytics.catDist.title" value="Распределение по категориям" /></h3>
+                  <p className="text-xs text-slate-500"><EditableText textKey="analytics.catDist.sub" value="Доля видов нарушений в платформе" /></p>
                 </div>
               </div>
 
@@ -157,7 +161,7 @@ const Analytics: React.FC = () => {
                 {/* Cat 1 */}
                 <div>
                   <div className="flex justify-between text-xs font-extrabold mb-1">
-                    <span className="text-navy">1. Язык вражды (Hate Speech)</span>
+                    <span className="text-navy"><EditableText textKey="analytics.catDist.c1" value="1. Язык вражды (Hate Speech)" /></span>
                     <span className="text-red-600">{cat1Count} кейсов ({Math.round((cat1Count / totalMarkers) * 100)}%)</span>
                   </div>
                   <div className="h-3 w-full bg-slate-100 rounded-full overflow-hidden">
@@ -171,7 +175,7 @@ const Analytics: React.FC = () => {
                 {/* Cat 2 */}
                 <div>
                   <div className="flex justify-between text-xs font-extrabold mb-1">
-                    <span className="text-navy">2. Санариптик шылуундар (Цифровое мошенничество)</span>
+                    <span className="text-navy"><EditableText textKey="analytics.catDist.c2" value="2. Санариптик шылуундар (Цифровое мошенничество)" /></span>
                     <span className="text-amber-600">{cat2Count} кейсов ({Math.round((cat2Count / totalMarkers) * 100)}%)</span>
                   </div>
                   <div className="h-3 w-full bg-slate-100 rounded-full overflow-hidden">
@@ -185,7 +189,7 @@ const Analytics: React.FC = () => {
                 {/* Cat 3 */}
                 <div>
                   <div className="flex justify-between text-xs font-extrabold mb-1">
-                    <span className="text-navy">3. Фейки и дезинформация</span>
+                    <span className="text-navy"><EditableText textKey="analytics.catDist.c3" value="3. Фейки и дезинформация" /></span>
                     <span className="text-blue-600">{cat3Count} кейсов ({Math.round((cat3Count / totalMarkers) * 100)}%)</span>
                   </div>
                   <div className="h-3 w-full bg-slate-100 rounded-full overflow-hidden">
@@ -199,7 +203,7 @@ const Analytics: React.FC = () => {
             </div>
 
             <div className="mt-8 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-medium">
-              <span>Источники: Независимый медиа-мониторинг КР</span>
+              <span><EditableText textKey="analytics.catDist.source" value="Источники: Независимый медиа-мониторинг КР" /></span>
               <CheckCircle2 className="h-4 w-4 text-emerald-600" />
             </div>
           </div>
@@ -212,8 +216,8 @@ const Analytics: React.FC = () => {
                   <MapPin className="h-6 w-6" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-extrabold text-navy">Активность по населённым пунктам</h3>
-                  <p className="text-xs text-slate-500">Количество зафиксированных ситуаций</p>
+                  <h3 className="text-xl font-extrabold text-navy"><EditableText textKey="analytics.cities.title" value="Активность по населённым пунктам" /></h3>
+                  <p className="text-xs text-slate-500"><EditableText textKey="analytics.cities.sub" value="Количество зафиксированных ситуаций" /></p>
                 </div>
               </div>
 
@@ -236,7 +240,7 @@ const Analytics: React.FC = () => {
             </div>
 
             <div className="mt-8 pt-4 border-t border-slate-100 text-xs text-slate-500 font-medium flex items-center justify-between">
-              <span>Обновлено в реальном времени с интерактивной карты</span>
+              <span><EditableText textKey="analytics.cities.updated" value="Обновлено в реальном времени с интерактивной карты" /></span>
             </div>
           </div>
         </div>

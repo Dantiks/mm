@@ -3,6 +3,7 @@ import { Send, ShieldCheck, BarChart3, ListFilter, ClipboardCheck, Eye } from 'l
 import { PageHero, PageSection } from '../components/UI/DesignKit';
 import { useLanguage } from '../i18n/LanguageContext';
 import termsContent from '../i18n/pages/terms';
+import EditableText from '../components/CMS/EditableText';
 
 const stepIcons = [
   <Send className="h-7 w-7 text-navy" key="send" />,
@@ -42,18 +43,22 @@ const Terms = () => {
                 </span>
               </div>
 
-              <h3 className="mb-3 text-[20px] font-extrabold text-ink">{step.title}</h3>
+              <h3 className="mb-3 text-[20px] font-extrabold text-ink">
+                <EditableText textKey={`terms.step.${step.n}.title`} value={step.title} />
+              </h3>
 
               {step.body && (
-                <p className="mb-4 text-[14px] leading-[22px] text-slateBody">{step.body}</p>
+                <p className="mb-4 text-[14px] leading-[22px] text-slateBody">
+                  <EditableText textKey={`terms.step.${step.n}.body`} value={step.body} />
+                </p>
               )}
 
               {step.bullets && (
                 <ul className="space-y-3 text-[14px] leading-relaxed text-slateBody">
-                  {step.bullets.map((b) => (
+                  {step.bullets.map((b, idx) => (
                     <li key={b} className="flex gap-2">
                       <span className="font-bold text-gold">•</span>
-                      {b}
+                      <EditableText textKey={`terms.step.${step.n}.bullet.${idx}`} value={b} />
                     </li>
                   ))}
                 </ul>
@@ -68,7 +73,7 @@ const Terms = () => {
                     >
                       {chipIconsByStepIndex[i]?.[chipIndex]}
                       <span className="text-[11px] font-bold uppercase tracking-tight text-navy">
-                        {label}
+                        <EditableText textKey={`terms.step.${step.n}.chip.${chipIndex}`} value={label} />
                       </span>
                     </div>
                   ))}

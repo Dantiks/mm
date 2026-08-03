@@ -35,9 +35,9 @@ export const EditableText: React.FC<Props> = ({
   };
 
   return (
-    <div className="relative group inline-block w-full">
+    <span className="relative group inline-block max-w-full">
       {/* Floating Key Badge */}
-      <span className="absolute -top-3.5 left-2 z-30 opacity-0 group-hover:opacity-100 transition-opacity bg-navy text-white text-[9px] font-mono font-bold px-2 py-0.5 rounded-md shadow-md flex items-center gap-1 pointer-events-none">
+      <span className="absolute -top-4 left-0 z-30 opacity-0 group-hover:opacity-100 transition-opacity bg-navy text-white text-[9px] font-mono font-bold px-2 py-0.5 rounded-md shadow-md flex items-center gap-1 pointer-events-none">
         <Edit2 className="w-2.5 h-2.5 text-gold" />
         {textKey}
       </span>
@@ -47,11 +47,11 @@ export const EditableText: React.FC<Props> = ({
         contentEditable
         suppressContentEditableWarning
         onBlur={handleBlur}
-        className={`${className} outline-none border-2 border-dashed border-red-400 hover:border-red-600 bg-red-50/20 hover:bg-red-50/40 rounded-xl p-1 transition-all cursor-text focus:border-red-600 focus:bg-white focus:ring-2 focus:ring-red-500/20`}
+        className={`${className} outline-none border-2 border-dashed border-red-400 hover:border-red-600 bg-red-50/20 hover:bg-red-50/40 rounded-lg px-1 transition-all cursor-text focus:border-red-600 focus:bg-white focus:ring-2 focus:ring-red-500/20`}
       >
         {displayValue}
       </Component>
-    </div>
+    </span>
   );
 };
 

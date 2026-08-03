@@ -4,6 +4,7 @@ import {fetchViolationTypes} from "../features/violationTypes/violationTypesThun
 import ViolationForm from "../components/Forms/ViolationForm";
 import {useLanguage} from "../i18n/LanguageContext";
 import newReportContent from "../i18n/pages/newReport";
+import EditableText from "../components/CMS/EditableText";
 
 interface ExpandedState {
   [key: string]: boolean;
@@ -44,34 +45,34 @@ const NewReport: React.FC = () => {
       <ViolationForm />
 
       <div className="flex-1 mb-10 lg:mb-0 text-[15px] leading-[24px] text-slateBody space-y-3">
-        <h2 className="text-[24px] font-extrabold text-navy mb-5">{c.howToFillTitle}</h2>
+        <h2 className="text-[24px] font-extrabold text-navy mb-5"><EditableText textKey="report.howToFillTitle" value={c.howToFillTitle} /></h2>
         <p className="">
-          {c.intro1_before}
+          <EditableText textKey="report.intro1_before" value={c.intro1_before} />
           <span className="font-bold text-goldDeep hover:underline cursor-pointer"
-                onClick={scrollToSection}>{c.intro1_link}</span>
-          {c.intro1_after}
+                onClick={scrollToSection}><EditableText textKey="report.intro1_link" value={c.intro1_link} /></span>
+          <EditableText textKey="report.intro1_after" value={c.intro1_after} />
           <span className="text-red-500 font-bold">*</span>
-          {c.requiredNote}
+          <EditableText textKey="report.requiredNote" value={c.requiredNote} />
         </p>
         <p className="">
-          {c.intro2}
+          <EditableText textKey="report.intro2" value={c.intro2} />
         </p>
         <p className="">
-          {c.intro3}
+          <EditableText textKey="report.intro3" value={c.intro3} />
         </p>
         <p className="">
-          {c.intro4}
+          <EditableText textKey="report.intro4" value={c.intro4} />
         </p>
         <p className="font-bold mt-4">
-          {c.thanks}
+          <EditableText textKey="report.thanks" value={c.thanks} />
         </p>
         <p className="font-bold mt-2">
-          {c.beMediaLiterate}
+          <EditableText textKey="report.beMediaLiterate" value={c.beMediaLiterate} />
         </p>
 
-        <h1 className="text-[22px] font-extrabold text-navy mt-8" ref={sectionRef}>{c.violationTypesTitle}</h1>
+        <h1 className="text-[22px] font-extrabold text-navy mt-8" ref={sectionRef}><EditableText textKey="report.violationTypesTitle" value={c.violationTypesTitle} /></h1>
 
-        <h2 className="text-[19px] font-bold text-ink mt-6">{c.disinfo.sectionTitle}</h2>
+        <h2 className="text-[19px] font-bold text-ink mt-6"><EditableText textKey="report.disinfo.title" value={c.disinfo.sectionTitle} /></h2>
         <div>
           {expanded.block1 && (<div>
             <p className="my-2"><span className="font-semibold">{c.disinfo.introTerm}</span>{c.disinfo.introRest}
@@ -123,11 +124,11 @@ const NewReport: React.FC = () => {
             className="mt-2 text-[14px] font-semibold text-goldDeep hover:underline"
             onClick={() => toggleContent('block1')}
           >
-            {expanded.block1 ? c.hide : c.readMore}
+            <EditableText textKey="report.block1.btn" value={expanded.block1 ? c.hide : c.readMore} />
           </button>
         </div>
 
-        <h2 className="text-[19px] font-bold text-ink mt-6">{c.hateSpeech.sectionTitle}</h2>
+        <h2 className="text-[19px] font-bold text-ink mt-6"><EditableText textKey="report.hateSpeech.title" value={c.hateSpeech.sectionTitle} /></h2>
         <div>
           {expanded.block2 && (<div>
             <p className="my-2"><span className="font-semibold">{c.hateSpeech.introTerm}</span>{c.hateSpeech.introRest}
@@ -143,24 +144,24 @@ const NewReport: React.FC = () => {
                 </li>
               ))}
             </ul>
-            <p className="text-red-500 font-bold mt-4 mb-2">
+            <div className="text-red-500 font-bold mt-4 mb-2">
               <p><strong>{c.hateSpeech.warningTitle}</strong></p>
               <ul className="list-disc pl-5 space-y-2">
                 {c.hateSpeech.warningList.map((item, idx) => (
                   <li key={idx}>{item}</li>
                 ))}
               </ul>
-            </p>
+            </div>
           </div>)}
           <button
             className="mt-2 text-[14px] font-semibold text-goldDeep hover:underline"
             onClick={() => toggleContent('block2')}
           >
-            {expanded.block2 ? c.hide : c.readMore}
+            <EditableText textKey="report.block2.btn" value={expanded.block2 ? c.hide : c.readMore} />
           </button>
         </div>
 
-        <h2 className="text-[19px] font-bold text-ink mt-6">{c.fraud.sectionTitle}</h2>
+        <h2 className="text-[19px] font-bold text-ink mt-6"><EditableText textKey="report.fraud.title" value={c.fraud.sectionTitle} /></h2>
         <div>
           {expanded.block3 && (<div>
 
@@ -183,7 +184,7 @@ const NewReport: React.FC = () => {
             className="mt-2 text-[14px] font-semibold text-goldDeep hover:underline"
             onClick={() => toggleContent('block3')}
           >
-            {expanded.block3 ? c.hide : c.readMore}
+            <EditableText textKey="report.block3.btn" value={expanded.block3 ? c.hide : c.readMore} />
           </button>
         </div>
       </div>

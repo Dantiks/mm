@@ -4,6 +4,8 @@ import { PageHero, PageSection, IconPill } from '../components/UI/DesignKit';
 import { useLanguage } from '../i18n/LanguageContext';
 import contactsContent from '../i18n/pages/contacts';
 
+import EditableText from '../components/CMS/EditableText';
+
 const Contacts = () => {
   const { t, language } = useLanguage();
   const c = contactsContent[language];
@@ -42,12 +44,12 @@ const Contacts = () => {
             <IconPill className="!h-14 !w-14 bg-red-50 text-red-600 border border-red-100">
               <Send className="h-6 w-6 text-red-600" />
             </IconPill>
-            <h3 className="mt-6 text-[20px] font-black text-navy">{c.telegram.title}</h3>
+            <h3 className="mt-6 text-[20px] font-black text-navy"><EditableText textKey="contacts.telegram.title" value={c.telegram.title} /></h3>
             <p className="mt-2 flex-grow text-[14px] leading-[22px] text-slateBody">
-              {c.telegram.description}
+              <EditableText textKey="contacts.telegram.desc" value={c.telegram.description} />
             </p>
             <span className="mt-6 flex items-center gap-2 text-[14px] font-extrabold text-red-600">
-              {c.telegram.cta}
+              <EditableText textKey="contacts.telegram.cta" value={c.telegram.cta} />
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </span>
           </a>
@@ -56,9 +58,9 @@ const Contacts = () => {
             <IconPill className="!h-14 !w-14 bg-red-50 text-red-600 border border-red-100">
               <Mail className="h-6 w-6 text-red-600" />
             </IconPill>
-            <h3 className="mt-6 text-[20px] font-black text-navy">{c.email.title}</h3>
+            <h3 className="mt-6 text-[20px] font-black text-navy"><EditableText textKey="contacts.email.title" value={c.email.title} /></h3>
             <p className="mt-2 flex-grow text-[14px] leading-[22px] text-slateBody">
-              {c.email.description}
+              <EditableText textKey="contacts.email.desc" value={c.email.description} />
             </p>
             <span className="mt-6 select-all text-[14px] font-extrabold text-navy">
               media.map.kg@gmail.com
@@ -74,9 +76,9 @@ const Contacts = () => {
             <IconPill className="!h-14 !w-14 bg-emerald-50 text-emerald-600 border border-emerald-100">
               <MessageCircle className="h-6 w-6 text-emerald-600" />
             </IconPill>
-            <h3 className="mt-6 text-[20px] font-black text-navy">WhatsApp</h3>
+            <h3 className="mt-6 text-[20px] font-black text-navy"><EditableText textKey="contacts.whatsapp.title" value="WhatsApp" /></h3>
             <p className="mt-2 flex-grow text-[14px] leading-[22px] text-slateBody">
-              Быстрая связь в чате WhatsApp для вопросов и консультаций.
+              <EditableText textKey="contacts.whatsapp.desc" value="Быстрая связь в чате WhatsApp для вопросов и консультаций." />
             </p>
             <span className="mt-6 flex items-center gap-2 text-[16px] font-black text-emerald-600">
               +996 550 786186
@@ -94,10 +96,10 @@ const Contacts = () => {
               </span>
               <div>
                 <h3 className="text-xl font-black text-navy sm:text-2xl">
-                  {ct.reportErrorTitle}
+                  <EditableText textKey="contacts.reportErrorTitle" value={ct.reportErrorTitle} />
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-600 mt-1 font-medium">
-                  {ct.reportErrorSubtitle}
+                  <EditableText textKey="contacts.reportErrorSubtitle" value={ct.reportErrorSubtitle} />
                 </p>
               </div>
             </div>
@@ -110,7 +112,7 @@ const Contacts = () => {
                 className="h-9 w-9 object-contain"
               />
               <span className="text-xs font-bold text-navy">
-                {t.owl.teacherName} примет заявку
+                <EditableText textKey="contacts.owlTag" value={`${t.owl.teacherName} примет заявку`} />
               </span>
             </div>
           </div>
@@ -118,7 +120,7 @@ const Contacts = () => {
           <form onSubmit={handleReportErrorSubmit} className="space-y-4 max-w-4xl">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold text-navy mb-1">{ct.namePlaceholder}</label>
+                <label className="block text-xs font-bold text-navy mb-1"><EditableText textKey="contacts.namePlaceholder" value={ct.namePlaceholder} /></label>
                 <input
                   type="text"
                   required
@@ -129,7 +131,7 @@ const Contacts = () => {
                 />
               </div>
               <div>
-                <label className="block text-xs font-bold text-navy mb-1">{ct.emailPlaceholder}</label>
+                <label className="block text-xs font-bold text-navy mb-1"><EditableText textKey="contacts.emailPlaceholder" value={ct.emailPlaceholder} /></label>
                 <input
                   type="text"
                   required
@@ -142,7 +144,7 @@ const Contacts = () => {
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-navy mb-1">Описание ошибки / замечания</label>
+              <label className="block text-xs font-bold text-navy mb-1"><EditableText textKey="contacts.messageLabel" value="Описание ошибки / замечания" /></label>
               <textarea
                 required
                 rows={4}
@@ -158,14 +160,14 @@ const Contacts = () => {
                 type="submit"
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-6 py-3.5 text-sm font-black text-white shadow-lg shadow-red-600/30 transition-all hover:bg-red-700 active:scale-[0.99]"
               >
-                <span>{ct.sendBtn}</span>
+                <EditableText textKey="contacts.sendBtn" value={ct.sendBtn} />
                 <Send className="h-4 w-4" />
               </button>
 
               {submitted && (
                 <div className="flex items-center gap-2 rounded-xl bg-emerald-100 px-4 py-3 text-xs font-bold text-emerald-800 border border-emerald-300">
                   <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0" />
-                  <span>{ct.successMessage}</span>
+                  <EditableText textKey="contacts.successMsg" value={ct.successMessage} />
                 </div>
               )}
             </div>
@@ -175,8 +177,8 @@ const Contacts = () => {
         {/* Раздел поддержки */}
         <div className="mt-8 flex flex-col items-center justify-between gap-6 rounded-3xl bg-navy p-8 md:flex-row md:p-12 shadow-xl">
           <div className="text-center md:text-left">
-            <h4 className="text-[24px] font-black text-white">{c.support.title}</h4>
-            <p className="mt-2 text-[15px] text-slate-300 font-medium">{c.support.description}</p>
+            <h4 className="text-[24px] font-black text-white"><EditableText textKey="contacts.support.title" value={c.support.title} /></h4>
+            <p className="mt-2 text-[15px] text-slate-300 font-medium"><EditableText textKey="contacts.support.desc" value={c.support.description} /></p>
           </div>
           <a
             href="https://t.me/mediamap_kg"
@@ -185,7 +187,7 @@ const Contacts = () => {
             className="flex items-center gap-2 rounded-xl bg-red-600 px-8 py-4 text-[15px] font-black text-white transition-all hover:bg-red-700 shadow-md"
           >
             <MessageCircle className="h-5 w-5" />
-            {c.support.button}
+            <EditableText textKey="contacts.support.btn" value={c.support.button} />
           </a>
         </div>
       </PageSection>

@@ -3,6 +3,8 @@ import { PageHero, PageSection } from '../components/UI/DesignKit';
 import { useLanguage } from '../i18n/LanguageContext';
 import aboutContent from '../i18n/pages/about';
 
+import EditableText from '../components/CMS/EditableText';
+
 const linkClass = 'font-semibold text-goldDeep hover:underline';
 
 const About = () => {
@@ -24,13 +26,13 @@ const About = () => {
           </div>
 
           <div className="space-y-4 text-[16px] leading-[26px] text-slateBody">
-            <p>{c.paragraph1}</p>
+            <p><EditableText textKey="about.p1" value={c.paragraph1} /></p>
             <p>
-              {c.paragraph2.beforeLeaflet}{' '}
+              <EditableText textKey="about.p2_before" value={c.paragraph2.beforeLeaflet} />{' '}
               <a href="https://leafletjs.com/" target="_blank" rel="noreferrer" className={linkClass}>
                 Leaflet
               </a>{' '}
-              {c.paragraph2.betweenLeafletAndOsm}{' '}
+              <EditableText textKey="about.p2_between" value={c.paragraph2.betweenLeafletAndOsm} />{' '}
               <a
                 href="https://www.openstreetmap.org/copyright"
                 target="_blank"
@@ -39,29 +41,29 @@ const About = () => {
               >
                 OpenStreetMap
               </a>{' '}
-              {c.paragraph2.afterOsm}
+              <EditableText textKey="about.p2_after" value={c.paragraph2.afterOsm} />
             </p>
-            <p>{c.paragraph3}</p>
-            <p>{c.paragraph4}</p>
+            <p><EditableText textKey="about.p3" value={c.paragraph3} /></p>
+            <p><EditableText textKey="about.p4" value={c.paragraph4} /></p>
             <p>
-              {c.paragraph5.beforeCaravan}{' '}
+              <EditableText textKey="about.p5_before" value={c.paragraph5.beforeCaravan} />{' '}
               <a
                 href="https://internews.kg/ru/proekt-caravan/"
                 target="_blank"
                 rel="noreferrer"
                 className={linkClass}
               >
-                {c.paragraph5.caravanTitle}
+                <EditableText textKey="about.p5_caravan" value={c.paragraph5.caravanTitle} />
               </a>{' '}
-              {c.paragraph5.betweenCaravanAndInternews}{' '}
+              <EditableText textKey="about.p5_between1" value={c.paragraph5.betweenCaravanAndInternews} />{' '}
               <a href="https://internews.kg/" target="_blank" rel="noreferrer" className={linkClass}>
                 Internews
               </a>{' '}
-              {c.paragraph5.betweenInternewsAndMediaConsult}{' '}
+              <EditableText textKey="about.p5_between2" value={c.paragraph5.betweenInternewsAndMediaConsult} />{' '}
               <a href="https://mediaconsult.kg" target="_blank" rel="noreferrer" className={linkClass}>
                 Фонд «МедиаКонсалт»
               </a>{' '}
-              {c.paragraph5.betweenMediaConsultAndCheckIt}{' '}
+              <EditableText textKey="about.p5_between3" value={c.paragraph5.betweenMediaConsultAndCheckIt} />{' '}
               <a
                 href="https://www.facebook.com/Checkitkg"
                 target="_blank"
@@ -70,7 +72,7 @@ const About = () => {
               >
                 СheckIt.kg
               </a>
-              {c.paragraph5.afterCheckIt}
+              <EditableText textKey="about.p5_after" value={c.paragraph5.afterCheckIt} />
             </p>
           </div>
         </div>
