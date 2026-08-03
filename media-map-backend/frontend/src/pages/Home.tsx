@@ -334,7 +334,7 @@ const Home = () => {
                       setCheckInputText('');
                       setCheckSubmitted(false);
                     }}
-                    className="group relative flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 via-orange-500 to-red-600 px-4 py-3 text-[13px] font-extrabold text-white shadow-lg shadow-orange-500/25 transition-all hover:scale-[1.03] hover:shadow-xl hover:shadow-orange-500/40 active:scale-[0.98] overflow-hidden"
+                    className="group relative flex items-center justify-center gap-2 rounded-2xl bg-red-600 hover:bg-red-700 px-4 py-3 text-[13px] font-extrabold text-white shadow-md shadow-red-600/25 transition-all hover:scale-[1.03] active:scale-[0.98] cursor-pointer"
                   >
                     <span>Проверить информацию</span>
                   </button>

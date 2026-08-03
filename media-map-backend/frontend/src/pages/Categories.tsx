@@ -119,9 +119,9 @@ const Categories = () => {
                       setActiveCheckCategory(isCheckingThis ? null : cat.id);
                       setCheckText('');
                     }}
-                    className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-2xl bg-gradient-to-r from-amber-500 via-orange-500 to-red-600 text-white font-extrabold text-xs shadow-md shadow-orange-500/20 hover:scale-[1.02] transition-all cursor-pointer"
+                    className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-2xl bg-red-600 hover:bg-red-700 text-white font-extrabold text-xs shadow-md shadow-red-600/25 hover:scale-[1.02] transition-all cursor-pointer"
                   >
-                    <span>Проверить информацию в этой категории</span>
+                    <span>Проверить информацию</span>
                   </button>
 
                   {/* Выдвигающееся Окно проверки */}

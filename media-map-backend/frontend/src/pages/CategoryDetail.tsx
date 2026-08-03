@@ -120,9 +120,9 @@ const CategoryDetail: React.FC = () => {
             />
             <button
               onClick={() => handleRunAiCheck(checkInput)}
-              className="px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 via-orange-500 to-red-600 text-white font-extrabold text-xs shadow-md hover:scale-[1.02] transition-all cursor-pointer"
+              className="px-6 py-3 rounded-xl bg-red-600 hover:bg-red-700 text-white font-extrabold text-xs shadow-md shadow-red-600/30 hover:scale-[1.02] transition-all cursor-pointer"
             >
-              Проверить информацию по законам КР
+              Проверить информацию
             </button>
           </div>
         </div>
