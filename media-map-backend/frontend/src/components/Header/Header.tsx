@@ -4,7 +4,7 @@ import { useAppSelector } from "../../app/hooks/useAppSelector";
 import { useAppDispatch } from "../../app/hooks/useAppDispatch";
 import { selectUser } from "../../features/users/usersSlice";
 import { logout } from "../../features/users/usersThunks";
-import { LogOut, LayoutDashboard, Menu, X, Search } from "lucide-react";
+import { LogOut, LayoutDashboard, Menu, X, Search, Edit3 } from "lucide-react";
 import MobileSideBar from "../Sidebar/MobileSideBar";
 import { useLanguage } from "../../i18n/LanguageContext";
 import LanguageSwitcher from "../../i18n/LanguageSwitcher";
@@ -82,6 +82,17 @@ const Header = () => {
 
             {user && (
               <div className="hidden items-center gap-2 md:flex">
+                {user.role === 'admin' && (
+                  <Link
+                    to="/admin/texts"
+                    className="flex items-center gap-1.5 rounded-xl bg-red-50 text-red-600 border border-red-200 px-3 py-2 text-xs font-extrabold transition-all hover:bg-red-600 hover:text-white shadow-xs"
+                    title="Визуальное редактирование текстов сайта"
+                  >
+                    <Edit3 className="h-4 w-4" />
+                    <span>Редактор сайта</span>
+                  </Link>
+                )}
+
                 <Link
                   to="/admin/main"
                   className="flex items-center gap-2 rounded-xl bg-navy px-4 py-2 text-xs font-bold text-white transition-all hover:bg-navyCard shadow-xs"

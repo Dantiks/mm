@@ -20,6 +20,7 @@ import SiteSearchModal from '../components/Search/SiteSearchModal';
 
 import NewsAggregatorCarousel, { NewsItem } from '../components/News/NewsAggregatorCarousel';
 import NewsDetailModal, { DetailedNewsItem } from '../components/News/NewsDetailModal';
+import EditableText from '../components/CMS/EditableText';
 
 // Совята для каждой категории: поза подобрана по смыслу
 const categoryOwls = [
@@ -239,12 +240,18 @@ const Home = () => {
 
             {/* LEFT: Заголовок + Следите за нами */}
             <div className="flex flex-col justify-center">
-              <h1 className="text-[28px] font-black leading-tight text-navy sm:text-[34px] lg:text-[38px]">
-                {t.home.heroTitle}
-              </h1>
-              <p className="mt-2.5 text-[14px] leading-relaxed text-slate-600 max-w-lg">
-                {t.home.heroSubtitle}
-              </p>
+              <EditableText
+                textKey="home.heroTitle"
+                value={t.home.heroTitle}
+                as="h1"
+                className="text-[28px] font-black leading-tight text-navy sm:text-[34px] lg:text-[38px]"
+              />
+              <EditableText
+                textKey="home.heroSubtitle"
+                value={t.home.heroSubtitle}
+                as="p"
+                className="mt-2.5 text-[14px] leading-relaxed text-slate-600 max-w-lg"
+              />
 
 
               {/* Соцсети с фирменными иконками */}
@@ -301,7 +308,12 @@ const Home = () => {
       <section className="bg-white py-6 lg:py-8">
         <div className="mx-auto max-w-[1792px] px-6 lg:px-16">
           <div className="mb-6 flex items-center justify-between">
-            <h2 className="text-[22px] font-extrabold text-navy">{t.home.categoriesTitle}</h2>
+            <EditableText
+              textKey="home.categoriesTitle"
+              value={t.home.categoriesTitle}
+              as="h2"
+              className="text-[22px] font-extrabold text-navy"
+            />
             <Link to="/categories" className="flex items-center gap-1 text-[13px] font-bold text-red-600 hover:underline">
               {t.home.categoriesViewAll} <ArrowRight className="h-3.5 w-3.5" />
             </Link>
@@ -359,10 +371,18 @@ const Home = () => {
         <div className="mx-auto max-w-[1792px] px-6 lg:px-16">
           <div className="flex flex-col gap-8 lg:flex-row lg:justify-between">
             <div className="max-w-[320px] shrink-0">
-              <h2 className="text-[26px] font-extrabold text-navy">{t.home.resourcesTitle}</h2>
-              <p className="mt-2 text-[14px] leading-relaxed text-slateBody">
-                {t.home.resourcesSubtitle}
-              </p>
+              <EditableText
+                textKey="home.resourcesTitle"
+                value={t.home.resourcesTitle}
+                as="h2"
+                className="text-[26px] font-extrabold text-navy"
+              />
+              <EditableText
+                textKey="home.resourcesSubtitle"
+                value={t.home.resourcesSubtitle}
+                as="p"
+                className="mt-2 text-[14px] leading-relaxed text-slateBody"
+              />
               <Link
                 to="/useful"
                 className="mt-4 inline-flex items-center gap-1.5 rounded-xl bg-navy px-4 py-2.5 text-xs font-bold text-white transition-all hover:bg-navyCard shadow-xs"
@@ -409,7 +429,12 @@ const Home = () => {
       <section className="mx-auto max-w-[1792px] px-6 py-12 lg:px-16">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h2 className="text-[26px] font-extrabold text-navy">{t.home.newsTitle}</h2>
+            <EditableText
+              textKey="home.newsTitle"
+              value={t.home.newsTitle}
+              as="h2"
+              className="text-[26px] font-extrabold text-navy"
+            />
             <p className="text-xs text-slate-500 mt-1">Реальные публикации и исследования в Кыргызстане</p>
           </div>
           <Link to="/useful" className="text-[13px] font-bold text-red-600 hover:underline flex items-center gap-1">
