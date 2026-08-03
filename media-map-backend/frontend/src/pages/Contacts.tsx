@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Phone, Send, MessageCircle, ArrowRight, AlertTriangle, CheckCircle2 } from 'lucide-react';
+import { Mail, Send, MessageCircle, ArrowRight, AlertTriangle, CheckCircle2 } from 'lucide-react';
 import { PageHero, PageSection, IconPill } from '../components/UI/DesignKit';
 import { useLanguage } from '../i18n/LanguageContext';
 import contactsContent from '../i18n/pages/contacts';
@@ -65,16 +65,24 @@ const Contacts = () => {
             </span>
           </div>
 
-          <div className="group flex flex-col rounded-2xl border-2 border-lineLight bg-white p-8 transition-all hover:border-red-500/40 hover:shadow-lg">
-            <IconPill className="!h-14 !w-14 bg-red-50 text-red-600 border border-red-100">
-              <Phone className="h-6 w-6 text-red-600" />
+          <a
+            href="https://wa.me/996550786186"
+            target="_blank"
+            rel="noreferrer"
+            className="group flex flex-col rounded-2xl border-2 border-lineLight bg-white p-8 transition-all hover:border-emerald-500/40 hover:shadow-lg"
+          >
+            <IconPill className="!h-14 !w-14 bg-emerald-50 text-emerald-600 border border-emerald-100">
+              <MessageCircle className="h-6 w-6 text-emerald-600" />
             </IconPill>
-            <h3 className="mt-6 text-[20px] font-black text-navy">{c.phone.title}</h3>
+            <h3 className="mt-6 text-[20px] font-black text-navy">WhatsApp</h3>
             <p className="mt-2 flex-grow text-[14px] leading-[22px] text-slateBody">
-              {c.phone.description}
+              Быстрая связь в чате WhatsApp для вопросов и консультаций.
             </p>
-            <span className="mt-6 text-[18px] font-black text-red-600">+996 550 786186</span>
-          </div>
+            <span className="mt-6 flex items-center gap-2 text-[16px] font-black text-emerald-600">
+              +996 550 786186
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </span>
+          </a>
         </div>
 
         {/* Блок «Если вы встретили ошибку — напишите нам» с маскотом */}

@@ -159,21 +159,20 @@ const AiAssistantWidget: React.FC = () => {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="group flex items-center gap-3 px-5 py-3.5 rounded-full bg-gradient-to-r from-navy via-indigo-900 to-slate-900 text-white shadow-2xl hover:shadow-indigo-500/20 hover:scale-105 transition-all duration-300 border border-white/20"
+          className="group flex items-center gap-3.5 px-5 py-3 rounded-full bg-gradient-to-r from-red-600 via-orange-500 via-amber-500 to-indigo-700 text-white shadow-2xl hover:shadow-orange-500/30 hover:scale-105 transition-all duration-300 border border-white/30"
         >
-          <div className="relative">
-            <Bot className="w-6 h-6 text-gold transition-transform group-hover:rotate-12" />
-            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-slate-900 animate-ping" />
-            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-slate-900" />
+          <div className="relative h-8 w-8 shrink-0">
+            <img
+              src="/owl-mascot.png"
+              alt="Совёнок MediaMap"
+              className="h-full w-full object-contain drop-shadow-md group-hover:scale-110 transition-transform"
+            />
+            <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-400 rounded-full border-2 border-red-600 animate-ping" />
+            <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-400 rounded-full border-2 border-red-600" />
           </div>
           <div className="text-left">
-            <div className="flex items-center gap-1.5">
-              <span className="text-sm font-extrabold tracking-tight">ИИ-Помощник</span>
-              <span className="px-1.5 py-0.2 rounded text-[9px] font-black uppercase bg-gold/20 text-gold border border-gold/30">
-                GPT-4o mini
-              </span>
-            </div>
-            <p className="text-[10px] text-slate-300 font-medium">Консультации и проверка</p>
+            <span className="text-sm font-black tracking-tight block drop-shadow-xs">Совёнок MediaMap</span>
+            <p className="text-[10px] text-amber-100 font-bold opacity-90">Консультации и проверка</p>
           </div>
         </button>
       )}
@@ -182,19 +181,14 @@ const AiAssistantWidget: React.FC = () => {
       {isOpen && (
         <div className="w-[90vw] sm:w-[420px] h-[580px] max-h-[85vh] bg-white rounded-3xl shadow-2xl border border-slate-200 flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-300">
           {/* Header */}
-          <div className="p-4 bg-gradient-to-r from-navy via-indigo-950 to-slate-900 text-white flex items-center justify-between shadow-md">
+          <div className="p-4 bg-gradient-to-r from-red-600 via-orange-500 via-amber-500 to-indigo-700 text-white flex items-center justify-between shadow-md">
             <div className="flex items-center gap-3">
-              <div className="p-2.5 bg-white/10 rounded-2xl border border-white/10 backdrop-blur-md">
-                <Sparkles className="w-5 h-5 text-gold" />
+              <div className="p-1.5 bg-white/20 rounded-2xl border border-white/30 backdrop-blur-md h-10 w-10 flex items-center justify-center">
+                <img src="/owl-mascot.png" alt="Совёнок MediaMap" className="h-8 w-8 object-contain drop-shadow-xs" />
               </div>
               <div>
-                <div className="flex items-center gap-2">
-                  <h3 className="font-bold text-sm tracking-tight">MediaMap AI</h3>
-                  <span className="px-1.5 py-0.5 rounded text-[9px] font-black uppercase bg-white/20 text-gold border border-gold/40">
-                    GPT-4o mini
-                  </span>
-                </div>
-                <p className="text-[11px] text-slate-300">Эксперт по медиа-правам и фактчекингу</p>
+                <h3 className="font-black text-sm tracking-tight drop-shadow-xs">Совёнок MediaMap</h3>
+                <p className="text-[11px] text-amber-100 font-semibold opacity-90">Эксперт по медиа-правам и фактчекингу</p>
               </div>
             </div>
 

@@ -15,7 +15,7 @@ import AiAnalysisModal from '../components/AI/AiAnalysisModal';
 import axiosApi from '../axiosApi';
 import { DEFAULT_OPENAI_KEY } from '../utils/constants';
 
-import { TelegramIcon, InstagramIcon, FacebookIcon, YoutubeIcon } from '../components/Common/SocialIcons';
+
 import SiteSearchModal from '../components/Search/SiteSearchModal';
 
 import NewsAggregatorCarousel, { NewsItem } from '../components/News/NewsAggregatorCarousel';
@@ -37,13 +37,6 @@ const resourceIcons = [
   <FileText className="h-4 w-4" key="file" />,
   <Wrench className="h-4 w-4" key="wrench" />,
   <Sparkles className="h-4 w-4" key="sparkles" />,
-];
-
-const socials = [
-  { label: 'Telegram', href: 'https://t.me/mediamap_kg', color: 'bg-[#229ED9]', icon: <TelegramIcon className="h-4 w-4" /> },
-  { label: 'Instagram', href: 'https://instagram.com/mediamap_kg', color: 'bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400', icon: <InstagramIcon className="h-4 w-4" /> },
-  { label: 'Facebook', href: 'https://facebook.com/mediamapkg', color: 'bg-[#1877F2]', icon: <FacebookIcon className="h-4 w-4" /> },
-  { label: 'YouTube', href: 'https://youtube.com/@mediamapkg', color: 'bg-[#FF0000]', icon: <YoutubeIcon className="h-4 w-4" /> },
 ];
 
 const tagStyles: Record<string, string> = {
@@ -266,25 +259,7 @@ const Home = () => {
               />
 
 
-              {/* Соцсети с фирменными иконками */}
-              <div className="mt-5 flex items-center gap-3">
-                <span className="text-[12px] font-bold text-navy">Следите за нами</span>
-                <div className="flex items-center gap-2">
-                  {socials.map((s) => (
-                    <a
-                      key={s.label}
-                      href={s.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label={s.label}
-                      title={s.label}
-                      className={`flex h-8 w-8 items-center justify-center rounded-full text-white shadow-md transition-all hover:scale-110 active:scale-95 ${s.color}`}
-                    >
-                      {s.icon}
-                    </a>
-                  ))}
-                </div>
-              </div>
+
             </div>
 
             {/* RIGHT: Горизонтальный Компактный Агрегатор Новостей */}

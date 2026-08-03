@@ -21,6 +21,7 @@ const Header = () => {
     { label: t.nav.home, to: '/' },
     { label: t.nav.about, to: '/about' },
     { label: t.nav.categories, to: '/categories' },
+    { label: 'Аналитика', to: '/analytics' },
     { label: t.nav.resources, to: '/useful' },
     { label: t.nav.news, to: '/news' },
     { label: t.nav.contacts, to: '/contacts' },

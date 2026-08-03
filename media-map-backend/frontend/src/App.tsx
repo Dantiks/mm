@@ -23,6 +23,8 @@ import AdminRouteGuard from "./components/Guards/AdminRouteGuard";
 import { ThemeProvider } from "./context/ThemeContext";
 import SiteTextsManagement from "./pages/AdminPanel/SiteTextsManagement";
 
+import Analytics from "./pages/Analytics";
+
 function App() {
     return (
         <ThemeProvider>
@@ -33,6 +35,7 @@ function App() {
                         <Route path="/sign-up" element={<Auth/>}/>
                         <Route path="/categories" element={<Categories/>}/>
                         <Route path="/categories/:categoryId" element={<CategoryDetail/>}/>
+                        <Route path="/analytics" element={<Analytics/>}/>
                         <Route path="/new-report" element={<NewReport/>}/>
                         <Route path="/about" element={<About/>}/>
                         <Route path="/terms" element={<Terms/>}/>
