@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Save, RefreshCw, Plus, FileText, CheckCircle2, Globe, Search } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Save, RefreshCw, Plus, FileText, CheckCircle2, Globe, Search, Sparkles } from 'lucide-react';
 import axiosApi from '../../axiosApi';
 
 interface TextItem {
@@ -20,6 +21,7 @@ const CATEGORIES = [
 ];
 
 const SiteTextsManagement: React.FC = () => {
+  const navigate = useNavigate();
   const [texts, setTexts] = useState<TextItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [saving, setSaving] = useState<boolean>(false);
@@ -33,6 +35,11 @@ const SiteTextsManagement: React.FC = () => {
   const [newValKy, setNewValKy] = useState('');
   const [newCategory, setNewCategory] = useState('home');
   const [showAddModal, setShowAddModal] = useState(false);
+
+  const handleStartLiveEdit = () => {
+    localStorage.setItem('adminEditorMode', 'true');
+    navigate('/');
+  };
 
   const fetchTexts = async () => {
     setLoading(true);
@@ -164,6 +171,28 @@ const SiteTextsManagement: React.FC = () => {
             {saveSuccess ? 'Сохранено!' : 'Сохранить все'}
           </button>
         </div>
+      </div>
+
+      {/* Live Visual Editor Banner */}
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-5 rounded-2xl bg-gradient-to-r from-navy via-slate-900 to-navy text-white shadow-lg">
+        <div className="flex items-center gap-3">
+          <div className="p-2.5 rounded-xl bg-red-600/30 text-amber-300 border border-red-500/30">
+            <Sparkles className="w-6 h-6 animate-pulse" />
+          </div>
+          <div>
+            <h3 className="font-extrabold text-base">Интерактивный живой редактор (In-Context CMS)</h3>
+            <p className="text-xs text-slate-300">
+              Вы можете перейти на страницы сайта и кликать по текстам для их визуального редактирования в реальном времени.
+            </p>
+          </div>
+        </div>
+        <button
+          onClick={handleStartLiveEdit}
+          className="shrink-0 px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-black shadow-md shadow-red-500/30 transition-all cursor-pointer flex items-center gap-2"
+        >
+          <Sparkles className="w-4 h-4 text-amber-300" />
+          <span>Перейти к визуальному редактированию</span>
+        </button>
       </div>
 
       {/* Filter Tabs & Search Bar */}

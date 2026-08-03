@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard,
   CheckCircle2,
@@ -9,6 +9,7 @@ import {
   ChevronRight,
   Newspaper,
   FileText,
+  Sparkles,
 } from "lucide-react";
 
 interface Props {
@@ -21,18 +22,26 @@ const navItems = [
   { to: "/admin/approved", label: "Опубликованные", icon: CheckCircle2 },
   { to: "/admin/violation-types", label: "Виды нарушений", icon: AlertOctagon },
   { to: "/admin/news", label: "Новости", icon: Newspaper },
-  { to: "/admin/texts", label: "Тексты сайта", icon: FileText },
+  { to: "/admin/texts", label: "Тексты сайта (CMS)", icon: FileText },
   { to: "/admin/users", label: "Пользователи", icon: Users },
 ];
 
 const AdminPanelSidebar: React.FC<Props> = ({ sidebarOpen, setSidebarOpen }) => {
+  const navigate = useNavigate();
+
+  const handleStartLiveEdit = () => {
+    localStorage.setItem('adminEditorMode', 'true');
+    setSidebarOpen(false);
+    navigate('/');
+  };
+
   return (
       <aside
           className={`fixed inset-y-0 left-0 z-40 w-72 bg-white border-r border-slate-100 p-6 transform 
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} 
         transition-all duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 shadow-sm`}
       >
-        <div className="flex items-center gap-3 px-2 mb-10">
+        <div className="flex items-center gap-3 px-2 mb-8">
           <div className="bg-navy p-2 rounded-xl shadow-lg">
             <LayoutDashboard className="text-white w-6 h-6" />
           </div>
@@ -42,9 +51,20 @@ const AdminPanelSidebar: React.FC<Props> = ({ sidebarOpen, setSidebarOpen }) => 
         </div>
 
         <nav className="space-y-2">
-          <p className="px-4 text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-4">
+          <p className="px-4 text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">
             Меню управления
           </p>
+
+          <button
+            onClick={handleStartLiveEdit}
+            className="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-gradient-to-r from-red-600 to-rose-600 text-white shadow-md shadow-red-500/20 hover:opacity-95 transition-all cursor-pointer group mb-4"
+          >
+            <div className="flex items-center gap-3">
+              <Sparkles className="w-5 h-5 text-amber-300 group-hover:rotate-12 transition-transform" />
+              <span className="font-black text-[14px]">Редактор сайта live</span>
+            </div>
+            <ChevronRight className="w-4 h-4 opacity-80" />
+          </button>
 
           {navItems.map((item) => (
               <NavLink

@@ -14,18 +14,20 @@ export const FloatingEditorBar: React.FC = () => {
     hasUnsavedChanges,
   } = useEditorMode();
 
-  // Check if current user is logged in as admin
+  // Check if current user is logged in as admin or enabled editor mode
   const userJson = localStorage.getItem('user');
+  const token = localStorage.getItem('token');
+  const adminEditorMode = localStorage.getItem('adminEditorMode');
   let isAdmin = false;
   try {
     const user = userJson ? JSON.parse(userJson) : null;
-    isAdmin = user?.role === 'admin';
+    isAdmin = user?.role === 'admin' || Boolean(token) || adminEditorMode === 'true';
   } catch (e) {
-    isAdmin = false;
+    isAdmin = Boolean(token) || adminEditorMode === 'true';
   }
 
-  // Only show for admin users
-  if (!isAdmin) return null;
+  // Only show for admin users or when admin editor mode is active
+  if (!isAdmin && !isEditorMode) return null;
 
   const count = Object.keys(pendingChanges).length;
 

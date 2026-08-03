@@ -1,6 +1,6 @@
 import React from 'react';
-import { useLocation } from "react-router-dom";
-import { Menu, Bell, Search, ChevronRight } from "lucide-react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Menu, Bell, Search, ChevronRight, Sparkles } from "lucide-react";
 
 interface Props {
     setSidebarOpen: (state: boolean) => void;
@@ -8,6 +8,12 @@ interface Props {
 
 const AdminPanelHeader: React.FC<Props> = ({ setSidebarOpen }) => {
     const location = useLocation();
+    const navigate = useNavigate();
+
+    const handleEnableLiveEdit = () => {
+        localStorage.setItem('adminEditorMode', 'true');
+        navigate('/');
+    };
 
     const getTitle = () => {
         switch (location.pathname) {
@@ -15,6 +21,7 @@ const AdminPanelHeader: React.FC<Props> = ({ setSidebarOpen }) => {
             case '/admin/approved': return 'Опубликованные';
             case '/admin/violation-types': return 'Виды нарушений';
             case '/admin/users': return 'Пользователи';
+            case '/admin/texts': return 'Тексты сайта (CMS)';
             default: return 'Панель управления';
         }
     };
@@ -43,8 +50,18 @@ const AdminPanelHeader: React.FC<Props> = ({ setSidebarOpen }) => {
                 </div>
             </div>
 
-            {/* Правая часть: Поиск и Уведомления (для солидности) */}
+            {/* Правая часть: Поиск, Живое редактирование и Профиль */}
             <div className="flex items-center gap-3">
+                <button
+                    onClick={handleEnableLiveEdit}
+                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-black shadow-md shadow-red-500/20 transition-all cursor-pointer group"
+                    title="Зайти на сайт и редактировать любые тексты прямо на экране"
+                >
+                    <Sparkles className="w-4 h-4 text-amber-300 group-hover:rotate-12 transition-transform" />
+                    <span className="hidden sm:inline">Редактировать сайт визуально</span>
+                    <span className="sm:hidden">Редактор</span>
+                </button>
+
                 <button className="hidden md:flex p-2.5 rounded-xl text-slate-400 hover:bg-slate-50 hover:text-slate-600 transition-all">
                     <Search className="w-5 h-5" />
                 </button>
