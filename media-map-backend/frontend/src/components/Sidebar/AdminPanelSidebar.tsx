@@ -7,7 +7,8 @@ import {
   Users,
   LogOut,
   ChevronRight,
-  Newspaper
+  Newspaper,
+  FileText,
 } from "lucide-react";
 
 interface Props {
@@ -20,6 +21,7 @@ const navItems = [
   { to: "/admin/approved", label: "Опубликованные", icon: CheckCircle2 },
   { to: "/admin/violation-types", label: "Виды нарушений", icon: AlertOctagon },
   { to: "/admin/news", label: "Новости", icon: Newspaper },
+  { to: "/admin/texts", label: "Тексты сайта", icon: FileText },
   { to: "/admin/users", label: "Пользователи", icon: Users },
 ];
 

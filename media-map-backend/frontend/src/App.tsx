@@ -21,6 +21,7 @@ import Violations from "./pages/AdminPanel/Violations";
 import Users from "./pages/AdminPanel/Users";
 import AdminRouteGuard from "./components/Guards/AdminRouteGuard";
 import { ThemeProvider } from "./context/ThemeContext";
+import SiteTextsManagement from "./pages/AdminPanel/SiteTextsManagement";
 
 function App() {
     return (
@@ -49,6 +50,7 @@ function App() {
                             <Route path="/admin/violation-types" element={<Violations/>}/>
                             <Route path="/admin/users" element={<Users/>}/>
                             <Route path="/admin/news" element={<NewsManagement/>}/>
+                            <Route path="/admin/texts" element={<SiteTextsManagement/>}/>
                         </Route>
                     </Route>
                 </Routes>

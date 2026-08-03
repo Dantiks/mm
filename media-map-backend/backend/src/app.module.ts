@@ -16,6 +16,8 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { NewsModule } from './routes/news/news.module';
 import { News } from './models/news.models';
 import { AiModule } from './ai/ai.module';
+import { SiteText } from './models/site-texts.models';
+import { SiteTextsModule } from './routes/site-texts/site-texts.module';
 
 @Module({
   controllers: [],
@@ -48,7 +50,7 @@ import { AiModule } from './ai/ai.module';
       database: process.env.DB_NAME,
       storage:
         process.env.DB_DIALECT === 'postgres' ? undefined : './database.sqlite',
-      models: [User, Marker, ViolationType, News],
+      models: [User, Marker, ViolationType, News, SiteText],
       autoLoadModels: true,
       synchronize: true,
     }),
@@ -61,6 +63,7 @@ import { AiModule } from './ai/ai.module';
     ScheduleModule.forRoot(),
     NewsModule,
     AiModule,
+    SiteTextsModule,
   ],
 })
 export class AppModule {}
