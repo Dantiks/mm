@@ -4,6 +4,8 @@ import { useLanguage } from '../../i18n/LanguageContext';
 import footerContent from '../../i18n/pages/footer';
 import { TelegramIcon, InstagramIcon, FacebookIcon, YoutubeIcon } from '../Common/SocialIcons';
 
+import EditableText from '../CMS/EditableText';
+
 const socials = [
   { label: 'Telegram', href: 'https://t.me/mediamap_kg', icon: <TelegramIcon className="h-4 w-4" /> },
   { label: 'Instagram', href: 'https://instagram.com/mediamap_kg', icon: <InstagramIcon className="h-4 w-4" /> },
@@ -16,10 +18,10 @@ const Footer = () => {
   const c = footerContent[language];
 
   const navLinks = [
-    { label: c.navLinks.about, to: '/about' },
-    { label: c.navLinks.resources, to: '/useful' },
-    { label: c.navLinks.categories, to: '/categories' },
-    { label: c.navLinks.contacts, to: '/contacts' },
+    { key: 'footer.about', label: c.navLinks.about, to: '/about' },
+    { key: 'footer.resources', label: c.navLinks.resources, to: '/useful' },
+    { key: 'footer.categories', label: c.navLinks.categories, to: '/categories' },
+    { key: 'footer.contacts', label: c.navLinks.contacts, to: '/contacts' },
   ];
 
   return (
@@ -33,7 +35,7 @@ const Footer = () => {
                 to={link.to}
                 className="text-[14px] text-[#c7cdd6] transition-colors hover:text-white"
               >
-                {link.label}
+                <EditableText textKey={link.key} value={link.label} />
               </Link>
             ))}
           </nav>
@@ -57,7 +59,7 @@ const Footer = () => {
 
         <div className="flex flex-col gap-4 py-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-[12px] text-[#8590a0]">
-            {c.copyright}
+            <EditableText textKey="footer.copyright" value={c.copyright} />
           </p>
           <div className="flex flex-wrap items-center gap-3">
             <a

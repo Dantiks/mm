@@ -10,6 +10,8 @@ import { useLanguage } from "../../i18n/LanguageContext";
 import LanguageSwitcher from "../../i18n/LanguageSwitcher";
 import SiteSearchModal from "../Search/SiteSearchModal";
 
+import EditableText from "../CMS/EditableText";
+
 const Header = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
@@ -18,13 +20,13 @@ const Header = () => {
   const { t } = useLanguage();
 
   const navItems = [
-    { label: t.nav.home, to: '/' },
-    { label: t.nav.about, to: '/about' },
-    { label: t.nav.categories, to: '/categories' },
-    { label: 'Аналитика', to: '/analytics' },
-    { label: t.nav.resources, to: '/useful' },
-    { label: t.nav.news, to: '/news' },
-    { label: t.nav.contacts, to: '/contacts' },
+    { key: 'nav.home', label: t.nav.home, to: '/' },
+    { key: 'nav.about', label: t.nav.about, to: '/about' },
+    { key: 'nav.categories', label: t.nav.categories, to: '/categories' },
+    { key: 'nav.analytics', label: 'Аналитика', to: '/analytics' },
+    { key: 'nav.resources', label: t.nav.resources, to: '/useful' },
+    { key: 'nav.news', label: t.nav.news, to: '/news' },
+    { key: 'nav.contacts', label: t.nav.contacts, to: '/contacts' },
   ];
 
   const toggleMenu = () => setIsOpen(!isOpen);
@@ -62,7 +64,7 @@ const Header = () => {
                   }`
                 }
               >
-                {item.label}
+                <EditableText textKey={item.key} value={item.label} />
               </NavLink>
             ))}
           </nav>

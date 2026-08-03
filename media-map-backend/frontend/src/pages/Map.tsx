@@ -5,6 +5,7 @@ import { PageHero } from '../components/UI/DesignKit';
 import { ExternalLink, MapPin, Calendar, Search, X, Maximize2 } from 'lucide-react';
 import realMarkersData from '../data/realMarkers.json';
 import realCategoriesData from '../data/realCategories.json';
+import EditableText from '../components/CMS/EditableText';
 
 // Fix Leaflet marker icons in Webpack/Vite
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -278,7 +279,7 @@ const MapPage: React.FC = () => {
                             rel="noreferrer"
                             className="mt-2 flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-bold transition-all shadow-2xs"
                           >
-                            <span>Перейти к первоисточнику</span>
+                            <EditableText textKey="map.btnSource" value="Перейти к первоисточнику" />
                             <ExternalLink className="h-3.5 w-3.5" />
                           </a>
                         )}
@@ -365,7 +366,7 @@ const MapPage: React.FC = () => {
                 rel="noreferrer"
                 className="inline-flex items-center justify-center gap-2 py-3 px-6 rounded-2xl bg-red-600 hover:bg-red-700 text-white text-sm font-bold transition-all shadow-md"
               >
-                <span>Перейти к первоисточнику</span>
+                <EditableText textKey="map.btnSourceModal" value="Перейти к первоисточнику" />
                 <ExternalLink className="h-4 w-4" />
               </a>
             )}

@@ -336,14 +336,14 @@ const Home = () => {
                     }}
                     className="group relative flex items-center justify-center gap-2 rounded-2xl bg-red-600 hover:bg-red-700 px-4 py-3 text-[13px] font-extrabold text-white shadow-md shadow-red-600/25 transition-all hover:scale-[1.03] active:scale-[0.98] cursor-pointer"
                   >
-                    <span>Проверить информацию</span>
+                    <EditableText textKey={`home.cat.${c.slug}.btnCheck`} value="Проверить информацию" />
                   </button>
 
                   <Link
                     to={`/categories/${c.slug}`}
                     className="flex items-center justify-center gap-1 text-[12px] font-bold text-slate-500 hover:text-red-600 transition-colors pt-1 border-t border-slate-100"
                   >
-                    <span>Законы КР и нормативно-правовая база</span>
+                    <EditableText textKey={`home.cat.${c.slug}.linkLaws`} value="Законы КР и нормативно-правовая база" />
                     <ArrowRight className="h-3.5 w-3.5 text-red-600" />
                   </Link>
                 </div>

@@ -5,6 +5,7 @@ import { USEFUL_RESOURCE_ICONS } from '../utils/usefulData';
 import { ExternalLink, BookOpen } from 'lucide-react';
 import AiAnalysisModal from '../components/AI/AiAnalysisModal';
 import axiosApi from '../axiosApi';
+import EditableText from '../components/CMS/EditableText';
 
 const Useful: React.FC = () => {
   const { language } = useLanguage();
@@ -105,7 +106,7 @@ const Useful: React.FC = () => {
                         }}
                         className="flex items-center gap-1 font-bold text-red-600 hover:text-red-700 transition-colors cursor-pointer"
                       >
-                        Проверить информацию
+                        <EditableText textKey={`useful.${res.id}.btnCheck`} value="Проверить информацию" />
                       </button>
                     </div>
                   </div>

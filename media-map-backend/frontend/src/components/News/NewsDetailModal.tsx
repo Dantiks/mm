@@ -1,5 +1,6 @@
 import React from 'react';
 import { X, ExternalLink, Calendar, Globe } from 'lucide-react';
+import EditableText from '../CMS/EditableText';
 
 export interface DetailedNewsItem {
   id: string | number;
@@ -101,7 +102,7 @@ const NewsDetailModal: React.FC<Props> = ({ news, onClose, onRunAiCheck }) => {
                   }}
                   className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs shadow-md shadow-red-600/30 hover:scale-103 transition-all cursor-pointer"
                 >
-                  Проверить информацию
+                  <EditableText textKey="modal.btnCheck" value="Проверить информацию" />
                 </button>
               )}
             </div>
@@ -113,7 +114,7 @@ const NewsDetailModal: React.FC<Props> = ({ news, onClose, onRunAiCheck }) => {
                 rel="noreferrer"
                 className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-navy text-white text-xs font-bold hover:bg-slate-800 transition-all shadow-md"
               >
-                <span>Читать на первоисточнике</span>
+                <EditableText textKey="modal.btnSource" value="Читать на первоисточнике" />
                 <ExternalLink className="h-4 w-4" />
               </a>
             )}

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { ShieldAlert, X, ArrowRight, BookOpen } from 'lucide-react';
+import EditableText from '../CMS/EditableText';
 
 export const ViolationCategoriesSidebar: React.FC = () => {
   const { t } = useLanguage();
@@ -110,7 +111,7 @@ export const ViolationCategoriesSidebar: React.FC = () => {
                     </p>
                     <div className="mt-3">
                       <span className="inline-flex items-center gap-1 py-1.5 px-3 rounded-xl bg-red-600 hover:bg-red-700 text-white text-[11px] font-extrabold shadow-xs transition-all">
-                        Проверить информацию
+                        <EditableText textKey={`sidebar.cat.${c.id}.btnCheck`} value="Проверить информацию" />
                       </span>
                     </div>
                   </div>
@@ -128,7 +129,7 @@ export const ViolationCategoriesSidebar: React.FC = () => {
             className="flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl bg-navy text-white text-xs font-bold hover:bg-slate-800 transition-all shadow-xs"
           >
             <BookOpen className="h-4 w-4" />
-            <span>Все категории и законы КР</span>
+            <EditableText textKey="sidebar.btnAllCategories" value="Все категории и законы КР" />
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import AiAnalysisModal from '../components/AI/AiAnalysisModal';
 import axiosApi from '../axiosApi';
+import EditableText from '../components/CMS/EditableText';
 
 const categoryData = [
   {
@@ -121,7 +122,7 @@ const Categories = () => {
                     }}
                     className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-2xl bg-red-600 hover:bg-red-700 text-white font-extrabold text-xs shadow-md shadow-red-600/25 hover:scale-[1.02] transition-all cursor-pointer"
                   >
-                    <span>Проверить информацию</span>
+                    <EditableText textKey={`categories.${cat.id}.btnCheck`} value="Проверить информацию" />
                   </button>
 
                   {/* Выдвигающееся Окно проверки */}
@@ -142,7 +143,7 @@ const Categories = () => {
                         className="w-full py-2 px-3 rounded-xl bg-navy text-white text-xs font-bold hover:bg-slate-800 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                       >
                         <Sparkles className="h-3.5 w-3.5 text-amber-400" />
-                        <span>Выполнить экспресс-проверку</span>
+                        <EditableText textKey={`categories.${cat.id}.btnRunCheck`} value="Выполнить экспресс-проверку" />
                       </button>
                     </div>
                   )}
@@ -152,7 +153,7 @@ const Categories = () => {
                     to={`/categories/${cat.slug}`}
                     className="flex items-center justify-between pt-3 border-t border-slate-100 text-xs font-black text-slate-700 hover:text-red-600 transition-colors"
                   >
-                    <span>Законы КР и нормативно-правовая база</span>
+                    <EditableText textKey={`categories.${cat.id}.linkLaws`} value="Законы КР и нормативно-правовая база" />
                     <ArrowRight className="h-4 w-4 text-red-600 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </div>
