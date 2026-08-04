@@ -26,14 +26,6 @@ export const ViolationCategoriesSidebar: React.FC = () => {
     },
     {
       id: 3,
-      slug: 'propaganda',
-      title: 'Пропаганда',
-      desc: 'Однобокое навязывание мнений, деструктивный контент и манипуляции.',
-      owl: '/owl-cross.png',
-      bg: 'bg-purple-50 border-purple-100',
-    },
-    {
-      id: 4,
       slug: 'digital-scams',
       title: 'Цифровое мошенничество',
       desc: 'Фишинг, взлом аккаунтов, дипфейки и финансовые схемы в сети.',
@@ -113,6 +105,11 @@ export const ViolationCategoriesSidebar: React.FC = () => {
                     <p className="mt-1 text-xs leading-relaxed text-slate-600 line-clamp-2">
                       {c.desc}
                     </p>
+                    <div className="mt-3">
+                      <span className="inline-flex items-center gap-1 py-1.5 px-3 rounded-xl bg-red-600 hover:bg-red-700 text-white text-[11px] font-extrabold shadow-xs transition-all">
+                        <EditableText textKey={`sidebar.cat.${c.id}.btnCheck`} value="Проверить информацию" />
+                      </span>
+                    </div>
                   </div>
                 </div>
               </Link>
