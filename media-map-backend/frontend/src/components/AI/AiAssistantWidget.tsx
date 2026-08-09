@@ -24,12 +24,12 @@ const AiAssistantWidget: React.FC = () => {
     {
       id: 'welcome',
       role: 'assistant',
-      content: `Здравствуйте! Я **ИИ-консультант MediaMap**, работающий на базе модели **GPT-4o mini**.
+      content: `Здравствуйте! Я ваш ИИ-ассистент, работающий на базе модели GPT-4o mini.
 
 Чем я могу помочь?
+- Подсказать, как правильно составить и подать заявку на проверку информации
 - Проверить статью или посты на признаки нарушений
-- Разъяснить законодательство КР в сфере медиа
-- Подсказать, как правильно составить и подать заявку`,
+- Разъяснить законодательство КР в сфере медиа`,
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     },
   ]);
@@ -183,12 +183,12 @@ const AiAssistantWidget: React.FC = () => {
           {/* Header */}
           <div className="p-4 bg-gradient-to-r from-red-600 via-orange-500 via-amber-500 to-indigo-700 text-white flex items-center justify-between shadow-md">
             <div className="flex items-center gap-3">
-              <div className="p-1.5 bg-white/20 rounded-2xl border border-white/30 backdrop-blur-md h-10 w-10 flex items-center justify-center">
-                <img src="/owl-mascot.png" alt="Совёнок MediaMap" className="h-8 w-8 object-contain drop-shadow-xs" />
+              <div className="p-1.5 bg-white/20 rounded-2xl border border-white/30 backdrop-blur-md h-14 w-14 flex items-center justify-center">
+                <img src="/owl-mascot.png" alt="Совёнок MediaMap" className="h-12 w-12 object-contain drop-shadow-xs" />
               </div>
               <div>
                 <h3 className="font-black text-sm tracking-tight drop-shadow-xs">Совёнок MediaMap</h3>
-                <p className="text-[11px] text-amber-100 font-semibold opacity-90">Эксперт по медиа-правам и фактчекингу</p>
+                <p className="text-[11px] text-amber-100 font-semibold opacity-90">ИИ ассистент Совенок MediaMap</p>
               </div>
             </div>
 

@@ -390,9 +390,9 @@ const Home = () => {
                 />
                 <div>
                   <h3 className="text-[14px] font-bold text-navy group-hover:text-red-600 transition-colors flex items-center gap-1">
-                    {t.home.oldSiteTitle} <ExternalLink className="h-3 w-3" />
+                    <EditableText textKey="home.oldSiteTitle" value={t.home.oldSiteTitle} /> <ExternalLink className="h-3 w-3" />
                   </h3>
-                  <p className="mt-1 text-[12px] leading-snug text-slateBody">{t.home.oldSiteDesc}</p>
+                  <p className="mt-1 text-[12px] leading-snug text-slateBody"><EditableText textKey="home.oldSiteDesc" value={t.home.oldSiteDesc} /></p>
                 </div>
               </Link>
               
@@ -422,7 +422,7 @@ const Home = () => {
               as="h2"
               className="text-[26px] font-extrabold text-navy"
             />
-            <p className="text-xs text-slate-500 mt-1">Реальные публикации и исследования в Кыргызстане</p>
+            <p className="text-xs text-slate-500 mt-1"><EditableText textKey="home.newsSubtitle" value="Реальные публикации и исследования в Кыргызстане" /></p>
           </div>
           <Link to="/useful" className="text-[13px] font-bold text-red-600 hover:underline flex items-center gap-1">
             {t.home.newsAll}
@@ -458,7 +458,7 @@ const Home = () => {
               <div className="px-4 pb-4 pt-2 flex items-center justify-between border-t border-slate-100 text-[11px] text-slate-400">
                 <span>{n.date}</span>
                 <span className="font-bold text-navy group-hover:text-red-600 flex items-center gap-1">
-                  Подробнее <ArrowRight className="h-3 w-3" />
+                  <EditableText textKey="home.news.readMore" value="Подробнее" /> <ArrowRight className="h-3 w-3" />
                 </span>
               </div>
             </article>
@@ -487,7 +487,7 @@ const Home = () => {
                 <span className="inline-block rounded-full bg-amber-100 px-3 py-0.5 text-[11px] font-bold text-amber-800 mb-1">
                   Категория: {activeCheckCategory.title}
                 </span>
-                <h3 className="text-[20px] font-black text-navy leading-tight">Проверить информацию</h3>
+                <h3 className="text-[20px] font-black text-navy leading-tight"><EditableText textKey="home.checkModal.title" value="Проверить информацию" /></h3>
               </div>
             </div>
 
@@ -519,14 +519,14 @@ const Home = () => {
                     type="submit" 
                     className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-red-600 px-6 py-3.5 text-[14px] font-bold text-white shadow-md transition-all hover:bg-red-700 hover:scale-[1.02]"
                   >
-                    <Sparkles className="h-4 w-4" /> Отправить на проверку
+                    <Sparkles className="h-4 w-4" /> <EditableText textKey="home.checkModal.submitBtn" value="Отправить на проверку" />
                   </button>
                   <button 
                     type="button" 
                     onClick={() => setActiveCheckCategory(null)}
                     className="rounded-xl border border-slate-200 px-5 py-3.5 text-[14px] font-bold text-slate-600 hover:bg-slate-50 transition-colors"
                   >
-                    Отмена
+                    <EditableText textKey="home.checkModal.cancelBtn" value="Отмена" />
                   </button>
                 </div>
               </form>
@@ -535,7 +535,7 @@ const Home = () => {
                 <div className="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 mb-1">
                   <Sparkles className="h-7 w-7" />
                 </div>
-                <h4 className="text-[18px] font-extrabold text-navy">Запрос успешно отправлен!</h4>
+                <h4 className="text-[18px] font-extrabold text-navy"><EditableText textKey="home.checkModal.successTitle" value="Запрос успешно отправлен!" /></h4>
                 <p className="text-[13px] text-slate-600 max-w-md">
                   Спасибо! Материал передан на проверку фактчекерам по категории «{activeCheckCategory.title}».
                 </p>
@@ -544,13 +544,13 @@ const Home = () => {
                     to="/new-report"
                     className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-navy px-4 py-3 text-[13px] font-bold text-white hover:bg-navyCard transition-colors"
                   >
-                    Сообщить о нарушении на карте
+                    <EditableText textKey="home.checkModal.reportBtn" value="Сообщить о нарушении на карте" />
                   </Link>
                   <button 
                     onClick={() => setActiveCheckCategory(null)}
                     className="rounded-xl border border-slate-200 px-5 py-3 text-[13px] font-bold text-slate-600 hover:bg-slate-50 transition-colors"
                   >
-                    Закрыть
+                    <EditableText textKey="home.checkModal.closeBtn" value="Закрыть" />
                   </button>
                 </div>
               </div>

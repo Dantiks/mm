@@ -44,7 +44,7 @@ export const ViolationCategoriesSidebar: React.FC = () => {
       >
         <img src="/owl-think.png" alt="Совёнок" className="h-7 w-7 object-contain drop-shadow-md group-hover:scale-110 transition-transform" />
         <span className="[writing-mode:vertical-lr] rotate-180 text-xs font-black uppercase tracking-wider hidden sm:block">
-          Категории нарушений
+          <EditableText textKey="sidebar.toggleBtn" value="Категории нарушений" />
         </span>
       </button>
 
@@ -67,8 +67,8 @@ export const ViolationCategoriesSidebar: React.FC = () => {
           <div className="flex items-center gap-2.5">
             <img src="/owl-mascot.png" alt="Совёнок" className="h-9 w-9 object-contain drop-shadow-xs" />
             <div>
-              <h3 className="font-extrabold text-navy text-base">Категории нарушений</h3>
-              <p className="text-xs text-slate-500">Правовой навигатор MediaMap</p>
+              <h3 className="font-extrabold text-navy text-base"><EditableText textKey="sidebar.drawer.title" value="Категории нарушений" /></h3>
+              <p className="text-xs text-slate-500"><EditableText textKey="sidebar.drawer.subtitle" value="Правовой навигатор MediaMap" /></p>
             </div>
           </div>
           <button
@@ -100,10 +100,10 @@ export const ViolationCategoriesSidebar: React.FC = () => {
                   </div>
                   <div className="flex-1">
                     <h4 className="text-sm font-bold text-navy hover:text-red-600 transition-colors">
-                      {c.title}
+                      <EditableText textKey={`sidebar.cat.${c.id}.title`} value={c.title} />
                     </h4>
                     <p className="mt-1 text-xs leading-relaxed text-slate-600 line-clamp-2">
-                      {c.desc}
+                      <EditableText textKey={`sidebar.cat.${c.id}.desc`} value={c.desc} />
                     </p>
                     <div className="mt-3">
                       <span className="inline-flex items-center gap-1 py-1.5 px-3 rounded-xl bg-red-600 hover:bg-red-700 text-white text-[11px] font-extrabold shadow-xs transition-all">
