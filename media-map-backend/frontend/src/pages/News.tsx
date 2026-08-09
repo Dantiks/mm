@@ -67,23 +67,8 @@ const NewsAggregator: React.FC = () => {
   return (
     <div className="bg-[#FAF9F5] min-h-screen font-inter">
       {/* Editorial Page Banner */}
-      <section className="bg-white border-b border-slate-200 py-10">
-        <div className="mx-auto max-w-[1400px] px-6 lg:px-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <span className="h-2 w-2 rounded-full bg-red-600 animate-ping" />
-              <span className="font-mono text-xs font-black uppercase tracking-widest text-red-600">
-                Global Multi-Source Feed
-              </span>
-            </div>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-slate-900 tracking-tight">
-              {t.aggregator.title || 'Агрегатор Новостей'}
-            </h1>
-            <p className="mt-2 text-sm text-slate-500 font-serif max-w-2xl">
-              Автоматический сборы материалов по медиа-праву, фактчекингу и безопасности со всего мира.
-            </p>
-          </div>
-
+      <section className="bg-white border-b border-slate-200 py-4">
+        <div className="mx-auto max-w-[1400px] px-6 lg:px-12 flex justify-end">
           <button
             onClick={fetchNewsData}
             disabled={loading}
