@@ -52,14 +52,14 @@ export const ViolationCategoriesSidebar: React.FC = () => {
       {/* Drawer Overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-xs transition-opacity"
+          className="fixed inset-0 z-[1100] bg-slate-950/60 backdrop-blur-xs transition-opacity"
           onClick={() => setIsOpen(false)}
         />
       )}
 
       {/* Drawer Panel */}
       <aside
-        className={`fixed left-0 top-0 bottom-0 z-50 w-full max-w-sm bg-white shadow-2xl transition-transform duration-300 ease-out flex flex-col ${
+        className={`fixed left-0 top-0 bottom-0 z-[1100] w-full max-w-sm bg-white shadow-2xl transition-transform duration-300 ease-out flex flex-col ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >

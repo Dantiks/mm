@@ -12,7 +12,7 @@ const ModalWindow: React.FC<Props> = ({ isOpen, onClose, title, children }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-gray-900 bg-opacity-50 z-50 flex items-center justify-center">
+    <div className="fixed inset-0 bg-gray-900 bg-opacity-50 z-[1100] flex items-center justify-center">
       <div className="md:max-h-[90%] bg-white rounded-[16px] shadow-lg md:max-w-[80%] font-inter h-full w-full flex flex-col">
         <div className="border-b p-4 flex items-center justify-between">
           <h2 className="text-[18px] font-extrabold text-navy">{title || ""}</h2>

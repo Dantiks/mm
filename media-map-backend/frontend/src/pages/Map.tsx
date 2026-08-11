@@ -297,7 +297,7 @@ const MapPage: React.FC = () => {
 
       {/* Full Marker Modal */}
       {activeModalMarker && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs">
+        <div className="fixed inset-0 z-[1100] flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs">
           <div className="bg-white rounded-3xl shadow-2xl max-w-2xl w-full p-6 relative max-h-[90vh] overflow-y-auto font-inter border border-slate-200">
             <button
               onClick={() => setActiveModalMarker(null)}

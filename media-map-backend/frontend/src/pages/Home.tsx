@@ -471,7 +471,7 @@ const Home = () => {
 
       {/* ── МОДАЛЬНОЕ ОКНО ПРОВЕРКИ ИНФОРМАЦИИ ── */}
       {activeCheckCategory && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-navy/60 backdrop-blur-xs p-4 animate-in fade-in duration-200">
+        <div className="fixed inset-0 z-[1100] flex items-center justify-center bg-navy/60 backdrop-blur-xs p-4 animate-in fade-in duration-200">
           <div className="relative w-full max-w-xl rounded-3xl bg-white p-6 sm:p-8 shadow-2xl border border-slate-100 overflow-hidden">
             {/* Кнопка закрытия */}
             <button 

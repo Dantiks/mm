@@ -305,7 +305,7 @@ const SiteTextsManagement: React.FC = () => {
 
       {/* Modal to Add New Custom Key */}
       {showAddModal && (
-        <div className="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-[1100] bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl p-6 w-full max-w-lg shadow-2xl space-y-4">
             <h3 className="text-lg font-black text-slate-800"><EditableText textKey="siteTextsManagement.raw10" value="Добавить новый ключ текста" /></h3>
 
