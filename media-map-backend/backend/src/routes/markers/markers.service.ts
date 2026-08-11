@@ -61,24 +61,18 @@ export class MarkersService {
 
   async getAll(isApproved?: boolean) {
     const where = isApproved !== undefined ? { isApproved } : {};
-    const result = await this.markerRepository.findAll({
+    // Пустой список — не ошибка. Раньше отдавали 404, и очередь модерации
+    // «падала», когда в ней просто нет заявок.
+    return this.markerRepository.findAll({
       where,
       include: { all: true },
     });
-    if (!result.length) {
-      throw new NotFoundException('Маркеры не найдены');
-    }
-    return result;
   }
 
   async getByType(violationTypeId: number) {
-    const result = await this.markerRepository.findAll({
+    return this.markerRepository.findAll({
       where: { violationTypeId },
     });
-    if (!result.length) {
-      throw new NotFoundException('Маркеры с таким нарушением не найдены');
-    }
-    return result;
   }
 
   async getOne(id: number) {
