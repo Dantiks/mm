@@ -5,6 +5,7 @@ import { useAppSelector } from "../../app/hooks/useAppSelector";
 import { selectViolationTypes } from "../../features/violationTypes/violationTypesSlice";
 import ViolationTypeForm from "../../components/Forms/ViolationTypeForm";
 import { apiURL } from "../../utils/constants";
+import EditableText from '../../components/CMS/EditableText';
 import {
   PlusCircle,
   Settings2,
@@ -40,8 +41,8 @@ const Violations = () => {
             <Settings2 className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-slate-800">Виды нарушений</h1>
-            <p className="text-sm text-slate-500">Управление категориями и иконками для карты</p>
+            <h1 className="text-2xl font-bold text-slate-800"><EditableText textKey="violations.raw1" value="Виды нарушений" /></h1>
+            <p className="text-sm text-slate-500"><EditableText textKey="violations.raw2" value="Управление категориями и иконками для карты" /></p>
           </div>
         </div>
 
@@ -51,7 +52,7 @@ const Violations = () => {
             <div className="bg-white  border border-slate-100 p-8 sticky top-6 shadow-sm">
               <div className="flex items-center gap-3 mb-6">
                 <PlusCircle className="w-5 h-5 text-navy" />
-                <h2 className="text-lg font-bold text-slate-800">Новый вид</h2>
+                <h2 className="text-lg font-bold text-slate-800"><EditableText textKey="violations.raw3" value="Новый вид" /></h2>
               </div>
               <ViolationTypeForm onSuccess={refreshViolationTypes} />
             </div>
@@ -63,7 +64,7 @@ const Violations = () => {
               <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center gap-3">
                   <Layers className="w-5 h-5 text-slate-400" />
-                  <h2 className="text-lg font-bold text-slate-800">Существующие типы</h2>
+                  <h2 className="text-lg font-bold text-slate-800"><EditableText textKey="violations.raw4" value="Существующие типы" /></h2>
                 </div>
                 <span className="px-3 py-1 bg-slate-50 text-slate-500 text-xs font-bold rounded-full border border-slate-100">
                 Всего: {violationTypes.length}
@@ -121,7 +122,7 @@ const Violations = () => {
                                 <div className="p-6 bg-white border-2 border-lineLight rounded-[16px] shadow-xl animate-in fade-in slide-in-from-top-4 duration-300">
                                   <div className="flex items-center gap-2 mb-4 text-goldDeep">
                                     <PencilLine className="w-4 h-4" />
-                                    <span className="text-sm font-bold uppercase tracking-wider">Редактирование категории</span>
+                                    <span className="text-sm font-bold uppercase tracking-wider"><EditableText textKey="violations.raw5" value="Редактирование категории" /></span>
                                   </div>
                                   <ViolationTypeForm
                                       item={item}
@@ -135,7 +136,7 @@ const Violations = () => {
                 ) : (
                     <div className="flex flex-col items-center justify-center py-16 text-slate-400 border-2 border-dashed border-slate-100 rounded-[2rem]">
                       <Layers className="w-12 h-12 mb-4 opacity-10" />
-                      <p className="font-medium">Список пуст</p>
+                      <p className="font-medium"><EditableText textKey="violations.raw6" value="Список пуст" /></p>
                     </div>
                 )}
               </div>

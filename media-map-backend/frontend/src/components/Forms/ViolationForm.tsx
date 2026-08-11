@@ -11,6 +11,7 @@ import {useLanguage} from "../../i18n/LanguageContext";
 import violationFormContent from "../../i18n/pages/violationForm";
 
 import EditableText from '../CMS/EditableText';
+import EditableAttr from '../../components/CMS/EditableAttr';
 
 const ViolationForm = () => {
     const {language} = useLanguage();
@@ -117,7 +118,7 @@ const ViolationForm = () => {
                         className="w-full rounded-[10px] border border-lineLight bg-white py-3 px-4 text-[15px] text-navy outline-none focus:border-gold transition-colors"
                         required
                     >
-                        <option className="py-2 my-2" value="">{c.regionDefaultOption}</option>
+                        <option className="py-2 my-2" value="">c.regionDefaultOption</option>
                         {c.regions.map((region, index) => (
                             <option key={region} value={violationFormContent.ru.regions[index]}>{region}</option>
                         ))}
@@ -128,16 +129,20 @@ const ViolationForm = () => {
                     <label className="mb-2 block text-[15px] font-semibold text-navy">
                         <span className="text-red-500">*</span> <EditableText textKey="form.cityLabel" value={c.cityLabel} />
                     </label>
-                    <input
+                    <EditableAttr textKey="violationForm.cityPlaceholder" value={c.cityPlaceholder} label="подсказка поля">
+                      {(v) => (
+                        <input
                         autoComplete="off"
                         type="text"
-                        placeholder={c.cityPlaceholder}
+                        placeholder={v}
                         className="w-full rounded-[10px] border border-lineLight bg-white py-3 px-4 text-[15px] text-navy outline-none focus:border-gold transition-colors"
                         name="authorCity"
                         value={formData.authorCity}
                         onChange={inputChangeHandler}
                         required
                     />
+                      )}
+                    </EditableAttr>
                 </div>
 
                 <div className="mb-8">
@@ -151,7 +156,7 @@ const ViolationForm = () => {
                         className="w-full rounded-[10px] border border-lineLight bg-white py-3 px-4 text-[15px] text-navy outline-none focus:border-gold transition-colors"
                         required
                     >
-                        <option value="" className="text-gray-400">{c.violationTypeDefaultOption}</option>
+                        <option value="" className="text-gray-400">c.violationTypeDefaultOption</option>
                         {violationTypes.map((type) =>
                             <option key={type.id} value={type.id}>{type.violationType}</option>
                         )}
@@ -162,15 +167,19 @@ const ViolationForm = () => {
                     <label className="mb-2 block text-[15px] font-semibold text-navy">
                         <EditableText textKey="form.mediaLinkLabel" value={c.mediaLinkLabel} />
                     </label>
-                    <input
+                    <EditableAttr textKey="violationForm.mediaLinkPlaceholder" value={c.mediaLinkPlaceholder} label="подсказка поля">
+                      {(v) => (
+                        <input
                         autoComplete="off"
                         type="url"
-                        placeholder={c.mediaLinkPlaceholder}
+                        placeholder={v}
                         className="w-full rounded-[10px] border border-lineLight bg-white py-3 px-4 text-[15px] text-navy outline-none focus:border-gold transition-colors"
                         name="mediaLink"
                         value={formData.mediaLink}
                         onChange={inputChangeHandler}
                     />
+                      )}
+                    </EditableAttr>
                 </div>
 
                 <div className="mb-8">
@@ -208,13 +217,17 @@ const ViolationForm = () => {
                     <label className="mb-2 block text-[15px] font-semibold text-navy">
                         <EditableText textKey="form.commentLabel" value={c.commentLabel} /> <span className="text-gray-400"><EditableText textKey="form.commentOptional" value={c.commentOptional} /></span>
                     </label>
-                    <textarea
-                        placeholder={c.commentPlaceholder}
+                    <EditableAttr textKey="violationForm.commentPlaceholder" value={c.commentPlaceholder} label="подсказка поля">
+                      {(v) => (
+                        <textarea
+                        placeholder={v}
                         className="w-full rounded-[10px] border border-lineLight bg-white py-3 px-4 text-[15px] text-navy outline-none focus:border-gold transition-colors"
                         name="authorComment"
                         value={formData.authorComment}
                         onChange={inputChangeHandler}
                     />
+                      )}
+                    </EditableAttr>
                 </div>
 
                 <div className="mb-10">

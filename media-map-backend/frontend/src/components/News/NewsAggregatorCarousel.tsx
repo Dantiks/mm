@@ -1,5 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { ChevronLeft, ChevronRight, MessageSquare, ArrowRight } from 'lucide-react';
+import EditableText from '../../components/CMS/EditableText';
+import EditableRecordText from '../../components/CMS/EditableRecordText';
 
 export interface NewsItem {
   id: string | number;
@@ -62,9 +64,11 @@ const NewsAggregatorCarousel: React.FC<Props> = ({ items, title = 'Агрега�
       <div className="flex items-center justify-between pb-1.5 border-b border-slate-100">
         <div className="flex items-center gap-2">
           <span className="h-2 w-2 rounded-full bg-red-600 animate-pulse" />
-          <h3 className="text-xs font-black text-navy uppercase tracking-wider">{title}</h3>
+          <h3 className="text-xs font-black text-navy uppercase tracking-wider">
+            <EditableText textKey="newsCarousel.title" value={title} />
+          </h3>
           <span className="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.2 rounded-full border border-emerald-100">
-            Live
+            <EditableText textKey="newsCarousel.liveBadge" value="Live" />
           </span>
         </div>
 
@@ -114,7 +118,7 @@ const NewsAggregatorCarousel: React.FC<Props> = ({ items, title = 'Агрега�
 
               {/* Top Tag Badge */}
               <span className="absolute top-2 left-2 rounded-full bg-red-600/90 backdrop-blur-xs px-2 py-0.5 text-[9px] font-extrabold text-white uppercase tracking-wider shadow-xs">
-                #{news.tag}
+                #<EditableRecordText resource="/news" id={news.id} field="tag" value={news.tag} />
               </span>
 
               {/* Bottom Overlay Gradient & Floating Comment Badge */}
@@ -131,16 +135,16 @@ const NewsAggregatorCarousel: React.FC<Props> = ({ items, title = 'Агрега�
 
             {/* Title & Description Below Image */}
             <div className="mt-1.5 px-0.5">
-              <h4 className="text-[12px] font-extrabold leading-snug text-navy group-hover:text-red-600 transition-colors line-clamp-2">
-                {news.title}
+              <h4 className="text-[12px] font-extrabold leading-snug text-navy group-hover:underline decoration-2 underline-offset-2 transition-colors line-clamp-2">
+                <EditableRecordText resource="/news" id={news.id} field="title" value={news.title} />
               </h4>
               {news.description && (
                 <p className="mt-0.5 text-[10px] leading-tight text-slate-500 line-clamp-1">
-                  {news.description}
+                  <EditableRecordText resource="/news" id={news.id} field="description" value={news.description} />
                 </p>
               )}
               <div className="mt-1 flex items-center gap-0.5 text-[10px] font-bold text-red-600 group-hover:translate-x-0.5 transition-transform">
-                <span>Читать</span>
+                <span><EditableText textKey="newsAggregatorCarousel.raw1" value="Читать" /></span>
                 <ArrowRight className="h-2.5 w-2.5" />
               </div>
             </div>

@@ -4,6 +4,8 @@ import NewsDetailModal, { DetailedNewsItem } from '../components/News/NewsDetail
 import AiAnalysisModal from '../components/AI/AiAnalysisModal';
 import { RefreshCw } from 'lucide-react';
 import axiosApi from '../axiosApi';
+import EditableText from '../components/CMS/EditableText';
+import EditableRecordText from '../components/CMS/EditableRecordText';
 
 interface RawNewsItem {
   id: number;
@@ -75,7 +77,7 @@ const NewsAggregator: React.FC = () => {
             className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition-all shadow-xs"
           >
             <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
-            Обновить ленту
+            <EditableText textKey="news.raw1" value="Обновить ленту" />
           </button>
         </div>
       </section>
@@ -87,12 +89,12 @@ const NewsAggregator: React.FC = () => {
             <div className="flex flex-col items-center justify-center py-24 space-y-3">
               <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-red-600" />
               <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">
-                Загрузка новостной ленты...
+                <EditableText textKey="news.raw2" value="Загрузка новостной ленты..." />
               </span>
             </div>
           ) : news.length === 0 ? (
             <div className="bg-white p-12 rounded-3xl text-center border border-slate-200 text-slate-500 text-sm">
-              Лента временно пуста. Попробуйте обновить страницу.
+              <EditableText textKey="news.raw3" value="Лента временно пуста. Попробуйте обновить страницу." />
             </div>
           ) : (
             <div className="divide-y divide-slate-200/90">
@@ -135,12 +137,12 @@ const NewsAggregator: React.FC = () => {
 
                       {/* CENTER COLUMN: Editorial Title, Snippet, Author/Source */}
                       <div className="md:col-span-7 space-y-2">
-                        <h2 className="text-xl sm:text-2xl font-serif font-bold text-slate-900 group-hover:text-red-600 transition-colors leading-snug">
-                          {item.title}
+                        <h2 className="text-xl sm:text-2xl font-serif font-bold text-slate-900 group-hover:underline decoration-2 underline-offset-2 transition-colors leading-snug">
+                          <EditableRecordText resource="/news" id={item.id} field="title" value={item.title} onSaved={fetchNewsData} />
                         </h2>
 
                         <p className="text-sm font-serif text-slate-600 leading-relaxed line-clamp-3">
-                          {item.contentSnippet}
+                          <EditableRecordText resource="/news" id={item.id} field="contentSnippet" value={item.contentSnippet} />
                         </p>
 
                         <div className="pt-2 flex items-center gap-3 text-xs">
@@ -155,7 +157,7 @@ const NewsAggregator: React.FC = () => {
                             }}
                             className="flex items-center gap-1 font-bold text-red-600 hover:text-red-700 transition-colors"
                           >
-                            Проверить информацию
+                            <EditableText textKey="news.raw4" value="Проверить информацию" />
                           </button>
                         </div>
                       </div>

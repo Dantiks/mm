@@ -2,6 +2,9 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Bot, X, Send, Sparkles, RefreshCw } from 'lucide-react';
 import axiosApi from '../../axiosApi';
 import { DEFAULT_OPENAI_KEY } from '../../utils/constants';
+import EditableText from '../../components/CMS/EditableText';
+import EditableImage from '../../components/CMS/EditableImage';
+import EditableAuto from '../../components/CMS/EditableAuto';
 
 interface Message {
   id: string;
@@ -171,8 +174,8 @@ const AiAssistantWidget: React.FC = () => {
             <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-400 rounded-full border-2 border-red-600" />
           </div>
           <div className="text-left">
-            <span className="text-sm font-black tracking-tight block drop-shadow-xs">Совёнок MediaMap</span>
-            <p className="text-[10px] text-amber-100 font-bold opacity-90">Консультации и проверка</p>
+            <span className="text-sm font-black tracking-tight block drop-shadow-xs"><EditableText textKey="aiAssistantWidget.raw1" value="Совёнок MediaMap" /></span>
+            <p className="text-[10px] text-amber-100 font-bold opacity-90"><EditableText textKey="aiAssistantWidget.raw2" value="Консультации и проверка" /></p>
           </div>
         </button>
       )}
@@ -184,11 +187,11 @@ const AiAssistantWidget: React.FC = () => {
           <div className="p-4 bg-gradient-to-r from-red-600 via-orange-500 via-amber-500 to-indigo-700 text-white flex items-center justify-between shadow-md">
             <div className="flex items-center gap-3">
               <div className="p-1.5 bg-white/20 rounded-2xl border border-white/30 backdrop-blur-md h-14 w-14 flex items-center justify-center">
-                <img src="/owl-mascot.png" alt="Совёнок MediaMap" className="h-12 w-12 object-contain drop-shadow-xs" />
+                <EditableImage imageKey="images.owlMascotAi" fallbackSrc="/owl-mascot.png" alt="Совёнок MediaMap" className="h-12 w-12 object-contain drop-shadow-xs" />
               </div>
               <div>
-                <h3 className="font-black text-sm tracking-tight drop-shadow-xs">Совёнок MediaMap</h3>
-                <p className="text-[11px] text-amber-100 font-semibold opacity-90">ИИ ассистент Совенок MediaMap</p>
+                <h3 className="font-black text-sm tracking-tight drop-shadow-xs"><EditableText textKey="aiAssistantWidget.raw3" value="Совёнок MediaMap" /></h3>
+                <p className="text-[11px] text-amber-100 font-semibold opacity-90"><EditableText textKey="aiAssistantWidget.raw4" value="ИИ ассистент Совенок MediaMap" /></p>
               </div>
             </div>
 
@@ -231,7 +234,7 @@ const AiAssistantWidget: React.FC = () => {
                 onClick={() => handleSendMessage(preset.query)}
                 className="px-3 py-1.5 rounded-full bg-white text-slate-600 text-[11px] font-semibold border border-slate-200 whitespace-nowrap hover:border-indigo-400 hover:text-indigo-600 hover:shadow-xs transition-all shrink-0"
               >
-                {preset.label}
+                <EditableAuto ns="aiAssistantWidget.preset.label" value={preset.label} />
               </button>
             ))}
           </div>

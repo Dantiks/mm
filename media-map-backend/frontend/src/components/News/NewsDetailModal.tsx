@@ -1,6 +1,7 @@
 import React from 'react';
 import { X, ExternalLink, Calendar, Globe } from 'lucide-react';
 import EditableText from '../CMS/EditableText';
+import EditableRecordText from '../../components/CMS/EditableRecordText';
 
 export interface DetailedNewsItem {
   id: string | number;
@@ -72,7 +73,7 @@ const NewsDetailModal: React.FC<Props> = ({ news, onClose, onRunAiCheck }) => {
           {/* Title & Image Layout */}
           <div className="space-y-4">
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-navy leading-tight tracking-tight">
-              {news.title}
+              <EditableRecordText resource="/news" id={news.id} field="title" value={news.title} />
             </h1>
 
             {news.image && (

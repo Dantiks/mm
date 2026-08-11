@@ -14,6 +14,8 @@ import {
 } from 'lucide-react';
 import AiAnalysisModal from '../components/AI/AiAnalysisModal';
 import axiosApi from '../axiosApi';
+import EditableText from '../components/CMS/EditableText';
+import EditableAuto from '../components/CMS/EditableAuto';
 
 const CategoryDetail: React.FC = () => {
   const { categoryId } = useParams<{ categoryId: string }>();
@@ -76,7 +78,7 @@ const CategoryDetail: React.FC = () => {
           className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-navy mb-8 transition-colors"
         >
           <ArrowLeft className="h-4 w-4" />
-          Все категории нарушений
+          <EditableText textKey="categoryDetail.raw1" value="Все категории нарушений" />
         </Link>
 
         {/* Заголовок категории (Без нумерации Категория №1) */}
@@ -87,15 +89,15 @@ const CategoryDetail: React.FC = () => {
             </span>
             <div>
               <h1 className="text-2xl font-black text-navy md:text-3xl lg:text-4xl">
-                {detail.title}
+                <EditableAuto ns="categoryDetail.detail.title" value={detail.title} />
               </h1>
               <p className="mt-2 text-sm text-slate-600 font-medium">
-                Нормативно-правовая база и законы Кыргызской Республики
+                <EditableText textKey="categoryDetail.raw2" value="Нормативно-правовая база и законы Кыргызской Республики" />
               </p>
             </div>
           </div>
           <p className="mt-4 text-base text-slate-700 max-w-3xl leading-relaxed">
-            {detail.summary}
+            <EditableAuto ns="categoryDetail.detail.summary" value={detail.summary} />
           </p>
         </div>
 
@@ -108,7 +110,7 @@ const CategoryDetail: React.FC = () => {
             </h3>
           </div>
           <p className="text-xs text-slate-600 mb-4 font-medium">
-            Отправьте подозреваемую новость, публикацию или пост на экспресс-верификацию юридической базой КР:
+            <EditableText textKey="categoryDetail.raw3" value="Отправьте подозреваемую новость, публикацию или пост на экспресс-верификацию юридической базой КР:" />
           </p>
           <div className="space-y-3">
             <textarea
@@ -122,7 +124,7 @@ const CategoryDetail: React.FC = () => {
               onClick={() => handleRunAiCheck(checkInput)}
               className="px-6 py-3 rounded-xl bg-red-600 hover:bg-red-700 text-white font-extrabold text-xs shadow-md shadow-red-600/30 hover:scale-[1.02] transition-all cursor-pointer"
             >
-              Проверить информацию
+              <EditableText textKey="categoryDetail.raw4" value="Проверить информацию" />
             </button>
           </div>
         </div>
@@ -137,10 +139,10 @@ const CategoryDetail: React.FC = () => {
                 <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-50 text-amber-600">
                   <HelpCircle className="h-5 w-5" />
                 </span>
-                Что это за нарушение?
+                <EditableText textKey="categoryDetail.raw5" value="Что это за нарушение?" />
               </div>
               <p className="text-sm text-slate-600 leading-relaxed">
-                {detail.whatIsIt}
+                <EditableAuto ns="categoryDetail.detail.whatIsIt" value={detail.whatIsIt} />
               </p>
             </div>
           </div>
@@ -152,13 +154,13 @@ const CategoryDetail: React.FC = () => {
                 <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-50 text-red-600">
                   <Scale className="h-5 w-5" />
                 </span>
-                Законы КР и ответственность
+                <EditableText textKey="categoryDetail.raw6" value="Законы КР и ответственность" />
               </div>
               <p className="text-sm font-semibold text-slate-800 mb-2">
-                {detail.legalBasis}
+                <EditableAuto ns="categoryDetail.detail.legalBasis" value={detail.legalBasis} />
               </p>
               <div className="rounded-xl bg-red-50/70 p-3 text-xs text-red-800 font-medium border border-red-200/60">
-                {detail.penalty}
+                <EditableAuto ns="categoryDetail.detail.penalty" value={detail.penalty} />
               </div>
             </div>
           </div>
@@ -171,9 +173,9 @@ const CategoryDetail: React.FC = () => {
               className="h-20 w-20 object-contain shrink-0 drop-shadow-md"
             />
             <div>
-              <h4 className="text-sm font-bold text-navy mb-1">Совет от Совёнка MediaMap</h4>
+              <h4 className="text-sm font-bold text-navy mb-1"><EditableText textKey="categoryDetail.raw7" value="Совет от Совёнка MediaMap" /></h4>
               <p className="text-xs text-slate-700 leading-relaxed">
-                Если вы увидели признаки этого нарушения в соцсетях или СМИ — отправьте сообщение модераторам MediaMap для верификации!
+                <EditableText textKey="categoryDetail.raw8" value="Если вы увидели признаки этого нарушения в соцсетях или СМИ — отправьте сообщение модераторам MediaMap для верификации!" />
               </p>
             </div>
           </div>
@@ -183,7 +185,7 @@ const CategoryDetail: React.FC = () => {
         <div className="mt-10 rounded-2xl border border-slate-200 bg-white p-8">
           <h3 className="text-xl font-bold text-navy mb-6 flex items-center gap-2">
             <AlertTriangle className="h-5 w-5 text-red-600" />
-            Характерные примеры в медиа-пространстве
+            <EditableText textKey="categoryDetail.raw9" value="Характерные примеры в медиа-пространстве" />
           </h3>
 
           <div className="space-y-4">
@@ -201,14 +203,14 @@ const CategoryDetail: React.FC = () => {
 
           <div className="mt-8 pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
             <span className="text-xs text-slate-500">
-              Нашли подобное нарушение в сети?
+              <EditableText textKey="categoryDetail.raw10" value="Нашли подобное нарушение в сети?" />
             </span>
             <Link
               to="/contacts"
               className="inline-flex items-center gap-2 rounded-xl bg-red-600 px-5 py-2.5 text-xs font-bold text-white transition-all hover:bg-red-700 shadow-sm"
             >
               <CheckCircle2 className="h-4 w-4" />
-              Сообщить модераторам MediaMap
+              <EditableText textKey="categoryDetail.raw11" value="Сообщить модераторам MediaMap" />
             </Link>
           </div>
         </div>

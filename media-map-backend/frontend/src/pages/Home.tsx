@@ -21,6 +21,9 @@ import SiteSearchModal from '../components/Search/SiteSearchModal';
 import NewsAggregatorCarousel, { NewsItem } from '../components/News/NewsAggregatorCarousel';
 import NewsDetailModal, { DetailedNewsItem } from '../components/News/NewsDetailModal';
 import EditableText from '../components/CMS/EditableText';
+import EditableAuto from '../components/CMS/EditableAuto';
+import EditableImage from '../components/CMS/EditableImage';
+import EditableBlock from '../components/CMS/EditableBlock';
 
 // Совята для каждой категории: поза подобрана по смыслу
 const categoryOwls = [
@@ -235,13 +238,11 @@ const Home = () => {
             <div className="flex flex-col justify-center">
               {/* Совёнок MediaMap перед началом слогана */}
               <div className="flex items-center gap-3 mb-1.5">
-                <img
-                  src="/owl-mascot.png"
+                <EditableImage
+                  imageKey="home.heroOwl"
+                  fallbackSrc="/owl-mascot.png"
                   alt="Совёнок MediaMap"
-                  className="h-12 w-12 sm:h-14 sm:w-14 object-contain drop-shadow-md transition-transform duration-300 hover:scale-110"
-                  onError={(e) => {
-                    (e.target as HTMLElement).setAttribute('src', '/owl-happy.png');
-                  }}
+                  className="h-12 w-12 sm:h-14 sm:w-14 object-contain drop-shadow-md"
                 />
               </div>
 
@@ -302,29 +303,30 @@ const Home = () => {
               className="text-[22px] font-extrabold text-navy"
             />
             <Link to="/categories" className="flex items-center gap-1 text-[13px] font-bold text-red-600 hover:underline">
-              {t.home.categoriesViewAll} <ArrowRight className="h-3.5 w-3.5" />
+              <EditableText textKey="home.categoriesViewAll" value={t.home.categoriesViewAll} /> <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
 
           <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
             {homeCategories.map((c) => (
+              <EditableBlock key={c.title} blockKey={`home.cat.${c.slug}`} label={c.title}>
               <div
-                key={c.title}
-                className="group flex flex-col rounded-2xl border-2 border-slate-200/80 bg-white p-6 shadow-xs transition-all hover:-translate-y-1 hover:border-red-600/50 hover:shadow-md"
+                className="group flex flex-col rounded-2xl border-2 border-slate-200/80 bg-white p-6 shadow-xs transition-colors hover:border-slate-300"
               >
                 {/* Совёнок вместо иконки */}
                 <div className="flex justify-center">
-                  <img
-                    src={c.owl.src}
+                  <EditableImage
+                    imageKey={`home.cat.${c.slug}.owl`}
+                    fallbackSrc={c.owl.src}
                     alt={c.owl.alt}
                     className="h-32 w-32 object-contain drop-shadow-md transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
-                <h3 className="mt-4 text-[16px] font-black text-navy group-hover:text-red-600 transition-colors text-center">
-                  {c.title}
+                <h3 className="mt-4 text-[16px] font-black text-navy group-hover:underline decoration-2 underline-offset-2 transition-colors text-center">
+                  <EditableText textKey={`home.cat.${c.slug}.title`} value={c.title} />
                 </h3>
                 <p className="mt-2 text-[13px] leading-relaxed text-slate-600 flex-1 text-center">
-                  {c.description}
+                  <EditableText textKey={`home.cat.${c.slug}.description`} value={c.description} multiline />
                 </p>
                 <div className="mt-6 flex flex-col gap-2.5">
                   <button
@@ -348,6 +350,7 @@ const Home = () => {
                   </Link>
                 </div>
               </div>
+              </EditableBlock>
             ))}
           </div>
         </div>
@@ -374,7 +377,7 @@ const Home = () => {
                 to="/useful"
                 className="mt-4 inline-flex items-center gap-1.5 rounded-xl bg-navy px-4 py-2.5 text-xs font-bold text-white transition-all hover:bg-navyCard shadow-xs"
               >
-                {t.home.resourcesViewAll}
+                <EditableText textKey="home.resourcesViewAll" value={t.home.resourcesViewAll} />
               </Link>
             </div>
 
@@ -389,7 +392,7 @@ const Home = () => {
                   className="h-9 w-9 object-contain opacity-80 group-hover:opacity-100 transition-opacity shrink-0"
                 />
                 <div>
-                  <h3 className="text-[14px] font-bold text-navy group-hover:text-red-600 transition-colors flex items-center gap-1">
+                  <h3 className="text-[14px] font-bold text-navy group-hover:underline decoration-2 underline-offset-2 transition-colors flex items-center gap-1">
                     <EditableText textKey="home.oldSiteTitle" value={t.home.oldSiteTitle} /> <ExternalLink className="h-3 w-3" />
                   </h3>
                   <p className="mt-1 text-[12px] leading-snug text-slateBody"><EditableText textKey="home.oldSiteDesc" value={t.home.oldSiteDesc} /></p>
@@ -399,11 +402,11 @@ const Home = () => {
               {resources.map((r) => (
                 <div key={r.title} className="flex items-start gap-3.5 rounded-xl bg-white p-4 border border-slate-100 shadow-2xs">
                   <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-red-50 text-red-600 border border-red-100">
-                    {r.icon}
+                    <EditableAuto ns="home.r.icon" value={r.icon} />
                   </span>
                   <div>
-                    <h3 className="text-[14px] font-bold text-navy">{r.title}</h3>
-                    <p className="mt-1 text-[12px] leading-snug text-slateBody">{r.description}</p>
+                    <h3 className="text-[14px] font-bold text-navy"><EditableAuto ns="home.r.title" value={r.title} /></h3>
+                    <p className="mt-1 text-[12px] leading-snug text-slateBody"><EditableAuto ns="home.r.description" value={r.description} /></p>
                   </div>
                 </div>
               ))}
@@ -425,7 +428,7 @@ const Home = () => {
             <p className="text-xs text-slate-500 mt-1"><EditableText textKey="home.newsSubtitle" value="Реальные публикации и исследования в Кыргызстане" /></p>
           </div>
           <Link to="/useful" className="text-[13px] font-bold text-red-600 hover:underline flex items-center gap-1">
-            {t.home.newsAll}
+            <EditableText textKey="home.newsAll" value={t.home.newsAll} />
           </Link>
         </div>
 
@@ -433,7 +436,7 @@ const Home = () => {
           {t.home.news.map((n) => (
             <article
               key={n.title}
-              className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xs transition-all hover:shadow-md hover:border-red-400 flex flex-col justify-between"
+              className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xs transition-colors hover:border-slate-300 flex flex-col justify-between"
             >
               <div>
                 <div className="relative h-[180px] overflow-hidden bg-slate-100">
@@ -449,14 +452,14 @@ const Home = () => {
                   </span>
                 </div>
                 <div className="p-4">
-                  <h3 className="text-[15px] font-extrabold leading-snug text-navy group-hover:text-red-600 transition-colors">
-                    {n.title}
+                  <h3 className="text-[15px] font-extrabold leading-snug text-navy group-hover:underline decoration-2 underline-offset-2 transition-colors">
+                    <EditableAuto ns="home.n.title" value={n.title} />
                   </h3>
-                  <p className="mt-2 text-[12px] leading-relaxed text-slateBody">{n.description}</p>
+                  <p className="mt-2 text-[12px] leading-relaxed text-slateBody"><EditableAuto ns="home.n.description" value={n.description} /></p>
                 </div>
               </div>
               <div className="px-4 pb-4 pt-2 flex items-center justify-between border-t border-slate-100 text-[11px] text-slate-400">
-                <span>{n.date}</span>
+                <span><EditableAuto ns="home.n.date" value={n.date} /></span>
                 <span className="font-bold text-navy group-hover:text-red-600 flex items-center gap-1">
                   <EditableText textKey="home.news.readMore" value="Подробнее" /> <ArrowRight className="h-3 w-3" />
                 </span>
@@ -502,7 +505,7 @@ const Home = () => {
                 className="flex flex-col gap-4"
               >
                 <p className="text-[13px] text-slate-600 leading-relaxed">
-                  Вставьте текст, ссылку или цитату. Совёнок и эксперты MediaMap проверят достоверность по категории <strong className="text-navy font-bold">«{activeCheckCategory.title}»</strong>.
+                  <EditableText textKey="home.raw20" value="Вставьте текст, ссылку или цитату. Совёнок и эксперты MediaMap проверят достоверность по категории" /> <strong className="text-navy font-bold">«{activeCheckCategory.title}»</strong>.
                 </p>
 
                 <textarea

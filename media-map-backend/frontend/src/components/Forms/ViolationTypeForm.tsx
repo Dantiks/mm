@@ -6,6 +6,7 @@ import { useAppSelector } from "../../app/hooks/useAppSelector";
 import { selectCreateViolationTypeLoading } from "../../features/violationTypes/violationTypesSlice";
 import { Type, UploadCloud, CheckCircle2, Loader2, AlertCircle, X, ImageIcon } from "lucide-react";
 import { apiURL } from "../../utils/constants";
+import EditableText from '../../components/CMS/EditableText';
 
 interface Props {
   item?: ViolationTypeMutation;
@@ -84,7 +85,7 @@ const ViolationTypeForm: React.FC<Props> = ({ item, onSuccess }) => {
         <div className="space-y-2">
           <label className="text-sm font-bold text-slate-700 ml-1 flex items-center gap-2">
             <Type className="w-4 h-4 text-navy" />
-            Название нарушения
+            <EditableText textKey="violationTypeForm.raw1" value="Название нарушения" />
           </label>
           <div className="relative">
             <input
@@ -103,12 +104,12 @@ const ViolationTypeForm: React.FC<Props> = ({ item, onSuccess }) => {
           <div className="flex items-center justify-between ml-1">
             <label className="text-sm font-bold text-slate-700 flex items-center gap-2">
               <UploadCloud className="w-4 h-4 text-navy" />
-              Иконка категории
+              <EditableText textKey="violationTypeForm.raw2" value="Иконка категории" />
             </label>
             {(item && currentIconUrl) && (
                 <div className="flex items-center gap-1.5 text-xs text-slate-400 border border-slate-100 rounded-full px-2 py-0.5">
                   <ImageIcon className="w-3 h-3 text-emerald-500" />
-                  <span>Текущая есть</span>
+                  <span><EditableText textKey="violationTypeForm.raw3" value="Текущая есть" /></span>
                 </div>
             )}
           </div>
@@ -184,7 +185,7 @@ const ViolationTypeForm: React.FC<Props> = ({ item, onSuccess }) => {
             <div className="flex items-center gap-2 p-3 bg-amber-50 rounded-xl border border-amber-100">
               <AlertCircle className="w-4 h-4 text-amber-500" />
               <p className="text-[11px] text-amber-700 leading-tight">
-                Изменения коснутся только названия и иконки. Прикрепленные маркеры останутся на карте.
+                <EditableText textKey="violationTypeForm.raw4" value="Изменения коснутся только названия и иконки. Прикрепленные маркеры останутся на карте." />
               </p>
             </div>
         )}

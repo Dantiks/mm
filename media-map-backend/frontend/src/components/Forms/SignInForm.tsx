@@ -4,6 +4,7 @@ import GoogleSignInButton from "../Buttons/GoogleSignInButton";
 import {SignIn} from "../../types";
 import {useAppSelector} from "../../app/hooks/useAppSelector";
 import {selectSignInError} from "../../features/users/usersSlice";
+import EditableText from '../../components/CMS/EditableText';
 
 interface Props {
   state: SignIn;
@@ -19,12 +20,12 @@ const SignInForm: React.FC<Props> = ({state, inputChangeHandler, onSubmit}) => {
       className="max-w-[600px] rounded-sm border border-stroke border-opacity-30 bg-white shadow-default py-3 mt-10 mx-auto">
       <div className="p-4 sm:p-12.5 xl:p-17.5">
         <h2 className="mb-5 text-2xl font-bold text-center text-darkBlue sm:text-title-xl2">
-          Войти
+          <EditableText textKey="signInForm.raw1" value="Войти" />
         </h2>
         <form autoComplete="off" onSubmit={onSubmit}>
           <div className="mb-4">
             <label className="mb-2.5 block font-medium text-darkBlue">
-              Email
+              <EditableText textKey="signIn.emailLabel" value="Email" />
             </label>
             <div className="relative">
               <input
@@ -42,7 +43,7 @@ const SignInForm: React.FC<Props> = ({state, inputChangeHandler, onSubmit}) => {
 
           <div className="mb-6">
             <label className="mb-2.5 block font-medium text-darkBlue ">
-              Пароль
+              <EditableText textKey="signInForm.raw2" value="Пароль" />
             </label>
             <div className="relative">
               <input

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import EditableText from '../../components/CMS/EditableText';
 
 interface NewsItem {
   id: number;
@@ -58,13 +59,13 @@ const NewsManagement: React.FC = () => {
   };
 
   if (loading) {
-    return <div className="p-8 text-center">Загрузка...</div>;
+    return <div className="p-8 text-center"><EditableText textKey="newsManagement.raw1" value="Загрузка..." /></div>;
   }
 
   return (
     <div>
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-2xl font-black text-navy">Управление новостями</h1>
+        <h1 className="text-2xl font-black text-navy"><EditableText textKey="newsManagement.raw2" value="Управление новостями" /></h1>
         <button
           onClick={handleTriggerFetch}
           disabled={fetching}
@@ -76,17 +77,17 @@ const NewsManagement: React.FC = () => {
 
       <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
         {news.length === 0 ? (
-          <p className="text-slate-500">Нет новостей. Запустите парсер.</p>
+          <p className="text-slate-500"><EditableText textKey="newsManagement.raw3" value="Нет новостей. Запустите парсер." /></p>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="border-b border-slate-100">
                   <th className="py-3 px-4 font-bold text-slate-500">ID</th>
-                  <th className="py-3 px-4 font-bold text-slate-500">Заголовок</th>
-                  <th className="py-3 px-4 font-bold text-slate-500">Источник</th>
-                  <th className="py-3 px-4 font-bold text-slate-500">Дата</th>
-                  <th className="py-3 px-4 font-bold text-slate-500 text-right">Действия</th>
+                  <th className="py-3 px-4 font-bold text-slate-500"><EditableText textKey="newsManagement.raw4" value="Заголовок" /></th>
+                  <th className="py-3 px-4 font-bold text-slate-500"><EditableText textKey="newsManagement.raw5" value="Источник" /></th>
+                  <th className="py-3 px-4 font-bold text-slate-500"><EditableText textKey="newsManagement.raw6" value="Дата" /></th>
+                  <th className="py-3 px-4 font-bold text-slate-500 text-right"><EditableText textKey="newsManagement.raw7" value="Действия" /></th>
                 </tr>
               </thead>
               <tbody>
@@ -111,7 +112,7 @@ const NewsManagement: React.FC = () => {
                         onClick={() => handleDelete(item.id)}
                         className="text-red-500 hover:text-red-700 text-sm font-bold"
                       >
-                        Удалить
+                        <EditableText textKey="newsManagement.raw8" value="Удалить" />
                       </button>
                     </td>
                   </tr>

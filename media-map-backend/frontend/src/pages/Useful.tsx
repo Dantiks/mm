@@ -6,6 +6,7 @@ import { ExternalLink, BookOpen } from 'lucide-react';
 import AiAnalysisModal from '../components/AI/AiAnalysisModal';
 import axiosApi from '../axiosApi';
 import EditableText from '../components/CMS/EditableText';
+import EditableAuto from '../components/CMS/EditableAuto';
 
 const Useful: React.FC = () => {
   const { language } = useLanguage();
@@ -50,10 +51,10 @@ const Useful: React.FC = () => {
               </span>
             </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-slate-900 tracking-tight">
-              {c.title}
+              <EditableText textKey="useful.title" value={c.title} />
             </h1>
             <p className="mt-2 text-sm text-slate-500 font-serif max-w-2xl">
-              {c.subtitle}
+              <EditableText textKey="useful.subtitle" value={c.subtitle} />
             </p>
           </div>
         </div>
@@ -84,19 +85,19 @@ const Useful: React.FC = () => {
 
                   {/* CENTER COLUMN: Title, Description, Actions */}
                   <div className="md:col-span-7 space-y-2">
-                    <h2 className="text-xl sm:text-2xl font-serif font-bold text-slate-900 group-hover:text-red-600 transition-colors leading-snug flex items-center gap-2">
-                      <span>{res.title}</span>
+                    <h2 className="text-xl sm:text-2xl font-serif font-bold text-slate-900 group-hover:underline decoration-2 underline-offset-2 transition-colors leading-snug flex items-center gap-2">
+                      <span><EditableAuto ns="useful.res.title" value={res.title} /></span>
                       <ExternalLink className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity text-red-600" />
                     </h2>
 
                     <p className="text-sm font-serif text-slate-600 leading-relaxed">
-                      {res.description}
+                      <EditableAuto ns="useful.res.description" value={res.description} />
                     </p>
 
                     <div className="pt-2 flex items-center gap-3 text-xs">
                       <span className="font-mono font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1">
                         <BookOpen className="h-3.5 w-3.5 text-blue-600" />
-                        {c.learnMore}
+                        <EditableText textKey="useful.learnMore" value={c.learnMore} />
                       </span>
                       <span className="text-slate-300">•</span>
                       <button
@@ -117,7 +118,7 @@ const Useful: React.FC = () => {
                       <div className="p-3 bg-red-50 text-red-600 rounded-2xl mb-2">
                         {USEFUL_RESOURCE_ICONS[res.id] || <BookOpen className="h-6 w-6" />}
                       </div>
-                      <span className="text-[11px] font-bold text-navy line-clamp-1">{res.title}</span>
+                      <span className="text-[11px] font-bold text-navy line-clamp-1"><EditableAuto ns="useful.res.title" value={res.title} /></span>
                     </div>
                   </div>
                 </div>

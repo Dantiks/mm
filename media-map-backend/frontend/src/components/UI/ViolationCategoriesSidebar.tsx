@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { X, ArrowRight, BookOpen } from 'lucide-react';
 import EditableText from '../CMS/EditableText';
+import EditableImage from '../../components/CMS/EditableImage';
 
 export const ViolationCategoriesSidebar: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -42,7 +43,7 @@ export const ViolationCategoriesSidebar: React.FC = () => {
         className="fixed left-0 top-1/2 -translate-y-1/2 z-40 flex items-center gap-2 bg-navy text-white px-2.5 py-3 rounded-r-2xl shadow-2xl hover:bg-red-600 transition-all hover:pl-3.5 cursor-pointer group border border-l-0 border-white/20"
         title="Категории нарушений"
       >
-        <img src="/owl-think.png" alt="Совёнок" className="h-7 w-7 object-contain drop-shadow-md group-hover:scale-110 transition-transform" />
+        <EditableImage imageKey="images.owlThink" fallbackSrc="/owl-think.png" alt="Совёнок" className="h-7 w-7 object-contain drop-shadow-md group-hover:scale-110 transition-transform" />
         <span className="[writing-mode:vertical-lr] rotate-180 text-xs font-black uppercase tracking-wider hidden sm:block">
           <EditableText textKey="sidebar.toggleBtn" value="Категории нарушений" />
         </span>
@@ -65,7 +66,7 @@ export const ViolationCategoriesSidebar: React.FC = () => {
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-slate-100 bg-slate-50/80">
           <div className="flex items-center gap-2.5">
-            <img src="/owl-mascot.png" alt="Совёнок" className="h-9 w-9 object-contain drop-shadow-xs" />
+            <EditableImage imageKey="images.owlMascotSidebar" fallbackSrc="/owl-mascot.png" alt="Совёнок" className="h-9 w-9 object-contain drop-shadow-xs" />
             <div>
               <h3 className="font-extrabold text-navy text-base"><EditableText textKey="sidebar.drawer.title" value="Категории нарушений" /></h3>
               <p className="text-xs text-slate-500"><EditableText textKey="sidebar.drawer.subtitle" value="Правовой навигатор MediaMap" /></p>
@@ -99,14 +100,14 @@ export const ViolationCategoriesSidebar: React.FC = () => {
                     <img src={c.owl} alt={c.title} className="h-full w-full object-contain drop-shadow-md transition-transform group-hover:scale-110" />
                   </div>
                   <div className="flex-1">
-                    <h4 className="text-sm font-bold text-navy hover:text-red-600 transition-colors">
+                    <h4 className="text-sm font-bold text-navy">
                       <EditableText textKey={`sidebar.cat.${c.id}.title`} value={c.title} />
                     </h4>
                     <p className="mt-1 text-xs leading-relaxed text-slate-600 line-clamp-2">
                       <EditableText textKey={`sidebar.cat.${c.id}.desc`} value={c.desc} />
                     </p>
                     <div className="mt-3">
-                      <span className="inline-flex items-center gap-1 py-1.5 px-3 rounded-xl bg-red-600 hover:bg-red-700 text-white text-[11px] font-extrabold shadow-xs transition-all">
+                      <span className="inline-flex items-center gap-1 py-1.5 px-3 rounded-xl bg-red-600 text-white text-[11px] font-extrabold shadow-xs">
                         <EditableText textKey={`sidebar.cat.${c.id}.btnCheck`} value="Проверить информацию" />
                       </span>
                     </div>

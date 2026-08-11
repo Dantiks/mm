@@ -104,7 +104,7 @@ const MapPage: React.FC = () => {
 
   return (
     <div className="bg-slate-50 min-h-screen font-inter">
-      <PageHero
+      <PageHero keyPrefix="map"
         eyebrow="МЕДИАКАРТА КЫРГЫЗСТАНА"
         title="Интерактивная карта нарушений"
         subtitle="Карта зафиксированных цифровых нарушений, фейков и мошенничеств по всем регионам Кыргызстана из официальной базы данных"
@@ -216,7 +216,7 @@ const MapPage: React.FC = () => {
                             className="flex items-center gap-1 text-[11px] font-bold text-red-600 hover:text-red-700 cursor-pointer"
                           >
                             <Maximize2 className="h-3 w-3" />
-                            <span>Открыть</span>
+                            <span><EditableText textKey="map.raw3" value="Открыть" /></span>
                           </button>
                         </div>
 
@@ -250,7 +250,7 @@ const MapPage: React.FC = () => {
                             />
                             <div className="absolute inset-0 bg-slate-950/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-bold text-xs gap-1">
                               <Maximize2 className="h-4 w-4" />
-                              Увеличить
+                              <EditableText textKey="map.raw4" value="Увеличить" />
                             </div>
                           </div>
                         )}
@@ -258,7 +258,7 @@ const MapPage: React.FC = () => {
                         {/* Author Comment */}
                         {marker.authorComment && (
                           <div className="p-3 bg-slate-50 rounded-xl border border-slate-200/80 text-xs text-slate-800 leading-relaxed font-medium">
-                            <p className="font-bold text-[10px] uppercase text-slate-400 mb-0.5">Сообщение заявителя:</p>
+                            <p className="font-bold text-[10px] uppercase text-slate-400 mb-0.5"><EditableText textKey="map.raw5" value="Сообщение заявителя:" /></p>
                             <p>"{marker.authorComment}"</p>
                           </div>
                         )}
@@ -266,7 +266,7 @@ const MapPage: React.FC = () => {
                         {/* Moderator Legal Comment */}
                         {marker.moderatorComment && (
                           <div className="p-3 bg-amber-50/80 rounded-xl border border-amber-200 text-xs text-amber-900 leading-relaxed font-medium">
-                            <p className="font-bold text-[10px] uppercase text-amber-700 mb-0.5">Правовая оценка модератора:</p>
+                            <p className="font-bold text-[10px] uppercase text-amber-700 mb-0.5"><EditableText textKey="map.raw6" value="Правовая оценка модератора:" /></p>
                             <p className="max-h-32 overflow-y-auto leading-relaxed">{marker.moderatorComment}</p>
                           </div>
                         )}
@@ -345,7 +345,7 @@ const MapPage: React.FC = () => {
             {/* Author comment */}
             {activeModalMarker.authorComment && (
               <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-sm text-slate-800 leading-relaxed font-medium mb-4">
-                <p className="font-bold text-xs uppercase text-slate-400 mb-1">Текст сообщения заявителя:</p>
+                <p className="font-bold text-xs uppercase text-slate-400 mb-1"><EditableText textKey="map.raw7" value="Текст сообщения заявителя:" /></p>
                 <p>"{activeModalMarker.authorComment}"</p>
               </div>
             )}
@@ -353,7 +353,7 @@ const MapPage: React.FC = () => {
             {/* Moderator comment */}
             {activeModalMarker.moderatorComment && (
               <div className="p-4 bg-amber-50 rounded-2xl border border-amber-200 text-sm text-amber-950 leading-relaxed font-medium mb-6">
-                <p className="font-bold text-xs uppercase text-amber-700 mb-1">Экспертный правовой комментарий и оценка:</p>
+                <p className="font-bold text-xs uppercase text-amber-700 mb-1"><EditableText textKey="map.raw8" value="Экспертный правовой комментарий и оценка:" /></p>
                 <p className="whitespace-pre-line">{activeModalMarker.moderatorComment}</p>
               </div>
             )}

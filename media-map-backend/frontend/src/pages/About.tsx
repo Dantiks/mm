@@ -13,7 +13,7 @@ const About = () => {
 
   return (
     <div className="bg-white">
-      <PageHero eyebrow={c.eyebrow} title={c.title} subtitle={c.subtitle} />
+      <PageHero keyPrefix="about" eyebrow={c.eyebrow} title={c.title} subtitle={c.subtitle} />
 
       <PageSection className="!py-16">
         <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2">
@@ -61,7 +61,7 @@ const About = () => {
               </a>{' '}
               <EditableText textKey="about.p5_between2" value={c.paragraph5.betweenInternewsAndMediaConsult} />{' '}
               <a href="https://mediaconsult.kg" target="_blank" rel="noreferrer" className={linkClass}>
-                Фонд «МедиаКонсалт»
+                <EditableText textKey="about.raw13" value="Фонд «МедиаКонсалт»" />
               </a>{' '}
               <EditableText textKey="about.p5_between3" value={c.paragraph5.betweenMediaConsultAndCheckIt} />{' '}
               <a
@@ -70,7 +70,7 @@ const About = () => {
                 rel="noreferrer"
                 className={linkClass}
               >
-                СheckIt.kg
+                <EditableText textKey="about.raw14" value="СheckIt.kg" />
               </a>
               <EditableText textKey="about.p5_after" value={c.paragraph5.afterCheckIt} />
             </p>

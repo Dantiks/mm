@@ -5,6 +5,7 @@ import footerContent from '../../i18n/pages/footer';
 import { TelegramIcon, InstagramIcon, FacebookIcon, YoutubeIcon } from '../Common/SocialIcons';
 
 import EditableText from '../CMS/EditableText';
+import EditableImage from '../CMS/EditableImage';
 
 const socials = [
   { label: 'Telegram', href: 'https://t.me/mediamap_kg', icon: <TelegramIcon className="h-4 w-4" /> },
@@ -68,16 +69,36 @@ const Footer = () => {
               rel="noreferrer"
               className="flex h-9 items-center rounded-md bg-white px-3 transition-opacity hover:opacity-90"
             >
-              <img src="/media-consult-logo.png" alt="МедиаКонсалт" className="h-5 w-auto object-contain" />
+              <EditableImage
+                imageKey="footer.logoMediaConsult"
+                fallbackSrc="/media-consult-logo.png"
+                alt="МедиаКонсалт"
+                className="h-5 w-auto object-contain"
+              />
             </a>
             <span className="flex h-9 items-center rounded-md bg-white px-3">
-              <img src="/assoc-logo.png" alt="Ассоциация Общинных СМИ" className="h-6 w-auto object-contain" />
+              <EditableImage
+                imageKey="footer.logoAssoc"
+                fallbackSrc="/assoc-logo.png"
+                alt="Ассоциация Общинных СМИ"
+                className="h-6 w-auto object-contain"
+              />
             </span>
             <span className="flex h-9 items-center rounded-md bg-white px-3">
-              <img src="/eu-horiz-logo.png" alt="Европейский Союз" className="h-6 w-auto object-contain" />
+              <EditableImage
+                imageKey="footer.logoEu"
+                fallbackSrc="/eu-horiz-logo.png"
+                alt="Европейский Союз"
+                className="h-6 w-auto object-contain"
+              />
             </span>
             <span className="flex h-9 items-center rounded-md bg-white px-3">
-              <img src="/internews-2-logo.jpg" alt="Internews" className="h-6 w-auto object-contain" />
+              <EditableImage
+                imageKey="footer.logoInternews"
+                fallbackSrc="/internews-2-logo.jpg"
+                alt="Internews"
+                className="h-6 w-auto object-contain"
+              />
             </span>
           </div>
         </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import { MapPin, Image as ImageIcon, Link2, ChevronDown } from "lucide-react";
 import ViolationCard from "../Card/ViolationCard";
 import { MarkerBeforeModeratorMutation, MarkerOnMap } from "../../types";
+import EditableText from '../../components/CMS/EditableText';
 
 interface Props {
   item: MarkerBeforeModeratorMutation | MarkerOnMap;
@@ -58,11 +59,11 @@ const ViolationListItem: React.FC<Props> = ({ item, toggleOpen, isOpenId }) => {
               {item.image ? (
                   <div className="flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-600 rounded-full text-xs font-bold uppercase tracking-tighter">
                     <ImageIcon className="w-3.5 h-3.5" />
-                    Фото
+                    <EditableText textKey="violationListItem.raw1" value="Фото" />
                   </div>
               ) : (
                   <div className="flex items-center gap-1.5 px-3 py-1 bg-slate-50 text-slate-400 rounded-full text-xs font-medium uppercase tracking-tighter">
-                    Нет фото
+                    <EditableText textKey="violationListItem.raw2" value="Нет фото" />
                   </div>
               )}
             </div>

@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import {EnvelopeIcon, LockClosedIcon, UserIcon} from "@heroicons/react/24/outline";
 import GoogleSignInButton from "../Buttons/GoogleSignInButton";
 import {SignUp} from "../../types";
+import EditableText from '../../components/CMS/EditableText';
 
 interface Props {
   state: SignUp;
@@ -22,14 +23,14 @@ const SignUpForm: React.FC<Props> = ({ state, inputChangeHandler, onSubmit }) =>
       className="max-w-[600px] rounded-sm border border-stroke border-opacity-30 bg-white shadow-default py-3 m-10 mx-auto">
       <div className="p-4 sm:p-12.5 xl:p-17.5">
         <h2 className="mb-5 text-2xl font-bold text-center text-darkBlue sm:text-title-xl2">
-          Зарегистрироваться
+          <EditableText textKey="signUpForm.raw1" value="Зарегистрироваться" />
         </h2>
 
         <form
           autoComplete="off" onSubmit={onSubmit}>
           <div className="mb-4">
             <label className="mb-2.5 block font-medium text-darkBlue">
-              Имя
+              <EditableText textKey="signUpForm.raw2" value="Имя" />
             </label>
             <div className="relative">
               <input
@@ -47,7 +48,7 @@ const SignUpForm: React.FC<Props> = ({ state, inputChangeHandler, onSubmit }) =>
 
           <div className="mb-4">
             <label className="mb-2.5 block font-medium text-darkBlue">
-              Email
+              <EditableText textKey="signUp.emailLabel" value="Email" />
             </label>
             <div className="relative">
               <input
@@ -65,7 +66,7 @@ const SignUpForm: React.FC<Props> = ({ state, inputChangeHandler, onSubmit }) =>
 
           <div className="mb-6">
             <label className="mb-2.5 block font-medium text-darkBlue ">
-              Пароль
+              <EditableText textKey="signUpForm.raw3" value="Пароль" />
             </label>
             <div className="relative">
               <input
@@ -83,7 +84,7 @@ const SignUpForm: React.FC<Props> = ({ state, inputChangeHandler, onSubmit }) =>
 
           <div className="mb-6">
             <label className="mb-2.5 block font-medium text-darkBlue ">
-              Повторите пароль
+              <EditableText textKey="signUpForm.raw4" value="Повторите пароль" />
             </label>
             <div className="relative">
               <input
@@ -115,7 +116,7 @@ const SignUpForm: React.FC<Props> = ({ state, inputChangeHandler, onSubmit }) =>
             <p>
               У вас уже есть аккаунт?{'  '}
               <Link to="/sign-in" className="text-yellow">
-                Войти
+                <EditableText textKey="signUpForm.raw5" value="Войти" />
               </Link>
             </p>
           </div>

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Save, RefreshCw, Plus, FileText, CheckCircle2, Globe, Search, Sparkles } from 'lucide-react';
 import axiosApi from '../../axiosApi';
+import EditableAuto from '../../components/CMS/EditableAuto';
+import EditableText from '../../components/CMS/EditableText';
 
 interface TextItem {
   key: string;
@@ -37,8 +39,7 @@ const SiteTextsManagement: React.FC = () => {
   const [showAddModal, setShowAddModal] = useState(false);
 
   const handleStartLiveEdit = () => {
-    localStorage.setItem('adminEditorMode', 'true');
-    navigate('/');
+    navigate('/?edit=1');
   };
 
   const fetchTexts = async () => {
@@ -140,10 +141,10 @@ const SiteTextsManagement: React.FC = () => {
         <div>
           <h1 className="text-2xl font-black text-slate-800 flex items-center gap-3">
             <FileText className="w-7 h-7 text-red-600" />
-            Редактирование текстов сайта (CMS)
+            <EditableText textKey="siteTextsManagement.raw1" value="Редактирование текстов сайта (CMS)" />
           </h1>
           <p className="text-slate-500 text-sm mt-1">
-            Вы можете изменить абсолютно любой текст на сайте на двух языках (Русский и Кыргызча).
+            <EditableText textKey="siteTextsManagement.raw2" value="Вы можете изменить абсолютно любой текст на сайте на двух языках (Русский и Кыргызча)." />
           </p>
         </div>
 
@@ -153,7 +154,7 @@ const SiteTextsManagement: React.FC = () => {
             className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-bold transition-all"
           >
             <Plus className="w-4 h-4" />
-            Добавить ключ
+            <EditableText textKey="siteTextsManagement.raw3" value="Добавить ключ" />
           </button>
 
           <button
@@ -180,9 +181,9 @@ const SiteTextsManagement: React.FC = () => {
             <Sparkles className="w-6 h-6 animate-pulse" />
           </div>
           <div>
-            <h3 className="font-extrabold text-base">Интерактивный живой редактор (In-Context CMS)</h3>
+            <h3 className="font-extrabold text-base"><EditableText textKey="siteTextsManagement.raw4" value="Интерактивный живой редактор (In-Context CMS)" /></h3>
             <p className="text-xs text-slate-300">
-              Вы можете перейти на страницы сайта и кликать по текстам для их визуального редактирования в реальном времени.
+              <EditableText textKey="siteTextsManagement.raw5" value="Вы можете перейти на страницы сайта и кликать по текстам для их визуального редактирования в реальном времени." />
             </p>
           </div>
         </div>
@@ -191,7 +192,7 @@ const SiteTextsManagement: React.FC = () => {
           className="shrink-0 px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-black shadow-md shadow-red-500/30 transition-all cursor-pointer flex items-center gap-2"
         >
           <Sparkles className="w-4 h-4 text-amber-300" />
-          <span>Перейти к визуальному редактированию</span>
+          <span><EditableText textKey="siteTextsManagement.raw6" value="Перейти к визуальному редактированию" /></span>
         </button>
       </div>
 
@@ -208,7 +209,7 @@ const SiteTextsManagement: React.FC = () => {
                   : 'bg-slate-50 text-slate-600 hover:bg-slate-100'
               }`}
             >
-              {cat.label}
+              <EditableAuto ns="siteTextsManagement.cat.label" value={cat.label} />
             </button>
           ))}
         </div>
@@ -232,7 +233,7 @@ const SiteTextsManagement: React.FC = () => {
         </div>
       ) : filteredTexts.length === 0 ? (
         <div className="p-8 text-center bg-white rounded-2xl border border-slate-100 text-slate-400 text-sm">
-          Тексты не найдены. Попробуйте изменить фильтр или поисковый запрос.
+          <EditableText textKey="siteTextsManagement.raw7" value="Тексты не найдены. Попробуйте изменить фильтр или поисковый запрос." />
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-4">
@@ -255,7 +256,7 @@ const SiteTextsManagement: React.FC = () => {
                 <div className="space-y-1">
                   <label className="text-xs font-extrabold text-slate-600 flex items-center gap-1.5">
                     <Globe className="w-3.5 h-3.5 text-blue-600" />
-                    Русский язык (RU)
+                    <EditableText textKey="siteTextsManagement.raw8" value="Русский язык (RU)" />
                   </label>
                   {item.valueRu.length > 80 ? (
                     <textarea
@@ -278,7 +279,7 @@ const SiteTextsManagement: React.FC = () => {
                 <div className="space-y-1">
                   <label className="text-xs font-extrabold text-slate-600 flex items-center gap-1.5">
                     <Globe className="w-3.5 h-3.5 text-emerald-600" />
-                    Кыргызча (KY)
+                    <EditableText textKey="siteTextsManagement.raw9" value="Кыргызча (KY)" />
                   </label>
                   {item.valueKy.length > 80 ? (
                     <textarea
@@ -306,11 +307,11 @@ const SiteTextsManagement: React.FC = () => {
       {showAddModal && (
         <div className="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl p-6 w-full max-w-lg shadow-2xl space-y-4">
-            <h3 className="text-lg font-black text-slate-800">Добавить новый ключ текста</h3>
+            <h3 className="text-lg font-black text-slate-800"><EditableText textKey="siteTextsManagement.raw10" value="Добавить новый ключ текста" /></h3>
 
             <div className="space-y-3">
               <div>
-                <label className="text-xs font-bold text-slate-600">Ключ (например, home.customBanner)</label>
+                <label className="text-xs font-bold text-slate-600"><EditableText textKey="siteTextsManagement.raw11" value="Ключ (например, home.customBanner)" /></label>
                 <input
                   type="text"
                   placeholder="home.myTitle"
@@ -321,7 +322,7 @@ const SiteTextsManagement: React.FC = () => {
               </div>
 
               <div>
-                <label className="text-xs font-bold text-slate-600">Категория</label>
+                <label className="text-xs font-bold text-slate-600"><EditableText textKey="siteTextsManagement.raw12" value="Категория" /></label>
                 <select
                   value={newCategory}
                   onChange={(e) => setNewCategory(e.target.value)}
@@ -336,7 +337,7 @@ const SiteTextsManagement: React.FC = () => {
               </div>
 
               <div>
-                <label className="text-xs font-bold text-slate-600">Текст на русском (RU)</label>
+                <label className="text-xs font-bold text-slate-600"><EditableText textKey="siteTextsManagement.raw13" value="Текст на русском (RU)" /></label>
                 <input
                   type="text"
                   placeholder="Введите текст..."
@@ -347,7 +348,7 @@ const SiteTextsManagement: React.FC = () => {
               </div>
 
               <div>
-                <label className="text-xs font-bold text-slate-600">Текст на кыргызском (KY)</label>
+                <label className="text-xs font-bold text-slate-600"><EditableText textKey="siteTextsManagement.raw14" value="Текст на кыргызском (KY)" /></label>
                 <input
                   type="text"
                   placeholder="Текстти киргизиңиз..."
@@ -363,13 +364,13 @@ const SiteTextsManagement: React.FC = () => {
                 onClick={() => setShowAddModal(false)}
                 className="px-4 py-2 text-sm font-bold text-slate-500 hover:text-slate-800"
               >
-                Отмена
+                <EditableText textKey="siteTextsManagement.raw15" value="Отмена" />
               </button>
               <button
                 onClick={handleAddNewKey}
                 className="px-5 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white text-sm font-bold shadow-md shadow-red-500/20"
               >
-                Добавить
+                <EditableText textKey="siteTextsManagement.raw16" value="Добавить" />
               </button>
             </div>
           </div>

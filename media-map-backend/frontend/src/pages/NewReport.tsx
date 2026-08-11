@@ -5,6 +5,7 @@ import ViolationForm from "../components/Forms/ViolationForm";
 import {useLanguage} from "../i18n/LanguageContext";
 import newReportContent from "../i18n/pages/newReport";
 import EditableText from "../components/CMS/EditableText";
+import EditableAuto from '../components/CMS/EditableAuto';
 
 interface ExpandedState {
   [key: string]: boolean;
@@ -75,27 +76,27 @@ const NewReport: React.FC = () => {
         <h2 className="text-[19px] font-bold text-ink mt-6"><EditableText textKey="report.disinfo.title" value={c.disinfo.sectionTitle} /></h2>
         <div>
           {expanded.block1 && (<div>
-            <p className="my-2"><span className="font-semibold">{c.disinfo.introTerm}</span>{c.disinfo.introRest}
+            <p className="my-2"><span className="font-semibold"><EditableText textKey="newReport.disinfo.introTerm" value={c.disinfo.introTerm} /></span><EditableText textKey="newReport.disinfo.introRest" value={c.disinfo.introRest} />
             </p>
-            <h3 className="font-semibold mt-4 mb-2">{c.disinfo.typesTitle}</h3>
+            <h3 className="font-semibold mt-4 mb-2"><EditableText textKey="newReport.disinfo.typesTitle" value={c.disinfo.typesTitle} /></h3>
             <ul className="list-disc pl-5 space-y-2">
               {c.disinfo.types.map((item, idx) => (
-                <li key={idx}><span className="font-semibold">{item.term}</span> {item.description}
+                <li key={idx}><span className="font-semibold"><EditableAuto ns="newReport.item.term" value={item.term} /></span> <EditableAuto ns="newReport.item.description" value={item.description} />
                 </li>
               ))}
             </ul>
 
-            <h3 className="font-semibold mt-4 mb-2">{c.disinfo.methodsTitle}</h3>
+            <h3 className="font-semibold mt-4 mb-2"><EditableText textKey="newReport.disinfo.methodsTitle" value={c.disinfo.methodsTitle} /></h3>
             <ul className="list-disc pl-5 space-y-2">
               {c.disinfo.methods.map((method, idx) => (
-                <li key={idx}><span className="font-semibold">{method.term}</span> {method.description}
+                <li key={idx}><span className="font-semibold"><EditableAuto ns="newReport.method.term" value={method.term} /></span> {method.description}
                   {method.subItems && (
                     <>
-                      <p className="indent-5 font-bold my-2">{method.subItemsLabel}</p>
+                      <p className="indent-5 font-bold my-2"><EditableAuto ns="newReport.method.subItemsLabel" value={method.subItemsLabel} /></p>
                       <ul className="list-disc pl-10 space-y-2">
                         {method.subItems.map((sub, subIdx) => (
                           <li key={subIdx}>
-                            {sub.term && <span className="font-semibold">{sub.term}</span>}
+                            {sub.term && <span className="font-semibold"><EditableAuto ns="newReport.sub.term" value={sub.term} /></span>}
                             {sub.term ? ' ' : ''}{sub.description}
                           </li>
                         ))}
@@ -108,7 +109,7 @@ const NewReport: React.FC = () => {
 
             <p className="text-red-500 mt-4 mb-2">
               <strong>
-                {c.disinfo.warningTitle}
+                <EditableText textKey="newReport.disinfo.warningTitle" value={c.disinfo.warningTitle} />
                 <ul>
                   {c.disinfo.warningList.map((item, idx) => (
                     <li key={idx}>
@@ -116,7 +117,7 @@ const NewReport: React.FC = () => {
                     </li>
                   ))}
                 </ul>
-                {c.disinfo.warningFooter}
+                <EditableText textKey="newReport.disinfo.warningFooter" value={c.disinfo.warningFooter} />
               </strong>
             </p>
           </div>)}
@@ -131,21 +132,21 @@ const NewReport: React.FC = () => {
         <h2 className="text-[19px] font-bold text-ink mt-6"><EditableText textKey="report.hateSpeech.title" value={c.hateSpeech.sectionTitle} /></h2>
         <div>
           {expanded.block2 && (<div>
-            <p className="my-2"><span className="font-semibold">{c.hateSpeech.introTerm}</span>{c.hateSpeech.introRest}
+            <p className="my-2"><span className="font-semibold"><EditableText textKey="newReport.hateSpeech.introTerm" value={c.hateSpeech.introTerm} /></span><EditableText textKey="newReport.hateSpeech.introRest" value={c.hateSpeech.introRest} />
             </p>
             <p className="my-2">
-              {c.hateSpeech.intro2}
+              <EditableText textKey="newReport.hateSpeech.intro2" value={c.hateSpeech.intro2} />
             </p>
 
-            <h3 className="font-semibold mt-4 mb-2">{c.hateSpeech.typesTitle}</h3>
+            <h3 className="font-semibold mt-4 mb-2"><EditableText textKey="newReport.hateSpeech.typesTitle" value={c.hateSpeech.typesTitle} /></h3>
             <ul className="list-disc pl-5 space-y-2">
               {c.hateSpeech.types.map((item, idx) => (
-                <li key={idx}><span className="font-semibold">{item.term}</span> {item.description}
+                <li key={idx}><span className="font-semibold"><EditableAuto ns="newReport.item.term" value={item.term} /></span> <EditableAuto ns="newReport.item.description" value={item.description} />
                 </li>
               ))}
             </ul>
             <div className="text-red-500 font-bold mt-4 mb-2">
-              <p><strong>{c.hateSpeech.warningTitle}</strong></p>
+              <p><strong><EditableText textKey="newReport.hateSpeech.warningTitle" value={c.hateSpeech.warningTitle} /></strong></p>
               <ul className="list-disc pl-5 space-y-2">
                 {c.hateSpeech.warningList.map((item, idx) => (
                   <li key={idx}>{item}</li>
@@ -166,18 +167,18 @@ const NewReport: React.FC = () => {
           {expanded.block3 && (<div>
 
 
-            <p className="my-2"><span className="font-semibold">{c.fraud.introTerm}</span>{c.fraud.introRest}</p>
+            <p className="my-2"><span className="font-semibold"><EditableText textKey="newReport.fraud.introTerm" value={c.fraud.introTerm} /></span><EditableText textKey="newReport.fraud.introRest" value={c.fraud.introRest} /></p>
 
-            <h3 className="font-semibold mt-4 mb-2">{c.fraud.typesTitle}</h3>
+            <h3 className="font-semibold mt-4 mb-2"><EditableText textKey="newReport.fraud.typesTitle" value={c.fraud.typesTitle} /></h3>
             <ul className="list-disc pl-5 space-y-2">
               {c.fraud.types.map((item, idx) => (
-                <li key={idx}><span className="font-semibold">{item.term}</span> {item.description}
+                <li key={idx}><span className="font-semibold"><EditableAuto ns="newReport.item.term" value={item.term} /></span> <EditableAuto ns="newReport.item.description" value={item.description} />
                 </li>
               ))}
             </ul>
 
             <p className="text-red-500 mt-4 mb-2">
-              <strong>{c.fraud.warning}</strong>
+              <strong><EditableText textKey="newReport.fraud.warning" value={c.fraud.warning} /></strong>
             </p>
           </div>)}
           <button

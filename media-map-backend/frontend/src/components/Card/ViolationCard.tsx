@@ -22,6 +22,7 @@ import {
   ExternalLink,
   Sparkles
 } from "lucide-react";
+import EditableText from "../CMS/EditableText";
 
 interface Props {
   item: MarkerBeforeModeratorMutation | MarkerOnMap;
@@ -97,7 +98,7 @@ const ViolationCard: React.FC<Props> = ({ item }) => {
               <div className="p-4 bg-cream rounded-[12px] border border-lineLight">
                 <div className="flex items-center gap-2 text-slate-400 mb-1">
                   <MapPin className="w-4 h-4" />
-                  <span className="text-[11px] font-bold uppercase tracking-wider">Локация</span>
+                  <span className="text-[11px] font-bold uppercase tracking-wider"><EditableText textKey="violationCard.raw1" value="Локация" /></span>
                 </div>
                 <p className="text-slate-700 font-medium">{item.authorRegion}</p>
                 <p className="text-slate-500 text-sm">{item.authorCity}</p>
@@ -106,7 +107,7 @@ const ViolationCard: React.FC<Props> = ({ item }) => {
               <div className="p-4 bg-cream rounded-[12px] border border-lineLight">
                 <div className="flex items-center gap-2 text-slate-400 mb-1">
                   <Link2 className="w-4 h-4" />
-                  <span className="text-[11px] font-bold uppercase tracking-wider">Источник</span>
+                  <span className="text-[11px] font-bold uppercase tracking-wider"><EditableText textKey="violationCard.raw2" value="Источник" /></span>
                 </div>
                 {item.mediaLink ? (
                     <a
@@ -115,10 +116,10 @@ const ViolationCard: React.FC<Props> = ({ item }) => {
                         rel="noopener noreferrer"
                         className="text-goldDeep hover:underline font-semibold text-sm flex items-center gap-1 break-all"
                     >
-                      Перейти по ссылке <ExternalLink className="w-3 h-3" />
+                      <EditableText textKey="violationCard.raw3" value="Перейти по ссылке" /> <ExternalLink className="w-3 h-3" />
                     </a>
                 ) : (
-                    <p className="text-slate-400 text-sm">Отсутствует</p>
+                    <p className="text-slate-400 text-sm"><EditableText textKey="violationCard.raw4" value="Отсутствует" /></p>
                 )}
               </div>
             </div>
@@ -129,7 +130,7 @@ const ViolationCard: React.FC<Props> = ({ item }) => {
                   <MessageSquare className="w-4 h-4 text-navy" />
                 </div>
                 <div>
-                  <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Комментарий заявителя</span>
+                  <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider"><EditableText textKey="violationCard.raw5" value="Комментарий заявителя" /></span>
                   <p className="text-slate-600 text-sm mt-1 leading-relaxed">
                     {item.authorComment || 'Комментарий не оставлен'}
                   </p>
@@ -141,7 +142,7 @@ const ViolationCard: React.FC<Props> = ({ item }) => {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2 text-indigo-900 font-extrabold text-xs">
                     <Sparkles className="w-4 h-4 text-indigo-600" />
-                    <span>ИИ-Заключение (GPT-4o mini) & Заметка</span>
+                    <span><EditableText textKey="violationCard.raw6" value="ИИ-Заключение (GPT-4o mini) & Заметка" /></span>
                   </div>
                   <button
                     onClick={handleReAnalyzeAi}
@@ -160,7 +161,7 @@ const ViolationCard: React.FC<Props> = ({ item }) => {
           </div>
 
           <div className="flex flex-col gap-4">
-            <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Прикрепленный скриншот</span>
+            <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider"><EditableText textKey="violationCard.raw7" value="Прикрепленный скриншот" /></span>
             {item.image ? (
                 <div className="relative group overflow-hidden rounded-2xl border border-slate-100 shadow-inner bg-slate-50">
                   <img
@@ -178,7 +179,7 @@ const ViolationCard: React.FC<Props> = ({ item }) => {
             ) : (
                 <div className="h-[200px] flex flex-col items-center justify-center bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200 text-slate-400">
                   <Globe className="w-10 h-10 mb-2 opacity-20" />
-                  <span className="text-sm font-medium">Изображение отсутствует</span>
+                  <span className="text-sm font-medium"><EditableText textKey="violationCard.raw8" value="Изображение отсутствует" /></span>
                 </div>
             )}
           </div>
@@ -191,7 +192,7 @@ const ViolationCard: React.FC<Props> = ({ item }) => {
               className="flex items-center gap-2 px-5 py-2.5 text-rose-600 font-semibold text-sm rounded-xl hover:bg-rose-50 transition-colors"
           >
             <Trash2 className="w-4 h-4" />
-            Удалить
+            <EditableText textKey="violationCard.raw9" value="Удалить" />
           </button>
 
           <button
@@ -200,7 +201,7 @@ const ViolationCard: React.FC<Props> = ({ item }) => {
               className="flex items-center gap-2 px-5 py-2.5 text-slate-600 bg-slate-100 font-semibold text-sm rounded-xl hover:bg-slate-200 transition-colors"
           >
             <Edit3 className="w-4 h-4" />
-            Редактировать
+            <EditableText textKey="violationCard.raw10" value="Редактировать" />
           </button>
 
           {!pathname.includes('/approved') && (
@@ -210,7 +211,7 @@ const ViolationCard: React.FC<Props> = ({ item }) => {
                   className="flex items-center gap-2 px-6 py-2.5 bg-gold text-navy font-extrabold text-sm rounded-[12px] hover:opacity-90 shadow-lg transition-all active:scale-95"
               >
                 <Globe className="w-4 h-4" />
-                Опубликовать на карте
+                <EditableText textKey="violationCard.raw11" value="Опубликовать на карте" />
               </button>
           )}
         </div>

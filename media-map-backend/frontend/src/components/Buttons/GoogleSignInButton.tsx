@@ -1,5 +1,6 @@
 import React from 'react';
 import {useGoogleLogin} from '@react-oauth/google';
+import EditableText from '../../components/CMS/EditableText';
 
 const GoogleSignInButton = () => {
 
@@ -55,7 +56,7 @@ const GoogleSignInButton = () => {
           </defs>
         </svg>
       </span>
-            Войти используя Google аккаунт
+            <EditableText textKey="googleSignInButton.raw1" value="Войти используя Google аккаунт" />
         </button>
     );
 };

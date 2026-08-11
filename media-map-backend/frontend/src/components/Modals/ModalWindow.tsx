@@ -1,4 +1,5 @@
 import React from 'react';
+import EditableText from '../../components/CMS/EditableText';
 
 interface Props {
   isOpen: boolean;
@@ -30,7 +31,7 @@ const ModalWindow: React.FC<Props> = ({ isOpen, onClose, title, children }) => {
             onClick={onClose}
             className="px-6 py-2.5 bg-navy text-white font-bold rounded-[12px] hover:bg-navyCard transition-colors focus:outline-none"
           >
-            Закрыть
+            <EditableText textKey="modalWindow.raw1" value="Закрыть" />
           </button>
         </div>
       </div>

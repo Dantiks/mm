@@ -17,6 +17,9 @@ import {
 } from "lucide-react";
 import { useLanguage } from "../../i18n/LanguageContext";
 import LanguageSwitcher from "../../i18n/LanguageSwitcher";
+import EditableText from '../../components/CMS/EditableText';
+import EditableImage from '../../components/CMS/EditableImage';
+import EditableAuto from '../../components/CMS/EditableAuto';
 
 interface Props {
   isOpen: boolean;
@@ -62,7 +65,7 @@ const MobileSideBar: React.FC<Props> = ({ isOpen, setIsOpen }) => {
         >
           {/* Шапка: лого и кнопка закрытия */}
           <div className="flex items-center justify-between p-5 border-b border-slate-50">
-            <img src="/media-map-logo.jpg" alt="Logo" className="h-7 w-auto" />
+            <EditableImage imageKey="images.logo" fallbackSrc="/media-map-logo.jpg" alt="Logo" className="h-7 w-auto" />
             <div className="flex items-center gap-2">
               <LanguageSwitcher />
               <button
@@ -90,9 +93,9 @@ const MobileSideBar: React.FC<Props> = ({ isOpen, setIsOpen }) => {
                     >
                       <div className="flex items-center gap-4">
                     <span className={isActive(item.to) ? 'text-blue-600' : 'text-slate-400'}>
-                      {item.icon}
+                      <EditableAuto ns="mobileSideBar.item.icon" value={item.icon} />
                     </span>
-                        {item.label}
+                        <EditableAuto ns="mobileSideBar.item.label" value={item.label} />
                       </div>
                       {isActive(item.to) && <ChevronRight className="w-4 h-4" />}
                     </Link>
@@ -104,7 +107,7 @@ const MobileSideBar: React.FC<Props> = ({ isOpen, setIsOpen }) => {
             {user && (
                 <div className="mt-6 pt-6 border-t border-slate-100">
               <span className="px-4 text-[10px] font-black uppercase tracking-[0.15em] text-slate-400 block mb-3">
-                {t.nav.admin}
+                <EditableText textKey="nav.admin" value={t.nav.admin} />
               </span>
                   <div className="space-y-1">
                     <Link
@@ -117,7 +120,7 @@ const MobileSideBar: React.FC<Props> = ({ isOpen, setIsOpen }) => {
                         }`}
                     >
                       <LayoutDashboard className={`w-5 h-5 ${isActive('/admin/main') ? 'text-blue-400' : 'text-slate-400'}`} />
-                      {t.nav.panel}
+                      <EditableText textKey="nav.panel" value={t.nav.panel} />
                     </Link>
 
                     <button
@@ -125,7 +128,7 @@ const MobileSideBar: React.FC<Props> = ({ isOpen, setIsOpen }) => {
                         className="w-full flex items-center gap-4 px-4 py-3 rounded-2xl text-red-500 font-bold text-sm hover:bg-red-50 transition-colors mt-1"
                     >
                       <LogOut className="w-5 h-5 text-red-400" />
-                      {t.nav.logout}
+                      <EditableText textKey="nav.logout" value={t.nav.logout} />
                     </button>
                   </div>
                 </div>
@@ -135,7 +138,7 @@ const MobileSideBar: React.FC<Props> = ({ isOpen, setIsOpen }) => {
           {/* Нижняя часть */}
           <div className="p-6 border-t border-slate-50 bg-slate-50/50">
             <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest text-center">
-              mediamap.kg • {new Date().getFullYear()}
+              <EditableText textKey="mobileSidebar.siteName" value="mediamap.kg" /> • {new Date().getFullYear()}
             </p>
           </div>
         </div>

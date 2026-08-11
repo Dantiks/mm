@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { Quote, RefreshCw } from 'lucide-react';
+import EditableText from '../CMS/EditableText';
+import EditableAuto from '../CMS/EditableAuto';
 
 const OWL_QUOTES = [
   {
@@ -56,10 +58,10 @@ export const OwlQuoteWidget: React.FC = () => {
 
             <div>
               <span className="font-mono text-[11px] font-black uppercase tracking-widest text-amber-800 bg-amber-100/80 px-2.5 py-1 rounded-md border border-amber-200/60">
-                {language === 'ky' ? '🦉 Совёнок кеңеши' : '🦉 Цитата от совёнка MediaMap'}
+                <EditableText textKey="owlQuote.badge" value={language === 'ky' ? '🦉 Совёнок кеңеши' : '🦉 Цитата от совёнка MediaMap'} />
               </span>
               <h4 className="text-base font-black text-navy mt-1.5">
-                {language === 'ky' ? 'Медиасабаттуулук эрежеси' : 'Правило медиаграмотности'}
+                <EditableText textKey="owlQuote.heading" value={language === 'ky' ? 'Медиасабаттуулук эрежеси' : 'Правило медиаграмотности'} />
               </h4>
             </div>
           </div>
@@ -70,7 +72,7 @@ export const OwlQuoteWidget: React.FC = () => {
               <Quote className="h-5 w-5 rotate-180" />
             </div>
             <p className="text-sm sm:text-base font-serif italic text-slate-800 leading-relaxed font-medium">
-              «{language === 'ky' ? current.ky : current.ru}»
+              «<EditableAuto ns="owlQuote.text" value={language === 'ky' ? current.ky : current.ru} />»
             </p>
           </div>
 
@@ -81,7 +83,7 @@ export const OwlQuoteWidget: React.FC = () => {
               className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 text-xs font-bold transition-all border border-amber-200 shadow-2xs active:scale-95 cursor-pointer"
             >
               <RefreshCw className="h-3.5 w-3.5 text-amber-700" />
-              <span>{language === 'ky' ? 'Кийинки кеңеш' : 'Другая цитата'}</span>
+              <span><EditableText textKey="owlQuote.nextBtn" value={language === 'ky' ? 'Кийинки кеңеш' : 'Другая цитата'} /></span>
             </button>
           </div>
         </div>

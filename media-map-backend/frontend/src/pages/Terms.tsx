@@ -4,6 +4,7 @@ import { PageHero, PageSection } from '../components/UI/DesignKit';
 import { useLanguage } from '../i18n/LanguageContext';
 import termsContent from '../i18n/pages/terms';
 import EditableText from '../components/CMS/EditableText';
+import EditableAuto from '../components/CMS/EditableAuto';
 
 const stepIcons = [
   <Send className="h-7 w-7 text-navy" key="send" />,
@@ -25,7 +26,7 @@ const Terms = () => {
 
   return (
     <div className="bg-white">
-      <PageHero eyebrow={c.eyebrow} title={c.title} subtitle={c.subtitle} />
+      <PageHero keyPrefix="terms" eyebrow={c.eyebrow} title={c.title} subtitle={c.subtitle} />
 
       <PageSection>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -39,7 +40,7 @@ const Terms = () => {
                   {stepIcons[i]}
                 </span>
                 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-navy text-[14px] font-bold text-white">
-                  {step.n}
+                  <EditableAuto ns="terms.step.n" value={step.n} />
                 </span>
               </div>
 

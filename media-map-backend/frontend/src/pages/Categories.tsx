@@ -11,6 +11,8 @@ import {
 import AiAnalysisModal from '../components/AI/AiAnalysisModal';
 import axiosApi from '../axiosApi';
 import EditableText from '../components/CMS/EditableText';
+import EditableImage from '../components/CMS/EditableImage';
+import EditableBlock from '../components/CMS/EditableBlock';
 
 const categoryData = [
   {
@@ -69,17 +71,18 @@ const Categories = () => {
         {/* Крупный заголовок */}
         <div className="text-center max-w-3xl mx-auto mb-10">
           <div className="flex justify-center mb-4">
-            <img 
-              src="/owl-mascot.png" 
-              alt="Mascot" 
-              className="h-16 w-16 object-contain hover:scale-110 transition-transform duration-300 drop-shadow-md"
+            <EditableImage
+              imageKey="images.owlCategories"
+              fallbackSrc="/owl-mascot.png"
+              alt="Mascot"
+              className="h-16 w-16 object-contain drop-shadow-md"
             />
           </div>
           <h1 className="text-3xl font-black text-navy sm:text-4xl md:text-5xl tracking-tight">
-            Категории нарушений
+            <EditableText textKey="categories.raw1" value="Категории нарушений" />
           </h1>
           <p className="mt-2 text-sm text-slate-500 max-w-xl mx-auto font-medium">
-            Выберите категорию для проверки информации или изучения нормативно-правовых актов КР.
+            <EditableText textKey="categories.raw2" value="Выберите категорию для проверки информации или изучения нормативно-правовых актов КР." />
           </p>
         </div>
 
@@ -90,24 +93,24 @@ const Categories = () => {
             const isCheckingThis = activeCheckCategory === cat.id;
 
             return (
+              <EditableBlock key={cat.id} blockKey={`categories.${cat.id}`} label={detail?.title || cat.id}>
               <div
-                key={cat.id}
-                className="group flex flex-col justify-between rounded-3xl border-2 border-slate-200/80 bg-white p-8 shadow-xs transition-all duration-300 hover:border-red-600/60 hover:shadow-xl"
+                className="group flex flex-col justify-between rounded-3xl border-2 border-slate-200/80 bg-white p-8 shadow-xs transition-colors duration-200 hover:border-slate-300"
               >
                 <div>
                   {/* Иконка категории */}
                   <div className="flex items-center justify-between mb-6">
-                    <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-red-50 border-2 border-red-100 group-hover:bg-red-600 group-hover:text-white transition-colors duration-300 shadow-xs">
+                    <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-red-50 border-2 border-red-100 shadow-xs">
                       {cat.icon}
                     </span>
                   </div>
 
                   {/* Название и описание категории */}
-                  <h2 className="text-2xl font-black text-navy group-hover:text-red-600 transition-colors">
-                    {detail?.title || cat.id}
+                  <h2 className="text-2xl font-black text-navy group-hover:underline decoration-2 underline-offset-2 transition-colors">
+                    <EditableText textKey={`categories.${cat.id}.title`} value={detail?.title || cat.id} />
                   </h2>
                   <p className="mt-3 text-sm leading-relaxed text-slate-600 font-medium">
-                    {detail?.summary || ''}
+                    <EditableText textKey={`categories.${cat.id}.summary`} value={detail?.summary || ''} multiline />
                   </p>
                 </div>
 
@@ -129,7 +132,7 @@ const Categories = () => {
                   {isCheckingThis && (
                     <div className="p-4 rounded-2xl bg-slate-50 border border-orange-200 animate-in fade-in zoom-in-95 space-y-2">
                       <label className="block text-[11px] font-bold text-navy uppercase">
-                        Введите текст или ссылку для экспресс-анализа:
+                        <EditableText textKey="categories.raw3" value="Введите текст или ссылку для экспресс-анализа:" />
                       </label>
                       <textarea
                         rows={3}
@@ -158,6 +161,7 @@ const Categories = () => {
                   </Link>
                 </div>
               </div>
+              </EditableBlock>
             );
           })}
         </div>
@@ -165,18 +169,19 @@ const Categories = () => {
         {/* Информационный блок с Совёнком */}
         <div className="mt-12 rounded-3xl border-2 border-amber-200/80 bg-gradient-to-r from-amber-50/80 via-orange-50/40 to-amber-50/80 p-6 md:p-8 flex flex-col md:flex-row items-center gap-6 shadow-sm">
           <div className="relative shrink-0">
-            <img
-              src="/owl-mascot.png"
+            <EditableImage
+              imageKey="categories.infoOwl"
+              fallbackSrc="/owl-mascot.png"
               alt={t.owl.teacherName}
               className="h-20 w-20 object-contain drop-shadow-md"
             />
           </div>
           <div>
             <h3 className="text-base font-extrabold text-navy mb-1">
-              Правовая база и законодательство Кыргызской Республики
+              <EditableText textKey="categories.raw4" value="Правовая база и законодательство Кыргызской Республики" />
             </h3>
             <p className="text-xs md:text-sm text-slate-700 leading-relaxed font-medium">
-              Каждая категория содержит ссылки на Уголовный кодекс КР, Кодекс о правонарушениях КР, Закон КР «О защите от недостоверной (ложной) информации» и аналитические материалы.
+              <EditableText textKey="categories.raw5" value="Каждая категория содержит ссылки на Уголовный кодекс КР, Кодекс о правонарушениях КР, Закон КР «О защите от недостоверной (ложной) информации» и аналитические материалы." />
             </p>
           </div>
         </div>

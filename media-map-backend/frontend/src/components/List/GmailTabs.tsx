@@ -4,6 +4,7 @@ import { selectViolationTypes } from "../../features/violationTypes/violationTyp
 import ViolationListItem from "./ViolationListItem";
 import { MarkerBeforeModeratorMutation, MarkerOnMap } from "../../types";
 import { Inbox } from "lucide-react";
+import EditableText from '../../components/CMS/EditableText';
 
 interface Props {
   markers: MarkerOnMap[] | MarkerBeforeModeratorMutation[];
@@ -80,7 +81,7 @@ const GmailTabs: React.FC<Props> = ({ markers }) => {
               ) : (
               <div className="flex flex-col items-center justify-center py-20 text-slate-400 bg-cream rounded-[16px] border-2 border-dashed border-lineLight">
                 <Inbox className="w-12 h-12 mb-3 opacity-20" />
-                <p className="font-medium">Заявки в этой категории отсутствуют</p>
+                <p className="font-medium"><EditableText textKey="gmailTabs.raw1" value="Заявки в этой категории отсутствуют" /></p>
               </div>
           )}
         </div>

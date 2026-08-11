@@ -12,6 +12,8 @@ import {
 } from '../features/users/usersSlice';
 import { useLanguage } from '../i18n/LanguageContext';
 import authContent from '../i18n/pages/auth';
+import EditableText from '../components/CMS/EditableText';
+import EditableAttr from '../components/CMS/EditableAttr';
 
 type Tab = 'signup' | 'login';
 
@@ -73,7 +75,7 @@ const Auth = () => {
               isSignup ? 'bg-gold text-navy' : 'text-mutedNavy hover:text-white'
             }`}
           >
-            {c.createAccount}
+            <EditableText textKey="auth.createAccount" value={c.createAccount} />
           </button>
           <button
             type="button"
@@ -82,7 +84,7 @@ const Auth = () => {
               !isSignup ? 'bg-gold text-navy' : 'text-mutedNavy hover:text-white'
             }`}
           >
-            {c.login}
+            <EditableText textKey="auth.login" value={c.login} />
           </button>
         </div>
 
@@ -94,32 +96,40 @@ const Auth = () => {
           {isSignup && (
             <div className="flex flex-row gap-4">
               <div className="flex-1">
-                <label className={labelClass}>{c.firstName}</label>
-                <input
+                <label className={labelClass}><EditableText textKey="auth.firstName" value={c.firstName} /></label>
+                <EditableAttr textKey="auth.firstName" value={c.firstName} label="подсказка поля">
+                  {(v) => (
+                    <input
                   className={inputClass}
                   type="text"
                   name="firstName"
-                  placeholder={c.firstName}
+                  placeholder={v}
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
                 />
+                  )}
+                </EditableAttr>
               </div>
               <div className="flex-1">
-                <label className={labelClass}>{c.lastName}</label>
-                <input
+                <label className={labelClass}><EditableText textKey="auth.lastName" value={c.lastName} /></label>
+                <EditableAttr textKey="auth.lastName" value={c.lastName} label="подсказка поля">
+                  {(v) => (
+                    <input
                   className={inputClass}
                   type="text"
                   name="lastName"
-                  placeholder={c.lastName}
+                  placeholder={v}
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
                 />
+                  )}
+                </EditableAttr>
               </div>
             </div>
           )}
 
           <div>
-            <label className={labelClass}>{c.email}</label>
+            <label className={labelClass}><EditableText textKey="auth.email" value={c.email} /></label>
             <input
               className={inputClass}
               type="email"
@@ -132,16 +142,20 @@ const Auth = () => {
           </div>
 
           <div>
-            <label className={labelClass}>{c.password}</label>
-            <input
+            <label className={labelClass}><EditableText textKey="auth.password" value={c.password} /></label>
+            <EditableAttr textKey="auth.passwordPlaceholder" value={c.passwordPlaceholder} label="подсказка поля">
+              {(v) => (
+                <input
               className={inputClass}
               type="password"
               name="password"
-              placeholder={c.passwordPlaceholder}
+              placeholder={v}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
+              )}
+            </EditableAttr>
           </div>
 
           {(signUpError || signInError) && (

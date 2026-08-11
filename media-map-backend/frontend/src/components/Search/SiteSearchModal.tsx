@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Search, X, MapPin, Newspaper, ShieldAlert, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import axiosApi from '../../axiosApi';
+import EditableText from '../../components/CMS/EditableText';
 
 interface Props {
   isOpen: boolean;
@@ -164,12 +165,12 @@ const SiteSearchModal: React.FC<Props> = ({ isOpen, onClose }) => {
         <div className="mt-4 flex-1 overflow-y-auto pr-1 space-y-2">
           {loading ? (
             <div className="py-12 text-center text-xs font-bold text-slate-400">
-              Поиск информации по сайту...
+              <EditableText textKey="siteSearchModal.raw1" value="Поиск информации по сайту..." />
             </div>
           ) : query.trim() && results.length === 0 ? (
             <div className="py-12 text-center text-slate-400">
-              <p className="text-sm font-bold text-slate-700">Ничего не найдено</p>
-              <p className="text-xs mt-1">Попробуйте изменить поисковый запрос (например: Бишкек, фейк, вражда)</p>
+              <p className="text-sm font-bold text-slate-700"><EditableText textKey="siteSearchModal.raw2" value="Ничего не найдено" /></p>
+              <p className="text-xs mt-1"><EditableText textKey="siteSearchModal.raw3" value="Попробуйте изменить поисковый запрос (например: Бишкек, фейк, вражда)" /></p>
             </div>
           ) : (
             results.map((item) => (
@@ -187,7 +188,7 @@ const SiteSearchModal: React.FC<Props> = ({ isOpen, onClose }) => {
 
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <h4 className="text-sm font-bold text-slate-800 group-hover:text-red-600 transition-colors truncate">
+                    <h4 className="text-sm font-bold text-slate-800 group-hover:underline decoration-2 underline-offset-2 transition-colors truncate">
                       {item.title}
                     </h4>
                     {item.badge && (
@@ -201,14 +202,14 @@ const SiteSearchModal: React.FC<Props> = ({ isOpen, onClose }) => {
                   )}
                 </div>
 
-                <ArrowRight className="h-4 w-4 text-slate-400 group-hover:text-red-600 shrink-0 self-center" />
+                <ArrowRight className="h-4 w-4 text-slate-400 group-hover:text-navy shrink-0 self-center" />
               </Link>
             ))
           )}
 
           {!query.trim() && (
             <div className="py-8 text-center text-xs text-slate-400 space-y-3">
-              <p className="font-bold text-slate-600">Быстрый поиск по направлениям:</p>
+              <p className="font-bold text-slate-600"><EditableText textKey="siteSearchModal.raw4" value="Быстрый поиск по направлениям:" /></p>
               <div className="flex flex-wrap justify-center gap-2">
                 {['Язык вражды', 'Дезинформация', 'Бишкек', 'Фактчекинг', 'Фейки'].map((tag) => (
                   <button

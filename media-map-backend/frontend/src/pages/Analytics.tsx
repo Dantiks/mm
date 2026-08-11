@@ -225,7 +225,7 @@ const Analytics: React.FC = () => {
                 {sortedCities.map(([city, count]) => (
                   <div
                     key={city}
-                    className="flex items-center justify-between p-3.5 rounded-2xl bg-slate-50 border border-slate-100 hover:border-red-200 transition-colors"
+                    className="flex items-center justify-between p-3.5 rounded-2xl bg-slate-50 border border-slate-100"
                   >
                     <span className="text-xs font-bold text-navy flex items-center gap-2">
                       <span className="h-2 w-2 rounded-full bg-red-600" />

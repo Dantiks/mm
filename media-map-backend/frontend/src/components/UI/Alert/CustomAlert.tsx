@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import EditableText from '../../../components/CMS/EditableText';
 
 interface Props {
   message: string;
@@ -36,7 +37,7 @@ const CustomAlert: React.FC<Props> = ({ message, isShow, hideAlert }) => {
         {/* Алерт */}
         <div className="fixed top-5 left-0 right-0 mx-auto max-w-[1200px] w-[90%] bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4">
           <div className="py-2">
-            <p className="font-bold">Внимание!</p>
+            <p className="font-bold"><EditableText textKey="customAlert.raw1" value="Внимание!" /></p>
             <p>{message}</p>
           </div>
         </div>

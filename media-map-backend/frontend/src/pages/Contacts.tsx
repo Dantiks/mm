@@ -30,7 +30,7 @@ const Contacts = () => {
 
   return (
     <div className="bg-white font-inter min-h-screen">
-      <PageHero eyebrow={c.eyebrow} title={c.title} subtitle={c.subtitle} />
+      <PageHero keyPrefix="contacts" eyebrow={c.eyebrow} title={c.title} subtitle={c.subtitle} />
 
       <PageSection>
         {/* Карточки контактов */}
@@ -39,7 +39,7 @@ const Contacts = () => {
             href="https://t.me/mediamap_kg"
             target="_blank"
             rel="noreferrer"
-            className="group flex flex-col rounded-2xl border-2 border-lineLight bg-white p-8 transition-all hover:border-red-500/40 hover:shadow-lg"
+            className="group flex flex-col rounded-2xl border-2 border-lineLight bg-white p-8 transition-colors hover:border-slate-300"
           >
             <IconPill className="!h-14 !w-14 bg-red-50 text-red-600 border border-red-100">
               <Send className="h-6 w-6 text-red-600" />
@@ -54,7 +54,7 @@ const Contacts = () => {
             </span>
           </a>
 
-          <div className="group flex flex-col rounded-2xl border-2 border-lineLight bg-white p-8 transition-all hover:border-red-500/40 hover:shadow-lg">
+          <div className="group flex flex-col rounded-2xl border-2 border-lineLight bg-white p-8 transition-colors hover:border-slate-300">
             <IconPill className="!h-14 !w-14 bg-red-50 text-red-600 border border-red-100">
               <Mail className="h-6 w-6 text-red-600" />
             </IconPill>
@@ -63,7 +63,7 @@ const Contacts = () => {
               <EditableText textKey="contacts.email.desc" value={c.email.description} />
             </p>
             <span className="mt-6 select-all text-[14px] font-extrabold text-navy">
-              media.map.kg@gmail.com
+              <EditableText textKey="contacts.emailAddress" value="media.map.kg@gmail.com" />
             </span>
           </div>
 
