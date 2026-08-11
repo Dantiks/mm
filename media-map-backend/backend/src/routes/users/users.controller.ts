@@ -2,7 +2,8 @@ import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/c
 import { UsersService } from './users.service';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { User } from '../../models/users.models';
-import { SignUp } from './dto/sign-up.dto';
+import { CreateUserDto } from './dto/create-user.dto';
+import { AdminGuard } from '../../auth/admin.guard';
 import { TokenAuthGuard } from '../../auth/token-auth.guard';
 
 @ApiTags('Пользователи')
@@ -10,12 +11,14 @@ import { TokenAuthGuard } from '../../auth/token-auth.guard';
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
-  @ApiOperation({ summary: 'Создание пользователя' })
+  @ApiOperation({ summary: 'Создание пользователя администратором' })
   @ApiResponse({ status: 200, type: User })
-  @UseGuards(TokenAuthGuard)
+  @ApiResponse({ status: 403, description: 'Нужна роль ADMIN' })
+  // Раньше стоял TokenAuthGuard: любой залогиненный мог создать пользователя.
+  @UseGuards(AdminGuard)
   @Post()
-  create(@Body() dto: SignUp) {
-    return this.usersService.create(dto);
+  create(@Body() dto: CreateUserDto) {
+    return this.usersService.createByAdmin(dto);
   }
 
   @ApiOperation({ summary: 'Получить всех пользователей' })

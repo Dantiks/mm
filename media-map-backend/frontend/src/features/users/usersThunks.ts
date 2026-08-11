@@ -35,6 +35,35 @@ export const signUp = createAsyncThunk<User, SignUp, { rejectValue: ValidationEr
     }
 );
 
+export interface CreateUserBody {
+    email: string;
+    password: string;
+    role: 'ADMIN' | 'MODERATOR';
+    name?: string;
+}
+
+/**
+ * Создание пользователя администратором.
+ *
+ * Отдельно от signUp: тот вызывает публичную регистрацию и в редьюсере
+ * подменяет текущего пользователя новым — администратор, добавляя коллегу,
+ * незаметно оказывался залогинен под его учёткой.
+ */
+export const createUser = createAsyncThunk<User, CreateUserBody, { rejectValue: ValidationError }>(
+    'users/create',
+    async (body, {rejectWithValue}) => {
+        try {
+            const {data} = await axiosApi.post<User>('users', body);
+            return data;
+        } catch (e) {
+            if (isAxiosError(e) && e.response && e.response.status === 400) {
+                return rejectWithValue(e.response.data as ValidationError);
+            }
+            throw e;
+        }
+    }
+);
+
 export const signIn = createAsyncThunk<User, SignIn, { rejectValue: LoginError }>(
     'users/sign-in',
     async (body, {rejectWithValue}) => {

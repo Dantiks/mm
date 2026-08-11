@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch } from "../../app/hooks/useAppDispatch";
-import { deleteUser, getAllUsers, signUp } from "../../features/users/usersThunks";
+import { createUser, deleteUser, getAllUsers } from "../../features/users/usersThunks";
 import { useAppSelector } from "../../app/hooks/useAppSelector";
 import { selectAllUsers, selectUser } from "../../features/users/usersSlice";
 import { User } from "../../types";
+import EditableText from '../../components/CMS/EditableText';
 import {
     Users as UsersIcon,
     Trash2,
@@ -53,8 +54,8 @@ const Users = () => {
         if (!newEmail || !newPassword) return;
         setIsCreating(true);
         try {
-            await dispatch(signUp({ email: newEmail, password: newPassword, role: newRole, name: 'Администратор №2' })).unwrap();
-            setCreateSuccess(`Второй администратор (${newEmail}) успешно зарегистрирован!`);
+            await dispatch(createUser({ email: newEmail, password: newPassword, role: newRole, name: newEmail })).unwrap();
+            setCreateSuccess(`Пользователь ${newEmail} создан с ролью ${newRole === 'ADMIN' ? 'администратор' : 'модератор'}.`);
             setNewEmail('');
             setNewPassword('');
             dispatch(getAllUsers());
@@ -62,8 +63,15 @@ const Users = () => {
                 setCreateSuccess('');
                 setIsAddModalOpen(false);
             }, 2500);
-        } catch (e) {
-            window.alert('Ошибка при создании администратора');
+        } catch (err: any) {
+            const status = err?.response?.status;
+            window.alert(
+                status === 403
+                    ? 'Создавать пользователей может только администратор.'
+                    : status === 409
+                        ? 'Пользователь с таким email уже существует.'
+                        : err?.message || 'Не удалось создать пользователя.'
+            );
         } finally {
             setIsCreating(false);
         }
@@ -108,8 +116,8 @@ const Users = () => {
                         <UsersIcon className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                        <h2 className="text-2xl font-bold text-slate-800 tracking-tight">Пользователи и Администраторы</h2>
-                        <p className="text-sm text-slate-500 font-medium">Управление доступом второго администратора (мамы) и модераторов</p>
+                        <h2 className="text-2xl font-bold text-slate-800 tracking-tight"><EditableText textKey="users.raw1" value="Пользователи и Администраторы" /></h2>
+                        <p className="text-sm text-slate-500 font-medium"><EditableText textKey="users.raw2" value="Управление доступом второго администратора (мамы) и модераторов" /></p>
                     </div>
                 </div>
                 
@@ -130,8 +138,8 @@ const Users = () => {
                     <thead>
                     <tr className="bg-slate-50/50 border-b border-slate-100">
                         <th className="py-5 px-6 text-[11px] font-bold text-slate-400 uppercase tracking-[0.1em]">Email пользователя</th>
-                        <th className="py-5 px-6 text-[11px] font-bold text-slate-400 uppercase tracking-[0.1em]">Уровень доступа</th>
-                        <th className="py-5 px-6 text-[11px] font-bold text-slate-400 uppercase tracking-[0.1em] text-right">Действия</th>
+                        <th className="py-5 px-6 text-[11px] font-bold text-slate-400 uppercase tracking-[0.1em]"><EditableText textKey="users.raw3" value="Уровень доступа" /></th>
+                        <th className="py-5 px-6 text-[11px] font-bold text-slate-400 uppercase tracking-[0.1em] text-right"><EditableText textKey="users.raw4" value="Действия" /></th>
                     </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-50">
@@ -167,7 +175,7 @@ const Users = () => {
                                     onClick={() => handleDelete(userItem)}
                                 >
                                     <Trash2 className="w-4 h-4" />
-                                    <span className="hidden sm:inline">Удалить</span>
+                                    <span className="hidden sm:inline"><EditableText textKey="users.raw5" value="Удалить" /></span>
                                 </button>
                             </td>
                         </tr>
@@ -183,7 +191,7 @@ const Users = () => {
                         <div className="flex items-center justify-between pb-4 border-b border-slate-100">
                             <h3 className="text-lg font-bold text-navy flex items-center gap-2">
                                 <ShieldCheck className="w-5 h-5 text-red-600" />
-                                Назначить 2-го администратора
+                                <EditableText textKey="users.raw6" value="Назначить 2-го администратора" />
                             </h3>
                             <button onClick={() => setIsAddModalOpen(false)} className="text-slate-400 hover:text-slate-600">
                                 <X className="w-5 h-5" />
@@ -204,7 +212,7 @@ const Users = () => {
                             </div>
 
                             <div>
-                                <label className="block text-xs font-bold text-slate-600 mb-1">Пароль</label>
+                                <label className="block text-xs font-bold text-slate-600 mb-1"><EditableText textKey="users.raw7" value="Пароль" /></label>
                                 <input
                                     type="password"
                                     required
@@ -216,14 +224,14 @@ const Users = () => {
                             </div>
 
                             <div>
-                                <label className="block text-xs font-bold text-slate-600 mb-1">Роль доступа</label>
+                                <label className="block text-xs font-bold text-slate-600 mb-1"><EditableText textKey="users.raw8" value="Роль доступа" /></label>
                                 <select
                                     value={newRole}
                                     onChange={(e) => setNewRole(e.target.value as 'ADMIN' | 'MODERATOR')}
                                     className="w-full rounded-xl border border-slate-300 px-4 py-2.5 text-sm text-navy outline-none focus:border-red-500"
                                 >
-                                    <option value="ADMIN">Администратор (Полный доступ)</option>
-                                    <option value="MODERATOR">Модератор (Проверка заявок)</option>
+                                    <option value="ADMIN">{"Администратор (Полный доступ)"}</option>
+                                    <option value="MODERATOR">{"Модератор (Проверка заявок)"}</option>
                                 </select>
                             </div>
 
@@ -240,7 +248,7 @@ const Users = () => {
                                     onClick={() => setIsAddModalOpen(false)}
                                     className="rounded-xl px-4 py-2 text-xs font-bold text-slate-500 hover:bg-slate-100"
                                 >
-                                    Отмена
+                                    <EditableText textKey="users.raw11" value="Отмена" />
                                 </button>
                                 <button
                                     type="submit"

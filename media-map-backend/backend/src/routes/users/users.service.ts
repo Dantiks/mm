@@ -1,9 +1,15 @@
-import { Injectable, NotFoundException, OnModuleInit } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+  OnModuleInit,
+} from '@nestjs/common';
 import { User } from '../../models/users.models';
 import { InjectModel } from '@nestjs/sequelize';
 import * as bcrypt from 'bcryptjs';
 import { SALT } from '../../../constants';
 import { SignUp } from './dto/sign-up.dto';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Injectable()
 export class UsersService implements OnModuleInit {
@@ -33,9 +39,32 @@ export class UsersService implements OnModuleInit {
 
   async create(dto: SignUp): Promise<User> {
     const hashedPassword = await bcrypt.hash(dto.password, SALT);
+    // Роль здесь не берём из тела запроса: /auth/sign-up открыт всем, и
+    // раньше можно было зарегистрироваться сразу администратором, просто
+    // добавив role в JSON. Роль по умолчанию задаёт модель.
     const user = await this.usersRepository.create({
-      ...dto,
+      email: dto.email,
+      name: dto.name,
       password: hashedPassword,
+    });
+    await user.generateToken();
+    await user.save();
+    return user;
+  }
+
+  /** Создание пользователя администратором — здесь роль задавать можно. */
+  async createByAdmin(dto: CreateUserDto): Promise<User> {
+    const existing = await this.getByEmail(dto.email);
+    if (existing) {
+      throw new ConflictException('Пользователь с таким email уже существует');
+    }
+
+    const hashedPassword = await bcrypt.hash(dto.password, SALT);
+    const user = await this.usersRepository.create({
+      email: dto.email,
+      name: dto.name || dto.email,
+      password: hashedPassword,
+      role: dto.role,
     });
     await user.generateToken();
     await user.save();
