@@ -14,6 +14,9 @@ module.exports = {
                 nunito: ['Nunito Sans', 'sans-serif'],
                 roboto: ['Roboto', 'sans-serif'],
                 mono: ['JetBrains Mono', 'monospace'],
+                // font-serif резолвился в системный serif — на разных машинах
+                // заголовки новостей выглядели по-разному.
+                serif: ['Merriweather', 'Georgia', 'serif'],
             },
             screens: {
                 'sm': '240px', // кастомный брейкпоинт
