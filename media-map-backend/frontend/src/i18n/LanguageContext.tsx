@@ -7,6 +7,8 @@ interface LanguageContextValue {
   setLanguage: (lang: Language) => void;
   t: Translations;
   refreshSiteTexts: () => Promise<void>;
+  /** Сырые значения из БД по плоскому ключу — нужны CMS-компонентам. */
+  siteTexts: Record<string, { ru: string; ky: string }>;
 }
 
 const LanguageContext = createContext<LanguageContextValue | undefined>(undefined);
@@ -77,8 +79,9 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       setLanguage,
       t: computedTranslations,
       refreshSiteTexts: fetchSiteTexts,
+      siteTexts: dbTexts,
     }),
-    [language, computedTranslations]
+    [language, computedTranslations, dbTexts]
   );
 
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
