@@ -74,20 +74,19 @@ const Header = () => {
 
           {/* Правая часть */}
           <div className="flex items-center gap-3">
-            {/* Интерактивный поиск по лупе наведение */}
-            <div className="relative flex items-center group">
-              <div
-                onClick={() => setIsSearchOpen(true)}
-                className="flex items-center rounded-full bg-slate-100 p-1 border border-slate-200/90 transition-all duration-500 ease-out group-hover:w-60 w-10 overflow-hidden group-hover:bg-white group-hover:shadow-md group-hover:border-red-500/80 cursor-pointer"
-              >
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-slate-600 group-hover:text-red-600 transition-colors">
-                  <Search className="h-4 w-4" />
-                </div>
-                <span className="whitespace-nowrap text-xs font-semibold text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pr-3 select-none">
-                  <EditableText textKey="header.raw3" value="Поиск по сайту..." />
-                </span>
-              </div>
-            </div>
+            {/* Поиск. Кнопка круглая и размера не меняет: раньше она
+                разъезжалась с 40 до 240 пикселей и толкала соседние
+                элементы шапки. Реакция на наведение осталась — фон,
+                рамка и цвет иконки. Подпись ушла в title. */}
+            <button
+              type="button"
+              onClick={() => setIsSearchOpen(true)}
+              title="Поиск по сайту"
+              aria-label="Поиск по сайту"
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-slate-100 border border-slate-200/90 text-slate-600 transition-colors duration-200 hover:bg-white hover:border-red-500/80 hover:text-red-600 hover:shadow-md cursor-pointer"
+            >
+              <Search className="h-4 w-4" />
+            </button>
 
             <LanguageSwitcher className="hidden md:flex" />
 
