@@ -1,0 +1,7 @@
+
+# Локальные логи запуска
+backend.log
+frontend.log
+
+# Копия исходников перед массовой обёрткой текстов
+.src-backup-before-codemod/
