@@ -1,18 +1,56 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLocation, useNavigate } from "react-router-dom";
-import { Menu, Bell, Search, ChevronRight, Sparkles } from "lucide-react";
+import { Menu, Bell, Search, ChevronRight, Sparkles, LogOut } from "lucide-react";
+import { useAppSelector } from "../../app/hooks/useAppSelector";
+import { useAppDispatch } from "../../app/hooks/useAppDispatch";
+import { selectUser } from "../../features/users/usersSlice";
+import { logout } from "../../features/users/usersThunks";
+import { canEditSiteContent } from "../../utils/roles";
+import EditableText from '../../components/CMS/EditableText';
 
 interface Props {
     setSidebarOpen: (state: boolean) => void;
 }
 
+const ROLE_LABELS: Record<string, string> = {
+    SUPERADMIN: 'Суперадминистратор',
+    ADMIN: 'Администратор',
+    MODERATOR: 'Модератор',
+};
+
 const AdminPanelHeader: React.FC<Props> = ({ setSidebarOpen }) => {
     const location = useLocation();
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+    const user = useAppSelector(selectUser);
+    const [isLoggingOut, setIsLoggingOut] = useState(false);
+
+    // Раньше здесь было захардкожено «Администратор / Главный модератор / A»
+    // независимо от того, кто вошёл.
+    const role = (user?.role || '').toUpperCase();
+    const displayName = user?.name || user?.email || 'Пользователь';
+    const roleLabel = ROLE_LABELS[role] || role || 'Без роли';
+    const initial = displayName.trim().charAt(0).toUpperCase() || '?';
 
     const handleEnableLiveEdit = () => {
-        localStorage.setItem('adminEditorMode', 'true');
-        navigate('/');
+        // ?edit=1 включает режим редактора. Прежний флаг adminEditorMode
+        // в localStorage мог поставить кто угодно через devtools.
+        navigate('/?edit=1');
+    };
+
+    const handleLogout = async () => {
+        if (isLoggingOut) return;
+        if (!window.confirm('Выйти из аккаунта?')) return;
+
+        setIsLoggingOut(true);
+        try {
+            await dispatch(logout()).unwrap();
+        } catch (e) {
+            // Локальную сессию сбрасываем в любом случае.
+        } finally {
+            setIsLoggingOut(false);
+            navigate('/');
+        }
     };
 
     const getTitle = () => {
@@ -40,9 +78,9 @@ const AdminPanelHeader: React.FC<Props> = ({ setSidebarOpen }) => {
                 {/* Хлебные крошки / Заголовок */}
                 <div className="flex flex-col">
                     <div className="flex items-center gap-2 text-xs font-medium text-slate-400 uppercase tracking-wider">
-                        <span>Админ</span>
+                        <span><EditableText textKey="adminPanelHeader.raw1" value="Админ" /></span>
                         <ChevronRight className="w-3 h-3" />
-                        <span className="text-goldDeep">Панель</span>
+                        <span className="text-goldDeep"><EditableText textKey="adminPanelHeader.raw2" value="Панель" /></span>
                     </div>
                     <h1 className="text-xl font-bold text-slate-800 leading-tight">
                         {getTitle()}
@@ -52,15 +90,17 @@ const AdminPanelHeader: React.FC<Props> = ({ setSidebarOpen }) => {
 
             {/* Правая часть: Поиск, Живое редактирование и Профиль */}
             <div className="flex items-center gap-3">
-                <button
-                    onClick={handleEnableLiveEdit}
-                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-black shadow-md shadow-red-500/20 transition-all cursor-pointer group"
-                    title="Зайти на сайт и редактировать любые тексты прямо на экране"
-                >
-                    <Sparkles className="w-4 h-4 text-amber-300 group-hover:rotate-12 transition-transform" />
-                    <span className="hidden sm:inline">Редактировать сайт визуально</span>
-                    <span className="sm:hidden">Редактор</span>
-                </button>
+                {canEditSiteContent(user?.role) && (
+                    <button
+                        onClick={handleEnableLiveEdit}
+                        className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-black shadow-md shadow-red-500/20 transition-all cursor-pointer group"
+                        title="Зайти на сайт и редактировать любые тексты прямо на экране"
+                    >
+                        <Sparkles className="w-4 h-4 text-amber-300 group-hover:rotate-12 transition-transform" />
+                        <span className="hidden sm:inline"><EditableText textKey="adminPanelHeader.raw3" value="Редактировать сайт визуально" /></span>
+                        <span className="sm:hidden"><EditableText textKey="adminPanelHeader.raw4" value="Редактор" /></span>
+                    </button>
+                )}
 
                 <button className="hidden md:flex p-2.5 rounded-xl text-slate-400 hover:bg-slate-50 hover:text-slate-600 transition-all">
                     <Search className="w-5 h-5" />
@@ -72,12 +112,26 @@ const AdminPanelHeader: React.FC<Props> = ({ setSidebarOpen }) => {
                 <div className="h-8 w-[1px] bg-slate-100 mx-2 hidden md:block"></div>
                 <div className="flex items-center gap-3 pl-2">
                     <div className="hidden md:block text-right">
-                        <p className="text-sm font-semibold text-slate-700">Администратор</p>
-                        <p className="text-[11px] text-slate-400 font-medium">Главный модератор</p>
+                        <p className="text-sm font-semibold text-slate-700 max-w-[180px] truncate" title={displayName}>
+                            {displayName}
+                        </p>
+                        <p className="text-[11px] text-slate-400 font-medium">{roleLabel}</p>
                     </div>
                     <div className="w-10 h-10 rounded-xl bg-navy flex items-center justify-center text-white font-bold shadow-md">
-                        A
+                        {initial}
                     </div>
+
+                    <button
+                        onClick={handleLogout}
+                        disabled={isLoggingOut}
+                        title="Выйти из аккаунта"
+                        className="flex items-center gap-1.5 px-3 py-2.5 rounded-xl text-rose-500 hover:bg-rose-50 transition-all cursor-pointer disabled:opacity-60"
+                    >
+                        <LogOut className="w-5 h-5" />
+                        <span className="hidden lg:inline text-xs font-bold">
+                            {isLoggingOut ? 'Выходим…' : 'Выйти'}
+                        </span>
+                    </button>
                 </div>
             </div>
         </header>

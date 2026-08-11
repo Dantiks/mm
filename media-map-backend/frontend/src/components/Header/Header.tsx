@@ -11,6 +11,8 @@ import LanguageSwitcher from "../../i18n/LanguageSwitcher";
 import SiteSearchModal from "../Search/SiteSearchModal";
 
 import EditableText from "../CMS/EditableText";
+import { canEditSiteContent } from "../../utils/roles";
+import EditableImage from '../../components/CMS/EditableImage';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -42,8 +44,9 @@ const Header = () => {
 
           {/* Логотип */}
           <Link to="/" className="flex items-center gap-2 shrink-0">
-            <img
-              src="/media-map-logo.jpg"
+            <EditableImage
+              imageKey="images.logo"
+              fallbackSrc="/media-map-logo.jpg"
               alt="MediaMap"
               className="h-12 w-auto object-contain"
             />
@@ -81,7 +84,7 @@ const Header = () => {
                   <Search className="h-4 w-4" />
                 </div>
                 <span className="whitespace-nowrap text-xs font-semibold text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pr-3 select-none">
-                  Поиск по сайту...
+                  <EditableText textKey="header.raw3" value="Поиск по сайту..." />
                 </span>
               </div>
             </div>
@@ -90,14 +93,14 @@ const Header = () => {
 
             {user && (
               <div className="hidden items-center gap-2 md:flex">
-                {user.role === 'admin' && (
+                {canEditSiteContent(user.role) && (
                   <Link
                     to="/admin/texts"
                     className="flex items-center gap-1.5 rounded-xl bg-red-50 text-red-600 border border-red-200 px-3 py-2 text-xs font-extrabold transition-all hover:bg-red-600 hover:text-white shadow-xs"
                     title="Визуальное редактирование текстов сайта"
                   >
                     <Edit3 className="h-4 w-4" />
-                    <span>Редактор сайта</span>
+                    <span><EditableText textKey="header.raw4" value="Редактор сайта" /></span>
                   </Link>
                 )}
 
@@ -106,14 +109,14 @@ const Header = () => {
                   className="flex items-center gap-2 rounded-xl bg-navy px-4 py-2 text-xs font-bold text-white transition-all hover:bg-navyCard shadow-xs"
                 >
                   <LayoutDashboard className="h-4 w-4" />
-                  {t.nav.panel}
+                  <EditableText textKey="nav.panel" value={t.nav.panel} />
                 </Link>
                 <button
                   onClick={handleLogout}
                   className="flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-bold text-red-500 transition-all hover:bg-red-50"
                 >
                   <LogOut className="h-4 w-4" />
-                  {t.nav.logout}
+                  <EditableText textKey="nav.logout" value={t.nav.logout} />
                 </button>
               </div>
             )}
