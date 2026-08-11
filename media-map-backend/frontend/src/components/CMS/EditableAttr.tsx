@@ -54,7 +54,10 @@ export const EditableAttr: React.FC<Props> = ({ textKey, value, children, label 
   };
 
   return (
-    <span className="relative inline-block w-full">
+    <span
+      className="relative inline-block w-full"
+      onClick={(e) => e.stopPropagation()}
+    >
       {children(current)}
 
       <button

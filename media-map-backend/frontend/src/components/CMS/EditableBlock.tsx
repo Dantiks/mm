@@ -33,12 +33,26 @@ export const EditableBlock: React.FC<Props> = ({
   }
 
   return (
-    <div className={`relative group/block ${className}`}>
+    <div
+      className={`relative group/block ${className}`}
+      onClickCapture={(e) => {
+        // В режиме редактора карточка не должна никуда вести — иначе
+        // до текста и кнопок внутри не добраться. Но собственные кнопки
+        // редактора пропускаем, иначе они перестанут нажиматься:
+        // перехват на фазе погружения срабатывает раньше их обработчиков.
+        if ((e.target as HTMLElement).closest('[data-cms-control]')) return;
+        e.preventDefault();
+        e.stopPropagation();
+      }}
+    >
       <div className={hidden ? 'opacity-25 grayscale pointer-events-none' : ''}>
         {children}
       </div>
 
-      <div className="absolute top-1 right-1 z-40 flex items-center gap-1 opacity-0 group-hover/block:opacity-100 transition-opacity">
+      <div
+        data-cms-control
+        className="absolute top-1 right-1 z-40 flex items-center gap-1 opacity-0 group-hover/block:opacity-100 transition-opacity"
+      >
         <span
           className="bg-navy/90 text-white text-[9px] font-mono font-bold px-1.5 py-0.5 rounded-md shadow-md flex items-center gap-1 max-w-[160px] truncate"
           title={blockKey}

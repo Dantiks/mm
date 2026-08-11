@@ -81,7 +81,13 @@ export const EditableImage: React.FC<Props> = ({ imageKey, fallbackSrc, alt, cla
   };
 
   return (
-    <span className="relative group inline-block max-w-full">
+    <span
+      className="relative group inline-block max-w-full"
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+      }}
+    >
       <img
         src={src}
         alt={alt}
@@ -90,7 +96,7 @@ export const EditableImage: React.FC<Props> = ({ imageKey, fallbackSrc, alt, cla
         }`}
       />
 
-      <span className="absolute inset-0 flex items-center justify-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity bg-navy/60 rounded-lg">
+      <span data-cms-control className="absolute inset-0 flex items-center justify-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity bg-navy/60 rounded-lg">
         <button
           type="button"
           onClick={() => inputRef.current?.click()}

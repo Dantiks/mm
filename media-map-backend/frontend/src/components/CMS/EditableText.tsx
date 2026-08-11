@@ -141,6 +141,15 @@ export const EditableText: React.FC<Props> = ({
       onBlur={handleBlur}
       onKeyDown={handleKeyDown}
       onPaste={handlePaste}
+      // Текст часто лежит внутри ссылки или кнопки. Без этого клик уходил
+      // родителю: вместо правки происходил переход на другую страницу.
+      onClick={(e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+      }}
+      // Фокус в contentEditable ставится по mousedown, поэтому здесь только
+      // гасим всплытие, но не отменяем событие — иначе каретка не встанет.
+      onMouseDown={(e: React.MouseEvent) => e.stopPropagation()}
       style={{ whiteSpace: multiline ? 'pre-wrap' : 'normal' }}
       className={`${className} outline-none border-2 border-dashed ${borderColor} rounded-lg px-1 transition-all cursor-text focus:ring-2 focus:ring-red-500/20`}
     >
@@ -149,7 +158,7 @@ export const EditableText: React.FC<Props> = ({
   );
 
   const badge = (
-    <span className="absolute -top-4 left-0 z-30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
+    <span data-cms-control className="absolute -top-4 left-0 z-30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
       <span className="bg-navy text-white text-[9px] font-mono font-bold px-2 py-0.5 rounded-md shadow-md flex items-center gap-1">
         <Edit2 className="w-2.5 h-2.5 text-gold" />
         {textKey}
