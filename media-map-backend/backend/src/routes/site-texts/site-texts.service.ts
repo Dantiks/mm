@@ -146,6 +146,18 @@ export class SiteTextsService implements OnModuleInit {
     return result;
   }
 
+  /**
+   * Значения по умолчанию — чтобы редактор мог откатить правку к исходному
+   * тексту, не имея доступа к коду.
+   */
+  getDefaults(): Record<string, { ru: string; ky: string; category?: string }> {
+    const result: Record<string, { ru: string; ky: string; category?: string }> = {};
+    for (const t of DEFAULT_SITE_TEXTS) {
+      result[t.key] = { ru: t.valueRu, ky: t.valueKy, category: t.category };
+    }
+    return result;
+  }
+
   async updateBulk(items: UpdateSiteTextItemDto[]) {
     for (const item of items) {
       const existing = await this.siteTextRepository.findByPk(item.key);
