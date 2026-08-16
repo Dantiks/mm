@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useLanguage } from '../i18n/LanguageContext';
 import NewsDetailModal, { DetailedNewsItem } from '../components/News/NewsDetailModal';
 import AiAnalysisModal from '../components/AI/AiAnalysisModal';
 import { RefreshCw } from 'lucide-react';
@@ -16,7 +15,6 @@ interface RawNewsItem {
 }
 
 const NewsAggregator: React.FC = () => {
-  const { t } = useLanguage();
   const [news, setNews] = useState<RawNewsItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [selectedNews, setSelectedNews] = useState<DetailedNewsItem | null>(null);
