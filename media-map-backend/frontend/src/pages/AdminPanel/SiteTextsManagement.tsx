@@ -152,7 +152,7 @@ const SiteTextsManagement: React.FC = () => {
           <button
             onClick={handleSaveAll}
             disabled={saving}
-            className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-sm font-bold shadow-md shadow-red-500/20 transition-all disabled:opacity-50"
+            className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-red-600 hover:bg-navy text-white text-sm font-bold shadow-md shadow-red-500/20 transition-all disabled:opacity-50"
           >
             {saving ? (
               <RefreshCw className="w-4 h-4 animate-spin" />
@@ -338,7 +338,7 @@ const SiteTextsManagement: React.FC = () => {
               </button>
               <button
                 onClick={handleAddNewKey}
-                className="px-5 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white text-sm font-bold shadow-md shadow-red-500/20"
+                className="px-5 py-2 rounded-xl bg-red-600 hover:bg-navy text-white text-sm font-bold shadow-md shadow-red-500/20"
               >
                 Добавить
               </button>

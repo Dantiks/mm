@@ -40,7 +40,7 @@ const NewsDetailModal: React.FC<Props> = ({ news, onClose, onRunAiCheck }) => {
           </div>
           <button
             onClick={onClose}
-            className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-200/80 text-slate-600 hover:bg-red-600 hover:text-white transition-all cursor-pointer"
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-200/80 text-slate-600 hover:bg-navy hover:text-white transition-all cursor-pointer"
           >
             <X className="h-4 w-4" />
           </button>
@@ -100,7 +100,7 @@ const NewsDetailModal: React.FC<Props> = ({ news, onClose, onRunAiCheck }) => {
                     onClose();
                     onRunAiCheck(fullText);
                   }}
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs shadow-md shadow-red-600/30 hover:scale-103 transition-all cursor-pointer"
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-red-600 hover:bg-navy text-white font-bold text-xs shadow-md shadow-red-600/30 hover:scale-103 transition-all cursor-pointer"
                 >
                   <EditableText textKey="modal.btnCheck" value="Проверить информацию" />
                 </button>

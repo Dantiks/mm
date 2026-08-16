@@ -80,7 +80,7 @@ const Violations = () => {
                                 className={`
                           flex items-center justify-between p-4 rounded-2xl border transition-all duration-300
                           ${isEditing
-                                    ? 'border-gold bg-cream shadow-sm ring-4 ring-creamPill'
+                                    ? 'border-gold bg-white shadow-sm ring-4 ring-slate-200'
                                     : 'border-slate-50 bg-slate-50/50 hover:border-slate-200 hover:bg-white hover:shadow-md'}
                         `}
                             >
@@ -109,7 +109,7 @@ const Violations = () => {
                                 </button>
                                 <button
                                     type="button"
-                                    className="p-2.5 rounded-xl text-slate-400 hover:bg-white hover:text-rose-500 hover:shadow-sm transition-all"
+                                    className="p-2.5 rounded-xl text-slate-400 hover:bg-white hover:text-navy hover:shadow-sm transition-all"
                                 >
                                   <Trash2 className="w-5 h-5" />
                                 </button>

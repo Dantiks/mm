@@ -72,7 +72,7 @@ const Users = () => {
     const getRoleBadge = (role: string) => {
         const styles = {
             SUPERADMIN: "bg-rose-100 text-rose-700 border-rose-200",
-            ADMIN: "bg-amber-100 text-amber-800 border-amber-300 font-bold",
+            ADMIN: "bg-slate-100 text-amber-800 border-slate-200 font-bold",
             MODERATOR: "bg-emerald-100 text-emerald-800 border-emerald-300",
             USER: "bg-slate-100 text-slate-700 border-slate-200",
         };
@@ -116,7 +116,7 @@ const Users = () => {
                 <div className="flex flex-wrap items-center gap-2">
                     <button
                         onClick={() => setIsAddModalOpen(true)}
-                        className="inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-5 py-2.5 text-xs font-extrabold text-white shadow-md hover:bg-red-700 transition-all"
+                        className="inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-5 py-2.5 text-xs font-extrabold text-white shadow-md hover:bg-navy transition-all"
                     >
                         <UserPlus className="w-4 h-4" />
                         + 2-й администратор
@@ -147,7 +147,7 @@ const Users = () => {
                                     </div>
                                     <span className="font-semibold text-slate-700">{userItem.email}</span>
                                     {currentUser?.id === userItem.id && (
-                                        <span className="text-[10px] bg-cream text-goldDeep px-1.5 py-0.5 rounded-md font-bold uppercase">Вы</span>
+                                        <span className="text-[10px] bg-white text-goldDeep px-1.5 py-0.5 rounded-md font-bold uppercase">Вы</span>
                                     )}
                                 </div>
                             </td>
@@ -162,7 +162,7 @@ const Users = () => {
                                             inline-flex items-center gap-2 px-4 py-2 rounded-xl font-bold text-sm transition-all
                                             ${userItem.role === "SUPERADMIN"
                                         ? 'opacity-20 cursor-not-allowed text-slate-400'
-                                        : 'text-rose-500 hover:bg-rose-50 active:scale-95'}
+                                        : 'text-rose-500 hover:bg-navy active:scale-95'}
                                         `}
                                     onClick={() => handleDelete(userItem)}
                                 >
@@ -245,7 +245,7 @@ const Users = () => {
                                 <button
                                     type="submit"
                                     disabled={isCreating}
-                                    className="rounded-xl bg-red-600 px-5 py-2 text-xs font-bold text-white hover:bg-red-700 shadow-md"
+                                    className="rounded-xl bg-red-600 px-5 py-2 text-xs font-bold text-white hover:bg-navy shadow-md"
                                 >
                                     {isCreating ? 'Создание...' : 'Создать учетную запись'}
                                 </button>

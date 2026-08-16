@@ -39,7 +39,7 @@ const Contacts = () => {
             href="https://t.me/mediamap_kg"
             target="_blank"
             rel="noreferrer"
-            className="group flex flex-col rounded-2xl border-2 border-lineLight bg-white p-8 transition-all hover:border-red-500/40 hover:shadow-lg"
+            className="group flex flex-col rounded-2xl border-2 border-lineLight bg-white p-8 transition-all hover:border-slate-300 hover:shadow-lg"
           >
             <IconPill className="!h-14 !w-14 bg-red-50 text-red-600 border border-red-100">
               <Send className="h-6 w-6 text-red-600" />
@@ -54,7 +54,7 @@ const Contacts = () => {
             </span>
           </a>
 
-          <div className="group flex flex-col rounded-2xl border-2 border-lineLight bg-white p-8 transition-all hover:border-red-500/40 hover:shadow-lg">
+          <div className="group flex flex-col rounded-2xl border-2 border-lineLight bg-white p-8 transition-all hover:border-slate-300 hover:shadow-lg">
             <IconPill className="!h-14 !w-14 bg-red-50 text-red-600 border border-red-100">
               <Mail className="h-6 w-6 text-red-600" />
             </IconPill>
@@ -88,7 +88,7 @@ const Contacts = () => {
         </div>
 
         {/* Блок «Если вы встретили ошибку — напишите нам» с маскотом */}
-        <div className="mt-12 rounded-3xl border-2 border-red-600/30 bg-gradient-to-br from-red-50/50 via-white to-amber-50/40 p-8 shadow-md relative overflow-hidden">
+        <div className="mt-12 rounded-3xl border-2 border-red-600/30 bg-gradient-to-br from-red-50/50 via-white to-white p-8 shadow-md relative overflow-hidden">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-6">
             <div className="flex items-center gap-4">
               <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-red-600 text-white shadow-md">
@@ -105,7 +105,7 @@ const Contacts = () => {
             </div>
 
             {/* Маскот-совёнок с подсказкой */}
-            <div className="flex items-center gap-2.5 rounded-2xl bg-white px-4 py-2 border border-amber-200 shadow-xs shrink-0">
+            <div className="flex items-center gap-2.5 rounded-2xl bg-white px-4 py-2 border border-slate-200 shadow-xs shrink-0">
               <img
                 src="/owl-mascot.png"
                 alt={t.owl.teacherName}
@@ -158,7 +158,7 @@ const Contacts = () => {
             <div className="flex items-center gap-4 pt-2">
               <button
                 type="submit"
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-6 py-3.5 text-sm font-black text-white shadow-lg shadow-red-600/30 transition-all hover:bg-red-700 active:scale-[0.99]"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-6 py-3.5 text-sm font-black text-white shadow-lg shadow-red-600/30 transition-all hover:bg-navy active:scale-[0.99]"
               >
                 <EditableText textKey="contacts.sendBtn" value={ct.sendBtn} />
                 <Send className="h-4 w-4" />
@@ -184,7 +184,7 @@ const Contacts = () => {
             href="https://t.me/mediamap_kg"
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-2 rounded-xl bg-red-600 px-8 py-4 text-[15px] font-black text-white transition-all hover:bg-red-700 shadow-md"
+            className="flex items-center gap-2 rounded-xl bg-red-600 px-8 py-4 text-[15px] font-black text-white transition-all hover:bg-navy shadow-md"
           >
             <MessageCircle className="h-5 w-5" />
             <EditableText textKey="contacts.support.btn" value={c.support.button} />

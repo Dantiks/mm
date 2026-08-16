@@ -9,7 +9,7 @@ const Useful: React.FC = () => {
   const c = usefulContent[language];
 
   return (
-    <div className="bg-[#FAF9F5] min-h-screen font-inter">
+    <div className="bg-[#FFFFFF] min-h-screen font-inter">
       {/* Editorial Page Banner (Same as News.tsx) */}
       <section className="bg-white border-b border-slate-200 py-10">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
@@ -55,7 +55,7 @@ const Useful: React.FC = () => {
 
                   {/* CENTER COLUMN: Title, Description, Actions */}
                   <div className="md:col-span-7 space-y-2">
-                    <h2 className="text-xl sm:text-2xl font-serif font-bold text-slate-900 group-hover:text-red-600 transition-colors leading-snug flex items-center gap-2">
+                    <h2 className="text-xl sm:text-2xl font-serif font-bold text-slate-900 group-hover:text-navy transition-colors leading-snug flex items-center gap-2">
                       <span>{res.title}</span>
                       <ExternalLink className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity text-red-600" />
                     </h2>
@@ -74,7 +74,7 @@ const Useful: React.FC = () => {
 
                   {/* RIGHT COLUMN: Thumbnail Icon Box */}
                   <div className="md:col-span-3 flex justify-end">
-                    <div className="w-full md:w-[200px] h-[120px] rounded-2xl bg-white border border-slate-200/80 p-4 shadow-xs flex flex-col items-center justify-center text-center group-hover:border-red-300 group-hover:shadow-md transition-all">
+                    <div className="w-full md:w-[200px] h-[120px] rounded-2xl bg-white border border-slate-200/80 p-4 shadow-xs flex flex-col items-center justify-center text-center group-hover:border-slate-300 group-hover:shadow-md transition-all">
                       <div className="p-3 bg-red-50 text-red-600 rounded-2xl mb-2">
                         {USEFUL_RESOURCE_ICONS[res.id] || <BookOpen className="h-6 w-6" />}
                       </div>

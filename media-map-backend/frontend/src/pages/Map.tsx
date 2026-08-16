@@ -213,7 +213,7 @@ const MapPage: React.FC = () => {
 
                           <button
                             onClick={() => setActiveModalMarker(marker)}
-                            className="flex items-center gap-1 text-[11px] font-bold text-red-600 hover:text-red-700 cursor-pointer"
+                            className="flex items-center gap-1 text-[11px] font-bold text-red-600 hover:text-navy cursor-pointer"
                           >
                             <Maximize2 className="h-3 w-3" />
                             <span>Открыть</span>
@@ -265,7 +265,7 @@ const MapPage: React.FC = () => {
 
                         {/* Moderator Legal Comment */}
                         {marker.moderatorComment && (
-                          <div className="p-3 bg-amber-50/80 rounded-xl border border-amber-200 text-xs text-amber-900 leading-relaxed font-medium">
+                          <div className="p-3 bg-slate-50/80 rounded-xl border border-slate-200 text-xs text-amber-900 leading-relaxed font-medium">
                             <p className="font-bold text-[10px] uppercase text-amber-700 mb-0.5">Правовая оценка модератора:</p>
                             <p className="max-h-32 overflow-y-auto leading-relaxed">{marker.moderatorComment}</p>
                           </div>
@@ -277,7 +277,7 @@ const MapPage: React.FC = () => {
                             href={marker.mediaLink}
                             target="_blank"
                             rel="noreferrer"
-                            className="mt-2 flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-bold transition-all shadow-2xs"
+                            className="mt-2 flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-red-600 hover:bg-navy text-white text-xs font-bold transition-all shadow-2xs"
                           >
                             <EditableText textKey="map.btnSource" value="Перейти к первоисточнику" />
                             <ExternalLink className="h-3.5 w-3.5" />
@@ -352,7 +352,7 @@ const MapPage: React.FC = () => {
 
             {/* Moderator comment */}
             {activeModalMarker.moderatorComment && (
-              <div className="p-4 bg-amber-50 rounded-2xl border border-amber-200 text-sm text-amber-950 leading-relaxed font-medium mb-6">
+              <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-sm text-amber-950 leading-relaxed font-medium mb-6">
                 <p className="font-bold text-xs uppercase text-amber-700 mb-1">Экспертный правовой комментарий и оценка:</p>
                 <p className="whitespace-pre-line">{activeModalMarker.moderatorComment}</p>
               </div>
@@ -364,7 +364,7 @@ const MapPage: React.FC = () => {
                 href={activeModalMarker.mediaLink}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2 py-3 px-6 rounded-2xl bg-red-600 hover:bg-red-700 text-white text-sm font-bold transition-all shadow-md"
+                className="inline-flex items-center justify-center gap-2 py-3 px-6 rounded-2xl bg-red-600 hover:bg-navy text-white text-sm font-bold transition-all shadow-md"
               >
                 <EditableText textKey="map.btnSourceModal" value="Перейти к первоисточнику" />
                 <ExternalLink className="h-4 w-4" />

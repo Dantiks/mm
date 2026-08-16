@@ -89,18 +89,18 @@ const Categories = () => {
             return (
               <div
                 key={cat.id}
-                className="group flex flex-col justify-between rounded-3xl border-2 border-slate-200/80 bg-white p-8 shadow-xs transition-all duration-300 hover:border-red-600/60 hover:shadow-xl"
+                className="group flex flex-col justify-between rounded-3xl border-2 border-slate-200/80 bg-white p-8 shadow-xs transition-all duration-300 hover:border-slate-300 hover:shadow-xl"
               >
                 <div>
                   {/* Иконка категории */}
                   <div className="flex items-center justify-between mb-6">
-                    <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-red-50 border-2 border-red-100 group-hover:bg-red-600 group-hover:text-white transition-colors duration-300 shadow-xs">
+                    <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-red-50 border-2 border-red-100 group-hover:bg-navy group-hover:text-white transition-colors duration-300 shadow-xs">
                       {cat.icon}
                     </span>
                   </div>
 
                   {/* Название и описание категории */}
-                  <h2 className="text-2xl font-black text-navy group-hover:text-red-600 transition-colors">
+                  <h2 className="text-2xl font-black text-navy group-hover:text-navy transition-colors">
                     {detail?.title || cat.id}
                   </h2>
                   <p className="mt-3 text-sm leading-relaxed text-slate-600 font-medium">
@@ -117,7 +117,7 @@ const Categories = () => {
                       setActiveCheckCategory(isCheckingThis ? null : cat.id);
                       setCheckText('');
                     }}
-                    className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-2xl bg-red-600 hover:bg-red-700 text-white font-extrabold text-xs shadow-md shadow-red-600/25 hover:scale-[1.02] transition-all cursor-pointer"
+                    className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-2xl bg-red-600 hover:bg-navy text-white font-extrabold text-xs shadow-md shadow-red-600/25 hover:scale-[1.02] transition-all cursor-pointer"
                   >
                     <EditableText textKey={`categories.${cat.id}.btnCheck`} value={t.home.checkInfoBtn} />
                   </button>
@@ -148,7 +148,7 @@ const Categories = () => {
                   {/* Ссылка Законы КР вместо старого текста */}
                   <Link
                     to={`/categories/${cat.slug}`}
-                    className="flex items-center justify-between pt-3 border-t border-slate-100 text-xs font-black text-slate-700 hover:text-red-600 transition-colors"
+                    className="flex items-center justify-between pt-3 border-t border-slate-100 text-xs font-black text-slate-700 hover:text-navy transition-colors"
                   >
                     <EditableText textKey={`categories.${cat.id}.linkLaws`} value="Законы КР и нормативно-правовая база" />
                     <ArrowRight className="h-4 w-4 text-red-600 group-hover:translate-x-1 transition-transform" />
@@ -160,7 +160,7 @@ const Categories = () => {
         </div>
 
         {/* Информационный блок с Совёнком */}
-        <div className="mt-12 rounded-3xl border-2 border-amber-200/80 bg-gradient-to-r from-amber-50/80 via-orange-50/40 to-amber-50/80 p-6 md:p-8 flex flex-col md:flex-row items-center gap-6 shadow-sm">
+        <div className="mt-12 rounded-3xl border-2 border-slate-200 bg-gradient-to-r from-white via-orange-50/40 to-white p-6 md:p-8 flex flex-col md:flex-row items-center gap-6 shadow-sm">
           <div className="relative shrink-0">
             <img
               src="/owl-mascot.png"

@@ -13,7 +13,7 @@ export const ViolationCategoriesSidebar: React.FC = () => {
   // sidebar follows the selected language instead of being Russian-only.
   const categories = [
     { id: 1, slug: 'hate-speech', owl: '/owl-stop.png', bg: 'bg-red-50 border-red-100' },
-    { id: 2, slug: 'disinformation', owl: '/owl-think.png', bg: 'bg-amber-50 border-amber-100' },
+    { id: 2, slug: 'disinformation', owl: '/owl-think.png', bg: 'bg-slate-50 border-slate-200' },
     { id: 3, slug: 'digital-scams', owl: '/owl-teacher.png', bg: 'bg-blue-50 border-blue-100' },
   ].map((meta, i) => ({
     ...meta,
@@ -26,7 +26,7 @@ export const ViolationCategoriesSidebar: React.FC = () => {
       {/* Sticky Quick Toggle Tab on Left Screen Edge */}
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed left-0 top-1/2 -translate-y-1/2 z-40 flex items-center gap-2 bg-navy text-white px-2.5 py-3 rounded-r-2xl shadow-2xl hover:bg-red-600 transition-all hover:pl-3.5 cursor-pointer group border border-l-0 border-white/20"
+        className="fixed left-0 top-1/2 -translate-y-1/2 z-40 flex items-center gap-2 bg-navy text-white px-2.5 py-3 rounded-r-2xl shadow-2xl hover:bg-navy transition-all hover:pl-3.5 cursor-pointer group border border-l-0 border-white/20"
         title={t.home.categoriesTitle}
       >
         <img src="/owl-think.png" alt="Совёнок" className="h-7 w-7 object-contain drop-shadow-md group-hover:scale-110 transition-transform" />
@@ -60,7 +60,7 @@ export const ViolationCategoriesSidebar: React.FC = () => {
           </div>
           <button
             onClick={() => setIsOpen(false)}
-            className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-200/80 text-slate-600 hover:bg-red-600 hover:text-white transition-all cursor-pointer"
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-200/80 text-slate-600 hover:bg-navy hover:text-white transition-all cursor-pointer"
           >
             <X className="h-4 w-4" />
           </button>
@@ -78,7 +78,7 @@ export const ViolationCategoriesSidebar: React.FC = () => {
                 className={`block rounded-2xl border p-4 transition-all hover:shadow-md ${
                   isActive
                     ? 'border-red-500 bg-red-50/30 shadow-xs'
-                    : 'border-slate-200/80 bg-white hover:border-red-300'
+                    : 'border-slate-200/80 bg-white hover:border-slate-300'
                 }`}
               >
                 <div className="flex items-start gap-3.5">
@@ -86,14 +86,14 @@ export const ViolationCategoriesSidebar: React.FC = () => {
                     <img src={c.owl} alt={c.title} className="h-full w-full object-contain drop-shadow-md transition-transform group-hover:scale-110" />
                   </div>
                   <div className="flex-1">
-                    <h4 className="text-sm font-bold text-navy hover:text-red-600 transition-colors">
+                    <h4 className="text-sm font-bold text-navy hover:text-navy transition-colors">
                       <EditableText textKey={`sidebar.cat.${c.id}.title`} value={c.title} />
                     </h4>
                     <p className="mt-1 text-xs leading-relaxed text-slate-600 line-clamp-2">
                       <EditableText textKey={`sidebar.cat.${c.id}.desc`} value={c.desc} />
                     </p>
                     <div className="mt-3">
-                      <span className="inline-flex items-center gap-1 py-1.5 px-3 rounded-xl bg-red-600 hover:bg-red-700 text-white text-[11px] font-extrabold shadow-xs transition-all">
+                      <span className="inline-flex items-center gap-1 py-1.5 px-3 rounded-xl bg-red-600 hover:bg-navy text-white text-[11px] font-extrabold shadow-xs transition-all">
                         <EditableText textKey={`sidebar.cat.${c.id}.btnCheck`} value={t.home.checkInfoBtn} />
                       </span>
                     </div>

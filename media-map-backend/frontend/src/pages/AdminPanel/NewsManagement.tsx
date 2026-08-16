@@ -94,7 +94,7 @@ const NewsManagement: React.FC = () => {
                   <tr key={item.id} className="border-b border-slate-50 hover:bg-slate-50/50">
                     <td className="py-3 px-4 text-slate-500">#{item.id}</td>
                     <td className="py-3 px-4 font-medium text-navy max-w-md truncate">
-                      <a href={item.link} target="_blank" rel="noreferrer" className="hover:text-red-600 transition-colors">
+                      <a href={item.link} target="_blank" rel="noreferrer" className="hover:text-navy transition-colors">
                         {item.title}
                       </a>
                     </td>
@@ -109,7 +109,7 @@ const NewsManagement: React.FC = () => {
                     <td className="py-3 px-4 text-right">
                       <button
                         onClick={() => handleDelete(item.id)}
-                        className="text-red-500 hover:text-red-700 text-sm font-bold"
+                        className="text-red-500 hover:text-navy text-sm font-bold"
                       >
                         Удалить
                       </button>

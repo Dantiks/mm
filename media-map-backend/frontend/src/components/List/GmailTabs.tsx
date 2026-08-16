@@ -41,7 +41,7 @@ const GmailTabs: React.FC<Props> = ({ markers }) => {
 
   return (
       <div className="w-full">
-        <div className="flex items-center gap-2 p-1 bg-cream rounded-[12px] w-fit mb-8 overflow-x-auto no-scrollbar">
+        <div className="flex items-center gap-2 p-1 bg-white rounded-[12px] w-fit mb-8 overflow-x-auto no-scrollbar">
           {tabs.map((tab) => {
             const isActive = activeTab === tab.id.toString();
             const iconSrc = getTabIconPath(tab);
@@ -78,7 +78,7 @@ const GmailTabs: React.FC<Props> = ({ markers }) => {
                       />
                   ))
               ) : (
-              <div className="flex flex-col items-center justify-center py-20 text-slate-400 bg-cream rounded-[16px] border-2 border-dashed border-lineLight">
+              <div className="flex flex-col items-center justify-center py-20 text-slate-400 bg-white rounded-[16px] border-2 border-dashed border-lineLight">
                 <Inbox className="w-12 h-12 mb-3 opacity-20" />
                 <p className="font-medium">Заявки в этой категории отсутствуют</p>
               </div>

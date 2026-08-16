@@ -74,7 +74,7 @@ const AdminPanelSidebar: React.FC<Props> = ({ sidebarOpen, setSidebarOpen }) => 
                   className={({ isActive }) => `
               group flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200
               ${isActive
-                      ? 'bg-cream text-navy shadow-sm'
+                      ? 'bg-white text-navy shadow-sm'
                       : 'text-slate-500 hover:bg-slate-50 hover:text-slate-700'}
             `}
               >
@@ -89,7 +89,7 @@ const AdminPanelSidebar: React.FC<Props> = ({ sidebarOpen, setSidebarOpen }) => 
           <div className="pt-8 mt-8 border-t border-slate-50">
             <NavLink
                 to="/"
-                className="flex items-center gap-3 px-4 py-3 rounded-xl text-rose-500 hover:bg-rose-50 transition-colors duration-200"
+                className="flex items-center gap-3 px-4 py-3 rounded-xl text-rose-500 hover:bg-navy transition-colors duration-200"
             >
               <LogOut className="w-5 h-5" strokeWidth={2.2} />
               <span className="font-medium text-[15px]">Выйти из панели</span>

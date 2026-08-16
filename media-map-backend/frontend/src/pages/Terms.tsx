@@ -35,7 +35,7 @@ const Terms = () => {
               className="flex h-full flex-col rounded-[16px] border border-lineLight bg-white p-6"
             >
               <div className="mb-5 flex items-center justify-between">
-                <span className="flex h-16 w-16 items-center justify-center rounded-full bg-creamPill">
+                <span className="flex h-16 w-16 items-center justify-center rounded-full bg-slate-50">
                   {stepIcons[i]}
                 </span>
                 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-navy text-[14px] font-bold text-white">
@@ -69,7 +69,7 @@ const Terms = () => {
                   {step.chips.map((label, chipIndex) => (
                     <div
                       key={label}
-                      className="flex items-center gap-2 rounded-[10px] border border-lineLight bg-cream px-3 py-2"
+                      className="flex items-center gap-2 rounded-[10px] border border-lineLight bg-white px-3 py-2"
                     >
                       {chipIconsByStepIndex[i]?.[chipIndex]}
                       <span className="text-[11px] font-bold uppercase tracking-tight text-navy">

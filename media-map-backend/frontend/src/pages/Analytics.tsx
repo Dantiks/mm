@@ -58,7 +58,7 @@ const Analytics: React.FC = () => {
   const cat3Count = markers.filter((m) => m.violationTypeId === 3).length || 20;
 
   return (
-    <div className="bg-[#FAF9F5] font-inter min-h-screen py-10">
+    <div className="bg-[#FFFFFF] font-inter min-h-screen py-10">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
         
         {/* Banner Header */}
@@ -109,10 +109,10 @@ const Analytics: React.FC = () => {
 
           <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs">
             <div className="flex items-center justify-between mb-4">
-              <span className="p-3 rounded-xl bg-amber-50 text-amber-600 font-bold">
+              <span className="p-3 rounded-xl bg-slate-50 text-amber-600 font-bold">
                 <MapPin className="h-6 w-6" />
               </span>
-              <span className="text-xs font-extrabold text-amber-700 bg-amber-50 px-2.5 py-1 rounded-full"><EditableText textKey="analytics.card2.tag" value="7 Областей" /></span>
+              <span className="text-xs font-extrabold text-amber-700 bg-slate-50 px-2.5 py-1 rounded-full"><EditableText textKey="analytics.card2.tag" value="7 Областей" /></span>
             </div>
             <span className="text-3xl font-black text-navy">9</span>
             <h4 className="text-xs font-bold text-slate-500 uppercase mt-1"><EditableText textKey="analytics.card2.title" value="Регионов КР под защитой" /></h4>
@@ -212,7 +212,7 @@ const Analytics: React.FC = () => {
           <div className="lg:col-span-6 bg-white p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-3 mb-6">
-                <div className="p-2.5 rounded-xl bg-amber-50 text-amber-600">
+                <div className="p-2.5 rounded-xl bg-slate-50 text-amber-600">
                   <MapPin className="h-6 w-6" />
                 </div>
                 <div>
@@ -225,7 +225,7 @@ const Analytics: React.FC = () => {
                 {sortedCities.map(([city, count]) => (
                   <div
                     key={city}
-                    className="flex items-center justify-between p-3.5 rounded-2xl bg-slate-50 border border-slate-100 hover:border-red-200 transition-colors"
+                    className="flex items-center justify-between p-3.5 rounded-2xl bg-slate-50 border border-slate-100 hover:border-slate-300 transition-colors"
                   >
                     <span className="text-xs font-bold text-navy flex items-center gap-2">
                       <span className="h-2 w-2 rounded-full bg-red-600" />

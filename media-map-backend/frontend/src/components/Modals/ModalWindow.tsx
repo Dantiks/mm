@@ -17,7 +17,7 @@ const ModalWindow: React.FC<Props> = ({ isOpen, onClose, title, children }) => {
           <h2 className="text-[18px] font-extrabold text-navy">{title || ""}</h2>
           <button
             onClick={onClose}
-            className="text-gray-600 hover:text-red-600 focus:outline-none"
+            className="text-gray-600 hover:text-navy focus:outline-none"
           >
             &times;
           </button>

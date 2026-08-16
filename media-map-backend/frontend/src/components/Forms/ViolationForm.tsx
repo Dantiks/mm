@@ -193,7 +193,7 @@ const ViolationForm = () => {
                         {/* Кастомная кнопка */}
                         <button
                             type="button"
-                            className="flex w-full items-center rounded-[10px] border border-lineLight bg-white p-3 outline-none cursor-pointer hover:bg-cream transition-colors"
+                            className="flex w-full items-center rounded-[10px] border border-lineLight bg-white p-3 outline-none cursor-pointer hover:bg-white transition-colors"
                         >
                             <div className="bg-navy inline-block text-sm text-white py-2 px-4 rounded ">
                                 <EditableText textKey="form.chooseFileBtn" value={c.chooseFileButton} />

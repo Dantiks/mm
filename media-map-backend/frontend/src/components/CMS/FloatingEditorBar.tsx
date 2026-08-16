@@ -78,7 +78,7 @@ export const FloatingEditorBar: React.FC = () => {
           {hasUnsavedChanges && (
             <button
               onClick={discardChanges}
-              className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-white/10 hover:bg-rose-600 text-slate-300 hover:text-white text-xs font-bold transition-all cursor-pointer"
+              className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-white/10 hover:bg-navy text-slate-300 hover:text-white text-xs font-bold transition-all cursor-pointer"
             >
               <RotateCcw className="w-3 h-3" />
               <span>Сбросить</span>
