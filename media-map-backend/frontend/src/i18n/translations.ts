@@ -67,8 +67,11 @@ export interface Translations {
     newsTitle: string;
     newsAll: string;
     newsReadAll: string;
+    readMore: string;
     quoteOfDay: string;
     categoriesTitle: string;
+    legalNavigator: string;
+    allCategoriesBtn: string;
     categoriesViewAll: string;
     categories: TextItem[];
     resources: TextItem[];
@@ -90,6 +93,7 @@ export interface Translations {
     title: string;
     subtitle: string;
     readSource: string;
+    readMore: string;
     publishedAt: string;
   };
 }
@@ -127,7 +131,7 @@ const translations: Record<Language, Translations> = {
       heroSubtitle:
         'Учимся анализировать информацию, распознавать манипуляции, противостоять языку вражды, дезинформации и цифровому мошенничеству.',
       followUs: 'Следите за нами',
-      newsOfDayCaption: 'Новость дня · агрегатор MediaMap',
+      newsOfDayCaption: 'Новость дня · MediaMap',
       newsOfDayTitle: 'Исследование МедиаКГ: 78% респондентов сталкивались с дезинформацией в социальных сетях',
       oldSiteTitle: 'Архивная версия платформы MediaMap',
       oldSiteDesc: 'Доступ к предыдущей версии материалов и сервисов MediaMap',
@@ -139,8 +143,11 @@ const translations: Record<Language, Translations> = {
       newsTitle: 'Новости фактчекинга и медиа',
       newsAll: 'Все новости →',
       newsReadAll: 'Читать все новости →',
+      readMore: 'Подробнее',
       quoteOfDay: 'Анализ современных медиа-трендов требует мультидисциплинарного подхода для подлинного понимания их влияния.',
       categoriesTitle: 'Категории нарушений',
+      legalNavigator: 'Правовой навигатор MediaMap',
+      allCategoriesBtn: 'Все категории и законы КР',
       categoriesViewAll: 'Все категории',
       categories: [
         {
@@ -241,9 +248,10 @@ const translations: Record<Language, Translations> = {
       }
     },
     aggregator: {
-      title: 'Агрегатор новостей',
+      title: 'Новости',
       subtitle: 'Последние новости из проверенных источников Кыргызстана',
       readSource: 'Читать в источнике',
+      readMore: 'Читать',
       publishedAt: 'Опубликовано:',
     }
   },
@@ -279,24 +287,27 @@ const translations: Record<Language, Translations> = {
       heroSubtitle:
         'Маалыматты талдоону, манипуляцияларды таанууну, жек көрүүчүлүк тилине, дезинформацияга жана санарип алдамчылыкка каршы турууну үйрөнөбүз.',
       followUs: 'Бизди ээрчиңиз',
-      newsOfDayCaption: 'Күндүн жаңылыгы · MediaMap агрегатору',
+      newsOfDayCaption: 'Күндүн жаңылыгы · MediaMap',
       newsOfDayTitle: 'МедиаКГ изилдөөсү: Респонденттердин 78% социалдык тармактарда дезинформацияга туш болгон',
       oldSiteTitle: 'MediaMap платформасынын архивдик версиясы',
       oldSiteDesc: 'MediaMap мурунку версиясынын материалдарына жана кызматтарына кирүү',
       checkInfoBtn: 'Маалыматты текшерүү',
       checkInputPlaceholder: 'Текшерүү үчүн шилтемени же текстти киргизиңиз...',
-      resourcesTitle: 'Сиз үчүн ресурстар',
+      resourcesTitle: 'Пайдалуу ресурстар',
       resourcesSubtitle: 'Маалымат менен иштөө үчүн практикалык материалдар, куралдар жана кызматтар.',
       resourcesViewAll: 'Бардык ресурстарды көрүү →',
       newsTitle: 'Фактчекинг жана медиа жаңылыктары',
       newsAll: 'Бардык жаңылыктар →',
       newsReadAll: 'Бардык жаңылыктарды окуу →',
+      readMore: 'Толугураак',
       quoteOfDay: 'Заманбап медиа-тренддерди талдоо алардын таасирин чыныгы түшүнүү үчүн мультидисциплинардык мамилени талап кылат.',
       categoriesTitle: 'Бузуулардын категориялары',
+      legalNavigator: 'MediaMap укуктук навигатору',
+      allCategoriesBtn: 'Бардык категориялар жана КР мыйзамдары',
       categoriesViewAll: 'Бардык категориялар',
       categories: [
         {
-          title: 'Жек көрүүчүлүк тили',
+          title: 'Кастык тили',
           description:
             'Дискриминациялык билдирүүлөрдү, ксенофобияны жана жек көрүүчүлүк тилин таанууну үйрөнөбүз.',
         },
@@ -354,7 +365,7 @@ const translations: Record<Language, Translations> = {
     categoryDetails: {
       'hate-speech': {
         id: 'hate-speech',
-        title: 'Жек көрүүчүлүк тили (Hate Speech)',
+        title: 'Кастык тили',
         summary: 'Дискриминациялык билдирүүлөр, улуттар аралык, диний же социалдык кастыкты козутуу.',
         whatIsIt: 'Жек көрүүчүлүк тили — бул расалык жек көрүүчүлүктү, ксенофобияны же чыдамсыздыкка негизделген башка формаларды жайылткан, козуткан же актаган билдирүүлөр.',
         legalBasis: 'Кыргыз Республикасынын мыйзамдары кастыкты козутууга ачык чакырыктарга тыюу салат (КР Кылмыш-жаза кодексинин 330-беренеси).',
@@ -367,7 +378,7 @@ const translations: Record<Language, Translations> = {
       },
       'disinformation': {
         id: 'disinformation',
-        title: 'Дезинформация жана Фейктер',
+        title: 'Дезинформация жана фейктер',
         summary: 'Жарандарды адаштыруу жана манипуляциялоо үчүн атайын түзүлгөн ачык жалган маалымат.',
         whatIsIt: 'Дезинформация — бул коомчулукту алдоо, зыян келтирүү же саясий/каржылык пайда алуу максатында атайылап түзүлгөн жана жайылтылган жалган маалыматтар.',
         legalBasis: 'КР «Жалган (туура эмес) маалыматтан коргоо жөнүндө» мыйзамы жалган маалыматтарды жарыялаган ресурстарды бөгөттөө тартибин жөнгө салат.',
@@ -393,9 +404,10 @@ const translations: Record<Language, Translations> = {
       }
     },
     aggregator: {
-      title: 'Жаңылыктар агрегатору',
+      title: 'Жаңылыктар',
       subtitle: 'Кыргызстандын ишенимдүү булактарынан акыркы жаңылыктар',
       readSource: 'Булактан окуу',
+      readMore: 'Окуу',
       publishedAt: 'Жарыяланды:',
     }
   },

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useLanguage } from '../i18n/LanguageContext';
 import NewsDetailModal, { DetailedNewsItem } from '../components/News/NewsDetailModal';
 import AiAnalysisModal from '../components/AI/AiAnalysisModal';
 import { RefreshCw } from 'lucide-react';
@@ -16,7 +15,6 @@ interface RawNewsItem {
 }
 
 const NewsAggregator: React.FC = () => {
-  const { t } = useLanguage();
   const [news, setNews] = useState<RawNewsItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [selectedNews, setSelectedNews] = useState<DetailedNewsItem | null>(null);
@@ -65,7 +63,7 @@ const NewsAggregator: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#FAF9F5] min-h-screen font-inter">
+    <div className="bg-[#FFFFFF] min-h-screen font-inter">
       {/* Editorial Page Banner */}
       <section className="bg-white border-b border-slate-200 py-4">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-12 flex justify-end">
@@ -85,7 +83,7 @@ const NewsAggregator: React.FC = () => {
         <div className="mx-auto max-w-[1200px] px-6 lg:px-12">
           {loading ? (
             <div className="flex flex-col items-center justify-center py-24 space-y-3">
-              <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-red-600" />
+              <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-navy" />
               <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">
                 Загрузка новостной ленты...
               </span>
@@ -135,7 +133,7 @@ const NewsAggregator: React.FC = () => {
 
                       {/* CENTER COLUMN: Editorial Title, Snippet, Author/Source */}
                       <div className="md:col-span-7 space-y-2">
-                        <h2 className="text-xl sm:text-2xl font-serif font-bold text-slate-900 group-hover:text-red-600 transition-colors leading-snug">
+                        <h2 className="text-xl sm:text-2xl font-serif font-bold text-slate-900 group-hover:text-navy transition-colors leading-snug">
                           {item.title}
                         </h2>
 
@@ -153,7 +151,7 @@ const NewsAggregator: React.FC = () => {
                               e.stopPropagation();
                               handleRunAiCheck(`${item.title}. ${item.contentSnippet}`);
                             }}
-                            className="flex items-center gap-1 font-bold text-red-600 hover:text-red-700 transition-colors"
+                            className="flex items-center gap-1 font-bold text-navy hover:text-navy transition-colors"
                           >
                             Проверить информацию
                           </button>

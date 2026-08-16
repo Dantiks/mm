@@ -117,7 +117,7 @@ const ViolationTypeForm: React.FC<Props> = ({ item, onSuccess }) => {
               onClick={() => fileInputRef.current?.click()}
               className={`
             relative cursor-pointer group border-2 border-dashed rounded-2xl p-6 transition-all duration-200 min-h-[160px] flex items-center justify-center
-            ${preview ? 'border-emerald-300 bg-emerald-50/40' : 'border-lineLight bg-cream hover:border-gold'}
+            ${preview ? 'border-emerald-300 bg-emerald-50/40' : 'border-lineLight bg-white hover:border-gold'}
           `}
           >
             <input
@@ -137,7 +137,7 @@ const ViolationTypeForm: React.FC<Props> = ({ item, onSuccess }) => {
                     <button
                         type="button"
                         onClick={handleCancelFile}
-                        className="absolute -top-2 -right-2 bg-rose-500 hover:bg-rose-600 text-white rounded-full p-1 shadow-lg shadow-rose-100/50 transition-all active:scale-95 group-hover:scale-110"
+                        className="absolute -top-2 -right-2 bg-rose-500 hover:bg-navyCard text-white rounded-full p-1 shadow-lg shadow-rose-100/50 transition-all active:scale-95 group-hover:scale-110"
                         title="Отменить выбор"
                     >
                       <X className="w-4 h-4" />
@@ -181,7 +181,7 @@ const ViolationTypeForm: React.FC<Props> = ({ item, onSuccess }) => {
         </button>
 
         {item && (
-            <div className="flex items-center gap-2 p-3 bg-amber-50 rounded-xl border border-amber-100">
+            <div className="flex items-center gap-2 p-3 bg-slate-50 rounded-xl border border-slate-200">
               <AlertCircle className="w-4 h-4 text-amber-500" />
               <p className="text-[11px] text-amber-700 leading-tight">
                 Изменения коснутся только названия и иконки. Прикрепленные маркеры останутся на карте.

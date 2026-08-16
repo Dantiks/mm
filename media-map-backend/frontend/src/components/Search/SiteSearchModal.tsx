@@ -142,7 +142,7 @@ const SiteSearchModal: React.FC<Props> = ({ isOpen, onClose }) => {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Поиск по сайту (новости, нарушения, категории, регионы)..."
-            className="w-full rounded-2xl bg-slate-50 py-3 pl-11 pr-10 text-sm font-semibold text-slate-800 placeholder-slate-400 outline-none focus:bg-white focus:ring-2 focus:ring-red-500/30 transition-all border border-slate-200"
+            className="w-full rounded-2xl bg-slate-50 py-3 pl-11 pr-10 text-sm font-semibold text-slate-800 placeholder-slate-400 outline-none focus:bg-white focus:ring-2 focus:ring-navy/10 transition-all border border-slate-200"
           />
           {query && (
             <button
@@ -179,7 +179,7 @@ const SiteSearchModal: React.FC<Props> = ({ isOpen, onClose }) => {
                 onClick={onClose}
                 className="flex items-start gap-3 p-3.5 rounded-2xl hover:bg-slate-50 border border-transparent hover:border-slate-200 transition-all group"
               >
-                <div className="p-2.5 bg-red-50 text-red-600 rounded-xl shrink-0 group-hover:bg-red-600 group-hover:text-white transition-colors">
+                <div className="p-2.5 bg-slate-50 text-navy rounded-xl shrink-0 group-hover:bg-navyCard group-hover:text-white transition-colors">
                   {item.type === 'category' && <ShieldAlert className="h-4 w-4" />}
                   {item.type === 'news' && <Newspaper className="h-4 w-4" />}
                   {item.type === 'marker' && <MapPin className="h-4 w-4" />}
@@ -187,7 +187,7 @@ const SiteSearchModal: React.FC<Props> = ({ isOpen, onClose }) => {
 
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <h4 className="text-sm font-bold text-slate-800 group-hover:text-red-600 transition-colors truncate">
+                    <h4 className="text-sm font-bold text-slate-800 group-hover:text-navy transition-colors truncate">
                       {item.title}
                     </h4>
                     {item.badge && (
@@ -201,7 +201,7 @@ const SiteSearchModal: React.FC<Props> = ({ isOpen, onClose }) => {
                   )}
                 </div>
 
-                <ArrowRight className="h-4 w-4 text-slate-400 group-hover:text-red-600 shrink-0 self-center" />
+                <ArrowRight className="h-4 w-4 text-slate-400 group-hover:text-navy shrink-0 self-center" />
               </Link>
             ))
           )}
@@ -214,7 +214,7 @@ const SiteSearchModal: React.FC<Props> = ({ isOpen, onClose }) => {
                   <button
                     key={tag}
                     onClick={() => setQuery(tag)}
-                    className="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-red-50 hover:text-red-700 text-slate-600 font-semibold transition-all border border-slate-200"
+                    className="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-navyCard hover:text-navy text-slate-600 font-semibold transition-all border border-slate-200"
                   >
                     #{tag}
                   </button>

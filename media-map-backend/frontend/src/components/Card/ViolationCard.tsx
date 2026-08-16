@@ -94,7 +94,7 @@ const ViolationCard: React.FC<Props> = ({ item }) => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="space-y-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="p-4 bg-cream rounded-[12px] border border-lineLight">
+              <div className="p-4 bg-white rounded-[12px] border border-lineLight">
                 <div className="flex items-center gap-2 text-slate-400 mb-1">
                   <MapPin className="w-4 h-4" />
                   <span className="text-[11px] font-bold uppercase tracking-wider">Локация</span>
@@ -103,7 +103,7 @@ const ViolationCard: React.FC<Props> = ({ item }) => {
                 <p className="text-slate-500 text-sm">{item.authorCity}</p>
               </div>
 
-              <div className="p-4 bg-cream rounded-[12px] border border-lineLight">
+              <div className="p-4 bg-white rounded-[12px] border border-lineLight">
                 <div className="flex items-center gap-2 text-slate-400 mb-1">
                   <Link2 className="w-4 h-4" />
                   <span className="text-[11px] font-bold uppercase tracking-wider">Источник</span>
@@ -125,7 +125,7 @@ const ViolationCard: React.FC<Props> = ({ item }) => {
 
             <div className="space-y-4">
               <div className="flex gap-3">
-                <div className="mt-1 p-2 bg-creamPill rounded-lg">
+                <div className="mt-1 p-2 bg-slate-50 rounded-lg">
                   <MessageSquare className="w-4 h-4 text-navy" />
                 </div>
                 <div>
@@ -188,7 +188,7 @@ const ViolationCard: React.FC<Props> = ({ item }) => {
           <button
               type="button"
               onClick={() => handleDelete(item.id)}
-              className="flex items-center gap-2 px-5 py-2.5 text-rose-600 font-semibold text-sm rounded-xl hover:bg-rose-50 transition-colors"
+              className="flex items-center gap-2 px-5 py-2.5 text-rose-600 font-semibold text-sm rounded-xl hover:bg-navyCard transition-colors"
           >
             <Trash2 className="w-4 h-4" />
             Удалить

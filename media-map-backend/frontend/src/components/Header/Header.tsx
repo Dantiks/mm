@@ -59,7 +59,7 @@ const Header = () => {
                 className={({ isActive }) =>
                   `text-[14px] transition-colors hover:text-navy ${
                     isActive
-                      ? 'font-extrabold text-navy border-b-2 border-red-600 pb-1'
+                      ? 'font-extrabold text-navy border-b-2 border-navy pb-1'
                       : 'font-medium text-[#3e494a]'
                   }`
                 }
@@ -75,9 +75,9 @@ const Header = () => {
             <div className="relative flex items-center group">
               <div
                 onClick={() => setIsSearchOpen(true)}
-                className="flex items-center rounded-full bg-slate-100 p-1 border border-slate-200/90 transition-all duration-500 ease-out group-hover:w-60 w-10 overflow-hidden group-hover:bg-white group-hover:shadow-md group-hover:border-red-500/80 cursor-pointer"
+                className="flex items-center rounded-full bg-slate-100 p-1 border border-slate-200/90 transition-all duration-500 ease-out group-hover:w-60 w-10 overflow-hidden group-hover:bg-white group-hover:shadow-md group-hover:border-slate-300 cursor-pointer"
               >
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-slate-600 group-hover:text-red-600 transition-colors">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-slate-600 group-hover:text-navy transition-colors">
                   <Search className="h-4 w-4" />
                 </div>
                 <span className="whitespace-nowrap text-xs font-semibold text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pr-3 select-none">
@@ -93,7 +93,7 @@ const Header = () => {
                 {user.role === 'admin' && (
                   <Link
                     to="/admin/texts"
-                    className="flex items-center gap-1.5 rounded-xl bg-red-50 text-red-600 border border-red-200 px-3 py-2 text-xs font-extrabold transition-all hover:bg-red-600 hover:text-white shadow-xs"
+                    className="flex items-center gap-1.5 rounded-xl bg-slate-50 text-navy border border-slate-200 px-3 py-2 text-xs font-extrabold transition-all hover:bg-navyCard hover:text-white shadow-xs"
                     title="Визуальное редактирование текстов сайта"
                   >
                     <Edit3 className="h-4 w-4" />
@@ -110,7 +110,7 @@ const Header = () => {
                 </Link>
                 <button
                   onClick={handleLogout}
-                  className="flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-bold text-red-500 transition-all hover:bg-red-50"
+                  className="flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-bold text-navy transition-all hover:bg-navyCard"
                 >
                   <LogOut className="h-4 w-4" />
                   {t.nav.logout}

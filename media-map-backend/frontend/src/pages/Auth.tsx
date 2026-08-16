@@ -145,7 +145,7 @@ const Auth = () => {
           </div>
 
           {(signUpError || signInError) && (
-            <p className="text-[13px] text-red-400">
+            <p className="text-[13px] text-navy">
               {isSignup
                 ? Object.values(signUpError ?? {}).flat().join(' ') || c.signUpErrorFallback
                 : signInError?.message || c.signInErrorFallback}

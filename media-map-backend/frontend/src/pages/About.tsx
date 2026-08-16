@@ -13,11 +13,11 @@ const About = () => {
 
   return (
     <div className="bg-white">
-      <PageHero eyebrow={c.eyebrow} title={c.title} subtitle={c.subtitle} />
+      <PageHero title={c.title} subtitle={c.subtitle} />
 
       <PageSection className="!py-16">
         <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2">
-          <div className="overflow-hidden rounded-[16px] border border-lineLight bg-cream p-8">
+          <div className="overflow-hidden rounded-[16px] border border-lineLight bg-white p-8">
             <img
               src="https://i.imgur.com/WbQnbas.png"
               alt="MediaMap.kg"

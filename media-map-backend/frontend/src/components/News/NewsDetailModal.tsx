@@ -33,14 +33,14 @@ const NewsDetailModal: React.FC<Props> = ({ news, onClose, onRunAiCheck }) => {
         {/* Header Bar */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-slate-50/50">
           <div className="flex items-center gap-2">
-            <span className="h-2.5 w-2.5 rounded-full bg-red-600 animate-pulse" />
+            <span className="h-2.5 w-2.5 rounded-full bg-navy animate-pulse" />
             <span className="text-xs font-black text-navy uppercase tracking-widest">
               NYT Editorial Reader • {news.source || 'MediaMap Feed'}
             </span>
           </div>
           <button
             onClick={onClose}
-            className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-200/80 text-slate-600 hover:bg-red-600 hover:text-white transition-all cursor-pointer"
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-200/80 text-slate-600 hover:bg-navyCard hover:text-white transition-all cursor-pointer"
           >
             <X className="h-4 w-4" />
           </button>
@@ -53,7 +53,7 @@ const NewsDetailModal: React.FC<Props> = ({ news, onClose, onRunAiCheck }) => {
           <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500 pb-4 border-b border-slate-100 font-mono">
             <div className="flex items-center gap-4">
               <span className="flex items-center gap-1.5 font-bold text-slate-700">
-                <Calendar className="h-3.5 w-3.5 text-red-600" />
+                <Calendar className="h-3.5 w-3.5 text-navy" />
                 {news.date}
               </span>
               <span className="flex items-center gap-1.5 font-bold text-slate-700">
@@ -63,7 +63,7 @@ const NewsDetailModal: React.FC<Props> = ({ news, onClose, onRunAiCheck }) => {
             </div>
 
             {news.tag && (
-              <span className="rounded-full bg-red-50 text-red-700 border border-red-100 px-3 py-1 font-bold uppercase text-[10px]">
+              <span className="rounded-full bg-slate-50 text-navy border border-slate-200 px-3 py-1 font-bold uppercase text-[10px]">
                 #{news.tag}
               </span>
             )}
@@ -86,7 +86,7 @@ const NewsDetailModal: React.FC<Props> = ({ news, onClose, onRunAiCheck }) => {
             )}
 
             {/* Main Article Snippet / Description */}
-            <div className="text-base sm:text-lg leading-relaxed text-slate-700 font-serif pt-2 space-y-4 border-l-2 border-red-500/80 pl-4 bg-slate-50/50 p-4 rounded-r-2xl">
+            <div className="text-base sm:text-lg leading-relaxed text-slate-700 font-serif pt-2 space-y-4 border-l-2 border-navy/80 pl-4 bg-slate-50/50 p-4 rounded-r-2xl">
               <p>{news.description || news.contentSnippet || 'Полный текст доступен на первоисточнике.'}</p>
             </div>
           </div>
@@ -100,7 +100,7 @@ const NewsDetailModal: React.FC<Props> = ({ news, onClose, onRunAiCheck }) => {
                     onClose();
                     onRunAiCheck(fullText);
                   }}
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs shadow-md shadow-red-600/30 hover:scale-103 transition-all cursor-pointer"
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-navy hover:bg-navyCard text-white font-bold text-xs shadow-md shadow-navy/20 hover:scale-103 transition-all cursor-pointer"
                 >
                   <EditableText textKey="modal.btnCheck" value="Проверить информацию" />
                 </button>

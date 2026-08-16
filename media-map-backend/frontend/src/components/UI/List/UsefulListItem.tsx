@@ -16,10 +16,10 @@ const UsefulListItem: React.FC<Props> = ({ link, title, description, icon, tag, 
             href={link}
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex gap-5 rounded-[16px] border border-lineLight bg-white p-5 transition-colors duration-200 hover:bg-cream"
+            className="group flex gap-5 rounded-[16px] border border-lineLight bg-white p-5 transition-colors duration-200 hover:bg-white"
         >
             {/* Иконка */}
-            <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-creamPill text-navy">
+            <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-slate-50 text-navy">
                 {icon || <ExternalLink className="h-5 w-5" />}
             </div>
 
@@ -28,7 +28,7 @@ const UsefulListItem: React.FC<Props> = ({ link, title, description, icon, tag, 
                 <div className="mb-1 flex items-center gap-2">
                     <h3 className="truncate text-[16px] font-extrabold text-ink">{title}</h3>
                     {tag && (
-                        <span className="rounded-md bg-cream px-2 py-0.5 font-mono text-[9px] uppercase tracking-widest text-goldDeep">
+                        <span className="rounded-md bg-white px-2 py-0.5 font-mono text-[9px] uppercase tracking-widest text-goldDeep">
                             {tag}
                         </span>
                     )}

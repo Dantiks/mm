@@ -51,7 +51,7 @@ const NewReport: React.FC = () => {
           <span className="font-bold text-goldDeep hover:underline cursor-pointer"
                 onClick={scrollToSection}><EditableText textKey="report.intro1_link" value={c.intro1_link} /></span>
           <EditableText textKey="report.intro1_after" value={c.intro1_after} />
-          <span className="text-red-500 font-bold">*</span>
+          <span className="text-navy font-bold">*</span>
           <EditableText textKey="report.requiredNote" value={c.requiredNote} />
         </p>
         <p className="">
@@ -106,7 +106,7 @@ const NewReport: React.FC = () => {
               ))}
             </ul>
 
-            <p className="text-red-500 mt-4 mb-2">
+            <p className="text-navy mt-4 mb-2">
               <strong>
                 {c.disinfo.warningTitle}
                 <ul>
@@ -144,7 +144,7 @@ const NewReport: React.FC = () => {
                 </li>
               ))}
             </ul>
-            <div className="text-red-500 font-bold mt-4 mb-2">
+            <div className="text-navy font-bold mt-4 mb-2">
               <p><strong>{c.hateSpeech.warningTitle}</strong></p>
               <ul className="list-disc pl-5 space-y-2">
                 {c.hateSpeech.warningList.map((item, idx) => (
@@ -176,7 +176,7 @@ const NewReport: React.FC = () => {
               ))}
             </ul>
 
-            <p className="text-red-500 mt-4 mb-2">
+            <p className="text-navy mt-4 mb-2">
               <strong>{c.fraud.warning}</strong>
             </p>
           </div>)}
