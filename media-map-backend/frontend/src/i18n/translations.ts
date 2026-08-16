@@ -67,6 +67,7 @@ export interface Translations {
     newsTitle: string;
     newsAll: string;
     newsReadAll: string;
+    readMore: string;
     quoteOfDay: string;
     categoriesTitle: string;
     categoriesViewAll: string;
@@ -139,6 +140,7 @@ const translations: Record<Language, Translations> = {
       newsTitle: 'Новости фактчекинга и медиа',
       newsAll: 'Все новости →',
       newsReadAll: 'Читать все новости →',
+      readMore: 'Подробнее',
       quoteOfDay: 'Анализ современных медиа-трендов требует мультидисциплинарного подхода для подлинного понимания их влияния.',
       categoriesTitle: 'Категории нарушений',
       categoriesViewAll: 'Все категории',
@@ -241,7 +243,7 @@ const translations: Record<Language, Translations> = {
       }
     },
     aggregator: {
-      title: 'Агрегатор новостей',
+      title: 'Новости',
       subtitle: 'Последние новости из проверенных источников Кыргызстана',
       readSource: 'Читать в источнике',
       publishedAt: 'Опубликовано:',
@@ -285,18 +287,19 @@ const translations: Record<Language, Translations> = {
       oldSiteDesc: 'MediaMap мурунку версиясынын материалдарына жана кызматтарына кирүү',
       checkInfoBtn: 'Маалыматты текшерүү',
       checkInputPlaceholder: 'Текшерүү үчүн шилтемени же текстти киргизиңиз...',
-      resourcesTitle: 'Сиз үчүн ресурстар',
+      resourcesTitle: 'Пайдалуу ресурстар',
       resourcesSubtitle: 'Маалымат менен иштөө үчүн практикалык материалдар, куралдар жана кызматтар.',
       resourcesViewAll: 'Бардык ресурстарды көрүү →',
       newsTitle: 'Фактчекинг жана медиа жаңылыктары',
       newsAll: 'Бардык жаңылыктар →',
       newsReadAll: 'Бардык жаңылыктарды окуу →',
+      readMore: 'Толугураак',
       quoteOfDay: 'Заманбап медиа-тренддерди талдоо алардын таасирин чыныгы түшүнүү үчүн мультидисциплинардык мамилени талап кылат.',
       categoriesTitle: 'Бузуулардын категориялары',
       categoriesViewAll: 'Бардык категориялар',
       categories: [
         {
-          title: 'Жек көрүүчүлүк тили',
+          title: 'Кастык тили',
           description:
             'Дискриминациялык билдирүүлөрдү, ксенофобияны жана жек көрүүчүлүк тилин таанууну үйрөнөбүз.',
         },
@@ -354,7 +357,7 @@ const translations: Record<Language, Translations> = {
     categoryDetails: {
       'hate-speech': {
         id: 'hate-speech',
-        title: 'Жек көрүүчүлүк тили (Hate Speech)',
+        title: 'Кастык тили',
         summary: 'Дискриминациялык билдирүүлөр, улуттар аралык, диний же социалдык кастыкты козутуу.',
         whatIsIt: 'Жек көрүүчүлүк тили — бул расалык жек көрүүчүлүктү, ксенофобияны же чыдамсыздыкка негизделген башка формаларды жайылткан, козуткан же актаган билдирүүлөр.',
         legalBasis: 'Кыргыз Республикасынын мыйзамдары кастыкты козутууга ачык чакырыктарга тыюу салат (КР Кылмыш-жаза кодексинин 330-беренеси).',
@@ -367,7 +370,7 @@ const translations: Record<Language, Translations> = {
       },
       'disinformation': {
         id: 'disinformation',
-        title: 'Дезинформация жана Фейктер',
+        title: 'Дезинформация жана фейктер',
         summary: 'Жарандарды адаштыруу жана манипуляциялоо үчүн атайын түзүлгөн ачык жалган маалымат.',
         whatIsIt: 'Дезинформация — бул коомчулукту алдоо, зыян келтирүү же саясий/каржылык пайда алуу максатында атайылап түзүлгөн жана жайылтылган жалган маалыматтар.',
         legalBasis: 'КР «Жалган (туура эмес) маалыматтан коргоо жөнүндө» мыйзамы жалган маалыматтарды жарыялаган ресурстарды бөгөттөө тартибин жөнгө салат.',
@@ -393,7 +396,7 @@ const translations: Record<Language, Translations> = {
       }
     },
     aggregator: {
-      title: 'Жаңылыктар агрегатору',
+      title: 'Жаңылыктар',
       subtitle: 'Кыргызстандын ишенимдүү булактарынан акыркы жаңылыктар',
       readSource: 'Булактан окуу',
       publishedAt: 'Жарыяланды:',

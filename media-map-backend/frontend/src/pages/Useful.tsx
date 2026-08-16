@@ -1,41 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
 import usefulContent from '../i18n/pages/useful';
 import { USEFUL_RESOURCE_ICONS } from '../utils/usefulData';
 import { ExternalLink, BookOpen } from 'lucide-react';
-import AiAnalysisModal from '../components/AI/AiAnalysisModal';
-import axiosApi from '../axiosApi';
-import EditableText from '../components/CMS/EditableText';
 
 const Useful: React.FC = () => {
   const { language } = useLanguage();
   const c = usefulContent[language];
-
-  // AI Check modal state
-  const [aiQueryText, setAiQueryText] = useState<string>('');
-  const [aiAnalysisResult, setAiAnalysisResult] = useState<string>('');
-  const [aiLoading, setAiLoading] = useState<boolean>(false);
-  const [isAiModalOpen, setIsAiModalOpen] = useState<boolean>(false);
-
-  const handleRunAiCheck = async (text: string) => {
-    if (!text.trim()) return;
-    setAiQueryText(text);
-    setIsAiModalOpen(true);
-    setAiLoading(true);
-    setAiAnalysisResult('');
-
-    try {
-      const { data } = await axiosApi.post('/ai/analyze', {
-        content: text,
-      });
-      setAiAnalysisResult(data.analysis || 'Анализ завершен.');
-    } catch (err) {
-      console.error('AI error:', err);
-      setAiAnalysisResult('Анализ выполнен экспертной базой данных MediaMap.');
-    } finally {
-      setAiLoading(false);
-    }
-  };
 
   return (
     <div className="bg-[#FAF9F5] min-h-screen font-inter">
@@ -98,16 +69,6 @@ const Useful: React.FC = () => {
                         <BookOpen className="h-3.5 w-3.5 text-blue-600" />
                         {c.learnMore}
                       </span>
-                      <span className="text-slate-300">•</span>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleRunAiCheck(`${res.title}. ${res.description}`);
-                        }}
-                        className="flex items-center gap-1 font-bold text-red-600 hover:text-red-700 transition-colors cursor-pointer"
-                      >
-                        <EditableText textKey={`useful.${res.id}.btnCheck`} value="Проверить информацию" />
-                      </button>
                     </div>
                   </div>
 
@@ -127,14 +88,6 @@ const Useful: React.FC = () => {
         </div>
       </section>
 
-      {/* AI Analysis Modal */}
-      <AiAnalysisModal
-        isOpen={isAiModalOpen}
-        onClose={() => setIsAiModalOpen(false)}
-        analysisText={aiAnalysisResult}
-        loading={aiLoading}
-        queryText={aiQueryText}
-      />
     </div>
   );
 };

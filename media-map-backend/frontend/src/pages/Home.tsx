@@ -458,7 +458,7 @@ const Home = () => {
               <div className="px-4 pb-4 pt-2 flex items-center justify-between border-t border-slate-100 text-[11px] text-slate-400">
                 <span>{n.date}</span>
                 <span className="font-bold text-navy group-hover:text-red-600 flex items-center gap-1">
-                  <EditableText textKey="home.news.readMore" value="Подробнее" /> <ArrowRight className="h-3 w-3" />
+                  <EditableText textKey="home.news.readMore" value={t.home.readMore} /> <ArrowRight className="h-3 w-3" />
                 </span>
               </div>
             </article>

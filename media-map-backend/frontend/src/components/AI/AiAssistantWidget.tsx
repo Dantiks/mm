@@ -161,7 +161,7 @@ const AiAssistantWidget: React.FC = () => {
           onClick={() => setIsOpen(true)}
           className="group flex items-center gap-3.5 px-5 py-3 rounded-full bg-gradient-to-r from-red-600 via-orange-500 via-amber-500 to-indigo-700 text-white shadow-2xl hover:shadow-orange-500/30 hover:scale-105 transition-all duration-300 border border-white/30"
         >
-          <div className="relative h-8 w-8 shrink-0">
+          <div className="relative h-11 w-11 shrink-0">
             <img
               src="/owl-mascot.png"
               alt="Совёнок MediaMap"
@@ -183,8 +183,8 @@ const AiAssistantWidget: React.FC = () => {
           {/* Header */}
           <div className="p-4 bg-gradient-to-r from-red-600 via-orange-500 via-amber-500 to-indigo-700 text-white flex items-center justify-between shadow-md">
             <div className="flex items-center gap-3">
-              <div className="p-1.5 bg-white/20 rounded-2xl border border-white/30 backdrop-blur-md h-14 w-14 flex items-center justify-center">
-                <img src="/owl-mascot.png" alt="Совёнок MediaMap" className="h-12 w-12 object-contain drop-shadow-xs" />
+              <div className="p-1.5 bg-white/20 rounded-2xl border border-white/30 backdrop-blur-md h-20 w-20 flex items-center justify-center">
+                <img src="/owl-mascot.png" alt="Совёнок MediaMap" className="h-16 w-16 object-contain drop-shadow-xs" />
               </div>
               <div>
                 <h3 className="font-black text-sm tracking-tight drop-shadow-xs">Совёнок MediaMap</h3>
