@@ -42,8 +42,8 @@ const resourceIcons = [
 const tagStyles: Record<string, string> = {
   фактчекинг: 'bg-red-100 text-red-700',
   дезинформация: 'bg-red-100 text-red-700',
-  коопсуздук: 'bg-amber-100 text-amber-800',
-  безопасность: 'bg-amber-100 text-amber-800',
+  коопсуздук: 'bg-slate-100 text-amber-800',
+  безопасность: 'bg-slate-100 text-amber-800',
   обучение: 'bg-emerald-100 text-emerald-800',
   окутуу: 'bg-emerald-100 text-emerald-800',
 };
@@ -227,7 +227,7 @@ const Home = () => {
     <div className="bg-white font-inter">
 
       {/* ── HERO ── */}
-      <section className="bg-[#f5f0e8] py-6 lg:py-8">
+      <section className="bg-[#FFFFFF] py-6 lg:py-8">
         <div className="mx-auto max-w-[1792px] pl-14 pr-6 sm:pl-16 sm:pr-8 lg:pl-24 lg:pr-16">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-center">
 
@@ -262,11 +262,11 @@ const Home = () => {
 
             </div>
 
-            {/* RIGHT: Горизонтальный Компактный Агрегатор Новостей */}
+            {/* RIGHT: горизонтальная лента новостей */}
             <div className="w-full min-w-0">
               <NewsAggregatorCarousel
                 items={displayNewsList}
-                title="Агрегатор новостей"
+                title={t.aggregator.title}
                 onSelectNews={(item) =>
                   setSelectedDetailNews({
                     id: item.id,
@@ -310,7 +310,7 @@ const Home = () => {
             {homeCategories.map((c) => (
               <div
                 key={c.title}
-                className="group flex flex-col rounded-2xl border-2 border-slate-200/80 bg-white p-6 shadow-xs transition-all hover:-translate-y-1 hover:border-red-600/50 hover:shadow-md"
+                className="group flex flex-col rounded-2xl border-2 border-slate-200/80 bg-white p-6 shadow-xs transition-all hover:-translate-y-1 hover:border-slate-300 hover:shadow-md"
               >
                 {/* Совёнок вместо иконки */}
                 <div className="flex justify-center">
@@ -320,7 +320,7 @@ const Home = () => {
                     className="h-32 w-32 object-contain drop-shadow-md transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
-                <h3 className="mt-4 text-[16px] font-black text-navy group-hover:text-red-600 transition-colors text-center">
+                <h3 className="mt-4 text-[16px] font-black text-navy group-hover:text-navy transition-colors text-center">
                   {c.title}
                 </h3>
                 <p className="mt-2 text-[13px] leading-relaxed text-slate-600 flex-1 text-center">
@@ -334,14 +334,14 @@ const Home = () => {
                       setCheckInputText('');
                       setCheckSubmitted(false);
                     }}
-                    className="group relative flex items-center justify-center gap-2 rounded-2xl bg-red-600 hover:bg-red-700 px-4 py-3 text-[13px] font-extrabold text-white shadow-md shadow-red-600/25 transition-all hover:scale-[1.03] active:scale-[0.98] cursor-pointer"
+                    className="group relative flex items-center justify-center gap-2 rounded-2xl bg-red-600 hover:bg-navy px-4 py-3 text-[13px] font-extrabold text-white shadow-md shadow-red-600/25 transition-all hover:scale-[1.03] active:scale-[0.98] cursor-pointer"
                   >
                     <EditableText textKey={`home.cat.${c.slug}.btnCheck`} value="Проверить информацию" />
                   </button>
 
                   <Link
                     to={`/categories/${c.slug}`}
-                    className="flex items-center justify-center gap-1 text-[12px] font-bold text-slate-500 hover:text-red-600 transition-colors pt-1 border-t border-slate-100"
+                    className="flex items-center justify-center gap-1 text-[12px] font-bold text-slate-500 hover:text-navy transition-colors pt-1 border-t border-slate-100"
                   >
                     <EditableText textKey={`home.cat.${c.slug}.linkLaws`} value="Законы КР и нормативно-правовая база" />
                     <ArrowRight className="h-3.5 w-3.5 text-red-600" />
@@ -354,7 +354,7 @@ const Home = () => {
       </section>
 
       {/* ── РЕСУРСЫ ── */}
-      <section className="bg-[#f5f0e8]/40 py-12">
+      <section className="bg-[#FFFFFF]/40 py-12">
         <div className="mx-auto max-w-[1792px] px-6 lg:px-16">
           <div className="flex flex-col gap-8 lg:flex-row lg:justify-between">
             <div className="max-w-[320px] shrink-0">
@@ -381,7 +381,7 @@ const Home = () => {
             <div className="grid flex-1 grid-cols-1 gap-x-8 gap-y-5 sm:grid-cols-2 lg:grid-cols-3">
               <Link
                 to="/map"
-                className="flex items-start gap-3.5 rounded-xl bg-white p-4 border border-slate-100 shadow-2xs hover:border-red-300 hover:bg-red-50/40 transition-colors group"
+                className="flex items-start gap-3.5 rounded-xl bg-white p-4 border border-slate-100 shadow-2xs hover:border-slate-300 hover:bg-navy transition-colors group"
               >
                 <img
                   src="/main-logo.png"
@@ -389,7 +389,7 @@ const Home = () => {
                   className="h-9 w-9 object-contain opacity-80 group-hover:opacity-100 transition-opacity shrink-0"
                 />
                 <div>
-                  <h3 className="text-[14px] font-bold text-navy group-hover:text-red-600 transition-colors flex items-center gap-1">
+                  <h3 className="text-[14px] font-bold text-navy group-hover:text-navy transition-colors flex items-center gap-1">
                     <EditableText textKey="home.oldSiteTitle" value={t.home.oldSiteTitle} /> <ExternalLink className="h-3 w-3" />
                   </h3>
                   <p className="mt-1 text-[12px] leading-snug text-slateBody"><EditableText textKey="home.oldSiteDesc" value={t.home.oldSiteDesc} /></p>
@@ -433,7 +433,7 @@ const Home = () => {
           {t.home.news.map((n) => (
             <article
               key={n.title}
-              className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xs transition-all hover:shadow-md hover:border-red-400 flex flex-col justify-between"
+              className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xs transition-all hover:shadow-md hover:border-slate-300 flex flex-col justify-between"
             >
               <div>
                 <div className="relative h-[180px] overflow-hidden bg-slate-100">
@@ -449,7 +449,7 @@ const Home = () => {
                   </span>
                 </div>
                 <div className="p-4">
-                  <h3 className="text-[15px] font-extrabold leading-snug text-navy group-hover:text-red-600 transition-colors">
+                  <h3 className="text-[15px] font-extrabold leading-snug text-navy group-hover:text-navy transition-colors">
                     {n.title}
                   </h3>
                   <p className="mt-2 text-[12px] leading-relaxed text-slateBody">{n.description}</p>
@@ -457,7 +457,7 @@ const Home = () => {
               </div>
               <div className="px-4 pb-4 pt-2 flex items-center justify-between border-t border-slate-100 text-[11px] text-slate-400">
                 <span>{n.date}</span>
-                <span className="font-bold text-navy group-hover:text-red-600 flex items-center gap-1">
+                <span className="font-bold text-navy group-hover:text-navy flex items-center gap-1">
                   <EditableText textKey="home.news.readMore" value={t.home.readMore} /> <ArrowRight className="h-3 w-3" />
                 </span>
               </div>
@@ -480,11 +480,11 @@ const Home = () => {
 
             {/* Заголовок с совёнком */}
             <div className="flex items-center gap-4 mb-6">
-              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-amber-50 border border-amber-100 shadow-xs">
+              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-slate-50 border border-slate-200 shadow-xs">
                 <img src={activeCheckCategory.owl} alt={activeCheckCategory.title} className="h-12 w-12 object-contain" />
               </div>
               <div>
-                <span className="inline-block rounded-full bg-amber-100 px-3 py-0.5 text-[11px] font-bold text-amber-800 mb-1">
+                <span className="inline-block rounded-full bg-slate-100 px-3 py-0.5 text-[11px] font-bold text-amber-800 mb-1">
                   Категория: {activeCheckCategory.title}
                 </span>
                 <h3 className="text-[20px] font-black text-navy leading-tight"><EditableText textKey="home.checkModal.title" value="Проверить информацию" /></h3>
@@ -511,13 +511,13 @@ const Home = () => {
                   placeholder="Вставьте ссылку или текст для проверки..."
                   rows={4}
                   required
-                  className="w-full rounded-2xl border border-slate-200 bg-slate-50/50 p-4 text-[14px] text-navy outline-none transition-colors focus:border-amber-400 focus:bg-white focus:ring-2 focus:ring-amber-200 shadow-inner resize-none"
+                  className="w-full rounded-2xl border border-slate-200 bg-slate-50/50 p-4 text-[14px] text-navy outline-none transition-colors focus:border-slate-200 focus:bg-white focus:ring-2 focus:ring-slate-300 shadow-inner resize-none"
                 />
 
                 <div className="flex items-center gap-3 pt-2">
                   <button 
                     type="submit" 
-                    className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-red-600 px-6 py-3.5 text-[14px] font-bold text-white shadow-md transition-all hover:bg-red-700 hover:scale-[1.02]"
+                    className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-red-600 px-6 py-3.5 text-[14px] font-bold text-white shadow-md transition-all hover:bg-navy hover:scale-[1.02]"
                   >
                     <Sparkles className="h-4 w-4" /> <EditableText textKey="home.checkModal.submitBtn" value="Отправить на проверку" />
                   </button>

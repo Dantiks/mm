@@ -1,3 +1,4 @@
+import { useLanguage } from '../../i18n/LanguageContext';
 import React, { useRef, useEffect, useState } from 'react';
 import { ChevronLeft, ChevronRight, MessageSquare, ArrowRight } from 'lucide-react';
 
@@ -19,7 +20,8 @@ interface Props {
   onSelectNews?: (news: NewsItem) => void;
 }
 
-const NewsAggregatorCarousel: React.FC<Props> = ({ items, title = 'Агрегатор новостей', onSelectNews }) => {
+const NewsAggregatorCarousel: React.FC<Props> = ({ items, title = 'Новости', onSelectNews }) => {
+  const { t } = useLanguage();
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
@@ -71,14 +73,14 @@ const NewsAggregatorCarousel: React.FC<Props> = ({ items, title = 'Агрега�
         <div className="flex items-center gap-1.5">
           <button
             onClick={() => scroll('left')}
-            className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-100 text-slate-700 hover:bg-red-600 hover:text-white transition-all active:scale-95 cursor-pointer"
+            className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-100 text-slate-700 hover:bg-navy hover:text-white transition-all active:scale-95 cursor-pointer"
             aria-label="Назад"
           >
             <ChevronLeft className="h-3.5 w-3.5" />
           </button>
           <button
             onClick={() => scroll('right')}
-            className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-100 text-slate-700 hover:bg-red-600 hover:text-white transition-all active:scale-95 cursor-pointer"
+            className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-100 text-slate-700 hover:bg-navy hover:text-white transition-all active:scale-95 cursor-pointer"
             aria-label="Вперед"
           >
             <ChevronRight className="h-3.5 w-3.5" />
@@ -131,7 +133,7 @@ const NewsAggregatorCarousel: React.FC<Props> = ({ items, title = 'Агрега�
 
             {/* Title & Description Below Image */}
             <div className="mt-1.5 px-0.5">
-              <h4 className="text-[12px] font-extrabold leading-snug text-navy group-hover:text-red-600 transition-colors line-clamp-2">
+              <h4 className="text-[12px] font-extrabold leading-snug text-navy group-hover:text-navy transition-colors line-clamp-2">
                 {news.title}
               </h4>
               {news.description && (
@@ -140,7 +142,7 @@ const NewsAggregatorCarousel: React.FC<Props> = ({ items, title = 'Агрега�
                 </p>
               )}
               <div className="mt-1 flex items-center gap-0.5 text-[10px] font-bold text-red-600 group-hover:translate-x-0.5 transition-transform">
-                <span>Читать</span>
+                <span>{t.aggregator.readMore}</span>
                 <ArrowRight className="h-2.5 w-2.5" />
               </div>
             </div>

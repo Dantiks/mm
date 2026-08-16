@@ -93,6 +93,7 @@ export interface Translations {
     title: string;
     subtitle: string;
     readSource: string;
+    readMore: string;
     publishedAt: string;
   };
 }
@@ -130,7 +131,7 @@ const translations: Record<Language, Translations> = {
       heroSubtitle:
         'Учимся анализировать информацию, распознавать манипуляции, противостоять языку вражды, дезинформации и цифровому мошенничеству.',
       followUs: 'Следите за нами',
-      newsOfDayCaption: 'Новость дня · агрегатор MediaMap',
+      newsOfDayCaption: 'Новость дня · MediaMap',
       newsOfDayTitle: 'Исследование МедиаКГ: 78% респондентов сталкивались с дезинформацией в социальных сетях',
       oldSiteTitle: 'Архивная версия платформы MediaMap',
       oldSiteDesc: 'Доступ к предыдущей версии материалов и сервисов MediaMap',
@@ -250,6 +251,7 @@ const translations: Record<Language, Translations> = {
       title: 'Новости',
       subtitle: 'Последние новости из проверенных источников Кыргызстана',
       readSource: 'Читать в источнике',
+      readMore: 'Читать',
       publishedAt: 'Опубликовано:',
     }
   },
@@ -285,7 +287,7 @@ const translations: Record<Language, Translations> = {
       heroSubtitle:
         'Маалыматты талдоону, манипуляцияларды таанууну, жек көрүүчүлүк тилине, дезинформацияга жана санарип алдамчылыкка каршы турууну үйрөнөбүз.',
       followUs: 'Бизди ээрчиңиз',
-      newsOfDayCaption: 'Күндүн жаңылыгы · MediaMap агрегатору',
+      newsOfDayCaption: 'Күндүн жаңылыгы · MediaMap',
       newsOfDayTitle: 'МедиаКГ изилдөөсү: Респонденттердин 78% социалдык тармактарда дезинформацияга туш болгон',
       oldSiteTitle: 'MediaMap платформасынын архивдик версиясы',
       oldSiteDesc: 'MediaMap мурунку версиясынын материалдарына жана кызматтарына кирүү',
@@ -405,6 +407,7 @@ const translations: Record<Language, Translations> = {
       title: 'Жаңылыктар',
       subtitle: 'Кыргызстандын ишенимдүү булактарынан акыркы жаңылыктар',
       readSource: 'Булактан окуу',
+      readMore: 'Окуу',
       publishedAt: 'Жарыяланды:',
     }
   },
