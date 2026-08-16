@@ -83,7 +83,7 @@ const NewsAggregator: React.FC = () => {
         <div className="mx-auto max-w-[1200px] px-6 lg:px-12">
           {loading ? (
             <div className="flex flex-col items-center justify-center py-24 space-y-3">
-              <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-red-600" />
+              <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-navy" />
               <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">
                 Загрузка новостной ленты...
               </span>
@@ -151,7 +151,7 @@ const NewsAggregator: React.FC = () => {
                               e.stopPropagation();
                               handleRunAiCheck(`${item.title}. ${item.contentSnippet}`);
                             }}
-                            className="flex items-center gap-1 font-bold text-red-600 hover:text-navy transition-colors"
+                            className="flex items-center gap-1 font-bold text-navy hover:text-navy transition-colors"
                           >
                             Проверить информацию
                           </button>

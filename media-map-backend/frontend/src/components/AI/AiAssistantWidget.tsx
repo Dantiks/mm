@@ -159,7 +159,7 @@ const AiAssistantWidget: React.FC = () => {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="group flex items-center gap-3.5 px-5 py-3 rounded-full bg-gradient-to-r from-red-600 via-orange-500 via-amber-500 to-indigo-700 text-white shadow-2xl hover:shadow-orange-500/30 hover:scale-105 transition-all duration-300 border border-white/30"
+          className="group flex items-center gap-3.5 px-5 py-3 rounded-full bg-gradient-to-r from-navy via-orange-500 via-amber-500 to-indigo-700 text-white shadow-2xl hover:shadow-orange-500/30 hover:scale-105 transition-all duration-300 border border-white/30"
         >
           <div className="relative h-11 w-11 shrink-0">
             <img
@@ -167,8 +167,8 @@ const AiAssistantWidget: React.FC = () => {
               alt="Совёнок MediaMap"
               className="h-full w-full object-contain drop-shadow-md group-hover:scale-110 transition-transform"
             />
-            <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-400 rounded-full border-2 border-red-600 animate-ping" />
-            <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-400 rounded-full border-2 border-red-600" />
+            <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-400 rounded-full border-2 border-navy animate-ping" />
+            <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-400 rounded-full border-2 border-navy" />
           </div>
           <div className="text-left">
             <span className="text-sm font-black tracking-tight block drop-shadow-xs">Совёнок MediaMap</span>
@@ -181,7 +181,7 @@ const AiAssistantWidget: React.FC = () => {
       {isOpen && (
         <div className="w-[90vw] sm:w-[420px] h-[580px] max-h-[85vh] bg-white rounded-3xl shadow-2xl border border-slate-200 flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-300">
           {/* Header */}
-          <div className="p-4 bg-gradient-to-r from-red-600 via-orange-500 via-amber-500 to-indigo-700 text-white flex items-center justify-between shadow-md">
+          <div className="p-4 bg-gradient-to-r from-navy via-orange-500 via-amber-500 to-indigo-700 text-white flex items-center justify-between shadow-md">
             <div className="flex items-center gap-3">
               <div className="p-1.5 bg-white/20 rounded-2xl border border-white/30 backdrop-blur-md h-20 w-20 flex items-center justify-center">
                 <img src="/owl-mascot.png" alt="Совёнок MediaMap" className="h-16 w-16 object-contain drop-shadow-xs" />

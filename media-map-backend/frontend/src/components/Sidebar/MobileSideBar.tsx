@@ -122,9 +122,9 @@ const MobileSideBar: React.FC<Props> = ({ isOpen, setIsOpen }) => {
 
                     <button
                         onClick={handleLogout}
-                        className="w-full flex items-center gap-4 px-4 py-3 rounded-2xl text-red-500 font-bold text-sm hover:bg-navy transition-colors mt-1"
+                        className="w-full flex items-center gap-4 px-4 py-3 rounded-2xl text-navy font-bold text-sm hover:bg-navyCard transition-colors mt-1"
                     >
-                      <LogOut className="w-5 h-5 text-red-400" />
+                      <LogOut className="w-5 h-5 text-navy" />
                       {t.nav.logout}
                     </button>
                   </div>

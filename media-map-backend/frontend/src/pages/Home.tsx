@@ -40,8 +40,8 @@ const resourceIcons = [
 ];
 
 const tagStyles: Record<string, string> = {
-  фактчекинг: 'bg-red-100 text-red-700',
-  дезинформация: 'bg-red-100 text-red-700',
+  фактчекинг: 'bg-slate-100 text-navy',
+  дезинформация: 'bg-slate-100 text-navy',
   коопсуздук: 'bg-slate-100 text-amber-800',
   безопасность: 'bg-slate-100 text-amber-800',
   обучение: 'bg-emerald-100 text-emerald-800',
@@ -301,7 +301,7 @@ const Home = () => {
               as="h2"
               className="text-[22px] font-extrabold text-navy"
             />
-            <Link to="/categories" className="flex items-center gap-1 text-[13px] font-bold text-red-600 hover:underline">
+            <Link to="/categories" className="flex items-center gap-1 text-[13px] font-bold text-navy hover:underline">
               {t.home.categoriesViewAll} <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
@@ -334,7 +334,7 @@ const Home = () => {
                       setCheckInputText('');
                       setCheckSubmitted(false);
                     }}
-                    className="group relative flex items-center justify-center gap-2 rounded-2xl bg-red-600 hover:bg-navy px-4 py-3 text-[13px] font-extrabold text-white shadow-md shadow-red-600/25 transition-all hover:scale-[1.03] active:scale-[0.98] cursor-pointer"
+                    className="group relative flex items-center justify-center gap-2 rounded-2xl bg-navy hover:bg-navyCard px-4 py-3 text-[13px] font-extrabold text-white shadow-md shadow-navy/20 transition-all hover:scale-[1.03] active:scale-[0.98] cursor-pointer"
                   >
                     <EditableText textKey={`home.cat.${c.slug}.btnCheck`} value="Проверить информацию" />
                   </button>
@@ -344,7 +344,7 @@ const Home = () => {
                     className="flex items-center justify-center gap-1 text-[12px] font-bold text-slate-500 hover:text-navy transition-colors pt-1 border-t border-slate-100"
                   >
                     <EditableText textKey={`home.cat.${c.slug}.linkLaws`} value="Законы КР и нормативно-правовая база" />
-                    <ArrowRight className="h-3.5 w-3.5 text-red-600" />
+                    <ArrowRight className="h-3.5 w-3.5 text-navy" />
                   </Link>
                 </div>
               </div>
@@ -381,7 +381,7 @@ const Home = () => {
             <div className="grid flex-1 grid-cols-1 gap-x-8 gap-y-5 sm:grid-cols-2 lg:grid-cols-3">
               <Link
                 to="/map"
-                className="flex items-start gap-3.5 rounded-xl bg-white p-4 border border-slate-100 shadow-2xs hover:border-slate-300 hover:bg-navy transition-colors group"
+                className="flex items-start gap-3.5 rounded-xl bg-white p-4 border border-slate-100 shadow-2xs hover:border-slate-300 hover:bg-navyCard transition-colors group"
               >
                 <img
                   src="/main-logo.png"
@@ -398,7 +398,7 @@ const Home = () => {
               
               {resources.map((r) => (
                 <div key={r.title} className="flex items-start gap-3.5 rounded-xl bg-white p-4 border border-slate-100 shadow-2xs">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-red-50 text-red-600 border border-red-100">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-slate-50 text-navy border border-slate-200">
                     {r.icon}
                   </span>
                   <div>
@@ -424,7 +424,7 @@ const Home = () => {
             />
             <p className="text-xs text-slate-500 mt-1"><EditableText textKey="home.newsSubtitle" value="Реальные публикации и исследования в Кыргызстане" /></p>
           </div>
-          <Link to="/useful" className="text-[13px] font-bold text-red-600 hover:underline flex items-center gap-1">
+          <Link to="/useful" className="text-[13px] font-bold text-navy hover:underline flex items-center gap-1">
             {t.home.newsAll}
           </Link>
         </div>
@@ -517,7 +517,7 @@ const Home = () => {
                 <div className="flex items-center gap-3 pt-2">
                   <button 
                     type="submit" 
-                    className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-red-600 px-6 py-3.5 text-[14px] font-bold text-white shadow-md transition-all hover:bg-navy hover:scale-[1.02]"
+                    className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-navy px-6 py-3.5 text-[14px] font-bold text-white shadow-md transition-all hover:bg-navyCard hover:scale-[1.02]"
                   >
                     <Sparkles className="h-4 w-4" /> <EditableText textKey="home.checkModal.submitBtn" value="Отправить на проверку" />
                   </button>

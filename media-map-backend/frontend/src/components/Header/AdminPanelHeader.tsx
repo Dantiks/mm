@@ -54,7 +54,7 @@ const AdminPanelHeader: React.FC<Props> = ({ setSidebarOpen }) => {
             <div className="flex items-center gap-3">
                 <button
                     onClick={handleEnableLiveEdit}
-                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-red-600 hover:bg-navy text-white text-xs font-black shadow-md shadow-red-500/20 transition-all cursor-pointer group"
+                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-navy hover:bg-navyCard text-white text-xs font-black shadow-md shadow-navy/20 transition-all cursor-pointer group"
                     title="Зайти на сайт и редактировать любые тексты прямо на экране"
                 >
                     <Sparkles className="w-4 h-4 text-amber-300 group-hover:rotate-12 transition-transform" />

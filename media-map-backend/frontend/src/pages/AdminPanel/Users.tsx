@@ -116,7 +116,7 @@ const Users = () => {
                 <div className="flex flex-wrap items-center gap-2">
                     <button
                         onClick={() => setIsAddModalOpen(true)}
-                        className="inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-5 py-2.5 text-xs font-extrabold text-white shadow-md hover:bg-navy transition-all"
+                        className="inline-flex items-center justify-center gap-2 rounded-xl bg-navy px-5 py-2.5 text-xs font-extrabold text-white shadow-md hover:bg-navyCard transition-all"
                     >
                         <UserPlus className="w-4 h-4" />
                         + 2-й администратор
@@ -162,7 +162,7 @@ const Users = () => {
                                             inline-flex items-center gap-2 px-4 py-2 rounded-xl font-bold text-sm transition-all
                                             ${userItem.role === "SUPERADMIN"
                                         ? 'opacity-20 cursor-not-allowed text-slate-400'
-                                        : 'text-rose-500 hover:bg-navy active:scale-95'}
+                                        : 'text-rose-500 hover:bg-navyCard active:scale-95'}
                                         `}
                                     onClick={() => handleDelete(userItem)}
                                 >
@@ -182,7 +182,7 @@ const Users = () => {
                     <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl animate-fadeIn">
                         <div className="flex items-center justify-between pb-4 border-b border-slate-100">
                             <h3 className="text-lg font-bold text-navy flex items-center gap-2">
-                                <ShieldCheck className="w-5 h-5 text-red-600" />
+                                <ShieldCheck className="w-5 h-5 text-navy" />
                                 Назначить 2-го администратора
                             </h3>
                             <button onClick={() => setIsAddModalOpen(false)} className="text-slate-400 hover:text-slate-600">
@@ -199,7 +199,7 @@ const Users = () => {
                                     value={newEmail}
                                     onChange={(e) => setNewEmail(e.target.value)}
                                     placeholder="admin2@mediamap.kg"
-                                    className="w-full rounded-xl border border-slate-300 px-4 py-2.5 text-sm text-navy outline-none focus:border-red-500"
+                                    className="w-full rounded-xl border border-slate-300 px-4 py-2.5 text-sm text-navy outline-none focus:border-navy"
                                 />
                             </div>
 
@@ -211,7 +211,7 @@ const Users = () => {
                                     value={newPassword}
                                     onChange={(e) => setNewPassword(e.target.value)}
                                     placeholder="••••••••"
-                                    className="w-full rounded-xl border border-slate-300 px-4 py-2.5 text-sm text-navy outline-none focus:border-red-500"
+                                    className="w-full rounded-xl border border-slate-300 px-4 py-2.5 text-sm text-navy outline-none focus:border-navy"
                                 />
                             </div>
 
@@ -220,7 +220,7 @@ const Users = () => {
                                 <select
                                     value={newRole}
                                     onChange={(e) => setNewRole(e.target.value as 'ADMIN' | 'MODERATOR')}
-                                    className="w-full rounded-xl border border-slate-300 px-4 py-2.5 text-sm text-navy outline-none focus:border-red-500"
+                                    className="w-full rounded-xl border border-slate-300 px-4 py-2.5 text-sm text-navy outline-none focus:border-navy"
                                 >
                                     <option value="ADMIN">Администратор (Полный доступ)</option>
                                     <option value="MODERATOR">Модератор (Проверка заявок)</option>
@@ -245,7 +245,7 @@ const Users = () => {
                                 <button
                                     type="submit"
                                     disabled={isCreating}
-                                    className="rounded-xl bg-red-600 px-5 py-2 text-xs font-bold text-white hover:bg-navy shadow-md"
+                                    className="rounded-xl bg-navy px-5 py-2 text-xs font-bold text-white hover:bg-navyCard shadow-md"
                                 >
                                     {isCreating ? 'Создание...' : 'Создать учетную запись'}
                                 </button>

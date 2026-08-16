@@ -57,7 +57,7 @@ const AdminPanelSidebar: React.FC<Props> = ({ sidebarOpen, setSidebarOpen }) => 
 
           <button
             onClick={handleStartLiveEdit}
-            className="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-gradient-to-r from-red-600 to-rose-600 text-white shadow-md shadow-red-500/20 hover:opacity-95 transition-all cursor-pointer group mb-4"
+            className="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-gradient-to-r from-navy to-rose-600 text-white shadow-md shadow-navy/20 hover:opacity-95 transition-all cursor-pointer group mb-4"
           >
             <div className="flex items-center gap-3">
               <Sparkles className="w-5 h-5 text-amber-300 group-hover:rotate-12 transition-transform" />
@@ -89,7 +89,7 @@ const AdminPanelSidebar: React.FC<Props> = ({ sidebarOpen, setSidebarOpen }) => 
           <div className="pt-8 mt-8 border-t border-slate-50">
             <NavLink
                 to="/"
-                className="flex items-center gap-3 px-4 py-3 rounded-xl text-rose-500 hover:bg-navy transition-colors duration-200"
+                className="flex items-center gap-3 px-4 py-3 rounded-xl text-rose-500 hover:bg-navyCard transition-colors duration-200"
             >
               <LogOut className="w-5 h-5" strokeWidth={2.2} />
               <span className="font-medium text-[15px]">Выйти из панели</span>

@@ -140,7 +140,7 @@ const AiAnalysisModal: React.FC<Props> = ({
             </button>
             <a
               href="/new-report"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-red-600 to-red-700 text-white text-xs font-extrabold shadow-md hover:from-navy hover:to-navy transition-all"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-navy to-navyCard text-white text-xs font-extrabold shadow-md hover:from-navy hover:to-navy transition-all"
             >
               <ExternalLink className="w-3.5 h-3.5" />
               Отправить заявку в MediaMap

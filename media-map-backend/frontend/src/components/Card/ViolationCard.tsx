@@ -188,7 +188,7 @@ const ViolationCard: React.FC<Props> = ({ item }) => {
           <button
               type="button"
               onClick={() => handleDelete(item.id)}
-              className="flex items-center gap-2 px-5 py-2.5 text-rose-600 font-semibold text-sm rounded-xl hover:bg-navy transition-colors"
+              className="flex items-center gap-2 px-5 py-2.5 text-rose-600 font-semibold text-sm rounded-xl hover:bg-navyCard transition-colors"
           >
             <Trash2 className="w-4 h-4" />
             Удалить

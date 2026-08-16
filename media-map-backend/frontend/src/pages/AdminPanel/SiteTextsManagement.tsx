@@ -132,7 +132,7 @@ const SiteTextsManagement: React.FC = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
         <div>
           <h1 className="text-2xl font-black text-slate-800 flex items-center gap-3">
-            <FileText className="w-7 h-7 text-red-600" />
+            <FileText className="w-7 h-7 text-navy" />
             Редактирование текстов сайта (CMS)
           </h1>
           <p className="text-slate-500 text-sm mt-1">
@@ -152,7 +152,7 @@ const SiteTextsManagement: React.FC = () => {
           <button
             onClick={handleSaveAll}
             disabled={saving}
-            className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-red-600 hover:bg-navy text-white text-sm font-bold shadow-md shadow-red-500/20 transition-all disabled:opacity-50"
+            className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-navy hover:bg-navyCard text-white text-sm font-bold shadow-md shadow-navy/20 transition-all disabled:opacity-50"
           >
             {saving ? (
               <RefreshCw className="w-4 h-4 animate-spin" />
@@ -191,7 +191,7 @@ const SiteTextsManagement: React.FC = () => {
             placeholder="Поиск по ключу или тексту..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-800 focus:outline-none focus:border-red-500"
+            className="w-full pl-9 pr-4 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-800 focus:outline-none focus:border-navy"
           />
         </div>
       </div>
@@ -199,7 +199,7 @@ const SiteTextsManagement: React.FC = () => {
       {/* Texts List */}
       {loading ? (
         <div className="flex items-center justify-center p-12 bg-white rounded-2xl shadow-sm">
-          <RefreshCw className="w-8 h-8 text-red-600 animate-spin" />
+          <RefreshCw className="w-8 h-8 text-navy animate-spin" />
         </div>
       ) : filteredTexts.length === 0 ? (
         <div className="p-8 text-center bg-white rounded-2xl border border-slate-100 text-slate-400 text-sm">
@@ -213,7 +213,7 @@ const SiteTextsManagement: React.FC = () => {
               className="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 hover:border-slate-200 transition-all space-y-3"
             >
               <div className="flex items-center justify-between">
-                <span className="font-mono text-xs font-bold text-red-600 bg-red-50 px-2.5 py-1 rounded-lg border border-red-100">
+                <span className="font-mono text-xs font-bold text-navy bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">
                   {item.key}
                 </span>
                 <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
@@ -233,14 +233,14 @@ const SiteTextsManagement: React.FC = () => {
                       rows={3}
                       value={item.valueRu}
                       onChange={(e) => handleChange(item.key, 'ru', e.target.value)}
-                      className="w-full p-3 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:bg-white focus:border-red-500 focus:outline-none transition-all"
+                      className="w-full p-3 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:bg-white focus:border-navy focus:outline-none transition-all"
                     />
                   ) : (
                     <input
                       type="text"
                       value={item.valueRu}
                       onChange={(e) => handleChange(item.key, 'ru', e.target.value)}
-                      className="w-full p-3 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:bg-white focus:border-red-500 focus:outline-none transition-all"
+                      className="w-full p-3 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:bg-white focus:border-navy focus:outline-none transition-all"
                     />
                   )}
                 </div>
@@ -256,14 +256,14 @@ const SiteTextsManagement: React.FC = () => {
                       rows={3}
                       value={item.valueKy}
                       onChange={(e) => handleChange(item.key, 'ky', e.target.value)}
-                      className="w-full p-3 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:bg-white focus:border-red-500 focus:outline-none transition-all"
+                      className="w-full p-3 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:bg-white focus:border-navy focus:outline-none transition-all"
                     />
                   ) : (
                     <input
                       type="text"
                       value={item.valueKy}
                       onChange={(e) => handleChange(item.key, 'ky', e.target.value)}
-                      className="w-full p-3 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:bg-white focus:border-red-500 focus:outline-none transition-all"
+                      className="w-full p-3 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:bg-white focus:border-navy focus:outline-none transition-all"
                     />
                   )}
                 </div>
@@ -287,7 +287,7 @@ const SiteTextsManagement: React.FC = () => {
                   placeholder="home.myTitle"
                   value={newKey}
                   onChange={(e) => setNewKey(e.target.value)}
-                  className="w-full p-3 mt-1 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:border-red-500"
+                  className="w-full p-3 mt-1 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:border-navy"
                 />
               </div>
 
@@ -296,7 +296,7 @@ const SiteTextsManagement: React.FC = () => {
                 <select
                   value={newCategory}
                   onChange={(e) => setNewCategory(e.target.value)}
-                  className="w-full p-3 mt-1 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:border-red-500"
+                  className="w-full p-3 mt-1 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:border-navy"
                 >
                   {CATEGORIES.filter((c) => c.id !== 'all').map((c) => (
                     <option key={c.id} value={c.id}>
@@ -313,7 +313,7 @@ const SiteTextsManagement: React.FC = () => {
                   placeholder="Введите текст..."
                   value={newValRu}
                   onChange={(e) => setNewValRu(e.target.value)}
-                  className="w-full p-3 mt-1 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:border-red-500"
+                  className="w-full p-3 mt-1 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:border-navy"
                 />
               </div>
 
@@ -324,7 +324,7 @@ const SiteTextsManagement: React.FC = () => {
                   placeholder="Текстти киргизиңиз..."
                   value={newValKy}
                   onChange={(e) => setNewValKy(e.target.value)}
-                  className="w-full p-3 mt-1 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:border-red-500"
+                  className="w-full p-3 mt-1 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:border-navy"
                 />
               </div>
             </div>
@@ -338,7 +338,7 @@ const SiteTextsManagement: React.FC = () => {
               </button>
               <button
                 onClick={handleAddNewKey}
-                className="px-5 py-2 rounded-xl bg-red-600 hover:bg-navy text-white text-sm font-bold shadow-md shadow-red-500/20"
+                className="px-5 py-2 rounded-xl bg-navy hover:bg-navyCard text-white text-sm font-bold shadow-md shadow-navy/20"
               >
                 Добавить
               </button>

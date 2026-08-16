@@ -66,8 +66,8 @@ const Analytics: React.FC = () => {
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
               <div className="flex items-center gap-2 mb-3">
-                <span className="flex h-3 w-3 rounded-full bg-red-600 animate-ping" />
-                <span className="font-mono text-xs font-black uppercase tracking-widest text-red-600">
+                <span className="flex h-3 w-3 rounded-full bg-navy animate-ping" />
+                <span className="font-mono text-xs font-black uppercase tracking-widest text-navy">
                   <EditableText textKey="analytics.eyebrow" value="Data Insights & Reports • MediaMap" />
                 </span>
               </div>
@@ -84,8 +84,8 @@ const Analytics: React.FC = () => {
               </p>
             </div>
 
-            <div className="flex items-center gap-3 bg-red-50 p-4 rounded-2xl border border-red-100 shrink-0">
-              <BarChart3 className="h-10 w-10 text-red-600" />
+            <div className="flex items-center gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200 shrink-0">
+              <BarChart3 className="h-10 w-10 text-navy" />
               <div>
                 <span className="text-2xl font-black text-navy">{totalMarkers}</span>
                 <span className="block text-xs font-bold text-slate-500 uppercase"><EditableText textKey="analytics.totalFixations" value="Всего фиксаций" /></span>
@@ -98,7 +98,7 @@ const Analytics: React.FC = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
           <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs">
             <div className="flex items-center justify-between mb-4">
-              <span className="p-3 rounded-xl bg-red-50 text-red-600 font-bold">
+              <span className="p-3 rounded-xl bg-slate-50 text-navy font-bold">
                 <FileText className="h-6 w-6" />
               </span>
               <span className="text-xs font-extrabold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full"><EditableText textKey="analytics.card1.tag" value="+100% База" /></span>
@@ -148,7 +148,7 @@ const Analytics: React.FC = () => {
           <div className="lg:col-span-6 bg-white p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-3 mb-6">
-                <div className="p-2.5 rounded-xl bg-red-50 text-red-600">
+                <div className="p-2.5 rounded-xl bg-slate-50 text-navy">
                   <PieChart className="h-6 w-6" />
                 </div>
                 <div>
@@ -162,11 +162,11 @@ const Analytics: React.FC = () => {
                 <div>
                   <div className="flex justify-between text-xs font-extrabold mb-1">
                     <span className="text-navy"><EditableText textKey="analytics.catDist.c1" value="1. Язык вражды (Hate Speech)" /></span>
-                    <span className="text-red-600">{cat1Count} кейсов ({Math.round((cat1Count / totalMarkers) * 100)}%)</span>
+                    <span className="text-navy">{cat1Count} кейсов ({Math.round((cat1Count / totalMarkers) * 100)}%)</span>
                   </div>
                   <div className="h-3 w-full bg-slate-100 rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-gradient-to-r from-red-500 to-red-600 rounded-full"
+                      className="h-full bg-gradient-to-r from-navy to-navyCard rounded-full"
                       style={{ width: `${Math.round((cat1Count / totalMarkers) * 100)}%` }}
                     />
                   </div>
@@ -228,10 +228,10 @@ const Analytics: React.FC = () => {
                     className="flex items-center justify-between p-3.5 rounded-2xl bg-slate-50 border border-slate-100 hover:border-slate-300 transition-colors"
                   >
                     <span className="text-xs font-bold text-navy flex items-center gap-2">
-                      <span className="h-2 w-2 rounded-full bg-red-600" />
+                      <span className="h-2 w-2 rounded-full bg-navy" />
                       {city}
                     </span>
-                    <span className="text-xs font-black text-red-600 bg-red-50 px-2.5 py-1 rounded-full border border-red-100">
+                    <span className="text-xs font-black text-navy bg-slate-50 px-2.5 py-1 rounded-full border border-slate-200">
                       {count} кейсов
                     </span>
                   </div>

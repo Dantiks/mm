@@ -63,7 +63,7 @@ const NewsAggregatorCarousel: React.FC<Props> = ({ items, title = 'Новост�
       {/* Header with Navigation Controls */}
       <div className="flex items-center justify-between pb-1.5 border-b border-slate-100">
         <div className="flex items-center gap-2">
-          <span className="h-2 w-2 rounded-full bg-red-600 animate-pulse" />
+          <span className="h-2 w-2 rounded-full bg-navy animate-pulse" />
           <h3 className="text-xs font-black text-navy uppercase tracking-wider">{title}</h3>
           <span className="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.2 rounded-full border border-emerald-100">
             Live
@@ -73,14 +73,14 @@ const NewsAggregatorCarousel: React.FC<Props> = ({ items, title = 'Новост�
         <div className="flex items-center gap-1.5">
           <button
             onClick={() => scroll('left')}
-            className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-100 text-slate-700 hover:bg-navy hover:text-white transition-all active:scale-95 cursor-pointer"
+            className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-100 text-slate-700 hover:bg-navyCard hover:text-white transition-all active:scale-95 cursor-pointer"
             aria-label="Назад"
           >
             <ChevronLeft className="h-3.5 w-3.5" />
           </button>
           <button
             onClick={() => scroll('right')}
-            className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-100 text-slate-700 hover:bg-navy hover:text-white transition-all active:scale-95 cursor-pointer"
+            className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-100 text-slate-700 hover:bg-navyCard hover:text-white transition-all active:scale-95 cursor-pointer"
             aria-label="Вперед"
           >
             <ChevronRight className="h-3.5 w-3.5" />
@@ -115,7 +115,7 @@ const NewsAggregatorCarousel: React.FC<Props> = ({ items, title = 'Новост�
               />
 
               {/* Top Tag Badge */}
-              <span className="absolute top-2 left-2 rounded-full bg-red-600/90 backdrop-blur-xs px-2 py-0.5 text-[9px] font-extrabold text-white uppercase tracking-wider shadow-xs">
+              <span className="absolute top-2 left-2 rounded-full bg-navy/90 backdrop-blur-xs px-2 py-0.5 text-[9px] font-extrabold text-white uppercase tracking-wider shadow-xs">
                 #{news.tag}
               </span>
 
@@ -141,7 +141,7 @@ const NewsAggregatorCarousel: React.FC<Props> = ({ items, title = 'Новост�
                   {news.description}
                 </p>
               )}
-              <div className="mt-1 flex items-center gap-0.5 text-[10px] font-bold text-red-600 group-hover:translate-x-0.5 transition-transform">
+              <div className="mt-1 flex items-center gap-0.5 text-[10px] font-bold text-navy group-hover:translate-x-0.5 transition-transform">
                 <span>{t.aggregator.readMore}</span>
                 <ArrowRight className="h-2.5 w-2.5" />
               </div>

@@ -16,17 +16,17 @@ const categoryData = [
   {
     id: 'hate-speech',
     slug: 'hate-speech',
-    icon: <MessageSquareWarning className="h-8 w-8 text-red-600" />,
+    icon: <MessageSquareWarning className="h-8 w-8 text-navy" />,
   },
   {
     id: 'disinformation',
     slug: 'disinformation',
-    icon: <FileSearch className="h-8 w-8 text-red-600" />,
+    icon: <FileSearch className="h-8 w-8 text-navy" />,
   },
   {
     id: 'digital-fraud',
     slug: 'digital-fraud',
-    icon: <ShieldAlert className="h-8 w-8 text-red-600" />,
+    icon: <ShieldAlert className="h-8 w-8 text-navy" />,
   },
 ];
 
@@ -94,7 +94,7 @@ const Categories = () => {
                 <div>
                   {/* Иконка категории */}
                   <div className="flex items-center justify-between mb-6">
-                    <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-red-50 border-2 border-red-100 group-hover:bg-navy group-hover:text-white transition-colors duration-300 shadow-xs">
+                    <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-50 border-2 border-slate-200 group-hover:bg-navyCard group-hover:text-white transition-colors duration-300 shadow-xs">
                       {cat.icon}
                     </span>
                   </div>
@@ -117,7 +117,7 @@ const Categories = () => {
                       setActiveCheckCategory(isCheckingThis ? null : cat.id);
                       setCheckText('');
                     }}
-                    className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-2xl bg-red-600 hover:bg-navy text-white font-extrabold text-xs shadow-md shadow-red-600/25 hover:scale-[1.02] transition-all cursor-pointer"
+                    className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-2xl bg-navy hover:bg-navyCard text-white font-extrabold text-xs shadow-md shadow-navy/20 hover:scale-[1.02] transition-all cursor-pointer"
                   >
                     <EditableText textKey={`categories.${cat.id}.btnCheck`} value={t.home.checkInfoBtn} />
                   </button>
@@ -133,7 +133,7 @@ const Categories = () => {
                         value={checkText}
                         onChange={(e) => setCheckText(e.target.value)}
                         placeholder="Вставьте подозрительный текст, новость или ссылку..."
-                        className="w-full rounded-xl border border-slate-200 p-2.5 text-xs text-slate-800 focus:border-red-500 focus:outline-none bg-white"
+                        className="w-full rounded-xl border border-slate-200 p-2.5 text-xs text-slate-800 focus:border-navy focus:outline-none bg-white"
                       />
                       <button
                         onClick={() => handleRunAiCheck(checkText, detail?.title)}
@@ -151,7 +151,7 @@ const Categories = () => {
                     className="flex items-center justify-between pt-3 border-t border-slate-100 text-xs font-black text-slate-700 hover:text-navy transition-colors"
                   >
                     <EditableText textKey={`categories.${cat.id}.linkLaws`} value="Законы КР и нормативно-правовая база" />
-                    <ArrowRight className="h-4 w-4 text-red-600 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="h-4 w-4 text-navy group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </div>
               </div>

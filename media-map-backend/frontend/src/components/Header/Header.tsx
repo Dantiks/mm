@@ -59,7 +59,7 @@ const Header = () => {
                 className={({ isActive }) =>
                   `text-[14px] transition-colors hover:text-navy ${
                     isActive
-                      ? 'font-extrabold text-navy border-b-2 border-red-600 pb-1'
+                      ? 'font-extrabold text-navy border-b-2 border-navy pb-1'
                       : 'font-medium text-[#3e494a]'
                   }`
                 }
@@ -93,7 +93,7 @@ const Header = () => {
                 {user.role === 'admin' && (
                   <Link
                     to="/admin/texts"
-                    className="flex items-center gap-1.5 rounded-xl bg-red-50 text-red-600 border border-red-200 px-3 py-2 text-xs font-extrabold transition-all hover:bg-navy hover:text-white shadow-xs"
+                    className="flex items-center gap-1.5 rounded-xl bg-slate-50 text-navy border border-slate-200 px-3 py-2 text-xs font-extrabold transition-all hover:bg-navyCard hover:text-white shadow-xs"
                     title="Визуальное редактирование текстов сайта"
                   >
                     <Edit3 className="h-4 w-4" />
@@ -110,7 +110,7 @@ const Header = () => {
                 </Link>
                 <button
                   onClick={handleLogout}
-                  className="flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-bold text-red-500 transition-all hover:bg-navy"
+                  className="flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-bold text-navy transition-all hover:bg-navyCard"
                 >
                   <LogOut className="h-4 w-4" />
                   {t.nav.logout}

@@ -133,7 +133,7 @@ const MapPage: React.FC = () => {
               const count = markers.filter(m => (m.violationTypeId || m.violationType?.id) === cat.id).length;
               let badgeColor = 'bg-blue-600';
               if (cat.id === 2) badgeColor = 'bg-amber-600';
-              if (cat.id === 3) badgeColor = 'bg-red-600';
+              if (cat.id === 3) badgeColor = 'bg-navy';
 
               return (
                 <button
@@ -162,7 +162,7 @@ const MapPage: React.FC = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Поиск по фактам, городу, тексту..."
-              className="w-full pl-10 pr-9 py-2 rounded-2xl bg-slate-100 border border-slate-200 text-xs font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-red-600/30 focus:border-red-600 transition-all"
+              className="w-full pl-10 pr-9 py-2 rounded-2xl bg-slate-100 border border-slate-200 text-xs font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-navy/10 focus:border-navy transition-all"
             />
             {searchQuery && (
               <button
@@ -206,14 +206,14 @@ const MapPage: React.FC = () => {
                         {/* Category Badge */}
                         <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-2">
                           <span className={`inline-block px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider text-white ${
-                            catId === 3 ? 'bg-red-600' : catId === 2 ? 'bg-amber-600' : 'bg-blue-600'
+                            catId === 3 ? 'bg-navy' : catId === 2 ? 'bg-amber-600' : 'bg-blue-600'
                           }`}>
                             {catId === 3 ? 'Кастык тили (Язык вражды)' : catId === 2 ? 'Санариптик шылуундар' : 'Жалган маалымат (Фейк)'}
                           </span>
 
                           <button
                             onClick={() => setActiveModalMarker(marker)}
-                            className="flex items-center gap-1 text-[11px] font-bold text-red-600 hover:text-navy cursor-pointer"
+                            className="flex items-center gap-1 text-[11px] font-bold text-navy hover:text-navy cursor-pointer"
                           >
                             <Maximize2 className="h-3 w-3" />
                             <span>Открыть</span>
@@ -223,7 +223,7 @@ const MapPage: React.FC = () => {
                         {/* Location Info */}
                         <div className="text-xs text-slate-600 space-y-1">
                           <div className="flex items-center gap-1.5 font-bold text-navy">
-                            <MapPin className="h-3.5 w-3.5 text-red-600 shrink-0" />
+                            <MapPin className="h-3.5 w-3.5 text-navy shrink-0" />
                             <span>Локация: {marker.authorRegion}, {marker.authorCity}</span>
                           </div>
                           {marker.createdAt && (
@@ -277,7 +277,7 @@ const MapPage: React.FC = () => {
                             href={marker.mediaLink}
                             target="_blank"
                             rel="noreferrer"
-                            className="mt-2 flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-red-600 hover:bg-navy text-white text-xs font-bold transition-all shadow-2xs"
+                            className="mt-2 flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-navy hover:bg-navyCard text-white text-xs font-bold transition-all shadow-2xs"
                           >
                             <EditableText textKey="map.btnSource" value="Перейти к первоисточнику" />
                             <ExternalLink className="h-3.5 w-3.5" />
@@ -308,7 +308,7 @@ const MapPage: React.FC = () => {
 
             <div className="flex items-center gap-2 mb-4">
               <span className={`inline-block px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider text-white ${
-                activeModalMarker.violationTypeId === 3 ? 'bg-red-600' : activeModalMarker.violationTypeId === 2 ? 'bg-amber-600' : 'bg-blue-600'
+                activeModalMarker.violationTypeId === 3 ? 'bg-navy' : activeModalMarker.violationTypeId === 2 ? 'bg-amber-600' : 'bg-blue-600'
               }`}>
                 {activeModalMarker.violationTypeId === 3 ? 'Кастык тили (Язык вражды)' : activeModalMarker.violationTypeId === 2 ? 'Санариптик шылуундар' : 'Жалган маалымат (Фейк)'}
               </span>
@@ -320,7 +320,7 @@ const MapPage: React.FC = () => {
 
             <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500 mb-6 pb-4 border-b border-slate-100">
               <div className="flex items-center gap-1 font-bold text-navy">
-                <MapPin className="h-4 w-4 text-red-600" />
+                <MapPin className="h-4 w-4 text-navy" />
                 {activeModalMarker.authorRegion}, {activeModalMarker.authorCity}
               </div>
               {activeModalMarker.createdAt && (
@@ -364,7 +364,7 @@ const MapPage: React.FC = () => {
                 href={activeModalMarker.mediaLink}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2 py-3 px-6 rounded-2xl bg-red-600 hover:bg-navy text-white text-sm font-bold transition-all shadow-md"
+                className="inline-flex items-center justify-center gap-2 py-3 px-6 rounded-2xl bg-navy hover:bg-navyCard text-white text-sm font-bold transition-all shadow-md"
               >
                 <EditableText textKey="map.btnSourceModal" value="Перейти к первоисточнику" />
                 <ExternalLink className="h-4 w-4" />

@@ -41,22 +41,22 @@ const Contacts = () => {
             rel="noreferrer"
             className="group flex flex-col rounded-2xl border-2 border-lineLight bg-white p-8 transition-all hover:border-slate-300 hover:shadow-lg"
           >
-            <IconPill className="!h-14 !w-14 bg-red-50 text-red-600 border border-red-100">
-              <Send className="h-6 w-6 text-red-600" />
+            <IconPill className="!h-14 !w-14 bg-slate-50 text-navy border border-slate-200">
+              <Send className="h-6 w-6 text-navy" />
             </IconPill>
             <h3 className="mt-6 text-[20px] font-black text-navy"><EditableText textKey="contacts.telegram.title" value={c.telegram.title} /></h3>
             <p className="mt-2 flex-grow text-[14px] leading-[22px] text-slateBody">
               <EditableText textKey="contacts.telegram.desc" value={c.telegram.description} />
             </p>
-            <span className="mt-6 flex items-center gap-2 text-[14px] font-extrabold text-red-600">
+            <span className="mt-6 flex items-center gap-2 text-[14px] font-extrabold text-navy">
               <EditableText textKey="contacts.telegram.cta" value={c.telegram.cta} />
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </span>
           </a>
 
           <div className="group flex flex-col rounded-2xl border-2 border-lineLight bg-white p-8 transition-all hover:border-slate-300 hover:shadow-lg">
-            <IconPill className="!h-14 !w-14 bg-red-50 text-red-600 border border-red-100">
-              <Mail className="h-6 w-6 text-red-600" />
+            <IconPill className="!h-14 !w-14 bg-slate-50 text-navy border border-slate-200">
+              <Mail className="h-6 w-6 text-navy" />
             </IconPill>
             <h3 className="mt-6 text-[20px] font-black text-navy"><EditableText textKey="contacts.email.title" value={c.email.title} /></h3>
             <p className="mt-2 flex-grow text-[14px] leading-[22px] text-slateBody">
@@ -88,10 +88,10 @@ const Contacts = () => {
         </div>
 
         {/* Блок «Если вы встретили ошибку — напишите нам» с маскотом */}
-        <div className="mt-12 rounded-3xl border-2 border-red-600/30 bg-gradient-to-br from-red-50/50 via-white to-white p-8 shadow-md relative overflow-hidden">
+        <div className="mt-12 rounded-3xl border-2 border-navy/30 bg-gradient-to-br from-navy/50 via-white to-white p-8 shadow-md relative overflow-hidden">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-6">
             <div className="flex items-center gap-4">
-              <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-red-600 text-white shadow-md">
+              <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-navy text-white shadow-md">
                 <AlertTriangle className="h-6 w-6" />
               </span>
               <div>
@@ -127,7 +127,7 @@ const Contacts = () => {
                   value={senderName}
                   onChange={(e) => setSenderName(e.target.value)}
                   placeholder={ct.namePlaceholder}
-                  className="w-full rounded-xl border-2 border-slate-200 bg-white px-4 py-3 text-sm text-navy placeholder:text-slate-400 outline-none focus:border-red-600 focus:ring-4 focus:ring-red-600/10 transition-all font-medium"
+                  className="w-full rounded-xl border-2 border-slate-200 bg-white px-4 py-3 text-sm text-navy placeholder:text-slate-400 outline-none focus:border-navy focus:ring-4 focus:ring-navy/10 transition-all font-medium"
                 />
               </div>
               <div>
@@ -138,7 +138,7 @@ const Contacts = () => {
                   value={senderEmail}
                   onChange={(e) => setSenderEmail(e.target.value)}
                   placeholder={ct.emailPlaceholder}
-                  className="w-full rounded-xl border-2 border-slate-200 bg-white px-4 py-3 text-sm text-navy placeholder:text-slate-400 outline-none focus:border-red-600 focus:ring-4 focus:ring-red-600/10 transition-all font-medium"
+                  className="w-full rounded-xl border-2 border-slate-200 bg-white px-4 py-3 text-sm text-navy placeholder:text-slate-400 outline-none focus:border-navy focus:ring-4 focus:ring-navy/10 transition-all font-medium"
                 />
               </div>
             </div>
@@ -151,14 +151,14 @@ const Contacts = () => {
                 value={errorMessage}
                 onChange={(e) => setErrorMessage(e.target.value)}
                 placeholder={ct.messagePlaceholder}
-                className="w-full rounded-xl border-2 border-slate-200 bg-white px-4 py-3 text-sm text-navy placeholder:text-slate-400 outline-none focus:border-red-600 focus:ring-4 focus:ring-red-600/10 transition-all font-medium"
+                className="w-full rounded-xl border-2 border-slate-200 bg-white px-4 py-3 text-sm text-navy placeholder:text-slate-400 outline-none focus:border-navy focus:ring-4 focus:ring-navy/10 transition-all font-medium"
               />
             </div>
 
             <div className="flex items-center gap-4 pt-2">
               <button
                 type="submit"
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-6 py-3.5 text-sm font-black text-white shadow-lg shadow-red-600/30 transition-all hover:bg-navy active:scale-[0.99]"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-navy px-6 py-3.5 text-sm font-black text-white shadow-lg shadow-navy/20 transition-all hover:bg-navyCard active:scale-[0.99]"
               >
                 <EditableText textKey="contacts.sendBtn" value={ct.sendBtn} />
                 <Send className="h-4 w-4" />
@@ -184,7 +184,7 @@ const Contacts = () => {
             href="https://t.me/mediamap_kg"
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-2 rounded-xl bg-red-600 px-8 py-4 text-[15px] font-black text-white transition-all hover:bg-navy shadow-md"
+            className="flex items-center gap-2 rounded-xl bg-navy px-8 py-4 text-[15px] font-black text-white transition-all hover:bg-navyCard shadow-md"
           >
             <MessageCircle className="h-5 w-5" />
             <EditableText textKey="contacts.support.btn" value={c.support.button} />

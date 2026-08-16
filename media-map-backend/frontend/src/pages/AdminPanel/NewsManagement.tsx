@@ -99,7 +99,7 @@ const NewsManagement: React.FC = () => {
                       </a>
                     </td>
                     <td className="py-3 px-4">
-                      <span className="text-xs font-bold text-red-600 bg-red-50 px-2 py-1 rounded-md">
+                      <span className="text-xs font-bold text-navy bg-slate-50 px-2 py-1 rounded-md">
                         {item.source}
                       </span>
                     </td>
@@ -109,7 +109,7 @@ const NewsManagement: React.FC = () => {
                     <td className="py-3 px-4 text-right">
                       <button
                         onClick={() => handleDelete(item.id)}
-                        className="text-red-500 hover:text-navy text-sm font-bold"
+                        className="text-navy hover:text-navy text-sm font-bold"
                       >
                         Удалить
                       </button>

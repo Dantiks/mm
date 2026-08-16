@@ -137,7 +137,7 @@ const ViolationTypeForm: React.FC<Props> = ({ item, onSuccess }) => {
                     <button
                         type="button"
                         onClick={handleCancelFile}
-                        className="absolute -top-2 -right-2 bg-rose-500 hover:bg-navy text-white rounded-full p-1 shadow-lg shadow-rose-100/50 transition-all active:scale-95 group-hover:scale-110"
+                        className="absolute -top-2 -right-2 bg-rose-500 hover:bg-navyCard text-white rounded-full p-1 shadow-lg shadow-rose-100/50 transition-all active:scale-95 group-hover:scale-110"
                         title="Отменить выбор"
                     >
                       <X className="w-4 h-4" />

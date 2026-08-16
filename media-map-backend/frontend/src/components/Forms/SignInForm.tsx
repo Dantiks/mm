@@ -60,7 +60,7 @@ const SignInForm: React.FC<Props> = ({state, inputChangeHandler, onSubmit}) => {
 
           {signInError && (
             <div className="mb-6">
-              <label className="mb-2.5 block font-medium text-center text-red-500 animate-bounce">
+              <label className="mb-2.5 block font-medium text-center text-navy animate-bounce">
                 {signInError.message}
               </label>
             </div>

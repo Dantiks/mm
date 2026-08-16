@@ -102,13 +102,13 @@ const ViolationForm = () => {
                 </h2>
                 <div className="mb-6">
                     <p className="mb-2.5 block text-gray-400 text-sm text-center">
-                        <span className="text-red-600">*</span> <EditableText textKey="form.requiredNote" value={c.requiredNote} />
+                        <span className="text-navy">*</span> <EditableText textKey="form.requiredNote" value={c.requiredNote} />
                     </p>
                 </div>
 
                 <div className="mb-8">
                     <label className="mb-2 block text-[15px] font-semibold text-navy">
-                        <span className="text-red-500">*</span> <EditableText textKey="form.regionLabel" value={c.regionLabel} />
+                        <span className="text-navy">*</span> <EditableText textKey="form.regionLabel" value={c.regionLabel} />
                     </label>
                     <select
                         name="authorRegion"
@@ -126,7 +126,7 @@ const ViolationForm = () => {
 
                 <div className="mb-8">
                     <label className="mb-2 block text-[15px] font-semibold text-navy">
-                        <span className="text-red-500">*</span> <EditableText textKey="form.cityLabel" value={c.cityLabel} />
+                        <span className="text-navy">*</span> <EditableText textKey="form.cityLabel" value={c.cityLabel} />
                     </label>
                     <input
                         autoComplete="off"
@@ -142,7 +142,7 @@ const ViolationForm = () => {
 
                 <div className="mb-8">
                     <label className="mb-2 block text-[15px] font-semibold text-navy">
-                        <span className="text-red-500">*</span> <EditableText textKey="form.violationTypeLabel" value={c.violationTypeLabel} />
+                        <span className="text-navy">*</span> <EditableText textKey="form.violationTypeLabel" value={c.violationTypeLabel} />
                     </label>
                     <select
                         name="violationTypeId"
