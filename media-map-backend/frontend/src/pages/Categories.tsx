@@ -76,11 +76,8 @@ const Categories = () => {
             />
           </div>
           <h1 className="text-3xl font-black text-navy sm:text-4xl md:text-5xl tracking-tight">
-            Категории нарушений
+            {t.home.categoriesTitle}
           </h1>
-          <p className="mt-2 text-sm text-slate-500 max-w-xl mx-auto font-medium">
-            Выберите категорию для проверки информации или изучения нормативно-правовых актов КР.
-          </p>
         </div>
 
         {/* 3 КАТЕГОРИИ (БЕЗ НУМЕРАЦИИ И БЕЗ НАДПИСИ «3 ОСНОВНЫЕ») */}
@@ -122,7 +119,7 @@ const Categories = () => {
                     }}
                     className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-2xl bg-red-600 hover:bg-red-700 text-white font-extrabold text-xs shadow-md shadow-red-600/25 hover:scale-[1.02] transition-all cursor-pointer"
                   >
-                    <EditableText textKey={`categories.${cat.id}.btnCheck`} value="Проверить информацию" />
+                    <EditableText textKey={`categories.${cat.id}.btnCheck`} value={t.home.checkInfoBtn} />
                   </button>
 
                   {/* Выдвигающееся Окно проверки */}

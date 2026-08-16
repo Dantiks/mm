@@ -70,6 +70,8 @@ export interface Translations {
     readMore: string;
     quoteOfDay: string;
     categoriesTitle: string;
+    legalNavigator: string;
+    allCategoriesBtn: string;
     categoriesViewAll: string;
     categories: TextItem[];
     resources: TextItem[];
@@ -143,6 +145,8 @@ const translations: Record<Language, Translations> = {
       readMore: 'Подробнее',
       quoteOfDay: 'Анализ современных медиа-трендов требует мультидисциплинарного подхода для подлинного понимания их влияния.',
       categoriesTitle: 'Категории нарушений',
+      legalNavigator: 'Правовой навигатор MediaMap',
+      allCategoriesBtn: 'Все категории и законы КР',
       categoriesViewAll: 'Все категории',
       categories: [
         {
@@ -296,6 +300,8 @@ const translations: Record<Language, Translations> = {
       readMore: 'Толугураак',
       quoteOfDay: 'Заманбап медиа-тренддерди талдоо алардын таасирин чыныгы түшүнүү үчүн мультидисциплинардык мамилени талап кылат.',
       categoriesTitle: 'Бузуулардын категориялары',
+      legalNavigator: 'MediaMap укуктук навигатору',
+      allCategoriesBtn: 'Бардык категориялар жана КР мыйзамдары',
       categoriesViewAll: 'Бардык категориялар',
       categories: [
         {
